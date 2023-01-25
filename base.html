@@ -5,19 +5,32 @@
     <head>
 
         <meta charset="utf-8"> 
-        <link rel="stylesheet" href="stylesheet1.css">
+        <link id="maincss" rel="stylesheet" href="sharedstyle.css">
+        <link id="customcss" rel="stylesheet" href="stylesheet1.css">
         <script src="code.js"></script> 
         <title>Iratus</title>
 
     </head>
 
-    <body class="dark light">
+    <body>
 
-        <h1>This is a heading</h1>
-        <p>This is a paragraph.</p>
+        <div class="title">
+            <h1>Welcome to Iratus !</h1>
+            <h2>A Mind-Blowing Chess Variant</h2>
+        </div>
 
-        <button onclick="setStyle('1')">Style sheet 1</button>
-        <button onclick="setStyle('2')">Style sheet 2</button>
+        <div class="bar buttons-container">
+            <button onclick="setStyle('1')">Style sheet 1</button>
+            <button onclick="setStyle('2')">Style sheet 2</button>
+            <button onclick="setStyle('3')">Style sheet 3</button>
+            <button onclick="setStyle('4')">Style sheet 4</button>
+            <!-- <button onclick="setStyle('no')">No style sheet</button> -->
+            <button>Play Chess</button>
+            <button>Play Iratus</button>
+        </div>
+
+        <div class="buttons-container menu">
+        </div>
 
     </body>
 
