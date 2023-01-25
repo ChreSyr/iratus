@@ -56,6 +56,9 @@ button:hover {
 
 .iratus {
     image-rendering: pixelated;
-    transform: rotateY(180deg);
     color: white;
+}
+
+button {
+    oncli
 }

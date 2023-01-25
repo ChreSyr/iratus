@@ -9,3 +9,7 @@ function setStyle(num) {
     }
     customtheme.setAttribute('href', 'stylesheet' + num + '.css')
 }
+
+function openPage(name) {
+    document.location = name + '.html'
+}
