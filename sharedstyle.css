@@ -28,7 +28,7 @@ button {
 
 button:hover {
     background-color: var(--light-green);
-    color: white;
+    color: black;
 }
 
 .all {
@@ -57,8 +57,4 @@ button:hover {
 .iratus {
     image-rendering: pixelated;
     color: white;
-}
-
-button {
-    oncli
 }

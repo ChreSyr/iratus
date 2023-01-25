@@ -10,6 +10,16 @@ function setStyle(num) {
     customtheme.setAttribute('href', 'stylesheet' + num + '.css')
 }
 
-function openPage(name) {
-    document.location = name + '.html'
+function enrage() {
+    var dogleft = document.getElementById('title-dogleft');
+    dogleft.src = "images/logo_enraged_black.png"
+    var dogright = document.getElementById('title-dogright');
+    dogright.src = "images/logo_enraged_black.png"
+}
+
+function quiet() {
+    var dogleft = document.getElementById('title-dogleft');
+    dogleft.src = "images/logo_quiet_black.png"
+    var dogright = document.getElementById('title-dogright');
+    dogright.src = "images/logo_quiet_black.png"
 }
