@@ -1,64 +1,11 @@
 
-:root {
-    --light-green: rgb(49, 99, 49);
-}
-
-body {
-    background-color: rgb(0, 32, 0);
-    margin: 20px;
-    border: 5px solid var(--light-green);
-    padding: 10px;
-
-    text-align: center;
-}
-
-h1 {
+.mainzone h1 {
     margin: 0;
-    margin-bottom: 20px;
+    padding: 60px;
+    padding-bottom: 20px;
 }
 
-h2 {
-    margin: 0;
-}
 
-button {
-    background-color: black;
-    color: var(--light-green);
-}
-
-.title {
-    padding: 20px;
-    background-color: var(--light-green);
-}
-
-.buttons-container {
-    background-color: var(--light-green);
-}
-
-.bar {
-    background-color: black;
-}
-
-.bar button {
-    margin: 0;
-    padding: 3px 20px;
-}
-
-.buttons-container button:hover {
-    background-color: var(--light-green);
-    color: white;
-}
-
-.menu {
-    width: 220px;
-    height: 100%;
-    text-align: center;
-    padding: 10px;
-}
-
-.menu button {
-    height: 50px;
+.iratus {
     width: 200px;
-    margin: 10px;
 }
-

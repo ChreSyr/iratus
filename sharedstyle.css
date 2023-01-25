@@ -1,10 +1,61 @@
 
+:root {
+    --light-green: rgb(67, 131, 67);
+}
+
+html {
+    margin: 0;
+    height: 100%;
+}
+
 body {
-    font-family: "pierce";
+    font-family: "pierce", "helvetica";
+    margin: 0;
+    height: 100%;
+    display: flex;
+    background-color: rgb(0, 32, 0);
 }
 
 button {
+    margin: 0;
+    padding: 3px 20px;
+    background-color: black;
+    color: var(--light-green);
     font-family: "pierce";
     font-size: 22px;
     cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--light-green);
+    color: white;
+}
+
+.all {
+    flex: 1 1 auto;
+    margin: 20px;
+
+    background-color: rgb(0, 32, 0);
+    border: 5px solid var(--light-green);
+    padding: 10px;
+
+    text-align: center;
+    display: flex;
+    flex-flow: column;
+}
+
+.mainzone {
+    background-color: var(--light-green);
+    flex: 1 1 auto;
+}
+
+.bar {
+    background-color: black;
+    flex: 0 1 auto;
+}
+
+.iratus {
+    image-rendering: pixelated;
+    transform: rotateY(180deg);
+    color: white;
 }
