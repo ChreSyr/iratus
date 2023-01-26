@@ -32,6 +32,7 @@
 
 .title button {
     flex: 1;
+    border: 2px solid black;
     font-size: 60px;
     margin: 30px 60px;
 }
