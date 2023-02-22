@@ -1,3 +1,4 @@
+"use strict";
 
 function setStyle(num) {
     var maintheme = document.getElementById('maincss');

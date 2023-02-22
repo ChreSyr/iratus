@@ -1,6 +1,15 @@
 
+/* UTILITIES */
+
+.reversed {
+    transform: rotateY(180deg);
+}
+
+/* ALL-SITE STYLE */
+
 :root {
-    --light-green: rgb(67, 131, 67);
+  --dark-green: rgb(0, 32, 0);
+  --light-green: rgb(67, 131, 67);
 }
 
 html {
@@ -13,7 +22,7 @@ body {
     margin: 0;
     height: 100%;
     display: flex;
-    background-color: rgb(0, 32, 0);
+    background-color: var(--dark-green);
 }
 
 button {
@@ -36,7 +45,7 @@ button:hover {
     flex: 1 1 auto;
     margin: 20px;
 
-    background-color: rgb(0, 32, 0);
+    background-color: var(--dark-green);
     border: 5px solid var(--light-green);
     padding: 10px;
 
@@ -48,6 +57,13 @@ button:hover {
 .mainzone {
     background-color: var(--light-green);
     flex: 1 1 auto;
+    overflow-y: auto;
+}
+
+.mainzone h1 {
+    margin: 0;
+    padding: 120px;
+    padding-bottom: 20px;
 }
 
 .bar {
@@ -55,7 +71,33 @@ button:hover {
     flex: 0 1 auto;
 }
 
-.iratus {
+.bar-dogleft {
     image-rendering: pixelated;
-    color: white;
+    height: 75px;
+    position: absolute;
+    top:37px;
+    left:37px;
+}
+
+.bar-dogright {
+    image-rendering: pixelated;
+    height: 75px;
+    position: absolute;
+    top:37px;
+    right:37px;
+}
+
+/* HOME STYLE */
+
+.title {
+    width: 800px;
+    margin: 0 auto;
+    display: flex;
+}
+
+.title button {
+    flex: 1;
+    border: 2px solid black;
+    font-size: 60px;
+    margin: 30px 60px;
 }

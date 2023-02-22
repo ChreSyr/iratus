@@ -1,0 +1,57 @@
+
+:root {
+  --square-size: 60px;
+}
+
+#content {
+  width: calc(var(--square-size) * 8);
+  height: calc(var(--square-size) * 10);
+  position: relative;
+  display: inline-block;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#highlighters, #cells {
+  background-color: rgba(0, 0, 0, 0);
+  pointer-events: none;
+}
+
+.square {
+  background-color: white;
+}
+
+.cell {
+  width: var(--square-size);
+  height: var(--square-size);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.rook {
+  background-image: url('images/wr.png');
+}
+
+.knight {
+  background-image: url('images/wn.png');
+}
+
+.selected {
+  /* for the selected piece */
+  background-color: rgba(44, 88, 100);
+}
+
+.accessible {
+  /* for the accesssible moves */
+  background-color: rgba(44, 88, 100, 0.5);
+}
