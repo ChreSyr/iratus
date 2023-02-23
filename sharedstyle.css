@@ -44,16 +44,12 @@ button:hover {
 }
 
 .all {
-    flex: 1 1 auto;
-    margin: 20px;
+  flex: 1 1 auto;
 
-    background-color: var(--dark-green);
-    border: 5px solid var(--light-green);
-    padding: 10px;
-
-    text-align: center;
-    display: flex;
-    flex-flow: column;
+  background-color: var(--dark-green);
+  text-align: center;
+  display: flex;
+  flex-flow: column;
 }
 
 .mainzone {
@@ -71,22 +67,15 @@ button:hover {
 .bar {
     background-color: black;
     flex: 0 1 auto;
+    height: 36px;
 }
 
 .bar-dogleft {
-    image-rendering: pixelated;
-    height: 72px;
-    position: absolute;
-    top:35px;
-    left:35px;
+    height: 0px;
 }
 
 .bar-dogright {
-    image-rendering: pixelated;
-    height: 72px;
-    position: absolute;
-    top:35px;
-    right:35px;
+  height: 0px;
 }
 
 /* HOME STYLE */
@@ -102,4 +91,35 @@ button:hover {
     border: 2px solid black;
     font-size: 60px;
     margin: 30px 60px;
+}
+
+@media only screen and (min-width:800px) {
+  .all {
+    flex: 1 1 auto;
+    margin: 20px;
+
+    background-color: var(--dark-green);
+    border: 5px solid var(--light-green);
+    padding: 10px;
+
+    text-align: center;
+    display: flex;
+    flex-flow: column;
+  }
+
+  .bar-dogleft {
+      image-rendering: pixelated;
+      height: 72px;
+      position: absolute;
+      top:35px;
+      left:35px;
+  }
+  
+  .bar-dogright {
+      image-rendering: pixelated;
+      height: 72px;
+      position: absolute;
+      top:35px;
+      right:35px;
+  }
 }

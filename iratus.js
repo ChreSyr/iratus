@@ -90,5 +90,4 @@ document.getElementsByClassName("mainzone")[0].addEventListener("click", event =
     selectedPiece = null;
   }
 
-
 });

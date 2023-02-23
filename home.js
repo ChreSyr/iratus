@@ -24,3 +24,13 @@ function quiet() {
     var dogright = document.getElementById('title-dogright');
     dogright.src = "images/logo_quiet_black.png"
 }
+
+function ajustSquareSize() {
+  const MAX_SQUARE_SIZE = 60;
+  var all = document.getElementsByClassName("all")[0];
+  var squareSize = Math.min(MAX_SQUARE_SIZE, document.documentElement.clientWidth / 8);
+  console.log("NEW WINDOW SIZE", squareSize)
+  document.documentElement.style.setProperty('--square-size', squareSize + 'px');
+}
+window.addEventListener('resize', ajustSquareSize);
+ajustSquareSize();
