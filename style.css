@@ -8,6 +8,8 @@
   height: calc(var(--square-size) * 10);
   position: relative;
   display: inline-block;
+  background-image: url("images/iratusboard.png");
+  background-size: contain;
 }
 
 .grid {
@@ -26,9 +28,9 @@
   pointer-events: none;
 }
 
-.square {
+/* .square {
   background-color: white;
-}
+} */
 
 .cell, .extracell {
   width: var(--square-size);

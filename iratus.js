@@ -1,4 +1,4 @@
-const chessBoard = [
+const iratusBoard = [
   ["", "", "", "", "", "", "", ""],
   ["R", "N", "B", "Q", "K", "B", "N", "R"],
   ["P", "P", "P", "P", "P", "P", "P", "P"],
@@ -33,7 +33,8 @@ for (let row = 0; row < 10; row++) {
     square.classList.add("square");
     square.dataset.row = row;
     square.dataset.col = col;
-    square.style.backgroundColor = (row + col) % 2 == 0 ? "white" : "black";
+    // square.style.backgroundColor = "";
+    // square.style.backgroundColor = (row + col) % 2 == 0 ? "white" : "black";
     board_ui.appendChild(square);
     
     const highlighter = document.createElement("div");
@@ -48,8 +49,8 @@ for (let row = 0; row < 10; row++) {
     cell.dataset.row = row;
     cell.dataset.col = col;
     cell.style.backgroundColor = "rgb(0, 0, 0, 0)";
-    if (chessBoard[row][col] !== "") {
-      const pieceClass = pieceClasses[chessBoard[row][col]];
+    if (iratusBoard[row][col] !== "") {
+      const pieceClass = pieceClasses[iratusBoard[row][col]];
       if (pieceClass !== null) {
         cell.piece = new pieceClass(board, cell.dataset.row, cell.dataset.col, "w", cell);
       } else {
