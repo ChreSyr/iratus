@@ -71,9 +71,9 @@ for (let row = 0; row < 10; row++) {
 
 let selectedPiece = null;
 
-document.addEventListener("click", event => {
-  if (event.target.classList.contains("square")) {
+document.getElementsByClassName("mainzone")[0].addEventListener("click", event => {
 
+  if (event.target.classList.contains("square")) {
     if (selectedPiece !== null && event.target.highlighter.classList.contains("accessible")) {
       selectedPiece.unselect();
       selectedPiece.goTo(event.target.dataset.row, event.target.dataset.col);
@@ -85,6 +85,9 @@ document.addEventListener("click", event => {
       selectedPiece.unselect();
       selectedPiece = null;
     }
+  } else if (selectedPiece) {
+    selectedPiece.unselect();
+    selectedPiece = null;
   }
 
 
