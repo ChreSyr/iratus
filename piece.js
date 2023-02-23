@@ -36,23 +36,22 @@ class Piece {
 
   constructor(board, row, col, color, cell=null) {
 
-    this.board = board;
-    this.row = parseInt(row);
-    this.col = parseInt(col);
-
-    this.color = color;
-    this.enemy_color = color === "b" ? "w" : "b";
-
-    this.cell = cell;
-    if (this.cell !== null) {
-      // add the name of the piece to the cell's classes, then css places the appropriate image
-      this.cell.classList.add(this.constructor.name.toLowerCase());  
-    }
-
     this.ID = this.constructor.ID;
     this.MOVES = this.constructor.MOVES;
     for (let meth of this.constructor.METH_TO_COPY) {
       this[meth] = this.constructor[meth];
+    }
+
+    this.board = board;
+    this.row = parseInt(row);
+    this.col = parseInt(col);
+
+    this.color = row < 5 ? "w" : "b";
+    this.enemy_color = this.color === "b" ? "w" : "b";
+
+    this.cell = cell;
+    if (this.cell !== null) {
+      this.cell.style.backgroundImage = "url('images/" + this.color + this.ID + ".png')";
     }
 
     this.is_captured = false;
@@ -96,16 +95,15 @@ class Piece {
 
     if (this.cell !== null) {
       // update the display
-      this.cell.classList.remove(this.actual_class.name.toLowerCase());
+      this.cell.style.backgroundImage = "";
       if (this.dynamited) {
-        this.cell.extracell.classList.remove("dynamited");
+        this.cell.extracell.style.backgroundImage = "";
       }
       this.cell.piece = null;
       this.cell = this.getSquare().cell;
-      this.cell.classList.add(this.actual_class.name.toLowerCase());
+      this.cell.style.backgroundImage = "url('images/" + this.color + this.ID + ".png')";
       if (this.dynamited) {
-        console.log("dynamited", row, col)
-        this.cell.extracell.classList.add("dynamited");
+        this.cell.extracell.style.backgroundImage = "url('images/" + this.color + "dy.png')";
       }
       this.cell.piece = this;
     }

@@ -38,18 +38,6 @@
   background-size: contain;
 }
 
-.rook {
-  background-image: url('images/wr.png');
-}
-
-.knight {
-  background-image: url('images/wn.png');
-}
-
-.dynamited {
-  background-image: url('images/wdy.png');
-}
-
 .selected {
   /* for the selected piece */
   background-color: rgba(44, 88, 100);
