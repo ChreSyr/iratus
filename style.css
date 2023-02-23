@@ -42,10 +42,10 @@
 
 .selected {
   /* for the selected piece */
-  background-color: rgba(44, 88, 100);
+  background-color: var(--selected);
 }
 
 .accessible {
   /* for the accesssible moves */
-  background-color: rgba(44, 88, 100, 0.5);
+  background-color: var(--accessible);
 }

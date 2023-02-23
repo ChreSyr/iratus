@@ -1,18 +1,7 @@
 
-.reversed {
-    transform: rotateY(180deg);
+:root {
+  --dark-green: rgb(22, 43, 22);
+  --light-green: rgb(68, 105, 68);
+  --selected: rgb(17, 57, 131);
+  --accessible: rgba(4, 27, 92, 0.3);
 }
-
-.mainzone h1 {
-    margin: 0;
-    padding: 120px;
-    padding-bottom: 20px;
-}
-
-.bar-dogleft {
-    height: 75px;
-    position: absolute;
-    top:37px;
-    left:37px;
-}
-

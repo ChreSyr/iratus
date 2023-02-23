@@ -8,8 +8,10 @@
 /* ALL-SITE STYLE */
 
 :root {
-  --dark-green: rgb(0, 32, 0);
-  --light-green: rgb(67, 131, 67);
+  --dark-green: rgb(22, 43, 22);
+  --light-green: rgb(68, 105, 68);
+  --selected: rgb(63, 131, 17);
+  --accessible: rgba(39, 92, 4, 0.3);
 }
 
 html {
@@ -73,18 +75,18 @@ button:hover {
 
 .bar-dogleft {
     image-rendering: pixelated;
-    height: 75px;
+    height: 72px;
     position: absolute;
-    top:37px;
-    left:37px;
+    top:35px;
+    left:35px;
 }
 
 .bar-dogright {
     image-rendering: pixelated;
-    height: 75px;
+    height: 72px;
     position: absolute;
-    top:37px;
-    right:37px;
+    top:35px;
+    right:35px;
 }
 
 /* HOME STYLE */

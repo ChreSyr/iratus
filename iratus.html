@@ -7,8 +7,8 @@
         <meta charset="utf-8"> 
         <link rel="icon" type="image/x-icon" href="images/logo_quiet.png">
         <link id="maincss" rel="stylesheet" href="sharedstyle.css">
-        <link id="customcss" rel="stylesheet" href="stylesheet1.css">
         <link rel="stylesheet" type="text/css" href="style.css">
+        <link id="customcss" rel="stylesheet" href="">
         <title>Iratus</title>
 
     </head>
@@ -28,6 +28,7 @@
                 <button onclick="setStyle('1')">Style sheet 1</button>
                 <button onclick="setStyle('2')">Style sheet 2</button>
                 <button onclick="setStyle('3')">Style sheet 3</button>
+                <button onclick="setStyle('')">No style sheet</button>
             </div>
             
             <div class="mainzone">
@@ -38,13 +39,14 @@
                   <div id="extracells", class="grid"></div>
                   <div id="cells", class="grid"></div>
                 </div>
-                <button onclick="console.log(document.getElementsByClassName('rook')[0].piece)">Click Here !</button>
-                <button onclick="document.getElementsByClassName('rook')[0].piece.transform(Knight)">Click Here !</button>
+                <!-- <button onclick="console.log(document.getElementsByClassName('rook')[0].piece)">Click Here !</button>
+                <button onclick="document.getElementsByClassName('rook')[0].piece.transform(Knight)">Click Here !</button> -->
 
             </div>
             
         </div>
 
+        <script type="text/javascript" src="home.js"></script>
         <script type="text/javascript" src="board.js"></script>
         <script type="text/javascript" src="piece.js"></script>
         <script type="text/javascript" src="rollingpiece.js"></script>
