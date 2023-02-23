@@ -20,7 +20,7 @@ const pieceClasses = {
   "P": null,
 }
 
-const board_ui = document.getElementById("board");
+const squares = document.getElementById("squares");
 const highlighters = document.getElementById("highlighters");
 const extracells = document.getElementById("extracells");
 const cells = document.getElementById("cells");
@@ -36,7 +36,7 @@ for (let row = 0; row < 10; row++) {
     square.dataset.col = col;
     // square.style.backgroundColor = "";
     // square.style.backgroundColor = (row + col) % 2 == 0 ? "white" : "black";
-    board_ui.appendChild(square);
+    squares.appendChild(square);
     
     const highlighter = document.createElement("div");
     highlighter.classList.add("highlighter");

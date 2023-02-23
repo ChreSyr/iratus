@@ -8,24 +8,23 @@ class IratusBoard {
 
     this.game = game;
     this.piecesByPos = [
-      null, null, null, null, null, null, null, null, undefined, undefined,
-      null, null, null, null, null, null, null, null, undefined, undefined,
-      null, null, null, null, null, null, null, null, undefined, undefined,
-      null, null, null, null, null, null, null, null, undefined, undefined,
-      null, null, null, null, null, null, null, null, undefined, undefined,
-      null, null, null, null, null, null, null, null, undefined, undefined,
-      null, null, null, null, null, null, null, null, undefined, undefined,
-      null, null, null, null, null, null, null, null, undefined, undefined,
-      null, null, null, null, null, null, null, null, undefined, undefined,
-      null, null, null, null, null, null, null, null, undefined, undefined,
+      null, null, null, null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null, null, null, null,
     ];
     this.pieces = [];
     this.calculator = null;
     this.createPieces();
   }
 
-  add_piece(piece) {
+  addPiece(piece) {
     this.pieces.push(piece);
+    this.piecesByPos[piece.getPos()] = piece;
   }
 
   createPieces() {
@@ -59,6 +58,10 @@ class IratusBoard {
         }
       }
     }
+  }
+
+  get(row, col) {
+    return this.piecesByPos[col * 10 + row];
   }
   
   initDisplay() {

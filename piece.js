@@ -32,7 +32,7 @@ class Piece {
   static ID = "";
   static MOVES = [];
   static ATTR_TO_COPY = ["ID", "MOVES"];
-  static METH_TO_COPY = ["copy", "getAccessibleMoves", "goTo", "capture", "redo", "uncapture", "undo", "updateValidMoves"];
+  static METH_TO_COPY = ["copy", "goTo", "capture", "redo", "uncapture", "undo", "updateValidMoves"];
 
   constructor(board, row, col) {
 
@@ -45,22 +45,32 @@ class Piece {
     this.board = board;
     this.row = parseInt(row);
     this.col = parseInt(col);
-
     this.color = row < 5 ? "w" : "b";
     this.enemy_color = this.color === "b" ? "w" : "b";
-
-    this.cell = null;
-
+    this.validMoves = [];
+    this.antikingSquares = [];
     this.is_captured = false;
-
+    this.dynamited = false;
     // for transformation memory
     this.actualClass = this.constructor;
 
-    this.dynamited = false;
+    this.cell = null;
 
-    this.board.add_piece(this);
+    this.board.addPiece(this);
   }
   
+  canGoTo(row, col) {
+
+    let piece = this.board.get(row, col);
+    if (piece === null) {
+      return true;
+    } else if (piece.ID === "dy") {
+      return piece.color === this.color;
+    } else {
+      return piece.color !== this.color;
+    }
+  }
+
   copyFrom(original) {
     this.is_captured = original.is_captured;
     if (this.is_captured) {return}
@@ -81,14 +91,18 @@ class Piece {
   }
 
   getSquare() {
-    const board = document.getElementById("board");
-    return document.querySelector(`[data-row="${this.row}"][data-col="${this.col}"]`);
+    return document.getElementById("squares").querySelector(`[data-row="${this.row}"][data-col="${this.col}"]`);
   }
   
   static goTo(row, col) {
+
+    let oldPos = this.getPos();
     this.row = parseInt(row);
     this.col = parseInt(col);
     if (this.is_captured) {return}
+
+    this.board.piecesByPos[oldPos] = null;
+    this.board.piecesByPos[this.getPos()] = this;
 
     if (this.cell !== null) {
       // update the display
@@ -137,12 +151,28 @@ class Piece {
     }
   }
 
-  unselect() {
-    this.getSquare().highlighter.classList.remove("selected");
-    for (let square of document.querySelectorAll(".square")) {
-      square.highlighter.classList.remove("accessible");
+  static updateValidMoves() {
+
+    if (this.is_captured) {return}
+
+    this.validMoves = [];
+
+    for (let i = 0; i < this.MOVES.length; i++) {
+      let move = this.MOVES[i];
+      let row = this.row + move[0];
+      let col = this.col + move[1];
+      if (row >= 0 && row <= 9 && col >= 0 && col <= 7) {
+        this.antikingSquares.push([row, col]);
+        if (this.canGoTo(row, col)) {
+          this.validMoves.push([row, col]);
+        }
+      }
     }
+
+    this.antikingSquares = this.validMoves;
   }
+
+  // VIEW METHODS
 
   handleClick() {
     let selectedHighlighter = document.querySelector(".selected");
@@ -163,19 +193,16 @@ class Piece {
     }
 
     const square = this.getSquare();
-    this.highlightAccessibleSquares();
     square.highlighter.classList.add("selected");
-  }
-
-  highlightAccessibleSquares() {
-    let accessibleMoves = this.getAccessibleMoves();
+    
+    this.updateValidMoves();
     let squares = document.querySelectorAll(".square");
 
     for (let square of squares) {
       let row = parseInt(square.dataset.row);
       let col = parseInt(square.dataset.col);
 
-      if (accessibleMoves.find(move => move[0] === row && move[1] === col)) {
+      if (this.validMoves.find(move => move[0] === row && move[1] === col)) {
         square.highlighter.classList.add("accessible");
       } else {
         square.highlighter.classList.remove("accessible");
@@ -183,17 +210,11 @@ class Piece {
     }
   }
 
-  static getAccessibleMoves() {
-    let accessibleMoves = [];
-    for (let i = 0; i < this.MOVES.length; i++) {
-      let move = this.MOVES[i];
-      let row = this.row + move[0];
-      let col = this.col + move[1];
-      if (row >= 0 && row <= 9 && col >= 0 && col <= 7) {
-        accessibleMoves.push([row, col]);
-      }
+  unselect() {
+    this.getSquare().highlighter.classList.remove("selected");
+    for (let square of document.querySelectorAll(".square")) {
+      square.highlighter.classList.remove("accessible");
     }
-    return accessibleMoves;
   }
 
 }
