@@ -1,17 +1,89 @@
 
-class Board {
+class IratusBoard {
 
   NBRANKS = 10;
-  static NBFILES = 8;
+  NBFILES = 8;
 
-  _storage = {};
+  constructor(game) {
 
-  add_piece(piece) {
-
+    this.game = game;
+    this.piecesByPos = [
+      null, null, null, null, null, null, null, null, undefined, undefined,
+      null, null, null, null, null, null, null, null, undefined, undefined,
+      null, null, null, null, null, null, null, null, undefined, undefined,
+      null, null, null, null, null, null, null, null, undefined, undefined,
+      null, null, null, null, null, null, null, null, undefined, undefined,
+      null, null, null, null, null, null, null, null, undefined, undefined,
+      null, null, null, null, null, null, null, null, undefined, undefined,
+      null, null, null, null, null, null, null, null, undefined, undefined,
+      null, null, null, null, null, null, null, null, undefined, undefined,
+      null, null, null, null, null, null, null, null, undefined, undefined,
+    ];
+    this.pieces = [];
+    this.calculator = null;
+    this.createPieces();
   }
 
-  set(piece, square) {
-    this._storage[square] = piece;
+  add_piece(piece) {
+    this.pieces.push(piece);
+  }
+
+  createPieces() {
+    let iratusBoard = [
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      ["R", "N", "B", "Q", "K", "B", "N", "R"],
+      ["P", "P", "P", "P", "P", "P", "P", "P"],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      ["P", "P", "P", "P", "P", "P", "P", "P"],
+      ["R", "N", "B", "Q", "K", "B", "N", "R"],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+    ];
+    let pieceClasses = {
+      "K": null,
+      "Q": null,
+      "R": Rook,
+      "B": null,
+      "N": Knight,
+      "P": null,
+      " ": null,
+    }
+    
+    for (let row = 0; row < 10; row++) {
+      for (let col = 0; col < 8; col++) {
+        let pieceClass = pieceClasses[iratusBoard[row][col]];
+        if (pieceClass !== null) {
+          new pieceClass(this, row, col);
+        }
+      }
+    }
+  }
+  
+  initDisplay() {
+    this.calculator = new CalculatorIratusBoard(this);
+    for (let piece of this.pieces) {
+      piece.initDisplay();
+    }
+  }
+
+  set(piece, pos) {
+    this.piecesByPos[pos] = piece;
+  }
+
+}
+
+class CalculatorIratusBoard extends IratusBoard {
+
+  constructor(board) {
+    super(board.game);
+
+    this.real_board = board;
+    this.pieces_correspondence = {};
+    for (let [i, piece] of board.pieces.entries()) {
+      this.pieces_correspondence[piece] = this.pieces[i]
+    }
   }
 
 }

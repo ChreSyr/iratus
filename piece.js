@@ -34,7 +34,7 @@ class Piece {
   static ATTR_TO_COPY = ["ID", "MOVES"];
   static METH_TO_COPY = ["copy", "getAccessibleMoves", "goTo", "capture", "redo", "uncapture", "undo", "updateValidMoves"];
 
-  constructor(board, row, col, color, cell=null) {
+  constructor(board, row, col) {
 
     this.ID = this.constructor.ID;
     this.MOVES = this.constructor.MOVES;
@@ -49,15 +49,12 @@ class Piece {
     this.color = row < 5 ? "w" : "b";
     this.enemy_color = this.color === "b" ? "w" : "b";
 
-    this.cell = cell;
-    if (this.cell !== null) {
-      this.cell.style.backgroundImage = "url('images/" + this.color + this.ID + ".png')";
-    }
+    this.cell = null;
 
     this.is_captured = false;
 
     // for transformation memory
-    this.actual_class = this.constructor;
+    this.actualClass = this.constructor;
 
     this.dynamited = false;
 
@@ -108,12 +105,20 @@ class Piece {
       this.cell.piece = this;
     }
   }
+
+  initDisplay() {
+    this.cell = this.getSquare().cell;
+    this.cell.piece = this;
+    this.cell.style.backgroundImage = "url('images/" + this.color + this.ID + ".png')";
+  }
+
+  static preciseTransform(piece) {}
   
   transform(pieceClass) {
-    if (this.actual_class === pieceClass) {return}
+    if (this.actualClass === pieceClass) {return}
 
-    let old_class = this.actual_class;
-    this.actual_class = pieceClass;
+    let old_class = this.actualClass;
+    this.actualClass = pieceClass;
 
     for (let attr of pieceClass.ATTR_TO_COPY) {
       this[attr] = pieceClass[attr];
@@ -122,37 +127,15 @@ class Piece {
       this[meth] = pieceClass[meth];
     }
 
+    pieceClass.preciseTransform(this);
+
     if (this.cell !== null) {
-      this.cell.classList.remove(old_class.name.toLowerCase());
-      this.cell.classList.add(pieceClass.name.toLowerCase());
+      this.cell.style.backgroundImage = "url('images/" + this.color + this.ID + ".png')";
+
+      // for calculations
+      this.board.calculator.pieces_correspondence[this].transform(pieceClass);
     }
   }
-
-  // def transform(self, piece_class):
-
-  // for attr in piece_class.ATTR_TO_COPY:
-  //     setattr(self, attr, getattr(piece_class, attr))
-  // for method in piece_class.METH_TO_COPY:
-  //     setattr(self, method, bp.PrefilledFunction(getattr(piece_class, method), self))
-
-  // for attr in old_class.ATTR_TO_COPY:
-  //     try:
-  //         setattr(self, attr, getattr(piece_class, attr))
-  //     except AttributeError:
-  //         pass
-  // for method in old_class.METH_TO_COPY:
-  //     try:
-  //         setattr(self, method, bp.PrefilledFunction(getattr(piece_class, method), self))
-  //     except AttributeError:
-  //         pass
-
-  // piece_class.precise_transform(self)
-
-  // if self.widget is not None:
-  //     self.widget.update_from_piece_transform()
-
-  //     self.board.calculator.pieces_correspondence[self].transform(piece_class)
-
 
   unselect() {
     this.getSquare().highlighter.classList.remove("selected");
@@ -162,17 +145,23 @@ class Piece {
   }
 
   handleClick() {
-    let selectedCell = document.querySelector(".selected");
-    if (selectedCell) {
-      selectedCell.classList.remove("selected");
-      if (selectedCell === this) {
+    let selectedHighlighter = document.querySelector(".selected");
+    if (selectedHighlighter) {
+      selectedHighlighter.classList.remove("selected");
+      if (selectedHighlighter === this.getSquare().highlighter) {
         // click while already selected  TODO : solve, doesn't work yet
         this.unselect();
+
+        if (this.actualClass.name.toLocaleLowerCase() === "knight") {
+          this.transform(Rook);
+        } else {
+          this.transform(Knight);
+        }
+
         return;
       }
     }
 
-    this.cell.classList.add("selected");
     const square = this.getSquare();
     this.highlightAccessibleSquares();
     square.highlighter.classList.add("selected");

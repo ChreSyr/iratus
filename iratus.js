@@ -25,7 +25,8 @@ const highlighters = document.getElementById("highlighters");
 const extracells = document.getElementById("extracells");
 const cells = document.getElementById("cells");
 
-let board = new Board();
+let game = new Game(IratusBoard);
+let board = game.board;
 
 for (let row = 0; row < 10; row++) {
   for (let col = 0; col < 8; col++) {
@@ -42,6 +43,7 @@ for (let row = 0; row < 10; row++) {
     highlighter.dataset.row = row;
     highlighter.dataset.col = col;
     highlighters.appendChild(highlighter);
+    highlighter.square = square;
     square.highlighter = highlighter;
 
     const cell = document.createElement("div");
@@ -49,14 +51,18 @@ for (let row = 0; row < 10; row++) {
     cell.dataset.row = row;
     cell.dataset.col = col;
     cell.style.backgroundColor = "rgb(0, 0, 0, 0)";
-    if (iratusBoard[row][col] !== "") {
-      const pieceClass = pieceClasses[iratusBoard[row][col]];
-      if (pieceClass !== null) {
-        cell.piece = new pieceClass(board, cell.dataset.row, cell.dataset.col, "w", cell);
-      } else {
-        cell.piece = null;
-      }
-    }
+    // cell.piece = game.board.piecesByPos[col * 10 + row];
+    // if (game.board.piecesByPos[col * 10 + row] !== null) {
+    //   console.log(game.board.piecesByPos[col * 10 + row]);
+    // }
+    // if (iratusBoard[row][col] !== "") {
+    //   const pieceClass = pieceClasses[iratusBoard[row][col]];
+    //   if (pieceClass !== null) {
+    //     cell.piece = new pieceClass(board, cell.dataset.row, cell.dataset.col, cell);
+    //   } else {
+    //     cell.piece = null;
+    //   }
+    // }
     cells.appendChild(cell);
     square.cell = cell;
     
@@ -68,6 +74,7 @@ for (let row = 0; row < 10; row++) {
     cell.extracell = extracell;
   } 
 }
+game.board.initDisplay();
 
 let selectedPiece = null;
 
