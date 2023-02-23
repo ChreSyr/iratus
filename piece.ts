@@ -38,7 +38,7 @@ class UI_Piece {}
 class Piece {
 
     LETTER: string;
-    static MOVES: Array<Array<number>>;
+    MOVES: Array<Array<number>>;
     #ATTR_TO_COPY: Array<string> = Array("LETTER",);
     #METH_TO_COPY: Array<string> = Array("copy", "go_to");
 

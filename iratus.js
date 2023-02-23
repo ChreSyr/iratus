@@ -22,6 +22,7 @@ const pieceClasses = {
 
 const board_ui = document.getElementById("board");
 const highlighters = document.getElementById("highlighters");
+const extracells = document.getElementById("extracells");
 const cells = document.getElementById("cells");
 
 let board = new Board();
@@ -50,14 +51,21 @@ for (let row = 0; row < 10; row++) {
     if (chessBoard[row][col] !== "") {
       const pieceClass = pieceClasses[chessBoard[row][col]];
       if (pieceClass !== null) {
-        cell.piece = new pieceClass(board, cell, "w");
+        cell.piece = new pieceClass(board, cell.dataset.row, cell.dataset.col, "w", cell);
       } else {
         cell.piece = null;
       }
     }
     cells.appendChild(cell);
     square.cell = cell;
-  }
+    
+    const extracell = document.createElement("div");
+    extracell.classList.add("extracell");
+    extracell.dataset.row = row;
+    extracell.dataset.col = col;
+    extracells.appendChild(extracell);
+    cell.extracell = extracell;
+  } 
 }
 
 let selectedPiece = null;
@@ -65,7 +73,11 @@ let selectedPiece = null;
 document.addEventListener("click", event => {
   if (event.target.classList.contains("square")) {
 
-    if (event.target.cell.piece) {
+    if (selectedPiece !== null && event.target.highlighter.classList.contains("accessible")) {
+      selectedPiece.unselect();
+      selectedPiece.goTo(event.target.dataset.row, event.target.dataset.col);
+      selectedPiece = null;
+    } else if (event.target.cell.piece) {
       selectedPiece = event.target.cell.piece;
       selectedPiece.handleClick();
     } else if (selectedPiece) {
@@ -73,4 +85,6 @@ document.addEventListener("click", event => {
       selectedPiece = null;
     }
   }
+
+
 });

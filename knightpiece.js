@@ -12,4 +12,3 @@ class Knight extends Piece {
     [-1, -2],
   ];
 }
-  

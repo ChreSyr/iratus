@@ -1,4 +1,30 @@
 
+/*      Piece.getPos()
+     ___ ___ ___ ___ ___ ___ ___ ___
+10  |0  |10 |20 |30 |40 |50 |60 |70 |
+    |___|___|___|___|___|___|___|___|
+9   |1  |11 |21 |31 |41 |51 |61 |71 |
+    |___|___|___|___|___|___|___|___|
+8   |2  |12 |22 |32 |42 |52 |62 |72 |
+    |___|___|___|___|___|___|___|___|
+7   |3  |13 |23 |   |   |   |   |   |
+    |___|___|___|___|___|___|___|___|
+6   |4  |14 |24 |   |   |   |   |   |
+    |___|___|___|___|___|___|___|___|
+5   |5  |15 |25 |   |   |   |   |   |
+    |___|___|___|___|___|___|___|___|
+4   |6  |16 |26 |   |   |   |   |   |
+    |___|___|___|___|___|___|___|___|
+3   |7  |17 |27 |   |   |   |   |   |
+    |___|___|___|___|___|___|___|___|
+2   |8  |18 |28 |   |   |   |   |   |
+    |___|___|___|___|___|___|___|___|
+1   |9  |19 |29 |   |   |   |   |79 |
+    |___|___|___|___|___|___|___|___|
+
+      a   b   c   d   e   f   g   h
+*/
+
 const file_dict = {0:"a", 1:"b", 2:"c", 3:"d", 4:"e", 5:"f", 6:"g", 7:"h"}
 
 class Piece {
@@ -6,46 +32,129 @@ class Piece {
   static ID = "";
   static MOVES = [];
   static ATTR_TO_COPY = ["ID", "MOVES"];
-  static METH_TO_COPY = ["copy", "goTo", "capture", "redo", "uncapture", "undo", "updateValidMoves"];
+  static METH_TO_COPY = ["copy", "getAccessibleMoves", "goTo", "capture", "redo", "uncapture", "undo", "updateValidMoves"];
 
-  constructor(board, cell, color) {
+  constructor(board, row, col, color, cell=null) {
 
     this.board = board;
-    this.cell = cell;
-    this.row = parseInt(cell.dataset.row);
-    this.col = parseInt(cell.dataset.col);
+    this.row = parseInt(row);
+    this.col = parseInt(col);
 
     this.color = color;
     this.enemy_color = color === "b" ? "w" : "b";
 
-    this.is_captured = false;
+    this.cell = cell;
+    if (this.cell !== null) {
+      // add the name of the piece to the cell's classes, then css places the appropriate image
+      this.cell.classList.add(this.constructor.name.toLowerCase());  
+    }
 
-    // add the name of the piece to the cell's classes, then css places the appropriate image
-    this.cell.classList.add(this.constructor.name.toLowerCase());  
+    this.ID = this.constructor.ID;
+    this.MOVES = this.constructor.MOVES;
+    for (let meth of this.constructor.METH_TO_COPY) {
+      this[meth] = this.constructor[meth];
+    }
+
+    this.is_captured = false;
 
     // for transformation memory
     this.actual_class = this.constructor;
 
-    // Block the next widget's link by mouse  TODO : remove ?
-    this.ignore_next_link = false;
+    this.dynamited = false;
 
     this.board.add_piece(this);
-
-    console.log(this.getCoordinates())
   }
   
+  copyFrom(original) {
+    this.is_captured = original.is_captured;
+    if (this.is_captured) {return}
+
+    this.board.set(this, original.square);
+
+    if (this.getPos() !== original.getPos()) {
+      this.goTo(original.row, original.col);
+    }
+  }
+
   getCoordinates() {
     return file_dict[this.col] + (this.board.NBRANKS - this.row);
   }
 
-  getCell() {
-    return this.cell;
+  getPos() {
+    return this.col * 10 + this.row;
   }
 
   getSquare() {
     const board = document.getElementById("board");
     return document.querySelector(`[data-row="${this.row}"][data-col="${this.col}"]`);
   }
+  
+  static goTo(row, col) {
+    this.row = parseInt(row);
+    this.col = parseInt(col);
+    if (this.is_captured) {return}
+
+    if (this.cell !== null) {
+      // update the display
+      this.cell.classList.remove(this.actual_class.name.toLowerCase());
+      if (this.dynamited) {
+        this.cell.extracell.classList.remove("dynamited");
+      }
+      this.cell.piece = null;
+      this.cell = this.getSquare().cell;
+      this.cell.classList.add(this.actual_class.name.toLowerCase());
+      if (this.dynamited) {
+        console.log("dynamited", row, col)
+        this.cell.extracell.classList.add("dynamited");
+      }
+      this.cell.piece = this;
+    }
+  }
+  
+  transform(pieceClass) {
+    if (this.actual_class === pieceClass) {return}
+
+    let old_class = this.actual_class;
+    this.actual_class = pieceClass;
+
+    for (let attr of pieceClass.ATTR_TO_COPY) {
+      this[attr] = pieceClass[attr];
+    }
+    for (let meth of pieceClass.METH_TO_COPY) {
+      this[meth] = pieceClass[meth];
+    }
+
+    if (this.cell !== null) {
+      this.cell.classList.remove(old_class.name.toLowerCase());
+      this.cell.classList.add(pieceClass.name.toLowerCase());
+    }
+  }
+
+  // def transform(self, piece_class):
+
+  // for attr in piece_class.ATTR_TO_COPY:
+  //     setattr(self, attr, getattr(piece_class, attr))
+  // for method in piece_class.METH_TO_COPY:
+  //     setattr(self, method, bp.PrefilledFunction(getattr(piece_class, method), self))
+
+  // for attr in old_class.ATTR_TO_COPY:
+  //     try:
+  //         setattr(self, attr, getattr(piece_class, attr))
+  //     except AttributeError:
+  //         pass
+  // for method in old_class.METH_TO_COPY:
+  //     try:
+  //         setattr(self, method, bp.PrefilledFunction(getattr(piece_class, method), self))
+  //     except AttributeError:
+  //         pass
+
+  // piece_class.precise_transform(self)
+
+  // if self.widget is not None:
+  //     self.widget.update_from_piece_transform()
+
+  //     self.board.calculator.pieces_correspondence[self].transform(piece_class)
+
 
   unselect() {
     this.getSquare().highlighter.classList.remove("selected");
@@ -59,7 +168,7 @@ class Piece {
     if (selectedCell) {
       selectedCell.classList.remove("selected");
       if (selectedCell === this) {
-        // click while already selected
+        // click while already selected  TODO : solve, doesn't work yet
         this.unselect();
         return;
       }
@@ -87,25 +196,19 @@ class Piece {
     }
   }
 
-  getAccessibleMoves() {
+  static getAccessibleMoves() {
     let accessibleMoves = [];
-    for (let i = 0; i < this.constructor.MOVES.length; i++) {
-      let move = this.constructor.MOVES[i];
+    for (let i = 0; i < this.MOVES.length; i++) {
+      let move = this.MOVES[i];
       let row = this.row + move[0];
       let col = this.col + move[1];
-      console.log(move, row, col);
       if (row >= 0 && row <= 9 && col >= 0 && col <= 7) {
         accessibleMoves.push([row, col]);
       }
     }
     return accessibleMoves;
   }
-  
-  move(row, col) {
-    this.row = row;
-    this.col = col;
-  }
-  
+
 }
 
   
