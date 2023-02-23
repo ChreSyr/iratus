@@ -47,6 +47,7 @@ class Piece {
     this.col = parseInt(col);
     this.color = row < 5 ? "w" : "b";
     this.enemy_color = this.color === "b" ? "w" : "b";
+    this._first_move = null;
     this.validMoves = [];
     this.antikingSquares = [];
     this.is_captured = false;
@@ -104,6 +105,10 @@ class Piece {
     this.board.piecesByPos[oldPos] = null;
     this.board.piecesByPos[this.getPos()] = this;
 
+    if (this._first_move === null) {
+      this._first_move = this.board.currentMove;
+    }
+
     if (this.cell !== null) {
       // update the display
       this.cell.style.backgroundImage = "";
@@ -120,10 +125,8 @@ class Piece {
     }
   }
 
-  initDisplay() {
-    this.cell = this.getSquare().cell;
-    this.cell.piece = this;
-    this.cell.style.backgroundImage = "url('images/" + this.color + this.ID + ".png')";
+  hasMoved() {
+    return this._first_move !== null;
   }
 
   static preciseTransform(piece) {}
@@ -148,6 +151,12 @@ class Piece {
 
       // for calculations
       this.board.calculator.pieces_correspondence[this].transform(pieceClass);
+    }
+  }
+
+  undo(move) {
+    if (this._first_move === move) {
+      this._first_move = null;
     }
   }
 
@@ -208,6 +217,12 @@ class Piece {
         square.highlighter.classList.remove("accessible");
       }
     }
+  }
+
+  initDisplay() {
+    this.cell = this.getSquare().cell;
+    this.cell.piece = this;
+    this.cell.style.backgroundImage = "url('images/" + this.color + this.ID + ".png')";
   }
 
   unselect() {

@@ -18,27 +18,31 @@ class IratusBoard {
       null, null, null, null, null, null, null, null, null, null,
     ];
     this.pieces = [];
+    this.piecesColored = {"w": [], "b": []};
     this.calculator = null;
     this.createPieces();
+
+    this.currentMove = {};  // TODO change
   }
 
   addPiece(piece) {
     this.pieces.push(piece);
     this.piecesByPos[piece.getPos()] = piece;
+    this.piecesColored[piece.color].push(piece);
   }
 
   createPieces() {
     let iratusBoard = [
-      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", "DY", "DY", " ", " ", " "],
       ["R", "N", "B", "Q", "K", "B", "N", "R"],
-      ["P", "P", "P", "P", "P", "P", "P", "P"],
+      ["i", "i", "i", "i", "i", "i", "i", "i"],
       [" ", " ", " ", " ", " ", " ", " ", " "],
       [" ", " ", " ", " ", " ", " ", " ", " "],
       [" ", " ", " ", " ", " ", " ", " ", " "],
       [" ", " ", " ", " ", " ", " ", " ", " "],
-      ["P", "P", "P", "P", "P", "P", "P", "P"],
+      ["i", "i", "i", "i", "i", "i", "i", "i"],
       ["R", "N", "B", "Q", "K", "B", "N", "R"],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", "DY", "DY", " ", " ", " "],
     ];
     let pieceClasses = {
       "K": null,
@@ -46,7 +50,8 @@ class IratusBoard {
       "R": Rook,
       "B": null,
       "N": Knight,
-      "P": null,
+      "i": null,
+      "DY": Dynamite,
       " ": null,
     }
     
