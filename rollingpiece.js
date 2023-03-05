@@ -1,7 +1,11 @@
 class RollingPiece extends Piece {
 
   static updateValidMoves() {
+
+    if (this.isCaptured) {return}
+    
     this.validMoves = [];
+    this.antikingSquares = [];
     for (let i = 0; i < this.MOVES.length; i++) {
       let move = this.MOVES[i];
       let row = this.row + move[0];

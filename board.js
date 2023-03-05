@@ -1,12 +1,96 @@
 
-class IratusBoard {
+class Board {
 
-  NBRANKS = 10;
-  NBFILES = 8;
+  static NBRANKS = 8;
+  static NBFILES = 8;
 
   constructor(game) {
 
     this.game = game;
+    this.NBFILES = this.constructor.NBFILES;
+    this.NBRANKS = this.constructor.NBRANKS;
+
+    this.piecesByPos = new Array(this.NBFILES * this.NBRANKS).fill(null);
+    this.pieces = [];
+    this.piecesColored = {"w": [], "b": []};
+    this.king = {};
+
+    this.calculator = null;
+    this.calculatorClass = null;
+    this.fatPositionClass = null;
+    this.createPieces();
+
+    this.currentMove = null;
+    this.mainCurrentMove = null;
+  }
+
+  addPiece(piece) {
+    this.pieces.push(piece);
+    this.piecesByPos[piece.getPos()] = piece;
+    this.piecesColored[piece.color].push(piece);
+
+    if (piece.ID === "k") {
+      this.king[piece.color] = piece;
+    }
+  }
+
+  createPieces() {}
+
+  get(row, col) {
+    return this.piecesByPos[col * 10 + row];
+  }
+
+  getFatPosition() {  // for the fatHistory
+    return new FatPosition(this, this.game.turn);
+  }
+  
+  initDisplay() {
+    this.calculator = new this.calculatorClass(this);
+    for (let piece of this.pieces) {
+      piece.initDisplay();
+    }
+  }
+  
+  move(start, end, main=true) {
+    if (typeof start === "number") {
+      start = [start % 10, Math.floor(start / 10)];
+    }
+    if (typeof end === "number") {
+      end = [end % 10, Math.floor(end / 10)];
+    }
+
+    let currentMove = new Move(this, start, end);
+    this.currentMove = currentMove;
+    if (main) {
+      this.mainCurrentMove = this.currentMove;
+    }
+    this.currentMove.executeCommand(new MainMove());
+
+    return currentMove;  // need to return currentMove, not this.currentMove
+  }
+
+  redo(move, main=true) {
+    this.currentMove = move;
+    if (main) {
+      this.mainCurrentMove = this.currentMove;
+    }
+    move.redoCommands();
+  }
+
+  undo(move) {
+    for (let command of [...move.commands].reverse()) {
+      move.undoCommand(command)
+    }
+  }
+  
+  updateAllValidMoves() {}
+}
+
+class FatPosition {
+  // Stores a full chess position
+  _EQ_ATTRIBUTES = ["piecesByPos", "castleRights", "turn"];
+
+  constructor(board, turn) {
     this.piecesByPos = [
       null, null, null, null, null, null, null, null, null, null,
       null, null, null, null, null, null, null, null, null, null,
@@ -17,81 +101,25 @@ class IratusBoard {
       null, null, null, null, null, null, null, null, null, null,
       null, null, null, null, null, null, null, null, null, null,
     ];
-    this.pieces = [];
-    this.piecesColored = {"w": [], "b": []};
-    this.calculator = null;
-    this.createPieces();
 
-    this.currentMove = {};  // TODO change
-  }
-
-  addPiece(piece) {
-    this.pieces.push(piece);
-    this.piecesByPos[piece.getPos()] = piece;
-    this.piecesColored[piece.color].push(piece);
-  }
-
-  createPieces() {
-    let iratusBoard = [
-      [" ", " ", " ", "DY", "DY", " ", " ", " "],
-      ["R", "N", "B", "Q", "K", "B", "N", "R"],
-      ["i", "i", "i", "i", "i", "i", "i", "i"],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      ["i", "i", "i", "i", "i", "i", "i", "i"],
-      ["R", "N", "B", "Q", "K", "B", "N", "R"],
-      [" ", " ", " ", "DY", "DY", " ", " ", " "],
-    ];
-    let pieceClasses = {
-      "K": null,
-      "Q": null,
-      "R": Rook,
-      "B": null,
-      "N": Knight,
-      "i": null,
-      "DY": Dynamite,
-      " ": null,
-    }
-    
-    for (let row = 0; row < 10; row++) {
-      for (let col = 0; col < 8; col++) {
-        let pieceClass = pieceClasses[iratusBoard[row][col]];
-        if (pieceClass !== null) {
-          new pieceClass(this, row, col);
-        }
+    for (let piece of board.pieces) {
+      if (! piece.isCaptured) {
+        this.piecesByPos[piece.getPos()] = piece.ID;
       }
     }
-  }
 
-  get(row, col) {
-    return this.piecesByPos[col * 10 + row];
+    this.casteRights = board.king["w"].castleRights + board.king["b"].castleRights;
+    this.turn = turn;
   }
   
-  initDisplay() {
-    this.calculator = new CalculatorIratusBoard(this);
-    for (let piece of this.pieces) {
-      piece.initDisplay();
+  equals(other) {
+    // NOTE : according to FIDE rules, I should check if en passant abilities are the same
+
+    for (let attr of this._EQ_ATTRIBUTES) {
+      if (this[attr] !== other[attr]) {
+        return false;
+      }
     }
+    return true;
   }
-
-  set(piece, pos) {
-    this.piecesByPos[pos] = piece;
-  }
-
-}
-
-class CalculatorIratusBoard extends IratusBoard {
-
-  constructor(board) {
-    super(board.game);
-
-    this.real_board = board;
-    this.pieces_correspondence = {};
-    for (let [i, piece] of board.pieces.entries()) {
-      this.pieces_correspondence[piece] = this.pieces[i]
-    }
-  }
-
 }
