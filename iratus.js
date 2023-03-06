@@ -61,12 +61,24 @@ function makeDraggable(element) {
 
     wasSelected = element.highlighter.classList.contains("selected");
     element.piece.handlePointerDown();
+
+    // dynamite
+    if (element.piece && element.piece.dynamited) {
+      element.extracell.style.backgroundImage = "";
+      element.style.backgroundImage += ", url('images/" + element.piece.color + "dy.png')";
+    }
   }
   
   const pointerupHandle = (event) => {
     dragging = null;
     element.classList.remove('dragging');
     element.style.transform = "";
+
+    // dynamite
+    if (element.piece && element.piece.dynamited) {
+      element.style.backgroundImage = "url('images/" + element.piece.color + element.piece.ID + ".png')";
+      element.extracell.style.backgroundImage = "url('images/" + element.piece.color + "dy.png')";
+    }
 
     let allHighlighters = document.querySelectorAll(".highlighter");
     for (let highlighter of allHighlighters) {
