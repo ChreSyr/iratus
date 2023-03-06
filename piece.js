@@ -45,7 +45,7 @@ class Piece {
     this.board = board;
     this.row = parseInt(row);
     this.col = parseInt(col);
-    this.color = row > 5 ? "w" : "b";
+    this.color = row > 4 ? "w" : "b";
     this.enemyColor = this.color === "b" ? "w" : "b";
     this.firstMove = null;
     this.validMoves = [];
@@ -56,6 +56,7 @@ class Piece {
     this.actualClass = this.constructor;
 
     this.cell = null;
+    this.cssClass = undefined;
 
     this.board.addPiece(this);
   }
@@ -84,6 +85,9 @@ class Piece {
     if (this.cell !== null) {
       // update the display
       this.cell.style.backgroundImage = "";
+      if (this.cssClass) {
+        this.cell.classList.remove(this.cssClass);
+      }
       if (this.dynamited) {
         this.cell.extracell.style.backgroundImage = "";
       }
@@ -152,17 +156,22 @@ class Piece {
     if (this.cell !== null) {  // update the display
      
       this.cell.style.backgroundImage = "";
+      if (this.cssClass) {
+        this.cell.classList.remove(this.cssClass);
+      }
       if (this.dynamited) {
         this.cell.extracell.style.backgroundImage = "";
       }
       this.cell.piece = null;
       this.cell = this.getSquare().cell;
       this.cell.style.backgroundImage = "url('images/" + this.color + this.ID + ".png')";
+      if (this.cssClass) {
+        this.cell.classList.add(this.cssClass);
+      }
       if (this.dynamited) {
         this.cell.extracell.style.backgroundImage = "url('images/" + this.color + "dy.png')";
       }
       this.cell.piece = this;
-      this.justMoved();
     }
 
     return commands;
@@ -222,6 +231,9 @@ class Piece {
       // update the display
       this.cell = this.getSquare().cell;
       this.cell.style.backgroundImage = "url('images/" + this.color + this.ID + ".png')";
+      if (this.cssClass) {
+        this.cell.classList.add(this.cssClass);
+      }
       if (this.dynamited) {
         this.cell.extracell.style.backgroundImage = "url('images/" + this.color + "dy.png')";
       }
@@ -309,9 +321,10 @@ class Piece {
     this.cell = this.getSquare().cell;
     this.cell.piece = this;
     this.cell.style.backgroundImage = "url('images/" + this.color + this.ID + ".png')";
+    if (this.cssClass) {
+      this.cell.classList.add(this.cssClass);
+    }
   }
-
-  justMoved() {}
 
   unselect() {
     this.getSquare().highlighter.classList.remove("selected");

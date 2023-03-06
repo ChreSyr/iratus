@@ -18,9 +18,7 @@ class Pawn extends Piece {
 
     if (this.row === this.promotionRank) {
       if (this.cell && this instanceof Pawn) {  // a phantom cannot promote
-        console.log("PROMOTION TIME !");
-        // self.board.display.pawn_to_promote = self
-        // self.board.display.promotion_dialog.open()
+        this.openPromotionWindow()
       }
     }
 
@@ -41,6 +39,23 @@ class Pawn extends Piece {
     return commands;
   }
 
+  openPromotionWindow() {
+    this.board.pawnToPromote = this;
+    let promotionWindow = document.getElementsByClassName("promotion-window")[0];
+    let promotionPieces = document.getElementsByClassName("promotion-piece");
+    for (let promotionPiece of promotionPieces) {
+      promotionPiece.style.backgroundImage = "url('images/" + this.color + promotionPiece.classList[1] + ".png')"; 
+    }
+    if (this.color === "w") { // TODO : what if the board is flipped ?
+      promotionWindow.classList.add("top");
+    } else {
+      promotionWindow.classList.remove("top");
+    }
+    promotionWindow.style.transform = `translateX(${this.col * 100}%)`;
+    promotionWindow.style.visibility = "visible";
+    promotionWindow.style.pointerEvents = "all";
+  }
+
   static preciseTransform(piece) {
 
     if (piece.color === "b") {
@@ -52,6 +67,10 @@ class Pawn extends Piece {
       piece.attackingMoves = [[-1, 1], [-1, -1]];
       piece.promotionRank = 0;
     }
+  }
+
+  static redo(row, col) {
+    super.goTo(row, col)
   }
 
   static updateValidMoves() {

@@ -14,6 +14,7 @@ class Board {
     this.pieces = [];
     this.piecesColored = {"w": [], "b": []};
     this.king = {};
+    this.pawnToPromote = null;
 
     this.calculator = null;
     this.calculatorClass = null;

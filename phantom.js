@@ -2,6 +2,12 @@
 class Phantom extends Piece {
 
   static ID = "p";
+
+  constructor(board, row, col) {
+    super(board, row, col);
+
+    this.cssClass = "phantom";
+  }
   
   canGoTo(row, col) {
 
@@ -12,30 +18,6 @@ class Phantom extends Piece {
       return false;
     } else {
       return piece.color !== this.color;
-    }
-  }
-  
-  transform(pieceClass) {
-
-    if (this.actualClass === pieceClass) {return}
-
-    super.transform(pieceClass);
-
-    if (this.cell !== null) {
-      this.cell.style.opacity = .7;
-    }
-  }
-
-  // View methods
-
-  initDisplay() {
-    super.initDisplay();
-    this.cell.style.opacity = .7;
-  }
-
-  justMoved() {
-    if (this.cell !== null) {
-      this.cell.style.opacity = .7;
     }
   }
 }

@@ -1,4 +1,19 @@
 
+let pieceClasses = {
+  "k": King,
+  "q": Queen,
+  "r": Rook,
+  "b": Bishop,
+  "n": Knight,
+  "i": Pawn,
+  "dy": Dynamite,
+  "s": null,
+  "d": null,
+  "p": Phantom,
+  "g": null,
+  " ": null,
+}
+
 class IratusBoard extends Board {
 
   static NBRANKS = 10;
@@ -48,16 +63,16 @@ class IratusBoard extends Board {
     //   ["p", "d", "s","dy","dy", "r", "d", "g"],
     // ];
     // iratusBoard = [
-    //   [" ", " ", " ", " ", " ", " ", " ", " "],
+    //   ["p", " ", " ", " ", " ", " ", " ", " "],
     //   [" ", " ", " ", " ", "k", " ", " ", " "],
     //   [" ", " ", " ", " ", " ", " ", " ", " "],
     //   [" ", " ", " ", " ", " ", " ", " ", " "],
+    //   [" ", " ", " ", " ", " ", " ", "i", " "],
+    //   [" ", " ", " ", " ", " ", " ", " ", "i"],
     //   [" ", " ", " ", " ", " ", " ", " ", " "],
     //   [" ", " ", " ", " ", " ", " ", " ", " "],
-    //   [" ", " ", " ", " ", " ", " ", " ", " "],
-    //   [" ", " ", " ", " ", " ", " ", " ", " "],
-    //   [" ", " ", " ", " ", "k", " ", "n", " "],
-    //   [" ", " ", " ", " ", " ", " ", " ", " "],
+    //   [" ", " ", " ", " ", "k", " ", " ", " "],
+    //   ["p", " ", " ", " ", " ", " ", " ", " "],
     // ];
     // iratusBoard = [
     //   [" ", " ", " ", " ","dy", " ", " ", " "],
@@ -71,20 +86,6 @@ class IratusBoard extends Board {
     //   [" ", " ", " ", "r", "k", "r", "n", " "],
     //   [" ", " ", " ", " ", " ", " ", " ", " "],
     // ];
-    let pieceClasses = {
-      "k": King,
-      "q": Queen,
-      "r": Rook,
-      "b": Bishop,
-      "n": Knight,
-      "i": Pawn,
-      "dy": Dynamite,
-      "s": null,
-      "d": null,
-      "p": Phantom,
-      "g": null,
-      " ": null,
-    }
 
     for (let row = 0; row < 10; row++) {
       for (let col = 0; col < 8; col++) {

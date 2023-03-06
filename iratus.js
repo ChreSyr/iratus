@@ -17,13 +17,15 @@ function collide(event, element) {
 
 document.addEventListener("pointerdown", event => {
   let selectedHighlighter = document.querySelector(".selected");
-  if (! selectedHighlighter) {return}
   
   let boardDiv = document.getElementById("content");
   if (collide(event, boardDiv)) {
     return;
   }
 
+  cancelPromotion();
+
+  if (! selectedHighlighter) {return}
   let selectedPiece = selectedHighlighter.cell.piece;
   selectedPiece.unselect();
 });
@@ -38,6 +40,7 @@ function makeDraggable(element) {
   }
       
   const pointerdownHandle = (event) => {
+    cancelPromotion();
     if (! element.piece) {
       if (! element.highlighter.classList.contains("accessible")) {
         let selectedHighlighter = document.querySelector(".selected");
@@ -98,3 +101,30 @@ function makeDraggable(element) {
 for (let element of document.querySelectorAll(".cell")) {
   makeDraggable(element);
 }
+
+for (let promotionPiece of document.getElementsByClassName("promotion-piece")) {
+  promotionPiece.addEventListener("pointerdown", event => {
+    lastMove = game.movesHistory.slice(-1)[0];
+    lastMove.executeCommand(new Transform(game.board.pawnToPromote, Pawn, pieceClasses[promotionPiece.classList[1]]));
+    lastMove.notation += "=" + promotionPiece.classList[1].toUpperCase();
+    game.board.pawnToPromote = null;
+    game.board.updateAllValidMoves();
+    game.checkForEnd();
+
+    let promotionWindow = document.getElementsByClassName("promotion-window")[0];
+    promotionWindow.style.visibility = "hidden";
+    promotionWindow.style.pointerEvents = "none";
+  });
+}
+
+const cancelPromotion = (event) => {
+  if (game.board.pawnToPromote) {
+    game.undo();
+    game.board.pawnToPromote = null;
+  
+    let promotionWindow = document.getElementsByClassName("promotion-window")[0];
+    promotionWindow.style.visibility = "hidden";
+    promotionWindow.style.pointerEvents = "none";
+  }
+}
+document.getElementsByClassName("promotion-cancel")[0].addEventListener("pointerdown", cancelPromotion);
