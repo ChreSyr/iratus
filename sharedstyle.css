@@ -2,7 +2,7 @@
 /* UTILITIES */
 
 .reversed {
-    transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
 
 /* ALL-SITE STYLE */
@@ -15,27 +15,27 @@
 }
 
 html {
-    margin: 0;
-    height: 100%;
+  margin: 0;
+  height: 100%;
 }
 
 body {
-    font-family: "pierce", "helvetica";
-    margin: 0;
-    height: 100%;
-    display: flex;
-    background-color: var(--dark-green);
+  font-family: "pierce", "helvetica";
+  margin: 0;
+  height: 100%;
+  display: flex;
+  background-color: var(--dark-green);
 }
 
 button {
-    margin: 0;
-    border: 0;
-    padding: 3px 20px;
-    background-color: black;
-    color: var(--light-green);
-    font-family: "pierce";
-    font-size: 22px;
-    cursor: pointer;
+  margin: 0;
+  border: 0;
+  padding: 3px 20px;
+  background-color: black;
+  color: var(--light-green);
+  font-family: "pierce";
+  font-size: 22px;
+  cursor: pointer;
 }
 
 button:hover {
@@ -52,45 +52,90 @@ button:hover {
   flex-flow: column;
 }
 
-.mainzone {
-    background-color: var(--light-green);
-    flex: 1 1 auto;
-    overflow-y: auto;
-}
-
-.mainzone h1 {
-    margin: 0;
-    padding: 120px;
-    padding-bottom: 20px;
-}
-
 .bar {
-    background-color: black;
-    flex: 0 1 auto;
-    height: 36px;
+  background-color: black;
+  flex: 0 1 auto;
+  height: 36px;
 }
 
 .bar-dogleft {
-    height: 0px;
+  height: 0px;
 }
 
 .bar-dogright {
   height: 0px;
 }
 
+.mainzone {
+  background-color: var(--light-green);
+  flex: 1 1 auto;
+  overflow-y: auto;
+}
+
+.mainzone h1 {
+  margin: 0;
+  padding: 120px;
+  padding-bottom: 20px;
+}
+
+#info {
+  position: absolute;
+  left: 50%;
+  top: calc(var(--square-size) * .8 + 200px);
+  width: calc(var(--square-size) * 8 * .8);
+  transform: translateX(-50%);
+
+  background-color: var(--light-green);
+  border-radius: 0.6rem;
+  box-shadow: 0 0.3rem 0.63rem 0.07rem rgb(0 0 0 / 40%);
+  height: calc(var(--square-size) * 8 * .8);
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* settings to change at end of game */
+  visibility: hidden;
+  pointer-events: none;
+}
+
+#info h2 {
+  font-size: 40px;
+  flex: 1 1 auto;
+  margin: 20px;
+}
+
+#info p {
+  font-size: 25px;
+  flex: 5 1 auto;
+  margin: 0;
+}
+
+#info img {
+  flex: 5 1 auto;
+  aspect-ratio: auto;
+  max-width: calc(var(--square-size) * 2);
+}
+
+#info button {
+  border: 2px solid black;
+  flex: 0 1 auto;
+  margin: 40px;
+}
+
 /* HOME STYLE */
 
 .title {
-    width: 800px;
-    margin: 0 auto;
-    display: flex;
+  width: 800px;
+  margin: 0 auto;
+  display: flex;
 }
 
 .title button {
-    flex: 1;
-    border: 2px solid black;
-    font-size: 60px;
-    margin: 30px 60px;
+  flex: 1;
+  border: 2px solid black;
+  font-size: 60px;
+  margin: 30px 60px;
 }
 
 @media only screen and (min-width:800px) {
@@ -108,18 +153,18 @@ button:hover {
   }
 
   .bar-dogleft {
-      image-rendering: pixelated;
-      height: 72px;
-      position: absolute;
-      top:35px;
-      left:35px;
+    image-rendering: pixelated;
+    height: 72px;
+    position: absolute;
+    top:35px;
+    left:35px;
   }
   
   .bar-dogright {
-      image-rendering: pixelated;
-      height: 72px;
-      position: absolute;
-      top:35px;
-      right:35px;
+    image-rendering: pixelated;
+    height: 72px;
+    position: absolute;
+    top:35px;
+    right:35px;
   }
 }

@@ -65,7 +65,7 @@ class Move {
     this.counter50rule = 0;
 
     if (board.game.movesHistory.length) {
-      let lastMove = this.board.game.movesHistory.slice(-1);
+      let lastMove = this.board.game.movesHistory.slice(-1)[0];
       this.turnNumber = lastMove.turnNumber;
       if (lastMove.turn !== this.turn) {
         this.turnNumber += .5;

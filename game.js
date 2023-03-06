@@ -36,9 +36,18 @@ class Game {
     if (ENDS.includes(gameState)) {
       let description = "";
       if (gameState === "checkmate") {
-        description = lastMove.turn === "w" ? "Black won" : "White won";
+        description = lastMove.turn === "b" ? "Black won" : "White won";
       }
-      alert(gameState, description);
+
+      let infoDiv = document.getElementById("info");
+      let titleLabel = infoDiv.getElementsByTagName("h2")[0];
+      titleLabel.innerHTML = gameState[0].toUpperCase() + gameState.substring(1);
+      let kingImage = infoDiv.getElementsByTagName("img")[0];
+      kingImage.src = gameState === "checkmate" ? "images/" + lastMove.turn + "k.png" : "";
+      let desriptionLabel = infoDiv.getElementsByTagName("p")[0];
+      desriptionLabel.innerHTML = description;
+      infoDiv.style.visibility = "visible";
+      infoDiv.style.pointerEvents = "all";
     }
   }
 
@@ -123,6 +132,8 @@ class Game {
         cell.dataset.row = row;
         cell.dataset.col = col;
         cell.style.backgroundColor = "rgb(0, 0, 0, 0)";
+        cell.highlighter = highlighter;
+        highlighter.cell = cell;
         cells.appendChild(cell);
         square.cell = cell;
         

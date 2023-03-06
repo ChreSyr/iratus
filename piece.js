@@ -110,12 +110,6 @@ class Piece {
   static copyFrom(original) {
     this.isCaptured = original.isCaptured;
     if (this.isCaptured) {return}
-
-    // this.board.piecesByPos[original.getPos()] = this;
-
-    // if (this.getPos() !== original.getPos()) {
-    //   this.goTo(original.row, original.col);
-    // }
     this.goTo(original.row, original.col);
   }
 
@@ -280,24 +274,11 @@ class Piece {
 
   // VIEW METHODS
 
-  handleClick() {
+  handlePointerDown() {
 
     let selectedHighlighter = document.querySelector(".selected");
     if (selectedHighlighter) {
       selectedHighlighter.classList.remove("selected");
-      if (selectedHighlighter === this.getSquare().highlighter) {
-        // click while already selected  TODO : solve, doesn't work yet
-        this.unselect();
-
-        if (this.actualClass.name.toLocaleLowerCase() === "knight") {
-          this.transform(Rook);
-        } else {
-          this.transform(Knight);
-        }
-
-        this.updateValidMoves();
-        return;
-      }
     }
 
     const square = this.getSquare();

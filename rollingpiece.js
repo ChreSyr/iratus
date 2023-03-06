@@ -26,3 +26,40 @@ class RollingPiece extends Piece {
     }
   }
 }
+
+class Rook extends RollingPiece {
+
+  static ID = "r";
+  static MOVES = [
+    [0, 1],
+    [0, -1],
+    [1, 0],
+    [-1, 0],
+  ];
+}
+
+class Bishop extends RollingPiece {
+
+  static ID = "b";
+  static MOVES = [
+    [1, 1],
+    [1, -1],
+    [-1, 1],
+    [-1, -1],
+  ];
+}
+
+class Queen extends RollingPiece {
+
+  static ID = "q";
+  static MOVES = [
+    [0, 1],
+    [0, -1],
+    [1, 0],
+    [-1, 0],
+    [1, 1],
+    [1, -1],
+    [-1, 1],
+    [-1, -1],
+  ];
+}

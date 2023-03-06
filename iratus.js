@@ -1,68 +1,100 @@
 
-// const squares = document.getElementById("squares");
-// const highlighters = document.getElementById("highlighters");
-// const extracells = document.getElementById("extracells");
-// const cells = document.getElementById("cells");
 
 let game = new Game(IratusBoard);
-// let board = game.board;
 
-// for (let row = 0; row < 10; row++) {
-//   for (let col = 0; col < 8; col++) {
-//     const square = document.createElement("div");
-//     square.classList.add("square");
-//     square.dataset.row = row;
-//     square.dataset.col = col;
-//     squares.appendChild(square);
-    
-//     const highlighter = document.createElement("div");
-//     highlighter.classList.add("highlighter");
-//     highlighter.dataset.row = row;
-//     highlighter.dataset.col = col;
-//     highlighters.appendChild(highlighter);
-//     highlighter.square = square;
-//     square.highlighter = highlighter;
+function hideInfo() {
+  let infoDiv = document.getElementById("info");
+  infoDiv.style.visibility = "hidden";
+  infoDiv.style.pointerEvents = "none";
+}
 
-//     const cell = document.createElement("div");
-//     cell.classList.add("cell");
-//     cell.dataset.row = row;
-//     cell.dataset.col = col;
-//     cell.style.backgroundColor = "rgb(0, 0, 0, 0)";
-//     cells.appendChild(cell);
-//     square.cell = cell;
-    
-//     const extracell = document.createElement("div");
-//     extracell.classList.add("extracell");
-//     extracell.dataset.row = row;
-//     extracell.dataset.col = col;
-//     extracells.appendChild(extracell);
-//     cell.extracell = extracell;
-//   } 
-// }
-// game.board.initDisplay();
+function collide(event, element) {
+  let rect = element.getBoundingClientRect();
+  let x = event.clientX - rect.x;
+  let y = event.clientY - rect.y;
+  return x >= 0 && x <= rect.width && y >= 0 && y <= rect.height;
+}
 
-let selectedPiece = null;
-
-document.getElementsByClassName("mainzone")[0].addEventListener("click", event => {
-
-  if (event.target.classList.contains("square")) {
-    if (selectedPiece !== null && event.target.highlighter.classList.contains("accessible")) {
-      selectedPiece.unselect();
-      game.move(start=[selectedPiece.row, selectedPiece.col], end=[parseInt(event.target.dataset.row), parseInt(event.target.dataset.col)])
-      // selectedPiece.goTo(event.target.dataset.row, event.target.dataset.col);
-      selectedPiece = null;
-    } else if (event.target.cell.piece) {
-      selectedPiece = event.target.cell.piece;
-      selectedPiece.handleClick();
-    } else if (selectedPiece) {
-      selectedPiece.unselect();
-      selectedPiece = null;
-    }
-  } else if (selectedPiece) {
-    selectedPiece.unselect();
-    selectedPiece = null;
+document.addEventListener("pointerdown", event => {
+  let selectedHighlighter = document.querySelector(".selected");
+  if (! selectedHighlighter) {return}
+  
+  let boardDiv = document.getElementById("content");
+  if (collide(event, boardDiv)) {
+    return;
   }
 
-  console.log(game.board.king["w"].posIsUnderCheck(parseInt(event.target.dataset.row), parseInt(event.target.dataset.col)));
-
+  let selectedPiece = selectedHighlighter.cell.piece;
+  selectedPiece.unselect();
 });
+
+function makeDraggable(element) {
+  let pos = {x: 0, y: 0};
+  let dragging = false;
+  let wasSelected = false;
+  
+  const stopScrollEvents = (event) => {
+    event.preventDefault();
+  }
+      
+  const pointerdownHandle = (event) => {
+    if (! element.piece) {
+      if (! element.highlighter.classList.contains("accessible")) {
+        let selectedHighlighter = document.querySelector(".selected");
+        if (selectedHighlighter) {
+          selectedHighlighter.cell.piece.unselect();
+        }
+      }
+      return;
+    }
+    if (element.highlighter.classList.contains("accessible")) {return}
+    let rect = element.getBoundingClientRect();
+    dragging = {dx: - rect.x - rect.width / 2, dy: - rect.y - rect.height / 2};
+    pos.x = event.clientX + dragging.dx;
+    pos.y = event.clientY + dragging.dy;
+    element.style.transform = `translate(${pos.x}px, ${pos.y}px)`;
+    element.classList.add('dragging');
+    element.setPointerCapture(event.pointerId);
+
+    wasSelected = element.highlighter.classList.contains("selected");
+    element.piece.handlePointerDown();
+  }
+  
+  const pointerupHandle = (event) => {
+    dragging = null;
+    element.classList.remove('dragging');
+    element.style.transform = "";
+
+    let allHighlighters = document.querySelectorAll(".highlighter");
+    for (let highlighter of allHighlighters) {
+      if (collide(event, highlighter)) {
+        if (highlighter.classList.contains("accessible")) {
+          let selectedPiece = document.querySelector(".selected").cell.piece;
+          selectedPiece.unselect();
+          game.move(start=[selectedPiece.row, selectedPiece.col], end=[parseInt(highlighter.dataset.row), parseInt(highlighter.dataset.col)])
+        }
+        break;
+      }
+    }
+    if (element.piece && wasSelected) {
+      element.piece.unselect();
+    }  // else, the piece has moved
+  }
+  
+  const pointermoveHandle = (event) => {
+    if (!dragging) {return};
+    pos.x = event.clientX + dragging.dx;
+    pos.y = event.clientY + dragging.dy;
+    element.style.transform = `translate(${pos.x}px, ${pos.y}px)`;
+  }
+  
+  element.addEventListener('pointerdown', pointerdownHandle);
+  element.addEventListener('pointerup', pointerupHandle);
+  element.addEventListener('pointercancel', pointerupHandle);
+  element.addEventListener('pointermove', pointermoveHandle);
+  element.addEventListener('touchstart', stopScrollEvents);
+}
+
+for (let element of document.querySelectorAll(".cell")) {
+  makeDraggable(element);
+}

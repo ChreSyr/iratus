@@ -23,14 +23,18 @@
   bottom: 0;
 }
 
-#highlighters, #extracells, #cells {
+#highlighters, #extracells {
   background-color: rgba(0, 0, 0, 0);
   pointer-events: none;
 }
 
-/* .square {
-  background-color: white;
-} */
+#cells {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.square {
+  touch-action: none;
+}
 
 .cell, .extracell {
   width: var(--square-size);
@@ -48,4 +52,10 @@
 .accessible {
   /* for the accesssible moves */
   background-color: var(--accessible);
+}
+
+.dragging {
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+  z-index: 2;
 }
