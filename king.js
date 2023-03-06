@@ -27,7 +27,7 @@ class King extends Piece {
     } else if (piece.ID === "dy") {
       return false;
     } else {
-      return piece.color !== this.color;
+      return piece.color !== this.color && ! piece.dynamited;
     }
   }
 

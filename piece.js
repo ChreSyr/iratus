@@ -67,7 +67,7 @@ class Piece {
     if (piece === null) {
       return true;
     } else if (piece.ID === "dy") {
-      return piece.color === this.color;
+      return piece.color === this.color && ! Dynamite.UNDYNAMITABLES.includes(this.ID);
     } else {
       return piece.color !== this.color;
     }
