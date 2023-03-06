@@ -95,10 +95,10 @@ class Piece {
       commands.push(new NotationHint("*"));
     }
 
-    // let alliedPhantom = this.board.phantoms[this.color];
-    // if (! alliedPhantom.isCaptured) {
-    //   commands.push(Transform(alliedPhantom, alliedPhantom.actualClass, this.actualClass));
-    // }
+    let alliedPhantom = this.board.phantom[this.color];
+    if (! alliedPhantom.isCaptured) {
+      commands.push(new Transform(alliedPhantom, alliedPhantom.actualClass, this.actualClass));
+    }
 
     return commands;
   }
@@ -162,6 +162,7 @@ class Piece {
         this.cell.extracell.style.backgroundImage = "url('images/" + this.color + "dy.png')";
       }
       this.cell.piece = this;
+      this.justMoved();
     }
 
     return commands;
@@ -309,6 +310,8 @@ class Piece {
     this.cell.piece = this;
     this.cell.style.backgroundImage = "url('images/" + this.color + this.ID + ".png')";
   }
+
+  justMoved() {}
 
   unselect() {
     this.getSquare().highlighter.classList.remove("selected");

@@ -41,6 +41,7 @@ class Dynamite extends Piece {
       if (piece.isCaptured) {continue}
       if (piece.dynamited) {continue}
       if (Dynamite.UNDYNAMITABLES.includes(piece.ID)) {continue}
+      if (piece.constructor.ID === "p") {continue}
       if (! piece.hasMoved()) {
         this.validMoves.push([piece.row, piece.col])
       }

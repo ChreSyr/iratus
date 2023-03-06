@@ -10,6 +10,17 @@ class IratusBoard extends Board {
     this.calculatorClass = CalculatorIratusBoard;
   }
 
+  addPiece(piece) {
+    super.addPiece(piece);
+
+    if (piece instanceof Phantom) {
+      if (this.phantom === undefined) {
+        this.phantom = {};
+      }
+      this.phantom[piece.color] = piece;
+    }
+  }
+
   createPieces() {
     
     let iratusBoard = [
@@ -70,7 +81,7 @@ class IratusBoard extends Board {
       "dy": Dynamite,
       "s": null,
       "d": null,
-      "p": null,
+      "p": Phantom,
       "g": null,
       " ": null,
     }
