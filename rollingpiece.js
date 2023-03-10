@@ -38,36 +38,63 @@ class Bishop extends RollingPiece {
   ];
 }
 
+class Grapple extends RollingPiece {
+  static ID = "g";
+  static MOVES = [
+    [0, 1],
+    [0, -1],
+    [1, 0],
+    [-1, 0],
+    [1, 1],
+    [1, -1],
+    [-1, 1],
+    [-1, -1],
+  ];
+
+  canGoTo(row, col) {
+    let piece = this.board.get(row, col);
+    if (piece === null) {
+      return true;
+    } else if (piece.ID === "dy") {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  static capturerCheck() {
+    return false;
+  }
+
+  static goTo(row, col) {
+    let grappledPiece = this.board.get(row, col);
+    if (! grappledPiece) {return super.goTo(row, col)}
+    const getCoord = (piece) => fileDict[piece.col] + (this.board.NBRANKS - piece.row);
+    let commands = [];
+
+    let notation = "G:";
+    if (grappledPiece.ID !== "i") {
+      notation += grappledPiece.ID.toUpperCase();
+    }
+    notation += getCoord(grappledPiece) + "->" + getCoord(this);  // ex : G:Nf6->d4
+    commands.push(new Notation(notation));
+    commands.push(new Capture(this, this));
+    commands.push(new AfterMove([grappledPiece.row, grappledPiece.col], [this.row, this.col]));
+    return commands;
+  }
+
+  static updateValidMoves() {
+    super.updateValidMoves();
+    this.antikingSquares.length = 0;
+  }
+}
+
+
 /**from mainpiece import RollingMainPiece
 from leash import dog_is_too_far, get_dog_square
 
 
 class Grapple(RollingMainPiece):
-
-    LETTER = "g"
-    moves = ((-1, -1), (-1, 1), (1, 1), (1, -1), (1, 0), (0, 1), (-1, 0), (0, -1))
-
-    METH_TO_COPY = RollingMainPiece.METH_TO_COPY + ("capturer_check",)
-
-    def can_go_to(self, square, move):
-
-        piece = self.board[square]
-
-        if piece == 0:
-            extrapiece = self.board.get_extrapiece_at(square)
-            if extrapiece != 0:
-                return self.can_equip(extrapiece) and extrapiece.can_equip(self)
-            return True
-
-        return piece.can_be_captured_by(self, move)
-
-    def can_equip(self, extrapiece):
-
-        return False
-
-    def capturer_check(self, piece):
-
-        return False
 
     def go_to(self, square):
 

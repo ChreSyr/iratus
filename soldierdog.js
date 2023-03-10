@@ -240,6 +240,16 @@ class Dog extends Piece {
 
     return commands;
   }
+
+  static goTo(row, col) {
+    let startRow = this.row, startCol = this.col;
+    let commands = super.goTo(row, col);
+
+    if (dogIsTooFar(this.soldier.row, this.soldier.col, this.row, this.col)) {  // happens when pulled by the grapple
+      commands.push(new AfterMove([this.soldier.row, this.soldier.col], getNewDogRC(startRow, startCol, this.row, this.col)));
+    }
+    return commands;
+  }
 }
 
 class EnragedDog extends PieceMovingTwice {
@@ -263,5 +273,5 @@ function getNewDogRC(leashStartRow, leashStartCol, leashEndRow, leashEndCol) {
 }
 
 function normed(x) {
-  if (x < 0) {return -1} else if (x > 0) {return 1} else {0}
+  if (x < 0) {return -1} else if (x > 0) {return 1} else {return 0}
 }

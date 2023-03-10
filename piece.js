@@ -34,7 +34,7 @@ class Piece {
 
   // these are used for piece.transform()
   static ATTR_TO_COPY = ["ID", "MOVES"];
-  static METH_TO_COPY = ["capture", "copyFrom", "goTo", "redo", "uncapture", "undo", "updateValidMoves"];
+  static METH_TO_COPY = ["capture", "capturerCheck", "copyFrom", "goTo", "redo", "uncapture", "undo", "updateValidMoves"];
 
   constructor(board, row, col) {
 
@@ -109,7 +109,7 @@ class Piece {
     return commands;
   }
 
-  capturerCheck() {
+  static capturerCheck() {
     return true;
   }
 
@@ -354,7 +354,7 @@ class Dynamite extends Piece {
     return commands;
   }
 
-  capturerCheck() {
+  static capturerCheck() {
     return false;
   }
 
