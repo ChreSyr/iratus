@@ -343,7 +343,7 @@ class Piece {
 class Dynamite extends Piece {
 
   static ID = "dy";
-  static UNDYNAMITABLES = ["k", "q", "dy", "p", "g"];
+  static UNDYNAMITABLES = ["k", "q", "r", "dy", "p", "g"];
 
   static capture(capturer) {
     let commands = super.capture(this, capturer);
