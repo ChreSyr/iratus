@@ -7,8 +7,10 @@ let pieceClasses = {
   "n": Knight,
   "i": Pawn,
   "dy": Dynamite,
-  "s": null,
-  "d": null,
+  "s": Soldier,
+  "ss": SuperSoldier,
+  "d": Dog,
+  "ed": EnragedDog,
   "p": Phantom,
   "g": null,
   " ": null,
@@ -42,10 +44,10 @@ class IratusBoard extends Board {
       ["p", "d", "s","dy","dy", "s", "d", "g"],
       ["r", "n", "b", "q", "k", "b", "n", "r"],
       ["i", "i", "i", "i", "i", "i", "i", "i"],
+      [" ", "d", "s", " ", " ", "ed", "ss", " "],
       [" ", " ", " ", " ", " ", " ", " ", " "],
       [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", "d", "s", " ", " ", "ed", "ss", " "],
       ["i", "i", "i", "i", "i", "i", "i", "i"],
       ["r", "n", "b", "q", "k", "b", "n", "r"],
       ["p", "d", "s","dy","dy", "s", "d", "g"],
@@ -117,7 +119,7 @@ class IratusBoard extends Board {
       let clonedPiece = this.calculator.getSimulatedPiece(piece);
       let validMoves = [];
       for (let validMove of piece.validMoves) {
-        let moveObject = this.calculator.move(clonedPiece.getPos(), piece.getNextPos(validMove), true);
+        let moveObject = this.calculator.move(clonedPiece.getPos(), Piece.getPos(validMove), true);
         for (let enemyClonedPiece of this.calculator.piecesColored[clonedPiece.enemyColor]) {
           enemyClonedPiece.updateValidMoves();
         }
@@ -127,21 +129,27 @@ class IratusBoard extends Board {
         this.calculator.undo(moveObject);
       }
       piece.validMoves = validMoves;
+      if (piece.validMoves.length === 0) {throw Error}
+      for (let otherPiece of this.piecesColored[piece.color]) {
+        if (otherPiece === piece) {continue}
+        otherPiece.validMoves.length = 0;
+      }
     } else {
       for (let piece of this.piecesColored[this.game.turn]) {
         let clonedPiece = this.calculator.getSimulatedPiece(piece);
         let validMoves = [];
         if (piece instanceof PieceMovingTwice && ! piece.stillHasToMove) {
           for (let validMove of piece.validMoves) {
-            let moveObject = this.calculator.move(clonedPiece.getPos(), piece.getNextPos(validMove), true);
+            let moveObject = this.calculator.move(clonedPiece.getPos(), Piece.getPos(validMove), true);
             for (let enemyClonedPiece of this.calculator.piecesColored[clonedPiece.enemyColor]) {
               enemyClonedPiece.updateValidMoves();
             }
+            let valid;
             if (moveObject.nextTurn === piece.color) {
-              let valid = false;
+              valid = false;
               clonedPiece.updateValidMoves();
               for (let validMove2 of clonedPiece.validMoves) {
-                let moveObject2 = this.calculator.move(clonedPiece.getPos(), piece.getNextPos(validMove2), true);
+                let moveObject2 = this.calculator.move(clonedPiece.getPos(), Piece.getPos(validMove2), true);
                 for (let enemyClonedPiece2 of this.calculator.piecesColored[clonedPiece.enemyColor]) {
                   enemyClonedPiece2.updateValidMoves();
                 }

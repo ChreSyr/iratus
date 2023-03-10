@@ -114,7 +114,12 @@ class Piece {
   static copyFrom(original) {
     this.isCaptured = original.isCaptured;
     if (this.isCaptured) {return}
-    this.goTo(original.row, original.col);
+
+    if (original.row !== this.row || original.col !== this.col) {
+      this.goTo(original.row, original.col);
+    } else {
+      this.board.piecesByPos[this.getPos()] = this;
+    }
   }
 
   getCoordinates() {
@@ -272,15 +277,15 @@ class Piece {
     this.validMoves = [];
     this.antikingSquares = [];
 
-    for (let i = 0; i < this.MOVES.length; i++) {
-      let move = this.MOVES[i];
+    for (let move of this.MOVES) {
       let row = this.row + move[0];
       let col = this.col + move[1];
-      if (row >= 0 && row <= 9 && col >= 0 && col <= 7) {
-        this.antikingSquares.push([row, col]);
-        if (this.canGoTo(row, col)) {
-          this.validMoves.push([row, col]);
-        }
+      
+      if (row < 0 || row > 9 || col < 0 || col > 7) {continue}
+      
+      this.antikingSquares.push([row, col]);
+      if (this.canGoTo(row, col)) {
+        this.validMoves.push([row, col]);
       }
     }
   }
@@ -332,7 +337,334 @@ class Piece {
       square.highlighter.classList.remove("accessible");
     }
   }
-
 }
 
-class PieceMovingTwice extends Piece {}
+class Dynamite extends Piece {
+
+  static ID = "dy";
+  static UNDYNAMITABLES = ["k", "q", "dy", "p", "g"];
+
+  static capture(capturer) {
+    let commands = super.capture(this, capturer);
+    commands.splice(commands.indexOf(commands.find(commandToRem => commandToRem.name === "transform")));  // remove phantomisation
+    if (capturer !== this) {  // when an ally goes to the dynamite
+      commands.push(new SetDynamite(capturer));
+    }
+    return commands;
+  }
+
+  capturerCheck() {
+    return false;
+  }
+
+  static copyFrom(original) {
+    this.isCaptured = original.isCaptured;
+    if (this.isCaptured) {return}
+    this.board.piecesByPos[original.getPos()] = this;
+  }
+
+  static goTo(row, col) {  // when the dynamite goes to an ally
+    let commands = [];
+    commands.push(new Capture(this, this));
+    commands.push(new SetDynamite(this.board.get(row, col)));
+    return commands;
+  }
+
+  static updateValidMoves() {
+    
+    if (this.isCaptured) {return}
+
+    this.validMoves = [];
+    // this.antiking_squares = [[this.row, this.col]];
+
+    for (let piece of this.board.piecesColored[this.color]) {
+      if (piece.isCaptured) {continue}
+      if (piece.dynamited) {continue}
+      if (Dynamite.UNDYNAMITABLES.includes(piece.ID)) {continue}
+      if (piece.constructor.ID === "p") {continue}
+      if (! piece.hasMoved()) {
+        this.validMoves.push([piece.row, piece.col])
+      }
+    }
+  }
+}
+
+class King extends Piece {
+
+  static ID = "k";
+  static MOVES = [
+    [0, 1],
+    [0, -1],
+    [-1, 1],
+    [-1, 0],
+    [-1, -1],
+    [1, 1],
+    [1, 0],
+    [1, -1],
+  ];
+
+  // long castle right + short castle right
+  castleRights = "00"
+  
+  canGoTo(row, col) {
+
+    if (this.posIsUnderCheck(row, col)) {
+      return false;
+    }
+    let piece = this.board.get(row, col);
+    if (piece === null) {
+      return true;
+    } else if (piece.ID === "dy") {
+      return false;
+    } else {
+      return piece.color !== this.color && ! piece.dynamited;
+    }
+  }
+
+  copyFrom(original) {
+    super.copyFrom(original);
+    this.castleRights = original.castleRights;
+  }
+
+  static goTo(row, col) {
+
+    let hasMoved = this.hasMoved();
+    let commands = super.goTo(row, col);
+
+    if (! hasMoved) {
+
+      if (col === 2 && this.castleRights[0] === "1") {  // Long castle
+        commands.push(new AfterMove([row, col - 2], [row, col + 1]));
+        commands.push(new Notation("0-0-0"));
+      }
+
+      else if (col === 6 && this.castleRights[1] === "1") {  // Short castle
+        commands.push(new AfterMove([row, col + 1], [row, col - 1]));
+        commands.push(new Notation("0-0"));
+      }
+    }
+
+    return commands;
+  }
+  
+  inCheck() {
+    return this.posIsUnderCheck(this.row, this.col);
+  }
+
+  posIsUnderCheck(row, col) {
+    for (let piece of this.board.piecesColored[this.enemyColor]) {
+      if (! piece.isCaptured) {
+        for (let antiking of piece.antikingSquares) {
+          if (row === antiking[0] && col === antiking[1]) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  static updateValidMoves() {
+    super.updateValidMoves();
+
+    if (! this.hasMoved() && ! this.inCheck()) {
+      // long castle
+      let canLongCastle = false;
+      let pieceAtLeftCorner = this.board.get(this.row, this.col - 4);
+      if (pieceAtLeftCorner !== null && pieceAtLeftCorner.ID === "r" && ! pieceAtLeftCorner.hasMoved()) {
+        canLongCastle = true;
+        for (let dx of [-1, -2]) {
+          if (this.board.get(this.row, this.col + dx) !== null) {
+            canLongCastle = false;
+            break;
+          }
+          if (this.posIsUnderCheck(this.row, this.col + dx)) {
+            canLongCastle = false;
+            break;
+          }
+        }
+        if (this.board.get(this.row, this.col - 3) !== null) {
+          canLongCastle = false;
+        }
+        if (canLongCastle) {
+          this.validMoves.push([this.row, this.col - 2]);
+        }
+      }
+      // short castle
+      let canShortCastle = false;
+      let pieceAtRightCorner = this.board.get(this.row, this.col + 3);
+      if (pieceAtRightCorner !== null && pieceAtRightCorner.ID === "r" && ! pieceAtRightCorner.hasMoved()) {
+        canShortCastle = true;
+        for (let dx of [1, 2]) {
+          if (this.board.get(this.row, this.col + dx) !== null || this.posIsUnderCheck(this.row, this.col + dx)) {
+            canShortCastle = false;
+            break;
+          }
+        }
+        if (canShortCastle) {
+          this.validMoves.push([this.row, this.col + 2]);
+        }
+      }
+
+      this.castleRights = (canLongCastle === true ? "1" : "0") + (canShortCastle === true ? "1" : "0")
+    }
+  }
+}
+
+class Knight extends Piece {
+
+  static ID = "n";
+  static MOVES = [
+    [2, 1],
+    [2, -1],
+    [-2, 1],
+    [-2, -1],
+    [1, 2],
+    [1, -2],
+    [-1, 2],
+    [-1, -2],
+  ];
+}
+
+class Pawn extends Piece {
+
+  static ID = "i";
+  static ATTR_TO_COPY = Piece.ATTR_TO_COPY.concat(["attackingMoves", "promotionRank"]);
+
+  constructor(board, row, col) {
+    super(board, row, col);
+
+    this.attackingMoves = undefined;
+    this.promotionRank = undefined;
+  
+    Pawn.preciseTransform(this);
+  }
+
+  static goTo(row, col) {
+    let commands = super.goTo(row, col);
+
+    if (this.row === this.promotionRank) {
+      if (this.cell && this instanceof Pawn) {  // a phantom cannot promote
+        this.openPromotionWindow();
+      }
+    }
+
+    // en passant
+    let stepback = this.color === "w" ? 1 : -1;
+    let pieceBehind = this.board.get(this.row + stepback, this.col);
+    if (pieceBehind === undefined) {
+      // Very rare case where the black phantom is a pawn at the topleft corner or
+      // the white phantom is a pawn at the bottomright corner of the board
+      return commands;
+    } else if (pieceBehind !== null && pieceBehind.color !== this.color && pieceBehind.ID === "i") {
+      let lastMove = this.board.game.movesHistory.slice(-1)[0];
+      if (this.board.get(lastMove.end[0], lastMove.end[1]) === pieceBehind && lastMove.start[0] !== this.row && lastMove.start[1] === this.col) {
+        commands.push(new Capture(pieceBehind, this));
+      }
+    }
+
+    return commands;
+  }
+
+  openPromotionWindow() {
+    this.board.pawnToPromote = this;
+    let promotionWindow = document.getElementsByClassName("promotion-window")[0];
+    let promotionPieces = document.getElementsByClassName("promotion-piece");
+    for (let promotionPiece of promotionPieces) {
+      promotionPiece.style.backgroundImage = "url('images/" + this.color + promotionPiece.classList[1] + ".png')"; 
+    }
+    if (this.color === "w") { // TODO : what if the board is flipped ?
+      promotionWindow.classList.add("top");
+    } else {
+      promotionWindow.classList.remove("top");
+    }
+    promotionWindow.style.transform = `translateX(${this.col * 100}%)`;
+    promotionWindow.style.visibility = "visible";
+    promotionWindow.style.pointerEvents = "all";
+  }
+
+  static preciseTransform(piece) {
+
+    if (piece.color === "b") {
+      piece.MOVES = [[1, 0], [2, 0]];
+      piece.attackingMoves = [[1, 1], [1, -1]];
+      piece.promotionRank = 9;
+    } else {
+      piece.MOVES = [[-1, 0], [-2, 0]];
+      piece.attackingMoves = [[-1, 1], [-1, -1]];
+      piece.promotionRank = 0;
+    }
+  }
+
+  static redo(row, col) {
+    super.goTo(row, col)
+  }
+
+  static updateValidMoves() {
+
+    if (this.isCaptured) {return}
+
+    this.validMoves = [];
+    this.antikingSquares = [];
+
+    for (let move of this.MOVES) {
+      let row = this.row + move[0];
+      let col = this.col + move[1];
+      
+      if (row < 0 || row > 9 || col < 0 || col > 7) {continue}
+
+      if (this.board.get(row, col) === null) {
+        this.validMoves.push([row, col]);
+      } else {
+        break;
+      }
+    }
+
+    for (let move of this.attackingMoves) {
+      let row = this.row + move[0];
+      let col = this.col + move[1];
+
+      if (row < 0 || row > 9 || col < 0 || col > 7) {continue}
+
+      this.antikingSquares.push([row, col]);
+
+      let attackedPiece = this.board.get(row, col);
+      if (attackedPiece === null) {
+
+        // en passant
+        let asidePiece = this.board.get(this.row, col);
+        if (asidePiece !== null && asidePiece.ID === "i" && asidePiece.color !== this.color) {
+          let lastMove = this.board.game.movesHistory.slice(-1)[0];
+          if (this.board.get(lastMove.end[0], lastMove.end[1]) === asidePiece && lastMove.start[0] !== row) {
+            this.validMoves.push([row, col]);
+          }
+        }
+      } else if (this.canGoTo(row, col)) {
+        this.validMoves.push([row, col]);
+      }
+    }
+  }
+}
+
+class Phantom extends Piece {
+
+  static ID = "p";
+
+  constructor(board, row, col) {
+    super(board, row, col);
+
+    this.cssClass = "phantom";
+  }
+  
+  canGoTo(row, col) {
+
+    let piece = this.board.get(row, col);
+    if (piece === null) {
+      return true;
+    } else if (piece.ID === "dy") {
+      return false;
+    } else {
+      return piece.color !== this.color;
+    }
+  }
+}

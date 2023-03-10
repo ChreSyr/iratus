@@ -42,6 +42,12 @@ class SetDynamite extends Command {
   }
 }
 
+class SetNextTurn extends Command {
+  constructor(nextTurn) {
+    super("setNextTurn", nextTurn);
+  }
+}
+
 class Transform extends Command {
   constructor(piece, oldClass, newClass) {
     super("transform", piece, oldClass, newClass);
