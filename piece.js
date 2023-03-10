@@ -31,6 +31,8 @@ class Piece {
 
   static ID = "";
   static MOVES = [];
+
+  // these are used for piece.transform()
   static ATTR_TO_COPY = ["ID", "MOVES"];
   static METH_TO_COPY = ["capture", "copyFrom", "goTo", "redo", "uncapture", "undo", "updateValidMoves"];
 
@@ -115,11 +117,10 @@ class Piece {
     this.isCaptured = original.isCaptured;
     if (this.isCaptured) {return}
 
-    if (original.row !== this.row || original.col !== this.col) {
-      this.goTo(original.row, original.col);
-    } else {
-      this.board.piecesByPos[this.getPos()] = this;
-    }
+    this.row = original.row;
+    this.col = original.col;
+    this.board.piecesByPos[this.getPos()] = this;
+    this.firstMove = original.firstMove;
   }
 
   getCoordinates() {
@@ -423,6 +424,7 @@ class King extends Piece {
 
   copyFrom(original) {
     super.copyFrom(original);
+    this.firstMove = original.firstMove;
     this.castleRights = original.castleRights;
   }
 

@@ -33,8 +33,12 @@ class PieceMovingTwice extends Piece {
     for (let command of commands) {
       if (command.name === "capture" && command.args[0] === this) {
         this.stillHasToMove = false;
-        return command
+        return commands;
       }
+    }
+    if (this.isCaptured) {
+      this.stillHasToMove = false;
+      return commands;
     }
 
     if (this.board.mainCurrentMove.piece === this) {
@@ -109,65 +113,46 @@ class Soldier extends Piece {
     }
   }
 
+  static capture(capturer) {
+    let commands = super.capture(capturer);
+
+    if (! this.dog) {return commands}  // happens when this is the phantom
+
+    if (! this.dog.isCaptured) {
+      commands.push(new Transform(this.dog, this.dog.actualClass, EnragedDog));  // enrage dog
+    } else {
+      commands.splice(commands.indexOf(commands.find(commandToRem => commandToRem.name === "transform")));  // remove leash phantomisation, stays dog
+    }
+
+    return commands;
+  }
+
+  static goTo(row, col) {
+    let startRow = this.row, startCol = this.col;
+    let commands = super.goTo(row, col);
+
+    if (! this.dog) {return commands}  // happens when this is the phantom
+
+    if (this.row === this.promotionRank) {
+      commands.push(new Transform(this, this.actualClass, SuperSoldier));
+    }
+
+    if (dogIsTooFar(this.row, this.col, this.dog.row, this.dog.col)) {
+      commands.push(new AfterMove([this.dog.row, this.dog.col], getNewDogRC(startRow, startCol, this.row, this.col)));
+    }
+
+    return commands;
+  }
+
+  static updateValidMoves() {
+    super.updateValidMoves();
+
+    if (this.dog) {
+      let squareToRemove = [this.dog.row, this.dog.col];
+      this.antikingSquares = this.antikingSquares.filter(arr => JSON.stringify(arr) !== JSON.stringify(squareToRemove));
+    }
+  }
 }
-
-/*
-    def capture(self, capturer):
-
-        commands = HasMoved.capture(self, capturer)
-
-        if self.malus is not None and self.malus.LETTER == "c":  # release, don't enrage the dog
-            return commands
-
-        if self.dog is None:
-            return commands
-
-        if not self.dog.is_captured:
-            dog_enrage = "transform", self.dog, self.dog.actual_class, EnragedDog
-            if commands is None:
-                commands = dog_enrage,
-            else:
-                commands = commands + (dog_enrage,)
-
-        else:
-            commands = list(commands)
-            for command in commands:
-                if command[0] == "transform":  # phantomisation
-                    commands.remove(command)
-                    break
-
-        return commands
-
-    def go_to(self, square):
-
-        start_square = self.square
-        commands = HasMoved.go_to(self, square)
-
-        # happens when this is a phantom soldier
-        if self.dog is None:
-            return commands
-
-        if self.rank == self.promotion_rank:
-            superhero = "transform", self, Soldier, SuperSoldier
-            commands += (superhero,)
-
-        if dog_is_too_far(self.square, self.dog.square):
-
-            dog_pull = "after_move", self.dog.square, get_dog_square(start_square, self.square)
-            commands = (dog_pull,) + commands
-
-        return commands
-
-    def update_valid_moves(self):
-
-        HasMoved.update_valid_moves(self)
-
-        if self.dog is not None:
-            if self.dog.square in self.antiking_squares:
-                self.antiking_squares = list(self.antiking_squares)
-                self.antiking_squares.remove(self.dog.square)
-                self.antiking_squares = tuple(self.antiking_squares)
-*/
 
 class SuperSoldier extends PieceMovingTwice {
   static ID = "ss";
@@ -177,148 +162,84 @@ class SuperSoldier extends PieceMovingTwice {
     [-1, 1],
     [-1, -1],
   ];
-/* 
-class SuperSoldier(MainPieceMovingTwice):
 
-    LETTER = "ss"
-    moves = ((-1, -1), (1, -1), (1, 1), (-1, 1))
+  constructor(board, row, col) {
+    super(board, row, col);
 
-    @staticmethod
-    def precise_transform(piece):
+    this.dog = null;
+  }
 
-        if not isinstance(piece, Soldier):
-            piece.dog = None
+  static preciseTransform(piece) {
+    if (! piece instanceof SuperSoldier) {
+      piece.dog = null;
+    }
+  }
 
-    def capture(self, capturer):
+  static capture(capturer) {
+    let commands = super.capture(capturer);
 
-        commands = MainPieceMovingTwice.capture(self, capturer)
+    if (! this.dog) {return commands}  // happens when this is the phantom or a promoted pawn
 
-        if self.malus is not None and self.malus.LETTER == "c":  # release, don't enrage the dog
-            return commands
+    if (! this.dog.isCaptured) {
+      commands.push(new Transform(this.dog, this.dog.actualClass, EnragedDog));  // enrage dog
+    } else {
+      commands.splice(commands.indexOf(commands.find(commandToRem => commandToRem.name === "transform")));  // remove leash phantomisation, stays dog
+    }
 
-        if self.dog is None:
-            return commands
+    return commands;
+  }
 
-        if not self.dog.is_captured:
-            dog_enrage = "transform", self.dog, self.dog.actual_class, EnragedDog
-            if commands is None:
-                commands = dog_enrage,
-            else:
-                commands = commands + (dog_enrage,)
+  static goTo(row, col) {
+    let startRow = this.row, startCol = this.col;
+    let commands = super.goTo(row, col);
 
-        else:
-            commands = list(commands)
-            for command in commands:
-                if command[0] == "transform":  # phantomisation
-                    commands.remove(command)
-                    break
+    if (! this.dog) {return commands}  // happens when this is the phantom or a promoted pawn
 
-        return commands
+    if (dogIsTooFar(this.row, this.col, this.dog.row, this.dog.col)) {
+      commands.push(new AfterMove([this.dog.row, this.dog.col], getNewDogRC(startRow, startCol, this.row, this.col)));
+    }
 
-    def go_to(self, square):
+    return commands;
+  }
 
-        start_square = self.square
-        commands = MainPieceMovingTwice.go_to(self, square)
+  static updateValidMoves() {
+    super.updateValidMoves();
 
-        # happens when this is a phantom leash
-        if self.dog is None:
-            return commands
-
-        if dog_is_too_far(self.square, self.dog.square):
-
-            dog_pull = "after_move", self.dog.square, get_dog_square(start_square, self.square)
-            return (dog_pull,) + commands
-
-        return commands
-
-    def update_valid_moves(self):
-
-        MainPieceMovingTwice.update_valid_moves(self)
-
-        if self.dog is not None:
-            if self.dog.square in self.antiking_squares:
-                self.antiking_squares = list(self.antiking_squares)
-                self.antiking_squares.remove(self.dog.square)
-                self.antiking_squares = tuple(self.antiking_squares)
- */
+    if (this.dog) {
+      let squareToRemove = [this.dog.row, this.dog.col];
+      this.antikingSquares = this.antikingSquares.filter(arr => JSON.stringify(arr) !== JSON.stringify(squareToRemove));
+    }
+  }
 }
 
 class Dog extends Piece {
   static ID = "d";
-/* 
-class Dog(HasMoved):
 
-    LETTER = "d"
-    # moves = ((-1, 0), (-1, -1), (0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1))
+  constructor(board, row, col) {
+    super(board, row, col);
 
-    def __init__(self, board, color, square):
+    this.soldier = undefined;
 
-        HasMoved.__init__(self, board, color, square)
+    if (col > 3) {
+      this.soldier = board.get(row, col - 1);
+      this.soldier.dog = this;
+    }
+  }
 
-        self.owner = None
+  static capture(capturer) {
+    let commands = super.capture(capturer);
 
-    def capture(self, capturer):
+    if (! this.soldier.isCaptured) {
+      for (let command of commands) {
+        if (command.name === "transform") {
+          command.args[2] = EnragedDog  // a captured Dog creates an EnragedDog's phantom
+        }
+      }
+      commands.push(new Capture(this.soldier, capturer));
+    }
 
-        commands = HasMoved.capture(self, capturer)
-        if not self.owner.is_captured:
-            capture = "capture", self.owner, capturer
-            commands += capture,
-
-            for command in commands:
-                if command[0] == "transform":  # phantomisation
-                    command[3] = EnragedDog
-        return commands
-
-    def set_malus(self, malus):
-
-        HasMoved.set_malus(self, malus)
-
-        if malus is not None and malus.LETTER == "c" and not self.owner.is_captured:
-            owner_capture = "capture", self.owner, malus
-            enragement = "transform", self, Dog, EnragedDog
-            return owner_capture, enragement
-
-    def update_valid_moves(self):
-
-        if self.is_captured:
-            return
-
-        self.valid_moves = ()
-        self.antiking_squares = ()
-
-        x = self.owner.square // 10
-        y = self.owner.square % 10
-        from_dog_to_leash = self.owner.square - self.square
-
-        for move in self.moves:
-
-            dx, dy = move
-
-            if not self.board.has_square(x + dx, y + dy):
-                continue
-
-            d = dx * 10 + dy
-            square = self.owner.square + d
-            if square == self.square:
-                continue
-            if square not in self.board.existing_squares:
-                raise AssertionError
-            if square != self.square:
-                self.antiking_squares += (square,)
-
-            start_square = self.square
-            end_square = square
-            dx = end_square // 10 - start_square // 10
-            dy = end_square % 10 - start_square % 10
-
-            if self.can_go_to(square, (dx, dy)):
-                self.valid_moves += (from_dog_to_leash + d,)
-
-        if self.bonus:
-            self.bonus.update_ally_vm()
-        if self.malus:
-            self.malus.update_victim_vm()
- */
+    return commands;
+  }
 }
 
 class EnragedDog extends PieceMovingTwice {
@@ -338,7 +259,7 @@ function dogIsTooFar(leashRow, leashCol, dogRow, dogCol) {
 function getNewDogRC(leashStartRow, leashStartCol, leashEndRow, leashEndCol) {
   let deltaRow = normed(leashEndRow - leashStartRow);
   let deltaCol = normed(leashEndCol - leashStartCol);
-  return leashEndRow - deltaRow, leashEndCol - deltaCol;
+  return [leashEndRow - deltaRow, leashEndCol - deltaCol];
 }
 
 function normed(x) {

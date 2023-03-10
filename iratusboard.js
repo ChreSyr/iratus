@@ -47,7 +47,7 @@ class IratusBoard extends Board {
       [" ", "d", "s", " ", " ", "ed", "ss", " "],
       [" ", " ", " ", " ", " ", " ", " ", " "],
       [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", "d", "s", " ", " ", "ed", "ss", " "],
+      [" ", "ed", "ss", " ", " ", "s", "d", " "],
       ["i", "i", "i", "i", "i", "i", "i", "i"],
       ["r", "n", "b", "q", "k", "b", "n", "r"],
       ["p", "d", "s","dy","dy", "s", "d", "g"],
@@ -57,6 +57,7 @@ class IratusBoard extends Board {
     //   ["r", "n", "b", "r", "k", " ", "n", "n"],
     //   ["i", "i", "i", "r", "r", " ", "i", "i"],
     //   [" ", " ", " ", " ", " ", " ", " ", " "],
+    //   [" ", "d", "s", " ", " ", "ed", "ss", " "],
     //   [" ", " ", " ", " ", " ", " ", " ", " "],
     //   [" ", " ", " ", " ", " ", " ", " ", " "],
     //   [" ", " ", " ", " ", " ", " ", " ", " "],
@@ -115,7 +116,7 @@ class IratusBoard extends Board {
     
     let piece = this.game.movesHistory.slice(-1)[0].piece;
     
-    if (piece instanceof PieceMovingTwice && piece.stillHasToMove) {
+    if (piece.stillHasToMove) {
       let clonedPiece = this.calculator.getSimulatedPiece(piece);
       let validMoves = [];
       for (let validMove of piece.validMoves) {
@@ -138,7 +139,7 @@ class IratusBoard extends Board {
       for (let piece of this.piecesColored[this.game.turn]) {
         let clonedPiece = this.calculator.getSimulatedPiece(piece);
         let validMoves = [];
-        if (piece instanceof PieceMovingTwice && ! piece.stillHasToMove) {
+        if (piece.stillHasToMove === false) {
           for (let validMove of piece.validMoves) {
             let moveObject = this.calculator.move(clonedPiece.getPos(), Piece.getPos(validMove), true);
             for (let enemyClonedPiece of this.calculator.piecesColored[clonedPiece.enemyColor]) {
