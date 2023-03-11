@@ -51,6 +51,15 @@ class PieceMovingTwice extends Piece {
     return commands;
   }
 
+  static undo(move) {
+    super.undo(move);
+
+    if (this.board.game.movesHistory.length) {
+      let lastMove = this.board.game.movesHistory.slice(-1)[0];
+      this.stillHasToMove = lastMove.piece === this;
+    }
+  }
+
   static updateValidMoves() {
     if (this.isCaptured) {return}
 
