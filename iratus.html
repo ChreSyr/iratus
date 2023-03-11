@@ -15,26 +15,24 @@
 
   <body>
 
+    <div class="buttons">
+      <button onclick="game.restart()">Restart</button>
+    </div>
     <div class="all">
 
-      <div class="bar">
+      <!-- <div class="bar">
         <img class="bar-dogleft reversed" src="images/logo_quiet.png" alt="dog">
         <img class="bar-dogright" src="images/logo_quiet.png" alt="dog">
         <button onclick="document.location='home.html'">Home</button>
         <button onclick="document.location='chess.html'">Play Chess</button>
         <button onclick="document.location='iratus.html'">Play Iratus</button>
-      </div>
-      <div class="bar">
+      </div> -->
+      <!-- <div class="bar">
         <button onclick="setStyle('1')">Style sheet 1</button>
         <button onclick="setStyle('2')">Style sheet 2</button>
         <button onclick="setStyle('3')">Style sheet 3</button>
         <button onclick="setStyle('')">No style sheet</button>
-      </div>
-      <div class="bar">
-        <button onclick="game.restart()">Restart</button>
-        <button onclick="game.undo()">Undo</button>
-        <button onclick="game.redo()">Redo</button>
-      </div>
+      </div> -->
       
       <div class="mainzone">
           
@@ -65,6 +63,10 @@
 
       </div>
         
+    </div>
+    <div class="buttons">
+      <button onclick="game.undo()">Undo</button>
+      <button onclick="game.redo()">Redo</button>
     </div>
 
     <script type="text/javascript" src="home.js"></script>

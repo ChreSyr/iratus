@@ -42,8 +42,8 @@ class Game {
       let infoDiv = document.getElementById("info");
       let titleLabel = infoDiv.getElementsByTagName("h2")[0];
       titleLabel.innerHTML = gameState[0].toUpperCase() + gameState.substring(1);
-      let kingImage = infoDiv.getElementsByTagName("img")[0];
-      kingImage.src = gameState === "checkmate" ? "images/" + lastMove.turn + "k.png" : "";
+      let pieceImage = infoDiv.getElementsByTagName("img")[0];
+      pieceImage.src = gameState === "checkmate" ? "images/" + lastMove.turn + lastMove.piece.ID + ".png" : "";
       let desriptionLabel = infoDiv.getElementsByTagName("p")[0];
       desriptionLabel.innerHTML = description;
       infoDiv.style.visibility = "visible";
