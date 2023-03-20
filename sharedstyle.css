@@ -150,7 +150,7 @@ button:hover {
   margin: 30px 60px;
 }
 
-@media only screen and (min-width:800px) {
+@medi(min-width:800px) {
 
   body {
     flex-direction: unset;
