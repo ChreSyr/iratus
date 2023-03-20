@@ -28,7 +28,8 @@ function quiet() {
 function ajustSquareSize() {
   const MAX_SQUARE_SIZE = 60;
   var all = document.getElementsByClassName("all")[0];
-  var squareSize = Math.min(MAX_SQUARE_SIZE, document.documentElement.clientWidth / 8);
+  var screenWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+  var squareSize = Math.min(MAX_SQUARE_SIZE, screenWidth / 8);
   document.documentElement.style.setProperty('--square-size', squareSize + 'px');
 }
 window.addEventListener('resize', ajustSquareSize);
