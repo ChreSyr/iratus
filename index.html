@@ -6,6 +6,7 @@
 
     <meta charset="utf-8"> 
     <link rel="icon" type="image/x-icon" href="images/logo_quiet.png">
+    <link rel="stylesheet" type="text/css" href="dropdown-style.css">
     <link id="maincss" rel="stylesheet" href="sharedstyle.css">
     <link rel="stylesheet" type="text/css" href="style.css">
     <link id="customcss" rel="stylesheet" href="">
@@ -15,24 +16,175 @@
 
   <body>
 
-    <div class="buttons">
-      <button onclick="game.restart()">Restart</button>
-    </div>
-    <div class="all">
+    <header>
+      <h1>Iratus</h1>
+      <div class="cd-dropdown-wrapper">
+        <a class="cd-dropdown-trigger" href="#0"></a>
+        <nav class="cd-dropdown">
+          <h2>Iratus</h2>
+          <a href="#0" class="cd-close">Close</a>
+          <ul class="cd-dropdown-content">
+            <li><a href="home.html">Home</a></li>
+            <li class="has-children">
+              <a href="">Règles</a>
+              <ul class="cd-dropdown-icons is-hidden">
+                <li class="go-back"><a href="#0">Options</a></li>
+                <li class="see-all"><a href="rules.html">Toutes les règles</a></li>
+                <li><a class="cd-dropdown-item item-1" href="rules.html"><h3>Le Soldat</h3></a></li>
+                <li><a class="cd-dropdown-item item-1" href="rules.html"><h3>Le Chien</h3></a></li>
+                <li><a class="cd-dropdown-item item-1" href="rules.html"><h3>La Dynamite</h3></a></li>
+                <li><a class="cd-dropdown-item item-1" href="rules.html"><h3>Le Phantôme</h3></a></li>
+                <li><a class="cd-dropdown-item item-1" href="rules.html"><h3>Le Grappin</h3></a></li>
+              </ul> <!-- .cd-secondary-dropdown -->
+            </li> <!-- .has-children -->
+            
+            <li class="has-children">
+              <a href="">Rules</a>
+              <ul class="cd-dropdown-gallery is-hidden">
+                <li class="go-back"><a href="#0">Menu</a></li>
+                <li class="see-all"><a href="http://codyhouse.co/?p=748">Browse Gallery</a></li>
+                <li>
+                  <a class="cd-dropdown-item" href="http://codyhouse.co/?p=748">
+                    <img src="img/img.png" alt="Product Image">
+                    <h3>Product #1</h3>
+                  </a>
+                </li>
+  
+                <li>
+                  <a class="cd-dropdown-item" href="http://codyhouse.co/?p=748">
+                    <img src="img/img.png" alt="Product Image">
+                    <h3>Product #2</h3>
+                  </a>
+                </li>
+  
+                <li>
+                  <a class="cd-dropdown-item" href="http://codyhouse.co/?p=748">
+                    <img src="img/img.png" alt="Product Image">
+                    <h3>Product #3</h3>
+                  </a>
+                </li>
+  
+                <li>
+                  <a class="cd-dropdown-item" href="http://codyhouse.co/?p=748">
+                    <img src="img/img.png" alt="Product Image">
+                    <h3>Product #4</h3>
+                  </a>
+                </li>
+              </ul> 
+            </li> <!-- .has-children -->
+            
+            <li class="has-children">
+              <a href="">Rulas</a>
+              <ul class="cd-secondary-dropdown is-hidden">
+                <li class="go-back"><a href="#0">Menu</a></li>
+                <li class="see-all"><a href="http://codyhouse.co/?p=748">All Clothing</a></li>
+                <li class="has-children">
+                  <a href="http://codyhouse.co/?p=748">Accessories</a>
+  
+                  <ul class="is-hidden">
+                    <li class="go-back"><a href="#0">Clothing</a></li>
+                    <li class="see-all"><a href="http://codyhouse.co/?p=748">All Accessories</a></li>
+                    <li class="has-children">
+                      <a href="#0">Beanies</a>
+  
+                      <ul class="is-hidden">
+                        <li class="go-back"><a href="#0">Accessories</a></li>
+                        <li class="see-all"><a href="http://codyhouse.co/?p=748">All Benies</a></li>
+                        <li><a href="http://codyhouse.co/?p=748">Caps &amp; Hats</a></li>
+                        <li><a href="http://codyhouse.co/?p=748">Gifts</a></li>
+                        <li><a href="http://codyhouse.co/?p=748">Scarves &amp; Snoods</a></li>
+                      </ul>
+                    </li>
+                    <li class="has-children">
+                      <a href="#0">Caps &amp; Hats</a>
+  
+                      <ul class="is-hidden">
+                        <li class="go-back"><a href="#0">Accessories</a></li>
+                        <li class="see-all"><a href="http://codyhouse.co/?p=748">All Caps &amp; Hats</a></li>
+                        <li><a href="http://codyhouse.co/?p=748">Beanies</a></li>
+                        <li><a href="http://codyhouse.co/?p=748">Caps</a></li>
+                        <li><a href="http://codyhouse.co/?p=748">Hats</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="http://codyhouse.co/?p=748">Glasses</a></li>
+                    <li><a href="http://codyhouse.co/?p=748">Gloves</a></li>
+                    <li><a href="http://codyhouse.co/?p=748">Jewellery</a></li>
+                    <li><a href="http://codyhouse.co/?p=748">Scarves</a></li>
+                  </ul>
+                </li>
+  
+                <li class="has-children">
+                  <a href="http://codyhouse.co/?p=748">Bottoms</a>
+  
+                  <ul class="is-hidden">
+                    <li class="go-back"><a href="#0">Clothing</a></li>
+                    <li class="see-all"><a href="http://codyhouse.co/?p=748">All Bottoms</a></li>
+                    <li><a href="http://codyhouse.co/?p=748">Casual Trousers</a></li>
+                    <li class="has-children">
+                      <a href="#0">Jeans</a>
+  
+                      <ul class="is-hidden">
+                        <li class="go-back"><a href="#0">Bottoms</a></li>
+                        <li class="see-all"><a href="http://codyhouse.co/?p=748">All Jeans</a></li>
+                        <li><a href="http://codyhouse.co/?p=748">Ripped</a></li>
+                        <li><a href="http://codyhouse.co/?p=748">Skinny</a></li>
+                        <li><a href="http://codyhouse.co/?p=748">Slim</a></li>
+                        <li><a href="http://codyhouse.co/?p=748">Straight</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#0">Leggings</a></li>
+                    <li><a href="#0">Shorts</a></li>
+                  </ul>
+                </li>
+  
+                <li class="has-children">
+                  <a href="http://codyhouse.co/?p=748">Jackets</a>
+  
+                  <ul class="is-hidden">
+                    <li class="go-back"><a href="#0">Clothing</a></li>
+                    <li class="see-all"><a href="http://codyhouse.co/?p=748">All Jackets</a></li>
+                    <li><a href="http://codyhouse.co/?p=748">Blazers</a></li>
+                    <li><a href="http://codyhouse.co/?p=748">Bomber jackets</a></li>
+                    <li><a href="http://codyhouse.co/?p=748">Denim Jackets</a></li>
+                    <li><a href="http://codyhouse.co/?p=748">Duffle Coats</a></li>
+                    <li><a href="http://codyhouse.co/?p=748">Leather Jackets</a></li>
+                    <li><a href="http://codyhouse.co/?p=748">Parkas</a></li>
+                  </ul>
+                </li>
+  
+                <li class="has-children">
+                  <a href="http://codyhouse.co/?p=748">Tops</a>
+  
+                  <ul class="is-hidden">
+                    <li class="go-back"><a href="#0">Clothing</a></li>
+                    <li class="see-all"><a href="http://codyhouse.co/?p=748">All Tops</a></li>
+                    <li><a href="http://codyhouse.co/?p=748">Cardigans</a></li>
+                    <li><a href="http://codyhouse.co/?p=748">Coats</a></li>
+                    <li><a href="http://codyhouse.co/?p=748">Polo Shirts</a></li>
+                    <li><a href="http://codyhouse.co/?p=748">Shirts</a></li>
+                    <li class="has-children">
+                      <a href="#0">T-Shirts</a>
+  
+                      <ul class="is-hidden">
+                        <li class="go-back"><a href="#0">Tops</a></li>
+                        <li class="see-all"><a href="http://codyhouse.co/?p=748">All T-shirts</a></li>
+                        <li><a href="http://codyhouse.co/?p=748">Plain</a></li>
+                        <li><a href="http://codyhouse.co/?p=748">Print</a></li>
+                        <li><a href="http://codyhouse.co/?p=748">Striped</a></li>
+                        <li><a href="http://codyhouse.co/?p=748">Long sleeved</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="http://codyhouse.co/?p=748">Vests</a></li>
+                  </ul>
+                </li>
+              </ul> <!-- .cd-secondary-dropdown -->
+            </li> <!-- .has-children -->
+          </ul> <!-- .cd-dropdown-content -->
+        </nav> <!-- .cd-dropdown -->
+      </div> <!-- .cd-dropdown-wrapper -->
+    </header>
 
-      <!-- <div class="bar">
-        <img class="bar-dogleft reversed" src="images/logo_quiet.png" alt="dog">
-        <img class="bar-dogright" src="images/logo_quiet.png" alt="dog">
-        <button onclick="document.location='home.html'">Home</button>
-        <button onclick="document.location='chess.html'">Play Chess</button>
-        <button onclick="document.location='iratus.html'">Play Iratus</button>
-      </div> -->
-      <!-- <div class="bar">
-        <button onclick="setStyle('1')">Style sheet 1</button>
-        <button onclick="setStyle('2')">Style sheet 2</button>
-        <button onclick="setStyle('3')">Style sheet 3</button>
-        <button onclick="setStyle('')">No style sheet</button>
-      </div> -->
+    <div class="all">
       
       <div class="mainzone">
           
@@ -60,13 +212,15 @@
             <button onclick="hideInfo()">That was a real good game</button>
           </div>
         <!-- </div> -->
+        <div class="controls">
+          <button onclick="game.undoAll()">&lt&lt</button>
+          <button onclick="game.undo()">&lt</button>
+          <button onclick="game.redo()">&gt</button>
+          <button onclick="game.redoAll()">&gt&gt</button>
+        </div>
 
       </div>
         
-    </div>
-    <div class="buttons">
-      <button onclick="game.undo()">Undo</button>
-      <button onclick="game.redo()">Redo</button>
     </div>
 
     <script type="text/javascript" src="home.js"></script>
@@ -78,6 +232,11 @@
     <script type="text/javascript" src="iratusboard.js"></script>
     <script type="text/javascript" src="game.js"></script>
     <script type="text/javascript" src="iratus.js"></script>
+
+    <!-- Dropdown -->
+    <script src="js/jquery-2.1.1.js"></script>
+    <script src="js/jquery.menu-aim.js"></script> <!-- menu aim -->
+    <script src="js/main.js"></script> <!-- Resource jQuery -->
 
   </body>
 

@@ -166,12 +166,6 @@ class Game {
     }
   }
 
-  restart() {
-    while (this.movesHistory.length) {
-      this.undo();
-    }
-  }
-
   redo() {  // redo the last move
 
     if (this.backMovesHistory.length === 0) {return}
@@ -191,6 +185,12 @@ class Game {
     }
   }
 
+  redoAll() {
+    while (this.backMovesHistory.length) {
+      this.redo();
+    }
+  }
+
   undo() {  // undo the last move
     if (this.movesHistory.length === 0) {return}
 
@@ -207,6 +207,12 @@ class Game {
       if (lastMove.turn !== lastMove.nextTurn) {
         this.board.flipDisplay(animate=false);
       }
+    }
+  }
+
+  undoAll() {
+    while (this.movesHistory.length) {
+      this.undo();
     }
   }
 }

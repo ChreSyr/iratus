@@ -5,9 +5,17 @@
   transform: rotateY(180deg);
 }
 
+/* FONT */
+
+@font-face {
+  font-family: "PierceRoman";
+  src: url("font/PierceRoman.otf");
+}
+
 /* ALL-SITE STYLE */
 
 :root {
+  --very-dark-green: rgb(10, 20, 10);
   --dark-green: rgb(22, 43, 22);
   --light-green: rgb(68, 105, 68);
   --selected: rgb(63, 131, 17);
@@ -20,12 +28,23 @@ html {
 }
 
 body {
-  font-family: "pierce", "helvetica";
+  font-family: "PierceRoman", "helvetica";
   margin: 0;
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: var(--dark-green);
+}
+
+header h1 {
+  color: var(--light-green);
+  /* font-weight: normal; */
+}
+
+header button {
+  /* width: 100%; */
+  height: var(--square-size);
+  /* position: absolute; */
+  border: 2px solid black;
 }
 
 button {
@@ -34,7 +53,7 @@ button {
   padding: 3px 20px;
   background-color: black;
   color: var(--light-green);
-  font-family: "pierce";
+  font-family: "PierceRoman";
   font-size: calc(var(--square-size) * .6);
   cursor: pointer;
 }
@@ -46,9 +65,9 @@ button:hover {
 
 .all {
   flex: 1 1 auto;
-
-  background-color: var(--dark-green);
+  background-color: rgb(0 0 0);
   text-align: center;
+  justify-content: center;
   display: flex;
   flex-flow: column;
 }
@@ -67,19 +86,25 @@ button:hover {
   height: 0px;
 }
 
-.buttons {
+.controls {
   background-color: black;
-  width: 100%;
+  width: calc(var(--square-size) * 8);
   height: var(--square-size);
   display: flex;
   justify-content: center;
 }
 
+.controls button {
+  padding: 0;
+  width: var(--square-size);
+}
+
 .mainzone {
-  background-color: var(--light-green);
-  flex: 1 1 auto;
-  overflow-y: auto;
+  /* background-color: var(--light-green); */
+  /* flex: 1 1 auto; */
+  overflow-y: hidden;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -93,15 +118,13 @@ button:hover {
 #info {
   position: absolute;
   left: 50%;
-  top: calc(var(--square-size) * .8 + 200px);
+  top: calc(var(--square-size) * (6 - 4 * .8));
   width: calc(var(--square-size) * 8 * .8);
   transform: translateX(-50%);
-
   background-color: var(--light-green);
   border-radius: 0.6rem;
   box-shadow: 0 0.3rem 0.63rem 0.07rem rgb(0 0 0 / 40%);
   height: calc(var(--square-size) * 8 * .8);
-  
   display: flex;
   flex-direction: column;
   align-items: center;
