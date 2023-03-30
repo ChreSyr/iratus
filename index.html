@@ -4,7 +4,8 @@
 <html>
   <head>
 
-    <meta charset="utf-8"> 
+    <meta charset="utf-8"
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="images/logo_quiet.png">
     <link rel="stylesheet" type="text/css" href="dropdown-style.css">
     <link id="maincss" rel="stylesheet" href="sharedstyle.css">
@@ -204,14 +205,14 @@
           </div>
 
         </div>
-        <!-- <div class="info-container"> -->
-          <div id="info">
-            <h2>Checkmate !</h2>
-            <img src="images/wk.png"></img>
-            <p>_ won</p>
-            <button onclick="hideInfo()">That was a real good game</button>
-          </div>
-        <!-- </div> -->
+          
+        <div id="info">
+          <h2>Checkmate !</h2>
+          <img src="images/wk.png"></img>
+          <p>_ won</p>
+          <button onclick="hideInfo()">That was a real good game</button>
+        </div>
+          
         <div class="controls">
           <button onclick="game.undoAll()">&lt&lt</button>
           <button onclick="game.undo()">&lt</button>
@@ -237,6 +238,7 @@
     <script src="js/jquery-2.1.1.js"></script>
     <script src="js/jquery.menu-aim.js"></script> <!-- menu aim -->
     <script src="js/main.js"></script> <!-- Resource jQuery -->
+    <script src="js/modernizr.js"></script> <!-- Modernizr -->
 
   </body>
 
