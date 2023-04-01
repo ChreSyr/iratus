@@ -83,6 +83,15 @@ img {
   max-width: 100%;
 }
 
+li {
+  background-color: var(--dark-green);
+}
+@media only screen and (min-width: 1024px) {
+  li {
+    background-color: black;
+  }
+}
+
 /* -------------------------------- 
 
 Main Components 
@@ -110,7 +119,7 @@ header {
   position: relative;
   width: calc(var(--square-size) * .75);
   height: calc(var(--square-size) * .75);
-  padding: 0 20px 0 20px;
+  /* padding: 0 20px 0 20px; */
   line-height: 40px;
   background-color: black;
   color: var(--light-green);
@@ -140,7 +149,7 @@ header {
   transition: width 0.3s, transform 0.3s;
 }
 .cd-dropdown-trigger::before {
-  right:20px;
+  right: calc(var(--square-size) * .4 - 5px);
   -webkit-transform: rotate(45deg);
   -moz-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
@@ -148,7 +157,7 @@ header {
   transform: rotate(45deg);
 }
 .cd-dropdown-trigger::after {
-  right: 15px;
+  left: calc(var(--square-size) * .4 - 5px);
   -webkit-transform: rotate(-45deg);
   -moz-transform: rotate(-45deg);
   -ms-transform: rotate(-45deg);
@@ -183,25 +192,18 @@ header {
     -ms-transform: rotate(45deg);
     -o-transform: rotate(45deg);
     transform: rotate(45deg);
+    left: calc(var(--square-size) * .4 - 11px);
   }
 }
 
 .cd-dropdown h2,
 .cd-dropdown-content a,
 .cd-dropdown-content ul a {
-  height: 50px;
-  line-height: 50px;
+  height: var(--square-size);
+  line-height: var(--square-size);
 }
-@media only screen and (min-width: 768px) {
-  .cd-dropdown h2,
-  .cd-dropdown-content a,
-  .cd-dropdown-content ul a {
-    height: 60px;
-    line-height: 60px;
-  }
-  .cd-dropdown h2 {
-    font-size:larger;
-  }
+.cd-dropdown h2 {
+  font-size: calc(var(--square-size) * .5);
 }
 @media only screen and (min-width: 1024px) {
   .cd-dropdown h2,
@@ -226,7 +228,7 @@ header {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--dark-green);
+  /* background-color: var(--dark-green); */
   color: black;
   visibility: hidden;
   /* Force Hardware Acceleration */
@@ -254,6 +256,7 @@ header {
   color: grey;
   border-bottom: 1px solid var(--very-dark-green);
   text-align: center;
+  background-color: var(--dark-green);
 }
 
 .cd-dropdown .cd-close {
@@ -262,8 +265,8 @@ header {
   z-index: 1;
   left: 0;
   top: 0;
-  height: 50px;
-  width: 50px;
+  height: calc(var(--square-size) * 1);
+  width: calc(var(--square-size) * 1);
   /* image replacement */
   overflow: hidden;
   text-indent: 100%;
@@ -311,11 +314,14 @@ header {
   -moz-transition: -moz-transform 0.5s 0s, visibility 0s 0s;
   transition: transform 0.5s 0s, visibility 0s 0s;
 }
-@media only screen and (min-width: 768px) {
+.cd-dropdown .cd-close {
+  /* top: 5px; */
+}
+/* @media only screen and (min-width: 768px) {
   .cd-dropdown .cd-close {
     top: 5px;
   }
-}
+} */
 @media only screen and (min-width: 1024px) {
   .cd-dropdown {
     position: absolute;
@@ -329,7 +335,8 @@ header {
     -o-transform: translateX(0);
     transform: translateX(0);
     background-color: black;
-    box-shadow: 0 10px 100px rgb(255 255 255 / 20%);
+/*     box-shadow: 0 10px 100px rgb(255 255 255 / 30%); */
+    box-shadow: 0 10px 100px rgb(68 105 68);
     opacity: 0;
     -webkit-transform: translateY(30px);
     -moz-transform: translateY(30px);
@@ -442,14 +449,20 @@ header {
 .dropdown-is-active .cd-dropdown-content, .dropdown-is-active .cd-dropdown-content ul {
   -webkit-overflow-scrolling: touch;
 }
-@media only screen and (min-width: 768px) {
+.cd-dropdown-content, .cd-dropdown-content ul {
+  padding-top: var(--square-size);
+}
+.cd-dropdown-content a, .cd-dropdown-content ul a {
+  font-size: 1.8rem;
+}
+/* @media only screen and (min-width: 768px) {
   .cd-dropdown-content, .cd-dropdown-content ul {
     padding-top: 60px;
   }
   .cd-dropdown-content a, .cd-dropdown-content ul a {
     font-size: 1.8rem;
   }
-}
+} */
 @media only screen and (min-width: 1024px) {
   .cd-dropdown-content, .cd-dropdown-content ul {
     padding-top: 0;
@@ -542,6 +555,7 @@ header {
   }
   .no-touch .cd-dropdown-content > li:not(.has-children) a:hover {
     color: black;
+    background-color: var(--light-green);
   }
   .cd-dropdown-content.move-out > li > a, .cd-dropdown-content.move-out > .cd-divider {
     /* reset mobile style */
@@ -562,7 +576,8 @@ header {
     height: auto;
     color: var(--light-green);
     background-color: black;
-    box-shadow: 0 10px 100px rgb(255 255 255 / 20%);
+/*     box-shadow: 0 10px 100px rgb(255 255 255 / 20%); */
+    box-shadow: 0 10px 100px rgb(68 105 68);
   }
   .cd-dropdown-content .cd-secondary-dropdown::after, .cd-dropdown-content .cd-dropdown-gallery::after, .cd-dropdown-content .cd-dropdown-icons::after {
     clear: both;

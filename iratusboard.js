@@ -107,6 +107,9 @@ class IratusBoard extends Board {
     for (let piece of this.pieces) {
       piece.updateValidMoves();
     }
+    for (let king of Object.values(this.king)) {
+      king.updateValidMoves();
+    }
     this.calculator.clone();
 
     if (this.game.movesHistory.length === 0) {

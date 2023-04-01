@@ -5,7 +5,7 @@ jQuery(document).ready(function($){
 		toggleNav();
 	});
 
-	//close meganavigation
+	//close meganavigation with X
 	$('.cd-dropdown .cd-close').on('click', function(event){
 		event.preventDefault();
 		toggleNav();
