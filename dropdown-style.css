@@ -67,6 +67,7 @@ body {
   font-size: 1.6rem;
   font-family: sans-serif;
   color: black;
+  background-color: black;
 }
 
 h1 {
@@ -193,7 +194,7 @@ header {
     -ms-transform: rotate(45deg);
     -o-transform: rotate(45deg);
     transform: rotate(45deg);
-    left: calc(var(--square-size) * .4 - 11px);
+    left: calc(var(--square-size) * .4 - 10.7px);
   }
 }
 
@@ -521,33 +522,57 @@ header {
   content: '';
   display: block;
   position: absolute;
-  left: 9px;
+  left: 14px;
   top: 50%;
-  margin-top: -30px;
-  width: 60px;
-  height: 60px;
+  margin-top: -27px;
+  width: 50px;
+  height: 50px;
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: 60px 60px;
+  background-size: 50px 50px;
   background-color: unset;
-  /* background-image: url("images/chessboard.png"); */
 }
 .cd-dropdown-item.btn-soldier::before {
-  background-image: url("images/ws.png"), url("images/black_square.png");
+  background-image: url("images/ws.png");
 }
 .cd-dropdown-item.btn-dog::before {
-  background-image: url("images/wd.png"), url("images/black_square.png");
+  background-image: url("images/wd.png");
 }
 .cd-dropdown-item.btn-dynamite::before {
-  background-image: url("images/wdy.png"), url("images/black_square.png");
+  background-image: url("images/wdy.png");
 }
 .cd-dropdown-item.btn-phantom::before {
-  background-image: url("images/wp.png"), url("images/black_square.png");
+  background-image: url("images/wp.png");
 }
 .cd-dropdown-item.btn-grapple::before {
-  background-image: url("images/wg.png"), url("images/black_square.png");
+  background-image: url("images/wg.png");
 }
 @media only screen and (min-width: 1024px) {
+  .cd-dropdown-content .cd-dropdown-icons .cd-dropdown-item::before {
+    /* item icon */
+    left: 9px;
+    top: 50%;
+    margin-top: -30px;
+    width: 60px;
+    height: 60px;
+    background-size: 60px 60px;
+    background-color: unset;
+  }
+  .cd-dropdown-item.btn-soldier::before {
+    background-image: url("images/ws.png"), url("images/black_square.png");
+  }
+  .cd-dropdown-item.btn-dog::before {
+    background-image: url("images/wd.png"), url("images/black_square.png");
+  }
+  .cd-dropdown-item.btn-dynamite::before {
+    background-image: url("images/wdy.png"), url("images/black_square.png");
+  }
+  .cd-dropdown-item.btn-phantom::before {
+    background-image: url("images/wp.png"), url("images/black_square.png");
+  }
+  .cd-dropdown-item.btn-grapple::before {
+    background-image: url("images/wg.png"), url("images/black_square.png");
+  }
   .cd-dropdown-content {
     /* reset mobile style */
     position: static;
@@ -557,10 +582,10 @@ header {
   .cd-dropdown-content > li:last-of-type a {
     border-bottom: none;
   }
-/*   .no-touch .cd-dropdown-content > li:not(.has-children) a:hover {
+  .no-touch .cd-dropdown-content > li:not(.has-children) a:hover {
     color: black;
     background-color: var(--light-green);
-  } */
+  }
   .cd-dropdown-content.move-out > li > a, .cd-dropdown-content.move-out > .cd-divider {
     /* reset mobile style */
     -webkit-transform: translateX(0);
