@@ -18,26 +18,28 @@
   <body>
 
     <header>
-      <h1>Iratus</h1>
+      <h1>Règles</h1>
       <div class="cd-dropdown-wrapper">
         <a class="cd-dropdown-trigger" href="#0"></a>
         <nav class="cd-dropdown">
           <h2>Iratus</h2>
           <a href="#0" class="cd-close">Close</a>
           <ul class="cd-dropdown-content">
-            <li><a href="index.html">Play</a></li>
-            <li class="has-children">
-              <a href="">Règles</a>
+            <li><a href="index.html">C'est où qu'on joue ?</a></li>
+            <!-- <li class="has-children">
+              <a href="">C'est comment qu'on joue ?</a>
               <ul class="cd-dropdown-icons is-hidden">
                 <li class="go-back"><a href="#0">Options</a></li>
                 <li class="see-all"><a href="rules.html">Toutes les règles</a></li>
-                <li><a class="cd-dropdown-item btn-soldier" href="rules.html"><h3>Le Soldat</h3></a></li>
-                <li><a class="cd-dropdown-item btn-dog" href="rules.html"><h3>Le Chien</h3></a></li>
-                <li><a class="cd-dropdown-item btn-dynamite" href="rules.html"><h3>La Dynamite</h3></a></li>
-                <li><a class="cd-dropdown-item btn-phantom" href="rules.html"><h3>Le Phantôme</h3></a></li>
-                <li><a class="cd-dropdown-item btn-grapple" href="rules.html"><h3>Le Grappin</h3></a></li>
-              </ul> <!-- .cd-secondary-dropdown -->
-            </li> <!-- .has-children -->
+                <li><a class="cd-dropdown-item btn-soldier" href="rules.html#soldier-anchor"><h3>Le Soldat</h3></a></li>
+                <li><a class="cd-dropdown-item btn-supersoldier" href="rules.html#supersoldier-anchor"><h3>Le Super Soldat</h3></a></li>
+                <li><a class="cd-dropdown-item btn-dog" href="rules.html#dog-anchor"><h3>Le Chien</h3></a></li>
+                <li><a class="cd-dropdown-item btn-enrageddog" href="rules.html#enrageddog-anchor"><h3>Le Chien Enragé</h3></a></li>
+                <li><a class="cd-dropdown-item btn-dynamite" href="rules.html#dynamite-anchor"><h3>La Dynamite</h3></a></li>
+                <li><a class="cd-dropdown-item btn-grapple" href="rules.html#grapple-anchor"><h3>Le Grappin</h3></a></li>
+                <li><a class="cd-dropdown-item btn-phantom" href="rules.html#phantom-anchor"><h3>Le Phantôme</h3></a></li>
+              </ul>
+            </li> .has-children -->
             
             <li class="has-children">
               <a href="">Où est Charlie ?</a>
@@ -101,8 +103,87 @@
     </header>
 
     <div class="rules">
-      
-      <h1> Bientôt, bientôt ! </h1>
+      <br>
+      <a href="https://www.chess.com/fr/learn-how-to-play-chess" target="_blank">Apprendre à Jouer aux Échecs - Chess.com</a>
+      <br>
+      <br>
+
+      <div class="rules-sep" id="soldier-anchor"></div>
+      <br>
+      <h2 class="rules-title">Le Soldat</h2>
+      <br>
+      <p>Le soldat se déplace d'une à deux cases, en diagonale et vers l'avant.</p>
+      <p>Il ne peut capturer que les pions.</p>
+      <p>S'il atteint l'autre bout de l'échiquier, il devient un super soldat.</p>
+      <br>
+      <p>Chaque soldat a un chien.</p>
+      <p>Ils ne peuvent se séparer ; le chien doit toujours être à une case de son maître, diagonales comprises.</p>
+      <p>Lorsque le soldat avance, le chien le suit automatiquement.</p>
+      <p>Si le chien est capturé, le soldat quitte la partie pour aller enterrer son chien.</p>
+      <br>
+
+      <div class="rules-sep" id="supersoldier-anchor"></div>
+      <br>
+      <h2 class="rules-title">Le Super Soldat</h2>
+      <br>
+      <p>Le super soldat se déplace d'une case, en diagonale, deux fois par tour.</p>
+      <p>Il peut capturer toutes les pièces.</p>
+      <p>Si le super soldat est un soldat promu, les règles quant au chien sont identiques.</p>
+      <br>
+
+      <div class="rules-sep" id="dog-anchor"></div>
+      <br>
+      <h2 class="rules-title">Le Chien</h2>
+      <br>
+      <p>Le chien ne se déplace qu'en suivant son maître (un soldat).</p>
+      <p>Il ne peut capturer aucune pièce.</p>
+      <p>Si son maître est capturé, le chien devient un chien enragé.</p>
+      <br>
+
+      <div class="rules-sep" id="enrageddog-anchor"></div>
+      <br>
+      <h2 class="rules-title">Le Chien Enragé</h2>
+      <br>
+      <p>Le chien enragé se déplace d'une case, horizontalement ou verticalement, deux fois par tour.</p>
+      <p>Il peut capturer toutes les pièces.</p>
+      <br>
+
+      <div class="rules-sep" id="dynamite-anchor"></div>
+      <br>
+      <h2 class="rules-title" id="dynamite-anchor">La Dynamite</h2>
+      <br>
+      <p>La dynamite n'est pas une pièce, mais plutôt un équipement.</p>
+      <p>Elle s'attache à une pièce alliée pour toute la partie.</p>
+      <p>La dynamite peut s'attacher aux pions, aux cavaliers, aux fous, aux chiens et aux soldats.</p>
+      <br>
+      <p>Pour attacher une pièce à la dynamite, deux options :</p>
+      <p>Si la pièce ne s'est pas encore déplacée, la dynamite peut la rejoindre sur sa case.</p>
+      <p>Sinon, elle peut se placer sur la case de la dynamite.</p>
+      <br>
+      <p>Une pièce ennemie ne peut pas passer sur la dynamite.</p>
+      <br>
+      <p>Lorsque qu'une pièce équipée de dynamite est capturée, la dynamite expolse.</p>
+      <p>La pièce ennemie qui a voulu capturer se fait ainsi capturer.</p>
+      <br>
+
+      <div class="rules-sep" id="phantom-anchor"></div>
+      <br>
+      <h2 class="rules-title">Le Phantôme</h2>
+      <br>
+      <p>Le phantôme devient la dernière pièce alliée capturée.</p>
+      <br>
+
+      <div class="rules-sep" id="grapple-anchor"></div>
+      <br>
+      <h2 class="rules-title">Le Grappin</h2>
+      <br>
+      <p>Le grappin se déplace comme la dame.</p>
+      <!-- <p>Il ne capture pas les pièces : il se fait capturer par elles !</p> -->
+      <p>Au lieu de capturer une pièce (alliée ou ennemie), il l'attire jusqu'à lui, se faisant capturer par elle.</p>
+      <br>
+
+      <br>
+      <br>
         
     </div>
 

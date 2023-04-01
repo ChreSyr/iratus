@@ -84,11 +84,11 @@ img {
   max-width: 100%;
 }
 
-li {
+.cd-dropdown-content li {
   background-color: var(--dark-green);
 }
 @media only screen and (min-width: 1024px) {
-  li {
+  .cd-dropdown-content li {
     background-color: black;
   }
 }
@@ -478,6 +478,9 @@ header {
     border-color: var(--light-green);
     transition: color 0.2s, background-color 0.2s;
   }
+  .cd-dropdown-content .cd-dropdown-item::before {
+    transition: background-image 0.2s;
+  }
   .cd-dropdown-content .cd-divider, .cd-dropdown-content ul .cd-divider {
     background-color: #1100fe;
     color: #f10b0b;
@@ -535,8 +538,14 @@ header {
 .cd-dropdown-item.btn-soldier::before {
   background-image: url("images/ws.png");
 }
+.cd-dropdown-item.btn-supersoldier::before {
+  background-image: url("images/wss.png");
+}
 .cd-dropdown-item.btn-dog::before {
   background-image: url("images/wd.png");
+}
+.cd-dropdown-item.btn-enrageddog::before {
+  background-image: url("images/wed.png");
 }
 .cd-dropdown-item.btn-dynamite::before {
   background-image: url("images/wdy.png");
@@ -561,8 +570,14 @@ header {
   .cd-dropdown-item.btn-soldier::before {
     background-image: url("images/ws.png"), url("images/black_square.png");
   }
+  .cd-dropdown-item.btn-supersoldier::before {
+    background-image: url("images/wss.png"), url("images/black_square.png");
+  }
   .cd-dropdown-item.btn-dog::before {
     background-image: url("images/wd.png"), url("images/black_square.png");
+  }
+  .cd-dropdown-item.btn-enrageddog::before {
+    background-image: url("images/wed.png"), url("images/black_square.png");
   }
   .cd-dropdown-item.btn-dynamite::before {
     background-image: url("images/wdy.png"), url("images/black_square.png");
@@ -577,7 +592,7 @@ header {
     /* reset mobile style */
     position: static;
     height: auto;
-    width: 280px;
+    width: 300px;
   }
   .cd-dropdown-content > li:last-of-type a {
     border-bottom: none;
@@ -788,8 +803,14 @@ header {
   .cd-dropdown-content .cd-dropdown-icons .cd-dropdown-item.btn-soldier:hover::before {
     background-image: url("images/bs.png"), url("images/white_square.png");
   }
+  .cd-dropdown-content .cd-dropdown-icons .cd-dropdown-item.btn-supersoldier:hover::before {
+    background-image: url("images/bss.png"), url("images/white_square.png");
+  }
   .cd-dropdown-content .cd-dropdown-icons .cd-dropdown-item.btn-dog:hover::before {
     background-image: url("images/bd.png"), url("images/white_square.png");
+  }
+  .cd-dropdown-content .cd-dropdown-icons .cd-dropdown-item.btn-enrageddog:hover::before {
+    background-image: url("images/bed.png"), url("images/white_square.png");
   }
   .cd-dropdown-content .cd-dropdown-icons .cd-dropdown-item.btn-dynamite:hover::before {
     background-image: url("images/bdy.png"), url("images/white_square.png");
