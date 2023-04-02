@@ -556,6 +556,9 @@ header {
 .cd-dropdown-item.btn-grapple::before {
   background-image: url("images/wg.png");
 }
+.cd-dropdown-item.btn-pawn::before {
+  background-image: url("images/wi.png");
+}
 @media only screen and (min-width: 1024px) {
   .cd-dropdown-content .cd-dropdown-icons .cd-dropdown-item::before {
     /* item icon */
@@ -587,6 +590,9 @@ header {
   }
   .cd-dropdown-item.btn-grapple::before {
     background-image: url("images/wg.png"), url("images/black_square.png");
+  }
+  .cd-dropdown-item.btn-pawn::before {
+    background-image: url("images/wi.png"), url("images/black_square.png");
   }
   .cd-dropdown-content {
     /* reset mobile style */
@@ -820,6 +826,9 @@ header {
   }
   .cd-dropdown-content .cd-dropdown-icons .cd-dropdown-item.btn-grapple:hover::before {
     background-image: url("images/bg.png"), url("images/white_square.png");
+  }
+  .cd-dropdown-content .cd-dropdown-icons .cd-dropdown-item.btn-pawn:hover::before {
+    background-image: url("images/bi.png"), url("images/white_square.png");
   }
   .cd-dropdown-content .cd-dropdown-icons .cd-dropdown-item h3 {
     color: inherit;
