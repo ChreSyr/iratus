@@ -96,6 +96,7 @@ button:hover {
   height: var(--square-size);
   display: flex;
   justify-content: center;
+  margin-top: calc(var(--square-size) / 2);
 }
 
 .controls button {

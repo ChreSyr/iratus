@@ -26,7 +26,7 @@ function quiet() {
 }
 
 function ajustSquareSize() {
-  var squareSize = Math.min(document.body.clientWidth / 8, (document.body.clientHeight) / 12, 60);
+  var squareSize = Math.min(document.body.clientWidth / 8, (document.body.clientHeight) / 13, 60);
   document.documentElement.style.setProperty('--square-size', squareSize + 'px');
 }
 window.addEventListener('resize', ajustSquareSize);
