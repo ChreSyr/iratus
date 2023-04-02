@@ -255,7 +255,7 @@ header {
   position: relative;
   width: 100%;
   z-index: 1;
-  color: grey;
+  color: var(--light-grey);
   border-bottom: 1px solid var(--very-dark-green);
   text-align: center;
   background-color: var(--dark-green);
@@ -289,7 +289,7 @@ header {
   transform: translateX(-50%) translateY(-50%);
   height: 20px;
   width: 2px;
-  background-color: #ffffff;
+  background-color: var(--light-grey);
 }
 .cd-dropdown .cd-close::after {
   -webkit-transform: translateX(-50%) translateY(-50%) rotate(45deg);
@@ -387,7 +387,7 @@ header {
 }
 .cd-dropdown-content a, .cd-dropdown-content ul a {
   display: block;
-  color: white;
+  color: var(--light-grey);
   /* truncate text with ellipsis if too long */
   overflow: hidden;
   text-overflow: ellipsis;
@@ -800,7 +800,7 @@ header {
     /* border: 2px solid var(--light-green); */
     margin: 5px;
     /* background-color: var(--dark-green); */
-    /* color: white; */
+    /* color: black; */
   }
   .cd-dropdown-content .cd-dropdown-icons .cd-dropdown-item:hover {
     background: var(--light-green);
@@ -941,7 +941,7 @@ header {
   display: inline-block;
   height: 2px;
   width: 10px;
-  background: white;
+  background: var(--light-grey);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }

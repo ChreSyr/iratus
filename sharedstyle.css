@@ -18,6 +18,7 @@
   --very-dark-green: rgb(10, 20, 10);
   --dark-green: rgb(22, 43, 22);
   --light-green: rgb(68, 105, 68);
+  --light-grey: rgb(200 200 200);
   --selected: rgb(63, 131, 17);
   --accessible: rgba(39, 92, 4, 0.3);
 }
