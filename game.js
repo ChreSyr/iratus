@@ -33,15 +33,23 @@ class Game {
       lastMove.notation += "+";
     }
     let ENDS = ["checkmate", "stalemate", "draw by repetition", "draw by insufficient material", "draw by 50-moves rule"]
+    let traductedENDS = {
+      "checkmate": "échec et mat",
+      "stalemate": "pat",
+      "draw by repetition": "égalité par répétitions",
+      "draw by insufficient material": "égalité par manque de matériel",
+      "draw by 50-moves rule": "égalité par la règle des 50 coups",
+    }
     if (ENDS.includes(gameState)) {
       let description = "";
       if (gameState === "checkmate") {
-        description = lastMove.turn === "b" ? "Black won" : "White won";
+        // description = lastMove.turn === "b" ? "Black won" : "White won";
+        description = lastMove.turn === "b" ? "Victoire des Noirs" : "Victoire des Blancs";
       }
 
       let infoDiv = document.getElementById("info");
       let titleLabel = infoDiv.getElementsByTagName("h2")[0];
-      titleLabel.innerHTML = gameState[0].toUpperCase() + gameState.substring(1);
+      titleLabel.innerHTML = traductedENDS[gameState][0].toUpperCase() + traductedENDS[gameState].substring(1);
       let pieceImage = infoDiv.getElementsByTagName("img")[0];
       pieceImage.src = gameState === "checkmate" ? "images/" + lastMove.turn + lastMove.piece.ID + ".png" : "";
       let desriptionLabel = infoDiv.getElementsByTagName("p")[0];

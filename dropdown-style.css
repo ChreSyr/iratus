@@ -316,14 +316,6 @@ header {
   -moz-transition: -moz-transform 0.5s 0s, visibility 0s 0s;
   transition: transform 0.5s 0s, visibility 0s 0s;
 }
-.cd-dropdown .cd-close {
-  /* top: 5px; */
-}
-/* @media only screen and (min-width: 768px) {
-  .cd-dropdown .cd-close {
-    top: 5px;
-  }
-} */
 @media only screen and (min-width: 1024px) {
   .cd-dropdown {
     position: absolute;

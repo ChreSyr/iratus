@@ -149,6 +149,7 @@ button:hover {
   font-size: calc(var(--square-size) / 2);
   flex: 5 1 auto;
   margin: 0;
+  margin-bottom: 16px;
 }
 
 #info img {
@@ -157,12 +158,65 @@ button:hover {
   margin-top: calc(var(--square-size) * -.3);
   max-width: calc(var(
   --square-size) * 2);
+  max-height: calc(var(  --square-size) * 2);
 }
 
 #info button {
   border: 2px solid black;
   flex: 0 1 auto;
-  margin: calc(var(--square-size) * 2 / 3);
+  margin-bottom: calc(var(--square-size) / 4);
+}
+
+#info .info-close {
+  /* 'X' close icon - mobile version only */
+  position: absolute;
+  z-index: 1;
+  margin: 5px;
+  right: 0;
+  top: 0;
+  height: calc(var(--square-size) * .8);
+  width: calc(var(--square-size) * .8);
+  /* image replacement */
+  overflow: hidden;
+  /* text-indent: 1000%; */
+  color: transparent;
+  white-space: nowrap;
+  border-radius: 3px;
+  /* border: var(--light-green) 2px solid; */
+}
+.info-close::after, .info-close::before {
+  /* this is the 'X' icon */
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  bottom: auto;
+  right: auto;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  height: 20px;
+  width: 2px;
+  background-color: var(--light-green);
+}
+.info-close:hover::after, .info-close:hover::before {
+  background-color: black;
+}
+.info-close::after {
+  -webkit-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  -moz-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  -ms-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  -o-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  transform: translateX(-50%) translateY(-50%) rotate(45deg);
+}
+.info-close::before {
+  -webkit-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+  -moz-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+  -ms-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+  -o-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+  transform: translateX(-50%) translateY(-50%) rotate(-45deg);
 }
 
 /* HOME STYLE */

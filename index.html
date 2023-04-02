@@ -30,7 +30,9 @@
               <a href="">C'est comment qu'on joue ?</a>
               <ul class="cd-dropdown-icons is-hidden">
                 <li class="go-back"><a href="#0">Retour</a></li>
-                <li class="long-item"><a class="cd-dropdown-item btn-king" href="https://www.chess.com/fr/learn-how-to-play-chess" target="_blank"><h3>Les Échecs Classiques - Chess.com</h3></a></li>
+                <li class="long-item">
+                  <a class="cd-dropdown-item btn-king" href="https://www.chess.com/fr/learn-how-to-play-chess" target="_blank">
+                    <h3>Les Échecs Classiques - Chess.com</h3></a></li>
                 <li class="see-all"><a href="rules.html">Toutes les nouvelles règles</a></li>
                 <li><a class="cd-dropdown-item btn-soldier" href="rules.html#soldier-anchor"><h3>Le Soldat</h3></a></li>
                 <li><a class="cd-dropdown-item btn-supersoldier" href="rules.html#supersoldier-anchor"><h3>Le Super Soldat</h3></a></li>
@@ -124,10 +126,12 @@
           </div>
           
           <div id="info">
+            <button onclick="hideInfo()" class="info-close">Close</button>
             <h2>Checkmate !</h2>
             <img src="images/wk.png"></img>
             <p>_ won</p>
-            <button onclick="hideInfo()">That was a real good game</button>
+            <button onclick="hideInfo();game.undoAll()">Nouvelle Partie</button>
+            <button onclick="hideInfo()">Retours</button>
           </div>
 
         </div>
