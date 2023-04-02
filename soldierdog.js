@@ -91,8 +91,9 @@ class PieceMovingTwice extends Piece {
   }
 }
 
-class Soldier extends Piece {
+class Soldier extends RollingPiece {
   static ID = "s";
+  static RANGE = 2;
 
   constructor(board, row, col) {
     super(board, row, col);
