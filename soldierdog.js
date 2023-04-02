@@ -107,19 +107,16 @@ class Soldier extends RollingPiece {
 
     Soldier.preciseTransform(this);
   }
+  
+  canGoTo(row, col) {
 
-  static preciseTransform(piece) {
-
-    if (! piece instanceof Soldier) {
-      piece.dog = null;
-    }
-
-    if (piece.color === "b") {
-      piece.MOVES = [[1, 1], [1, -1]];
-      piece.promotionRank = 9;
+    let piece = this.board.get(row, col);
+    if (piece === null) {
+      return true;
+    } else if (piece.ID === "dy") {
+      return piece.color === this.color && ! Dynamite.UNDYNAMITABLES.includes(this.ID);
     } else {
-      piece.MOVES = [[-1, 1], [-1, -1]];
-      piece.promotionRank = 0;
+      return piece.color !== this.color && piece.ID === "i";  // only captures pawns
     }
   }
 
@@ -152,6 +149,21 @@ class Soldier extends RollingPiece {
     }
 
     return commands;
+  }
+
+  static preciseTransform(piece) {
+
+    if (! piece instanceof Soldier) {
+      piece.dog = null;
+    }
+
+    if (piece.color === "b") {
+      piece.MOVES = [[1, 1], [1, -1]];
+      piece.promotionRank = 9;
+    } else {
+      piece.MOVES = [[-1, 1], [-1, -1]];
+      piece.promotionRank = 0;
+    }
   }
 
   static updateValidMoves() {
