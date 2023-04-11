@@ -223,6 +223,7 @@ button:hover {
 
 .controls button {
   -webkit-tap-highlight-color: var(--light-green);
+  transition: border 10s;
 }
 
 .controls button:hover {
@@ -234,6 +235,9 @@ button:hover {
   .controls button:hover {
     background-color: var(--light-green);
     color: black;
+  }
+  .controls button:active {
+    border: 10px solid red;
   }
 }
 
