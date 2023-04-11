@@ -78,6 +78,7 @@ h1 {
 a {
   color: var(--light-green);
   text-decoration: none;
+  -webkit-tap-highlight-color: rgb(68, 105, 68, .5);
 }
 
 img {
@@ -130,6 +131,7 @@ header {
 }
 .cd-dropdown-trigger:hover {
   background-color: var(--light-green);
+  -webkit-tap-highlight-color: transparent;
 }
 .cd-dropdown-trigger:hover::before, .cd-dropdown-trigger:hover::after {
   background-color: black;
