@@ -2,6 +2,9 @@
 
 class PieceMovingTwice extends Piece {
 
+  // TODO : solve : an enraged dog doesn't know he can capture a checking piece that requires him two moves to reach
+
+  static stillHasToMove = false;
   static ATTR_TO_COPY = Piece.ATTR_TO_COPY.concat(["stillHasToMove"]);
 
   constructor(board, row, col) {
