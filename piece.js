@@ -34,7 +34,7 @@ class Piece {
 
   // these are used for piece.transform()
   static ATTR_TO_COPY = ["ID", "MOVES", "RANGE"];
-  static METH_TO_COPY = ["capture", "capturerCheck", "copyFrom", "goTo", "redo", "uncapture", "undo", "updateValidMoves"];
+  static METH_TO_COPY = ["canGoTo", "capture", "capturerCheck", "copyFrom", "goTo", "redo", "uncapture", "undo", "updateValidMoves"];
 
   constructor(board, row, col) {
 
@@ -64,7 +64,7 @@ class Piece {
     this.board.addPiece(this);
   }
   
-  canGoTo(row, col) {
+  static canGoTo(row, col) {
 
     let piece = this.board.get(row, col);
     if (piece === null) {
@@ -408,7 +408,7 @@ class King extends Piece {
   // long castle right + short castle right
   castleRights = "00"
   
-  canGoTo(row, col) {
+  static canGoTo(row, col) {
 
     if (this.posIsUnderCheck(row, col)) {
       return false;
@@ -659,7 +659,7 @@ class Phantom extends Piece {
     this.cssClass = "phantom";
   }
   
-  canGoTo(row, col) {
+  static canGoTo(row, col) {
 
     let piece = this.board.get(row, col);
     if (piece === null) {
