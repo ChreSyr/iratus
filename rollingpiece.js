@@ -13,7 +13,7 @@ class RollingPiece extends Piece {
       let row = this.row + move[0];
       let col = this.col + move[1];
       
-      for (let iRange = 0; iRange < this.constructor.RANGE; iRange++) {
+      for (let iRange = 0; iRange < this.RANGE; iRange++) {
 
         if (row < 0 || row > 9 || col < 0 || col > 7) {break}
 

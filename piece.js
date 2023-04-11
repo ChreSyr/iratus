@@ -33,13 +33,14 @@ class Piece {
   static MOVES = [];
 
   // these are used for piece.transform()
-  static ATTR_TO_COPY = ["ID", "MOVES"];
+  static ATTR_TO_COPY = ["ID", "MOVES", "RANGE"];
   static METH_TO_COPY = ["capture", "capturerCheck", "copyFrom", "goTo", "redo", "uncapture", "undo", "updateValidMoves"];
 
   constructor(board, row, col) {
 
     this.ID = this.constructor.ID;
     this.MOVES = this.constructor.MOVES;
+    this.RANGE = this.constructor.RANGE;
     for (let meth of this.constructor.METH_TO_COPY) {
       this[meth] = this.constructor[meth];
     }
@@ -651,7 +652,6 @@ class Pawn extends Piece {
 class Phantom extends Piece {
 
   static ID = "p";
-  static RANGE = 10;
 
   constructor(board, row, col) {
     super(board, row, col);
