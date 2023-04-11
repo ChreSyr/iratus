@@ -651,6 +651,7 @@ class Pawn extends Piece {
 class Phantom extends Piece {
 
   static ID = "p";
+  static RANGE = 10;
 
   constructor(board, row, col) {
     super(board, row, col);
