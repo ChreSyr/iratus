@@ -111,7 +111,7 @@ class Soldier extends RollingPiece {
     Soldier.preciseTransform(this);
   }
   
-  canGoTo(row, col) {
+  static canGoTo(row, col) {
 
     let piece = this.board.get(row, col);
     if (piece === null) {

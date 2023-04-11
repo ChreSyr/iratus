@@ -57,7 +57,7 @@ class Grapple extends RollingPiece {
     [-1, -1],
   ];
 
-  canGoTo(row, col) {
+  static canGoTo(row, col) {
     let piece = this.board.get(row, col);
     if (piece === null) {
       return true;
