@@ -1,4 +1,3 @@
-
 /* UTILITIES */
 
 .reversed {
@@ -17,7 +16,7 @@
 :root {
   --very-dark-green: rgb(10, 20, 10);
   --dark-green: rgb(22, 43, 22);
-  --light-green: rgb(68, 105, 68);
+  --light-green: rgb(131, 174, 131);
   --light-grey: rgb(200 200 200);
   --selected: rgb(63, 131, 17);
   --accessible: rgba(39, 92, 4, 0.3);
@@ -158,9 +157,8 @@ button:hover {
   flex: 5 1 auto;
   aspect-ratio: auto;
   margin-top: calc(var(--square-size) * -.3);
-  max-width: calc(var(
-  --square-size) * 2);
-  max-height: calc(var(  --square-size) * 2);
+  max-width: calc(var(--square-size) * 2);
+  max-height: calc(var(--square-size) * 2);
 }
 
 #info button {
@@ -186,7 +184,9 @@ button:hover {
   border-radius: 3px;
   /* border: var(--light-green) 2px solid; */
 }
-.info-close::after, .info-close::before {
+
+.info-close::after,
+.info-close::before {
   /* this is the 'X' icon */
   content: '';
   position: absolute;
@@ -203,9 +203,12 @@ button:hover {
   width: 2px;
   background-color: var(--light-green);
 }
-.info-close:hover::after, .info-close:hover::before {
+
+.info-close:hover::after,
+.info-close:hover::before {
   background-color: black;
 }
+
 .info-close::after {
   -webkit-transform: translateX(-50%) translateY(-50%) rotate(45deg);
   -moz-transform: translateX(-50%) translateY(-50%) rotate(45deg);
@@ -213,6 +216,7 @@ button:hover {
   -o-transform: translateX(-50%) translateY(-50%) rotate(45deg);
   transform: translateX(-50%) translateY(-50%) rotate(45deg);
 }
+
 .info-close::before {
   -webkit-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
   -moz-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
@@ -236,6 +240,7 @@ button:hover {
     background-color: var(--light-green);
     color: black;
   }
+
   .controls button:active {
     border: 4px solid black;
   }
@@ -266,7 +271,7 @@ button:hover {
   background-color: black;
   height: 100%;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
 }
 
 @media only screen and (min-width: 1024px) {
@@ -287,14 +292,13 @@ button:hover {
 }
 
 .rules-sep {
-/*   border-top: 6px solid green; */
+  /*   border-top: 6px solid green; */
   height: 4px;
   width: 100%;
   background-color: var(--light-green);
 }
 
 .rules-title {
-  margin: 0 auto;
   font-size: xx-large;
 }
 
@@ -302,6 +306,52 @@ button:hover {
   margin: 0 auto;
   font-size: large;
   text-align: center;
+}
+
+.rules-title-div {
+  margin: 0 auto;
+  display: flex;
+  margin-top: -5px;
+  align-items: center;
+}
+
+.showcase {
+  width: 60px;
+  height: 60px;
+  background-size: cover;
+  margin: 10px;
+}
+
+.soldier {
+  background-image: url("images/ws.png");
+}
+
+.supersoldier {
+  background-image: url("images/wss.png");
+}
+
+.dog {
+  background-image: url("images/wd.png");
+}
+
+.enrageddog {
+  background-image: url("images/wed.png");
+}
+
+.dynamite {
+  background-image: url("images/wd.png");
+}
+
+.phantom {
+  background-image: url("images/wp.png");
+}
+
+.grapple {
+  background-image: url("images/wg.png");
+}
+
+.pawn {
+  background-image: url("images/wi.png");
 }
 
 /* Contact style */
