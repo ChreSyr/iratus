@@ -1,4 +1,3 @@
-
 :root {
   --square-size: 60px;
 }
@@ -8,9 +7,15 @@
   height: calc(var(--square-size) * 10);
   position: relative;
   display: inline-block;
-  background-image: url("images/iratusboard.png");
+  background-image: url("images/iratusboard-small.jpg");
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+@media only screen and (min-width: 1024px) {
+  #content {
+    background-image: url("images/iratusboard.png");
+  }
 }
 
 .grid {
@@ -24,7 +29,8 @@
   bottom: 0;
 }
 
-#highlighters, #extracells {
+#highlighters,
+#extracells {
   background-color: rgba(0, 0, 0, 0);
   pointer-events: none;
 }
@@ -37,7 +43,8 @@
   touch-action: none;
 }
 
-.cell, .extracell {
+.cell,
+.extracell {
   width: var(--square-size);
   height: var(--square-size);
   background-size: contain;
@@ -81,7 +88,7 @@
   pointer-events: none;
 }
 
-.promotion-cancel{
+.promotion-cancel {
   height: calc(var(--square-size) / 2);
   display: flex;
   justify-content: center;
@@ -106,18 +113,23 @@
 .promotion-window.top .q {
   order: 6;
 }
+
 .promotion-window.top .n {
   order: 5;
 }
+
 .promotion-window.top .r {
   order: 4;
 }
+
 .promotion-window.top .b {
   order: 3;
 }
+
 .promotion-window.top .ed {
   order: 2;
 }
+
 .promotion-window.top .ss {
   order: 1;
 }
