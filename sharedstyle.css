@@ -7,7 +7,7 @@
 /* FONT */
 
 @font-face {
-  font-family: "PierceRoman";
+  font-family: "PierceRoman", sans-serif;
   src: url("font/PierceRoman.otf");
 }
 
