@@ -456,6 +456,12 @@ class King extends Piece {
 
   posIsUnderCheck(row, col) {
     for (let piece of this.board.piecesColored[this.enemyColor]) {
+
+      // the phantom's antiking squares can change after a capture
+      // so they are taken in account only during calculation
+      if (piece.cell && piece.cssClass === "phantom")
+        {continue}
+
       if (! piece.isCaptured) {
         for (let antiking of piece.antikingSquares) {
           if (row === antiking[0] && col === antiking[1]) {
