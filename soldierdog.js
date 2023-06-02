@@ -172,10 +172,7 @@ class Soldier extends RollingPiece {
   static updateValidMoves() {
     super.updateValidMoves();
 
-    if (this.dog) {
-      let squareToRemove = [this.dog.row, this.dog.col];
-      this.antikingSquares = this.antikingSquares.filter(arr => JSON.stringify(arr) !== JSON.stringify(squareToRemove));
-    }
+    this.antikingSquares = []
   }
 }
 
