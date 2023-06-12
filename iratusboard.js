@@ -8,7 +8,7 @@ let pieceClasses = {
   "i": Pawn,
   "dy": Dynamite,
   "s": Soldier,
-  "ss": SuperSoldier,
+  "es": EliteSoldier,
   "d": Dog,
   "ed": EnragedDog,
   "p": Phantom,

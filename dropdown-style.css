@@ -519,8 +519,8 @@ header {
 .cd-dropdown-item.btn-soldier::before {
   background-image: url("images/ws.png");
 }
-.cd-dropdown-item.btn-supersoldier::before {
-  background-image: url("images/wss.png");
+.cd-dropdown-item.btn-elitesoldier::before {
+  background-image: url("images/wes.png");
 }
 .cd-dropdown-item.btn-dog::before {
   background-image: url("images/wd.png");
@@ -557,8 +557,8 @@ header {
   .cd-dropdown-item.btn-soldier::before {
     background-image: url("images/ws.png"), url("images/black_square.png");
   }
-  .cd-dropdown-item.btn-supersoldier::before {
-    background-image: url("images/wss.png"), url("images/black_square.png");
+  .cd-dropdown-item.btn-elitesoldier::before {
+    background-image: url("images/wes.png"), url("images/black_square.png");
   }
   .cd-dropdown-item.btn-dog::before {
     background-image: url("images/wd.png"), url("images/black_square.png");
@@ -796,8 +796,8 @@ header {
   .cd-dropdown-content .cd-dropdown-icons .cd-dropdown-item.btn-soldier:hover::before {
     background-image: url("images/bs.png"), url("images/white_square.png");
   }
-  .cd-dropdown-content .cd-dropdown-icons .cd-dropdown-item.btn-supersoldier:hover::before {
-    background-image: url("images/bss.png"), url("images/white_square.png");
+  .cd-dropdown-content .cd-dropdown-icons .cd-dropdown-item.btn-elitesoldier:hover::before {
+    background-image: url("images/bes.png"), url("images/white_square.png");
   }
   .cd-dropdown-content .cd-dropdown-icons .cd-dropdown-item.btn-dog:hover::before {
     background-image: url("images/bd.png"), url("images/white_square.png");

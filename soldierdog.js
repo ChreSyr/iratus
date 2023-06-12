@@ -144,7 +144,7 @@ class Soldier extends RollingPiece {
     if (! this.dog) {return commands}  // happens when this is the phantom
 
     if (this.row === this.promotionRank) {
-      commands.push(new Transform(this, this.actualClass, SuperSoldier));
+      commands.push(new Transform(this, this.actualClass, EliteSoldier));
     }
 
     if (dogIsTooFar(this.row, this.col, this.dog.row, this.dog.col)) {
@@ -176,8 +176,8 @@ class Soldier extends RollingPiece {
   }
 }
 
-class SuperSoldier extends PieceMovingTwice {
-  static ID = "ss";
+class EliteSoldier extends PieceMovingTwice {
+  static ID = "es";
   static MOVES = [
     [1, 1],
     [1, -1],
@@ -192,7 +192,7 @@ class SuperSoldier extends PieceMovingTwice {
   }
 
   static preciseTransform(piece) {
-    if (! piece instanceof SuperSoldier) {
+    if (! piece instanceof EliteSoldier) {
       piece.dog = null;
     }
   }
