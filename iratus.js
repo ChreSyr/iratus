@@ -139,7 +139,7 @@ function makePieceDraggable(element) {
     element.classList.add('dragging');
     element.setPointerCapture(event.pointerId);
 
-    // wasSelected = element.highlighter.classList.contains("selected");
+    wasSelected = element.piece === game.board.selectedPiece;
     element.piece.handlePointerDown();
 
     // dynamite
