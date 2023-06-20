@@ -139,6 +139,7 @@ button:hover {
   /* settings to change at end of game */
   visibility: hidden;
   pointer-events: none;
+  z-index: 2;
 }
 
 #info h2 {
