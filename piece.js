@@ -343,6 +343,8 @@ class Piece {
 
     this.board.selectedPiece = this;
 
+    if (this.board.game.turn !== this.color) {return}
+
     for (let validMove of this.validMoves) {
       const movePos = validMove[1] * 10 + validMove[0];
       const squareAccessible = document.createElement("div");
