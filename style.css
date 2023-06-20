@@ -24,7 +24,7 @@
 }
 
 .square {
-  touch-action: none;
+  /* touch-action: none; */
 }
 
 .cell,

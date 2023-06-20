@@ -62,8 +62,10 @@ function makePieceDraggable(element) {
   const pointerdownHandle = (event) => {
 
     cancelPromotion();
-    // TODO : unselect piece when clicked outside
-    
+
+    const squareAccessible = document.querySelector(`.square[data-row="${element.piece.row}"][data-col="${element.piece.col}"]`);
+    if (squareAccessible) {return} 
+
     let rect = element.getBoundingClientRect();
     dragging = {dx: - rect.x - rect.width / 2, dy: - rect.y - rect.height / 2};
     pos.x = event.clientX + dragging.dx;
