@@ -84,7 +84,7 @@ function makeDraggable(element) {
     for (let highlighter of allHighlighters) {
       if (collide(event, highlighter)) {
         if (highlighter.classList.contains("accessible")) {
-          let selectedPiece = document.querySelector(".selected").cell.piece;
+          let selectedPiece = game.board.selectedPiece;
           selectedPiece.unselect();
           game.move(start=[selectedPiece.row, selectedPiece.col], end=[parseInt(highlighter.dataset.row), parseInt(highlighter.dataset.col)])
         }
@@ -112,6 +112,84 @@ function makeDraggable(element) {
 
 for (let element of document.querySelectorAll(".cell")) {
   makeDraggable(element);
+}
+
+
+
+function makePieceDraggable(element) {
+  let pos = {x: 0, y: 0};
+  let dragging = false;
+  let wasSelected = false;
+  
+  const stopScrollEvents = (event) => {
+    event.preventDefault();
+  }
+      
+  const pointerdownHandle = (event) => {
+    cancelPromotion();
+    // TODO : unselect piece when clicked outside
+    
+    let rect = element.getBoundingClientRect();
+    dragging = {dx: - rect.x - rect.width / 2, dy: - rect.y - rect.height / 2};
+    pos.x = event.clientX + dragging.dx;
+    pos.y = event.clientY + dragging.dy;
+
+    var squareSize = parseInt(document.documentElement.style.getPropertyValue("--square-size"), 10);
+    element.style.transform = `translate(${(element.piece.col + pos.x / squareSize) * 100}%, ${(element.piece.row + pos.y / squareSize) * 100}%)`;
+    element.classList.add('dragging');
+    element.setPointerCapture(event.pointerId);
+
+    // wasSelected = element.highlighter.classList.contains("selected");
+    element.piece.handlePointerDown();
+
+    // dynamite
+    if (element.piece && element.piece.dynamited) {
+      // element.extracell.style.backgroundImage = "";
+      element.style.backgroundImage += ", url('images/" + element.piece.color + "dy.png')";
+    }
+  }
+  
+  const pointerupHandle = (event) => {
+    dragging = null;
+    element.classList.remove('dragging');
+    element.style.transform = "";
+
+    // dynamite
+    if (element.piece && element.piece.dynamited) {
+      element.style.backgroundImage = "url('images/" + element.piece.color + element.piece.ID + ".png')";
+      element.extracell.style.backgroundImage = "url('images/" + element.piece.color + "dy.png')";
+    }
+
+    let allHighlighters = document.querySelectorAll(".highlighter");
+    for (let highlighter of allHighlighters) {
+      if (collide(event, highlighter)) {
+        if (highlighter.classList.contains("accessible")) {
+          let selectedPiece = game.board.selectedPiece;
+          selectedPiece.unselect();
+          game.move(start=[selectedPiece.row, selectedPiece.col], end=[parseInt(highlighter.dataset.row), parseInt(highlighter.dataset.col)])
+        }
+        break;
+      }
+    }
+    if (element.piece && wasSelected) {
+      element.piece.unselect();
+    }  // else, the piece has moved
+  }
+  
+  const pointermoveHandle = (event) => {
+    if (!dragging) {return};
+    pos.x = event.clientX + dragging.dx;
+    pos.y = event.clientY + dragging.dy;
+    var squareSize = parseInt(document.documentElement.style.getPropertyValue("--square-size"), 10);
+    element.style.transform = `translate(${(element.piece.col + pos.x / squareSize) * 100}%, ${(element.piece.row + pos.y / squareSize) * 100}%)`;
+    // element.style.transform = `translate(${pos.x}px, ${pos.y}px)`;
+  }
+  
+  element.addEventListener('pointerdown', pointerdownHandle);
+  element.addEventListener('pointerup', pointerupHandle);
+  element.addEventListener('pointercancel', pointerupHandle);
+  element.addEventListener('pointermove', pointermoveHandle);
+  element.addEventListener('touchstart', stopScrollEvents);
 }
 
 for (let promotionPiece of document.getElementsByClassName("promotion-piece")) {

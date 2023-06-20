@@ -31,3 +31,48 @@ function ajustSquareSize() {
 }
 window.addEventListener('resize', ajustSquareSize);
 ajustSquareSize();
+
+// Creating pieces styles
+function setPiecesStyle(style=null) {
+  if (style !== null) {throw Error}  // not implemented
+  
+  var colors = ["b", "w"];
+  var pieceIDs = ["b", "d", "dy", "ed", "es", "g", "i", "k", "n", "p", "q", "r", "s"];
+
+  let css = '';
+
+  for (let color of colors) {
+    for (let pieceID of pieceIDs) {
+      css += `\
+#board-single .piece.${color}${pieceID},
+#board-single .promotion-piece.${color}${pieceID}
+{
+  background-image: url(images/${color}${pieceID}.png);
+}
+`
+    }
+  }
+
+//   for (let row = 0; row < 10; row++) {
+//     for (let col = 0; col < 8; col++) {
+//       css += `\
+// .square-${col ? col : ""}${row} {
+//     transform: translate(${col}00%,${row}00%)
+// }
+// .flipped .square-${col ? col : ""}${row} {
+//   transform: translate(${9 - col}00%,${7 - row}00%)
+// }
+// `
+//     } 
+//   }
+
+  var piecesStyle = document.getElementById("board-styles-single");
+
+  if (piecesStyle.styleSheet){
+    // This is required for IE8 and below.
+    piecesStyle.styleSheet.cssText = css;
+  } else {
+    piecesStyle.appendChild(document.createTextNode(css));
+  }
+}
+setPiecesStyle();

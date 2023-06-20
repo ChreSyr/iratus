@@ -58,7 +58,7 @@ class Piece {
     // for transformation memory
     this.actualClass = this.constructor;
 
-    this.cell = null;
+    this.widget = null;
     this.cssClass = undefined;
 
     this.board.addPiece(this);
@@ -85,17 +85,22 @@ class Piece {
     this.validMoves.length = 0;
     this.antikingSquares.length = 0;
 
-    if (this.cell !== null) {
+    if (this.widget !== null) {
       // update the display
-      this.cell.style.backgroundImage = "";
-      if (this.cssClass) {
-        this.cell.classList.remove(this.cssClass);
-      }
-      if (this.dynamited) {
-        this.cell.extracell.style.backgroundImage = "";
-      }
-      this.cell.piece = null;
+      this.widget.style.display = "none";
     }
+
+    // if (this.cell !== null) {
+    //   // update the display
+    //   this.cell.style.backgroundImage = "";
+    //   if (this.cssClass) {
+    //     this.cell.classList.remove(this.cssClass);
+    //   }
+    //   if (this.dynamited) {
+    //     this.cell.extracell.style.backgroundImage = "";
+    //   }
+    //   this.cell.piece = null;
+    // }
 
     if (this.dynamited && ! capturer.isCaptured) {
       commands.push(new Capture(capturer, this));
@@ -160,26 +165,32 @@ class Piece {
       this.firstMove = this.board.currentMove;
     }
 
-    if (this.cell !== null) {  // update the display
-     
-      this.cell.style.backgroundImage = "";
-      if (this.cssClass) {
-        this.cell.classList.remove(this.cssClass);
-      }
-      if (this.dynamited) {
-        this.cell.extracell.style.backgroundImage = "";
-      }
-      this.cell.piece = null;
-      this.cell = this.getSquare().cell;
-      this.cell.style.backgroundImage = "url('images/" + this.color + this.ID + ".png')";
-      if (this.cssClass) {
-        this.cell.classList.add(this.cssClass);
-      }
-      if (this.dynamited) {
-        this.cell.extracell.style.backgroundImage = "url('images/" + this.color + "dy.png')";
-      }
-      this.cell.piece = this;
+    // update the display
+    if (this.widget !== null) {  
+      this.widget.classList.remove("square-" + oldPos);
+      this.widget.classList.add("square-" + this.getPos());
     }
+
+    // if (this.cell !== null) {  // update the display
+     
+    //   this.cell.style.backgroundImage = "";
+    //   if (this.cssClass) {
+    //     this.cell.classList.remove(this.cssClass);
+    //   }
+    //   if (this.dynamited) {
+    //     this.cell.extracell.style.backgroundImage = "";
+    //   }
+    //   this.cell.piece = null;
+    //   this.cell = this.getSquare().cell;
+    //   this.cell.style.backgroundImage = "url('images/" + this.color + this.ID + ".png')";
+    //   if (this.cssClass) {
+    //     this.cell.classList.add(this.cssClass);
+    //   }
+    //   if (this.dynamited) {
+    //     this.cell.extracell.style.backgroundImage = "url('images/" + this.color + "dy.png')";
+    //   }
+    //   this.cell.piece = this;
+    // }
 
     return commands;
   }
@@ -198,19 +209,28 @@ class Piece {
     this.dynamited = val;
 
     // update the display
-    if (this.cell !== null) {
+    if (this.widget !== null) {
       if (this.dynamited) {
-        this.cell.extracell.style.backgroundImage = "url('images/" + this.color + "dy.png')";
+        this.widget.classList.add("dynamited");
       } else {
-        this.cell.extracell.style.backgroundImage = "";
+        this.widget.classList.remove("dynamited");
       }
     }
+
+    // update the display
+    // if (this.cell !== null) {
+    //   if (this.dynamited) {
+    //     this.cell.extracell.style.backgroundImage = "url('images/" + this.color + "dy.png')";
+    //   } else {
+    //     this.cell.extracell.style.backgroundImage = "";
+    //   }
+    // }
   }
 
   transform(pieceClass) {
     if (this.actualClass === pieceClass) {return}
 
-    let old_class = this.actualClass;
+    let oldClass = this.actualClass;
     this.actualClass = pieceClass;
 
     for (let attr of pieceClass.ATTR_TO_COPY) {
@@ -222,30 +242,43 @@ class Piece {
 
     pieceClass.preciseTransform(this);
 
-    if (this.cell !== null) {
-      this.cell.style.backgroundImage = "url('images/" + this.color + this.ID + ".png')";
+    if (this.widget !== null) {
+      this.widget.classList.remove(this.color + oldClass.ID);
+      this.widget.classList.add(this.color + this.ID);
 
       // for calculations
       this.board.calculator.getSimulatedPiece(this).transform(pieceClass);
     }
+
+    // if (this.cell !== null) {
+    //   this.cell.style.backgroundImage = "url('images/" + this.color + this.ID + ".png')";
+
+    //   // for calculations
+    //   this.board.calculator.getSimulatedPiece(this).transform(pieceClass);
+    // }
   }
 
   static uncapture() {
     this.board.piecesByPos[this.getPos()] = this;
     this.isCaptured = false;
 
-    if (this.cell !== null) {
+    if (this.widget !== null) {
       // update the display
-      this.cell = this.getSquare().cell;
-      this.cell.style.backgroundImage = "url('images/" + this.color + this.ID + ".png')";
-      if (this.cssClass) {
-        this.cell.classList.add(this.cssClass);
-      }
-      if (this.dynamited) {
-        this.cell.extracell.style.backgroundImage = "url('images/" + this.color + "dy.png')";
-      }
-      this.cell.piece = this;
+      this.widget.style.display = "block";
     }
+
+    // if (this.cell !== null) {
+    //   // update the display
+    //   this.cell = this.getSquare().cell;
+    //   this.cell.style.backgroundImage = "url('images/" + this.color + this.ID + ".png')";
+    //   if (this.cssClass) {
+    //     this.cell.classList.add(this.cssClass);
+    //   }
+    //   if (this.dynamited) {
+    //     this.cell.extracell.style.backgroundImage = "url('images/" + this.color + "dy.png')";
+    //   }
+    //   this.cell.piece = this;
+    // }
   }
 
   /*
@@ -296,13 +329,16 @@ class Piece {
 
   handlePointerDown() {
 
-    let selectedHighlighter = document.querySelector(".selected");
-    if (selectedHighlighter) {
-      selectedHighlighter.classList.remove("selected");
-    }
+    this.board.selectedPiece = this;
 
-    const square = this.getSquare();
-    square.highlighter.classList.add("selected");
+    var selectHighlighter = this.board.selectHighlighter;
+    if (selectHighlighter.pos !== null) {
+      selectHighlighter.classList.remove("square-" + selectHighlighter.pos);
+    } else {
+      selectHighlighter.style.display = "block";
+    }
+    selectHighlighter.pos = this.getPos();
+    selectHighlighter.classList.add("square-" + selectHighlighter.pos);
 
     let squares = document.querySelectorAll(".square");
 
@@ -324,17 +360,32 @@ class Piece {
     }
   }
 
-  initDisplay() {
-    this.cell = this.getSquare().cell;
-    this.cell.piece = this;
-    this.cell.style.backgroundImage = "url('images/" + this.color + this.ID + ".png')";
-    if (this.cssClass) {
-      this.cell.classList.add(this.cssClass);
+  initDisplay(boardDiv) {
+
+    this.widget = document.createElement("div");
+    this.widget.classList.add("piece");
+    this.widget.classList.add(this.color + this.ID);
+    this.widget.classList.add("square-" + this.getPos());
+    if (this.cssClass === "phantom") {
+      this.widget.classList.add("phantom");
     }
+    this.widget.piece = this;
+    makePieceDraggable(this.widget);
+    boardDiv.appendChild(this.widget);
+
   }
 
   unselect() {
-    this.getSquare().highlighter.classList.remove("selected");
+
+    this.board.selectedPiece = null;
+
+    var selectHighlighter = this.board.selectHighlighter;
+    if (selectHighlighter.pos !== null) {
+      selectHighlighter.classList.remove("square-" + selectHighlighter.pos);
+    }
+    selectHighlighter.style.display = "none";
+    selectHighlighter.pos = null;
+
     for (let square of document.querySelectorAll(".square")) {
       square.highlighter.classList.remove("accessible");
     }
@@ -459,7 +510,7 @@ class King extends Piece {
 
       // the phantom's antiking squares can change after a capture
       // so they are taken in account only during calculation
-      if (piece.cell && piece.cssClass === "phantom")
+      if (piece.widget && piece.cssClass === "phantom")
         {continue}
 
       if (! piece.isCaptured) {
@@ -553,7 +604,7 @@ class Pawn extends Piece {
     let commands = super.goTo(row, col);
 
     if (this.row === this.promotionRank) {
-      if (this.cell && this instanceof Pawn) {  // a phantom cannot promote
+      if (this.widget && this instanceof Pawn) {  // a phantom cannot promote
         this.openPromotionWindow();
       }
     }

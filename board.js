@@ -21,6 +21,9 @@ class Board {
     this.fatPositionClass = null;
     this.createPieces();
 
+    this.selectedPiece = null;
+    this.selectHighlighter = null;
+
     this.currentMove = null;
     this.mainCurrentMove = null;
   }
@@ -47,8 +50,17 @@ class Board {
   
   initDisplay() {
     this.calculator = new this.calculatorClass(this);
+
+    let boardDiv = document.getElementById("board-single");
+
+    this.selectHighlighter = document.createElement("div");
+    this.selectHighlighter.classList.add("highlight");
+    this.selectHighlighter.style.display = "none";
+    this.selectHighlighter.pos = null;
+    boardDiv.appendChild(this.selectHighlighter);
+
     for (let piece of this.pieces) {
-      piece.initDisplay();
+      piece.initDisplay(boardDiv);
     }
   }
   
