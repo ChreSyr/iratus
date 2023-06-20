@@ -2,22 +2,6 @@
   --square-size: 60px;
 }
 
-#content {
-  width: calc(var(--square-size) * 8);
-  height: calc(var(--square-size) * 10);
-  position: relative;
-  display: inline-block;
-  background-image: url("images/iratusboard-small.jpg");
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-@media only screen and (min-width: 1024px) {
-  #content {
-    background-image: url("images/iratusboard.png");
-  }
-}
-
 .grid {
   display: grid;
   grid-template-columns: repeat(8, 1fr);

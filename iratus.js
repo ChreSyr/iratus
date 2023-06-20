@@ -18,7 +18,7 @@ function collide(event, element) {
 document.addEventListener("pointerdown", event => {
   let selectedHighlighter = document.querySelector(".selected");
   
-  let boardDiv = document.getElementById("content");
+  let boardDiv = document.getElementById("board-single");
   if (collide(event, boardDiv)) {
     return;
   }

@@ -1,0 +1,22 @@
+.board {
+  background-repeat: no-repeat;
+  background-size: 100%;
+  /* border-radius: 3px; */
+  contain: layout;
+  height: calc(var(--square-size) * 10);
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  width: calc(var(--square-size) * 8);
+}
+
+#board-single {
+  background-image: url("../images/iratusboard-small.jpg");
+}
+
+@media only screen and (min-width: 1024px) {
+  #board-single {
+    background-image: url("../images/iratusboard.png");
+  }
+}
