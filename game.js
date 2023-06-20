@@ -114,45 +114,51 @@ class Game {
 
   initDisplay() {
     
-    const squares = document.getElementById("squares");
-    const highlighters = document.getElementById("highlighters");
-    const extracells = document.getElementById("extracells");
-    const cells = document.getElementById("cells");
+    if (false) {
+      const boardDiv = document.getElementById("board-single");
+      const squares = document.getElementById("squares");
+      const highlighters = document.getElementById("highlighters");
+      const extracells = document.getElementById("extracells");
+      const cells = document.getElementById("cells");
 
-    for (let row = 0; row < 10; row++) {
-      for (let col = 0; col < 8; col++) {
-        const square = document.createElement("div");
-        square.classList.add("square");
-        square.dataset.row = row;
-        square.dataset.col = col;
-        squares.appendChild(square);
-        
-        const highlighter = document.createElement("div");
-        highlighter.classList.add("highlighter");
-        highlighter.dataset.row = row;
-        highlighter.dataset.col = col;
-        highlighters.appendChild(highlighter);
-        highlighter.square = square;
-        square.highlighter = highlighter;
+      for (let row = 0; row < 10; row++) {
+        for (let col = 0; col < 8; col++) {
+          const square = document.createElement("div");
+          square.classList.add("square");
+          square.dataset.row = row;
+          square.dataset.col = col;
+          square.style.display = "none";
+          square.style.transform = `translate(${col}00%,${row}00%)`;
+          boardDiv.appendChild(square);
+          
+          const highlighter = document.createElement("div");
+          highlighter.classList.add("highlighter");
+          highlighter.dataset.row = row;
+          highlighter.dataset.col = col;
+          highlighters.appendChild(highlighter);
+          highlighter.square = square;
+          square.highlighter = highlighter;
 
-        const cell = document.createElement("div");
-        cell.classList.add("cell");
-        cell.dataset.row = row;
-        cell.dataset.col = col;
-        cell.style.backgroundColor = "rgb(0, 0, 0, 0)";
-        cell.highlighter = highlighter;
-        highlighter.cell = cell;
-        cells.appendChild(cell);
-        square.cell = cell;
-        
-        const extracell = document.createElement("div");
-        extracell.classList.add("extracell");
-        extracell.dataset.row = row;
-        extracell.dataset.col = col;
-        extracells.appendChild(extracell);
-        cell.extracell = extracell;
-      } 
+          const cell = document.createElement("div");
+          cell.classList.add("cell");
+          cell.dataset.row = row;
+          cell.dataset.col = col;
+          cell.style.backgroundColor = "rgb(0, 0, 0, 0)";
+          cell.highlighter = highlighter;
+          highlighter.cell = cell;
+          cells.appendChild(cell);
+          square.cell = cell;
+          
+          const extracell = document.createElement("div");
+          extracell.classList.add("extracell");
+          extracell.dataset.row = row;
+          extracell.dataset.col = col;
+          extracells.appendChild(extracell);
+          cell.extracell = extracell;
+        } 
+      }
     }
+    
     this.board.initDisplay();
   }
 

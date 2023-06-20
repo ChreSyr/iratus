@@ -33,47 +33,40 @@
   top: 0;
   touch-action: none;
   width: 12.5%;
-  will-change: transform
+  will-change: transform;
+  z-index: 2;
 }
 
 .piece.dragging {
   cursor: grabbing;
   cursor: -webkit-grabbing;
-  z-index: 2
+  z-index: 3;
 }
 
-/* todo : capture-hint & hint ? */
-.capture-hint,
-.highlight,
-.hint {
-  height: 10%;
-  left: 0;
+.square {
   position: absolute;
   top: 0;
+  left: 0;
   width: 12.5%;
+  height: 10%;
+  /* pointer-events: none; */
 }
 
-.capture-hint,
-.hint {
-  background-clip: content-box;
-  border-radius: 50%;
-  box-sizing: border-box;
-  pointer-events: none;
-}
-
-.capture-hint {
-  border: 5px solid rgba(0, 0, 0, .1);
-}
-
-.hint {
-  background-color: rgba(0, 0, 0, .1);
-  padding: 4.2%;
-}
-
-.highlight {
-  background-color: rgb(255, 255, 0);
+.square.selected {
+  background-color: var(--selected);
   opacity: 0.5;
 }
+
+.square.accessible {
+  background: radial-gradient(var(--accessible) 25%, rgba(0, 0, 0, 0) 0%);
+  pointer-events: auto;
+}
+
+.square.captureable {
+  background: radial-gradient(transparent 59%, var(--accessible) 59%, var(--accessible) 69%, transparent 0%);
+}
+
+/* SQUARE-XX */
 
 .square-0 {
   transform: translate(000%, 000%)

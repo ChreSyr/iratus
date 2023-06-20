@@ -15,12 +15,14 @@
 /* ALL-SITE STYLE */
 
 :root {
-  --very-dark-green: rgb(10, 20, 10);
+  --accessible: rgba(0, 0, 0, 0.2);
+  --dark: rgb(21, 21, 21);
   --dark-green: rgb(22, 43, 22);
   --light-green: rgb(131, 174, 131);
   --light-grey: rgb(200 200 200);
-  --selected: rgb(63, 131, 17);
-  --accessible: rgba(39, 92, 4, 0.3);
+  --selected: rgba(255, 255, 0, .5);
+  /* rgb(63, 131, 17); */
+  --very-dark-green: rgb(10, 20, 10);
 }
 
 html {
@@ -71,7 +73,7 @@ button:hover {
 
 .all {
   flex: 1 1 auto;
-  background-color: rgb(0 0 0);
+  background-color: var(--dark);
   text-align: center;
   justify-content: center;
   display: flex;
@@ -92,8 +94,10 @@ button:hover {
   height: 0px;
 }
 
+/* CONTROLS */
+
 .controls {
-  background-color: black;
+  background-color: var(--dark);
   width: calc(var(--square-size) * 8);
   height: var(--square-size);
   display: flex;
@@ -103,7 +107,25 @@ button:hover {
 
 .controls button {
   padding: 0;
+  transition: background-color .2s;
+  -webkit-tap-highlight-color: var(--light-green);
   width: var(--square-size);
+}
+
+.controls button:hover {
+  background-color: var(--dark);
+  color: var(--light-green);
+}
+
+@media only screen and (min-width: 1024px) {
+  .controls button:hover {
+    background-color: var(--light-green);
+    color: black;
+  }
+
+  .controls button:active {
+    border: 4px solid black;
+  }
 }
 
 .mainzone {
@@ -139,7 +161,7 @@ button:hover {
   /* settings to change at end of game */
   visibility: hidden;
   pointer-events: none;
-  z-index: 2;
+  z-index: 3;
 }
 
 #info h2 {
@@ -225,27 +247,6 @@ button:hover {
   -ms-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
   -o-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
   transform: translateX(-50%) translateY(-50%) rotate(-45deg);
-}
-
-.controls button {
-  -webkit-tap-highlight-color: var(--light-green);
-  transition: border .02s;
-}
-
-.controls button:hover {
-  background-color: black;
-  color: var(--light-green);
-}
-
-@media only screen and (min-width: 1024px) {
-  .controls button:hover {
-    background-color: var(--light-green);
-    color: black;
-  }
-
-  .controls button:active {
-    border: 4px solid black;
-  }
 }
 
 /* HOME STYLE */

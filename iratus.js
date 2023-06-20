@@ -1,6 +1,6 @@
 
 
-let game = new Game(IratusBoard);
+const game = new Game(IratusBoard);
 
 function hideInfo() {
   let infoDiv = document.getElementById("info");
@@ -15,106 +15,40 @@ function collide(event, element) {
   return x >= 0 && x <= rect.width && y >= 0 && y <= rect.height;
 }
 
+// TODO : rethink ?
+// cancel promotion when clicked outside the game
+// unselect a piece when clicked outside the game
 document.addEventListener("pointerdown", event => {
-  let selectedHighlighter = document.querySelector(".selected");
-  
-  let boardDiv = document.getElementById("board-single");
-  if (collide(event, boardDiv)) {
-    return;
-  }
+
+  const boardDiv = document.getElementById("board-single");
+  if (boardDiv.contains(event.target) && boardDiv !== event.target) {return}
 
   cancelPromotion();
-
-  if (! selectedHighlighter) {return}
-  let selectedPiece = selectedHighlighter.cell.piece;
-  selectedPiece.unselect();
+  let selectedPiece = game.board.selectedPiece;
+  if (selectedPiece) {
+    selectedPiece.unselect()
+  }
 });
 
-function makeDraggable(element) {
-  let pos = {x: 0, y: 0};
-  let dragging = false;
-  let wasSelected = false;
-  
-  const stopScrollEvents = (event) => {
-    event.preventDefault();
-  }
+function makeSquareClickable(square) {
       
   const pointerdownHandle = (event) => {
+
     cancelPromotion();
-    if (! element.piece) {
-      if (! element.highlighter.classList.contains("accessible")) {
-        let selectedHighlighter = document.querySelector(".selected");
-        if (selectedHighlighter) {
-          selectedHighlighter.cell.piece.unselect();
-        }
-      }
-      return;
-    }
-    if (element.highlighter.classList.contains("accessible")) {return}
-    let rect = element.getBoundingClientRect();
-    dragging = {dx: - rect.x - rect.width / 2, dy: - rect.y - rect.height / 2};
-    pos.x = event.clientX + dragging.dx;
-    pos.y = event.clientY + dragging.dy;
-    element.style.transform = `translate(${pos.x}px, ${pos.y}px)`;
-    element.classList.add('dragging');
-    element.setPointerCapture(event.pointerId);
 
-    wasSelected = element.highlighter.classList.contains("selected");
-    element.piece.handlePointerDown();
-
-    // dynamite
-    if (element.piece && element.piece.dynamited) {
-      element.extracell.style.backgroundImage = "";
-      element.style.backgroundImage += ", url('images/" + element.piece.color + "dy.png')";
-    }
-  }
-  
-  const pointerupHandle = (event) => {
-    dragging = null;
-    element.classList.remove('dragging');
-    element.style.transform = "";
-
-    // dynamite
-    if (element.piece && element.piece.dynamited) {
-      element.style.backgroundImage = "url('images/" + element.piece.color + element.piece.ID + ".png')";
-      element.extracell.style.backgroundImage = "url('images/" + element.piece.color + "dy.png')";
-    }
-
-    let allHighlighters = document.querySelectorAll(".highlighter");
-    for (let highlighter of allHighlighters) {
-      if (collide(event, highlighter)) {
-        if (highlighter.classList.contains("accessible")) {
-          let selectedPiece = game.board.selectedPiece;
-          selectedPiece.unselect();
-          game.move(start=[selectedPiece.row, selectedPiece.col], end=[parseInt(highlighter.dataset.row), parseInt(highlighter.dataset.col)])
-        }
-        break;
+    if (square.classList.contains("accessible")) {
+      let selectedPiece = game.board.selectedPiece;
+      selectedPiece.unselect();
+      game.move(start=[selectedPiece.row, selectedPiece.col], end=[parseInt(square.dataset.row), parseInt(square.dataset.col)]);
+    } else {
+      if (game.board.selectedPiece) {
+        game.board.selectedPiece.unselect();
       }
     }
-    if (element.piece && wasSelected) {
-      element.piece.unselect();
-    }  // else, the piece has moved
   }
   
-  const pointermoveHandle = (event) => {
-    if (!dragging) {return};
-    pos.x = event.clientX + dragging.dx;
-    pos.y = event.clientY + dragging.dy;
-    element.style.transform = `translate(${pos.x}px, ${pos.y}px)`;
-  }
-  
-  element.addEventListener('pointerdown', pointerdownHandle);
-  element.addEventListener('pointerup', pointerupHandle);
-  element.addEventListener('pointercancel', pointerupHandle);
-  element.addEventListener('pointermove', pointermoveHandle);
-  element.addEventListener('touchstart', stopScrollEvents);
+  square.addEventListener('pointerdown', pointerdownHandle);
 }
-
-for (let element of document.querySelectorAll(".cell")) {
-  makeDraggable(element);
-}
-
-
 
 function makePieceDraggable(element) {
   let pos = {x: 0, y: 0};
@@ -126,6 +60,7 @@ function makePieceDraggable(element) {
   }
       
   const pointerdownHandle = (event) => {
+
     cancelPromotion();
     // TODO : unselect piece when clicked outside
     
@@ -160,13 +95,13 @@ function makePieceDraggable(element) {
       element.extracell.style.backgroundImage = "url('images/" + element.piece.color + "dy.png')";
     }
 
-    let allHighlighters = document.querySelectorAll(".highlighter");
-    for (let highlighter of allHighlighters) {
-      if (collide(event, highlighter)) {
-        if (highlighter.classList.contains("accessible")) {
+    let squares = document.querySelectorAll(".square");
+    for (let square of squares) {
+      if (collide(event, square)) {
+        if (square.classList.contains("accessible")) {
           let selectedPiece = game.board.selectedPiece;
           selectedPiece.unselect();
-          game.move(start=[selectedPiece.row, selectedPiece.col], end=[parseInt(highlighter.dataset.row), parseInt(highlighter.dataset.col)])
+          game.move(start=[selectedPiece.row, selectedPiece.col], end=[parseInt(square.dataset.row), parseInt(square.dataset.col)])
         }
         break;
       }

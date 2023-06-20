@@ -329,38 +329,55 @@ class Piece {
 
   handlePointerDown() {
 
+    if (this.board.selectedPiece !== null) {
+      this.board.selectedPiece.unselect();
+      // this.board.squareSelected.classList.add("square-" + this.getPos());
+    }
+    
+    const squareSelected = document.createElement("div");
+    squareSelected.classList.add("square");
+    squareSelected.classList.add("selected");
+    squareSelected.classList.add("square-" + this.getPos());
+    this.board.widget.appendChild(squareSelected);
+    this.board.squareSelected = squareSelected;
+
     this.board.selectedPiece = this;
 
-    var selectHighlighter = this.board.selectHighlighter;
-    if (selectHighlighter.pos !== null) {
-      selectHighlighter.classList.remove("square-" + selectHighlighter.pos);
-    } else {
-      selectHighlighter.style.display = "block";
-    }
-    selectHighlighter.pos = this.getPos();
-    selectHighlighter.classList.add("square-" + selectHighlighter.pos);
-
-    let squares = document.querySelectorAll(".square");
-
-    if (this.board.game.turn !== this.color) {
-      for (let square of squares) {
-        square.highlighter.classList.remove("accessible");
+    for (let validMove of this.validMoves) {
+      const movePos = validMove[1] * 10 + validMove[0];
+      const squareAccessible = document.createElement("div");
+      squareAccessible.classList.add("square");
+      squareAccessible.classList.add("accessible");
+      if (this.board.piecesByPos[movePos] !== null) {
+        squareAccessible.classList.add("captureable");
       }
-    } else {
-      for (let square of squares) {
-        let row = parseInt(square.dataset.row);
-        let col = parseInt(square.dataset.col);
+      squareAccessible.classList.add("square-" + movePos);
+      squareAccessible.dataset.row = validMove[0];
+      squareAccessible.dataset.col = validMove[1];
+      makeSquareClickable(squareAccessible);
+      this.board.widget.appendChild(squareAccessible);
+      this.board.squaresAccessible.push(squareAccessible);
+    }
+
+    // if (this.board.game.turn !== this.color) {
+    //   for (let square of squares) {
+    //     square.classList.remove("accessible");
+    //   }
+    // } else {
+    //   for (let square of squares) {
+    //     let row = parseInt(square.dataset.row);
+    //     let col = parseInt(square.dataset.col);
   
-        if (this.validMoves.find(move => move[0] === row && move[1] === col)) {
-          square.highlighter.classList.add("accessible");
-        } else {
-          square.highlighter.classList.remove("accessible");
-        }
-      }
-    }
+    //     if (this.validMoves.find(move => move[0] === row && move[1] === col)) {
+    //       square.classList.add("accessible");
+    //     } else {
+    //       square.classList.remove("accessible");
+    //     }
+    //   }
+    // }
   }
 
-  initDisplay(boardDiv) {
+  initDisplay() {
 
     this.widget = document.createElement("div");
     this.widget.classList.add("piece");
@@ -371,24 +388,25 @@ class Piece {
     }
     this.widget.piece = this;
     makePieceDraggable(this.widget);
-    boardDiv.appendChild(this.widget);
+    this.board.widget.appendChild(this.widget);
 
   }
 
   unselect() {
 
+    if (this.board.selectedPiece === null) {return}
+
+    this.board.squareSelected.classList.remove("square-" + this.board.selectedPiece.getPos());
+    this.board.squareSelected.remove();
+    this.board.squareSelected = null;
+
     this.board.selectedPiece = null;
-
-    var selectHighlighter = this.board.selectHighlighter;
-    if (selectHighlighter.pos !== null) {
-      selectHighlighter.classList.remove("square-" + selectHighlighter.pos);
+    
+    for (let squareAccessible of this.board.squaresAccessible) {
+      squareAccessible.remove();
     }
-    selectHighlighter.style.display = "none";
-    selectHighlighter.pos = null;
+    this.board.squaresAccessible.length = 0;
 
-    for (let square of document.querySelectorAll(".square")) {
-      square.highlighter.classList.remove("accessible");
-    }
   }
 }
 

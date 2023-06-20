@@ -21,8 +21,10 @@ class Board {
     this.fatPositionClass = null;
     this.createPieces();
 
+    this.widget = null;
     this.selectedPiece = null;
-    this.selectHighlighter = null;
+    this.squareSelected = null;
+    this.squaresAccessible = [];
 
     this.currentMove = null;
     this.mainCurrentMove = null;
@@ -51,16 +53,30 @@ class Board {
   initDisplay() {
     this.calculator = new this.calculatorClass(this);
 
-    let boardDiv = document.getElementById("board-single");
+    this.widget = document.getElementById("board-single");
+    
+    // for (let col = 0; col < this.NBFILES; col++) {
+    //   for (let row = 0; row < this.NBRANKS; row++) {
+    //     const square = document.createElement("div");
+    //     square.classList.add("square");
+    //     square.dataset.row = row;
+    //     square.dataset.col = col;
+    //     // square.style.display = "none";
+    //     square.style.transform = `translate(${col}00%,${row}00%)`;
+    //     makeSquareClickable(square);
+    //     this.squares.push(square);
+    //     boardDiv.appendChild(square);
+    //   }
+    // }
 
-    this.selectHighlighter = document.createElement("div");
-    this.selectHighlighter.classList.add("highlight");
-    this.selectHighlighter.style.display = "none";
-    this.selectHighlighter.pos = null;
-    boardDiv.appendChild(this.selectHighlighter);
+    // this.squareSelected = document.createElement("div");
+    // this.squareSelected.classList.add("highlight");
+    // this.squareSelected.style.display = "none";
+    // this.squareSelected.pos = null;
+    // boardDiv.appendChild(this.squareSelected);
 
     for (let piece of this.pieces) {
-      piece.initDisplay(boardDiv);
+      piece.initDisplay();
     }
   }
   
