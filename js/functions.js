@@ -24,6 +24,7 @@ const cancelPromotion = (event) => {
 
 // Close settings
 function closeSettings() {
+  document.getElementById("overlay").style.display = "none";
   document.getElementsByClassName("settings")[0].style.display = "none";
 }
 
@@ -133,6 +134,7 @@ function makePieceDraggable(element) {
 
 // Open settings
 function openSettings() {
+  document.getElementById("overlay").style.display = "flex";
   document.getElementsByClassName("settings")[0].style.display = "flex";
 }
 
