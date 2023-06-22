@@ -42,7 +42,7 @@ try {
   document.getElementsByClassName("promotion-cancel")[0].addEventListener("pointerdown", cancelPromotion);
 
 } catch (error) {
-  console.error(error);
+  console.log(error);
   alert(error);
   alert(error.stack);
 }
