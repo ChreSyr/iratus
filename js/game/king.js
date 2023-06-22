@@ -1,4 +1,6 @@
 
+alert('King');
+
 class King extends Piece {
 
   static ID = "k";

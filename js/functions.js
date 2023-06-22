@@ -22,6 +22,11 @@ const cancelPromotion = (event) => {
   }
 }
 
+// Close settings
+function closeSettings() {
+  document.getElementsByClassName("settings")[0].style.display = "none";
+}
+
 // Returns whether or not an event collides with a screen element
 function collide(event, element) {
   let rect = element.getBoundingClientRect();
@@ -128,7 +133,7 @@ function makePieceDraggable(element) {
 
 // Open settings
 function openSettings() {
-  console.log("Open settings");
+  document.getElementsByClassName("settings")[0].style.display = "flex";
 }
 
 // Writes css code in <script id="board-styles-single">

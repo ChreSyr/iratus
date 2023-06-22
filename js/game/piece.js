@@ -25,6 +25,8 @@
       a   b   c   d   e   f   g   h
 */
 
+alert('Piece');
+
 class Piece {
 
   static ID = "";

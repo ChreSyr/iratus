@@ -1,5 +1,5 @@
 
-alert('IratusBoard')
+alert('IratusBoard');
 
 class IratusBoard extends Board {
 
