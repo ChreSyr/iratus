@@ -1,3 +1,7 @@
+:root {
+  --square-size: 60px;
+}
+
 .board {
   background-repeat: no-repeat;
   background-size: 100%;
@@ -64,6 +68,10 @@
 
 .square.captureable {
   background: radial-gradient(transparent 59%, var(--accessible) 59%, var(--accessible) 69%, transparent 0%);
+}
+
+.phantom {
+  opacity: .7;
 }
 
 /* SQUARE-XX */
