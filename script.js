@@ -43,5 +43,6 @@ try {
 
 } catch (error) {
   console.error(error);
-  alert(error, error.stack);
+  alert(error);
+  alert(error.stack);
 }
