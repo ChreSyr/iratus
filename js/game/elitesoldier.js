@@ -1,4 +1,6 @@
 
+alert('EliteSoldier');
+
 class EliteSoldier extends PieceMovingTwice {
   static ID = "es";
   static MOVES = [

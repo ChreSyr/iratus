@@ -1,4 +1,6 @@
 
+alert('CalculatorIratusBoard');
+
 class CalculatorIratusBoard extends IratusBoard {
 
   constructor(board) {

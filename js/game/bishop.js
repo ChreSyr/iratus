@@ -1,4 +1,6 @@
 
+alert('Bishop');
+
 class Bishop extends RollingPiece {
 
   static ID = "b";
