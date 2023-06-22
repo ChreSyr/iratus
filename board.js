@@ -146,3 +146,20 @@ class FatPosition {
     return arraysEqual(this.piecesByPos, other.piecesByPos);
   }
 }
+
+let pieceClasses = {
+  "k": King,
+  "q": Queen,
+  "r": Rook,
+  "b": Bishop,
+  "n": Knight,
+  "i": Pawn,
+  "dy": Dynamite,
+  "s": Soldier,
+  "es": EliteSoldier,
+  "d": Dog,
+  "ed": EnragedDog,
+  "p": Phantom,
+  "g": Grapple,
+  " ": null,
+}
