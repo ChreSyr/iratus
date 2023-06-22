@@ -429,6 +429,7 @@ header {
   -webkit-transition: -webkit-transform 0.5s 0s, visibility 0s 0s;
   -moz-transition: -moz-transform 0.5s 0s, visibility 0s 0s;
   transition: transform 0.5s 0s, visibility 0s 0s;
+  background-color: rgba(0, 0, 0, .1);
 }
 
 @media only screen and (min-width: 1024px) {
