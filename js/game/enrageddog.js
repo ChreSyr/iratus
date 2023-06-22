@@ -1,6 +1,4 @@
 
-alert('EnragedDog');
-
 class EnragedDog extends PieceMovingTwice {
   static ID = "ed";
   static MOVES = [

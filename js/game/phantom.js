@@ -1,6 +1,4 @@
 
-alert('Phantom');
-
 class Phantom extends Piece {
 
   static ID = "p";

@@ -1,6 +1,4 @@
 
-alert('IratusBoard');
-
 class IratusBoard extends Board {
 
   static NBRANKS = 10;

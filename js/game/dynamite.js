@@ -1,6 +1,4 @@
 
-alert('Dynamite');
-
 class Dynamite extends Piece {
 
   static ID = "dy";

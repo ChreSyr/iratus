@@ -1,10 +1,10 @@
 
-var scripts = document.getElementsByTagName('script');
-var str = Array.from(document.getElementsByTagName('script'), function(script) {
-  var filename = script.src.substring(script.src.lastIndexOf('/')+1);
-  return filename.substring(0, filename.length - 3);
-}).toString();
-alert("loading: " + str);
+// var scripts = document.getElementsByTagName('script');
+// var str = Array.from(document.getElementsByTagName('script'), function(script) {
+//   var filename = script.src.substring(script.src.lastIndexOf('/')+1);
+//   return filename.substring(0, filename.length - 3);
+// }).toString();
+// alert("loading: " + str);
 
 try {
 

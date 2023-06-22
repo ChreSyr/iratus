@@ -1,6 +1,4 @@
 
-alert('Game');
-
 class Game {
 
   constructor(boardClass) {

@@ -1,6 +1,4 @@
 
-alert('Board');
-
 class Board {
 
   static pieceClassesByID = {

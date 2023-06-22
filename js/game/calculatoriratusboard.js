@@ -1,5 +1,4 @@
 
-alert('CalculatorIratusBoard');
 
 class CalculatorIratusBoard extends IratusBoard {
 
@@ -25,3 +24,5 @@ class CalculatorIratusBoard extends IratusBoard {
     return this.piecesCorrespondence[i];
   }
 }
+
+alert('CalculatorIratusBoard');

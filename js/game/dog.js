@@ -1,6 +1,4 @@
 
-alert('Dog');
-
 class Dog extends Piece {
   static ID = "d";
 
