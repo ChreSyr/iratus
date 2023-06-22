@@ -80,10 +80,10 @@ function makePieceDraggable(element) {
     element.piece.handlePointerDown();
 
     // dynamite
-    if (element.piece && element.piece.dynamited) {
-      // element.extracell.style.backgroundImage = "";
-      element.style.backgroundImage += ", url('images/" + element.piece.color + "dy.png')";
-    }
+    // if (element.piece && element.piece.dynamited) {
+    //   // element.extracell.style.backgroundImage = "";
+    //   element.style.backgroundImage += ", url('images/" + element.piece.color + "dy.png')";
+    // }
   }
   
   const pointerupHandle = (event) => {
@@ -92,10 +92,10 @@ function makePieceDraggable(element) {
     element.style.transform = "";
 
     // dynamite
-    if (element.piece && element.piece.dynamited) {
-      element.style.backgroundImage = "url('images/" + element.piece.color + element.piece.ID + ".png')";
-      element.extracell.style.backgroundImage = "url('images/" + element.piece.color + "dy.png')";
-    }
+    // if (element.piece && element.piece.dynamited) {
+    //   element.style.backgroundImage = "url('images/" + element.piece.color + element.piece.ID + ".png')";
+    //   element.extracell.style.backgroundImage = "url('images/" + element.piece.color + "dy.png')";
+    // }
 
     let squares = document.querySelectorAll(".square");
     for (let square of squares) {

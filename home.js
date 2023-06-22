@@ -44,11 +44,12 @@ function setPiecesStyle(style=null) {
   for (let color of colors) {
     for (let pieceID of pieceIDs) {
       css += `\
-#board-single .piece.${color}${pieceID},
-#board-single .promotion-piece.${color}${pieceID}
-{
-  background-image: url(images/${color}${pieceID}.png);
-}
+      #board-single .piece.${color}${pieceID}, #board-single .promotion-piece.${color}${pieceID} {
+        background-image: url(images/${color}${pieceID}.png);
+      }
+      #board-single .dynamited.${color}${pieceID} {
+        background-image: url(images/${color}${pieceID}.png), url(images/${color}dy.png);
+      }
 `
     }
   }
