@@ -10,6 +10,7 @@
   <link id="maincss" rel="stylesheet" href="css/sharedstyle.css">
   <link rel="stylesheet" type="text/css" href="css/index.css">
   <link rel="stylesheet" type="text/css" href="css/board.css">
+  <link id="customcss" rel="stylesheet" href="">
   <style type="text/css" id="board-styles-single"></style>
   <title>Iratus</title>
 
@@ -219,10 +220,18 @@
         <button tabindex=-1 onclick="game.redoAll()">&gt&gt</button>
       </div>
 
-      <div class="overlay" id="overlay"></div>
+      <div class="overlay" id="overlay">
+
+      </div>
 
       <div class="settings">
         <button onclick="closeSettings()" class="settings-close"></button>
+        <select id="styleSelector" onchange="handleStyleSelection()">
+          <option value="0">Default</option>
+          <option value="1">Style 1</option>
+          <option value="2">Style 2</option>
+          <option value="3">Style 3</option>
+        </select>
       </div>
 
     </div>

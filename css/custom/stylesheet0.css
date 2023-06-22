@@ -1,0 +1,10 @@
+:root {
+  --accessible: rgba(0, 0, 0, 0.2);
+  --dark: rgb(21, 21, 21);
+  --dark-green: rgb(22, 43, 22);
+  --light-dark: rgb(64, 64, 64);
+  --light-green: rgb(131, 174, 131);
+  --light-grey: rgb(200 200 200);
+  --selected: rgba(255, 255, 0, .5);
+  --very-dark-green: rgb(10, 20, 10);
+}

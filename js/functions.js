@@ -36,6 +36,12 @@ function collide(event, element) {
   return x >= 0 && x <= rect.width && y >= 0 && y <= rect.height;
 }
 
+// Handle when an option is selected in the style <select>
+function handleStyleSelection() {
+  var selectedOption = document.getElementById("styleSelector").value;
+  document.getElementById('customcss').setAttribute('href', 'css/custom/stylesheet' + selectedOption + '.css');
+}
+
 // Hide the info window shown after a game
 function hideInfo() {
   document.getElementById("info").style.display = "none";
@@ -176,10 +182,9 @@ function setPiecesStyle(style=null) {
 function setStyle(num) {
   var maintheme = document.getElementById('maincss');
   var customtheme = document.getElementById('customcss');
-  if (num === 'no') {
-      maintheme.setAttribute('href', null)
-  } else {
-      maintheme.setAttribute('href', 'sharedstyle.css')
-  }
-  customtheme.setAttribute('href', 'stylesheet' + num + '.css')
+  // if (num === 'e') {
+  //     maintheme.setAttribute('href', null);
+  //     return;
+  // } else 
+  customtheme.setAttribute('href', 'css/custom/stylesheet' + num + '.css');
 }
