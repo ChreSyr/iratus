@@ -129,6 +129,7 @@ function makePieceDraggable(element) {
 // Writes css code in <script id="board-styles-single">
 // This code defines the images of the pieces
 function setPiecesStyle(style=null) {
+  
   if (style !== null) {throw Error}  // not implemented
   
   var colors = ["b", "w"];

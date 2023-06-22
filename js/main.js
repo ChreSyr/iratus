@@ -10,6 +10,10 @@ jQuery(document).ready(function($){
 		event.preventDefault();
 		toggleNav();
 	});
+	$('.cd-dropdown .a-close').on('click', function(event){
+    // No preventDefault here because there is other reactions to this event
+		toggleNav();
+	});
 
 	//on mobile - open submenu
 	$('.has-children').children('a').on('click', function(event){
