@@ -10,3 +10,88 @@
   font-size: 60px;
   margin: 30px 60px;
 }
+
+.settings-btn {
+  /* display: block; */
+  position: absolute;
+  width: calc(var(--square-size) * .75);
+  height: calc(var(--square-size) * .75);
+  /* padding: 0 20px 0 20px; */
+  /* line-height: 40px; */
+  background-color: black;
+  /* color: var(--light-green); */
+  border-radius: 3px;
+  border: var(--light-green) 2px solid;
+  /* font-size: large; */
+  right: calc(var(--square-size) / 8);
+  top: calc(var(--square-size) / 8);
+  /* background-image: url("../images/settings.svg"); */
+  /* background-blend-mode: soft-light; */
+  fill: var(--light-green);
+  padding: 1%;
+  cursor: pointer;
+}
+
+.settings-btn:hover {
+  background-color: var(--light-green);
+  fill: black;
+}
+
+.settings {
+  display: flex;
+  width: calc(var(--square-size) * 6);
+  height: calc(var(--square-size) * 8);
+  background-color: var(--dark);
+  position: absolute;
+  top: var(--square-size);
+  /* position: absolute; */
+  /* left: 50%; */
+  /* top: 18%; */
+  /* width: calc(var(--square-size) * 8 * .8); */
+  /* transform: translateX(-50%); */
+  /* background-color: var(--light-green); */
+  border-radius: 0.6rem;
+  box-shadow: 0 0.3rem 0.63rem 0.07rem rgb(0 0 0 / 40%);
+  /* height: calc(var(--square-size) * 8 * .8); */
+  /* display: flex; */
+  flex-direction: column;
+  align-items: center;
+  /* display: none; */
+  z-index: 3;
+}
+
+.settings-close {
+  position: absolute;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  /* overflow: hidden; */
+  /* color: transparent; */
+  top: 5px;
+  right: 5px;
+  height: calc(var(--square-size) * .6);
+  width: calc(var(--square-size) * .6);
+  border-radius: 0.6rem;
+}
+
+.settings-close::before,
+.settings-close::after {
+  content: "";
+  position: absolute;
+  /* top: 40%; */
+  /* left: 40%; */
+  width: calc(var(--square-size) / 2.3);
+  height: 3px;
+  background-color: var(--light-green);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.settings-close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.settings-close:hover::before,
+.settings-close:hover::after {
+  background-color: black;
+}
