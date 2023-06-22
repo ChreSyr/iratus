@@ -13,7 +13,7 @@ class Game {
     this.counter50rule = 0;  // draw if no capture or pawn move within 50 moves
     this.result = undefined;
 
-    this.alwaysFlip = false;
+    this.alwaysFlip = false;  // TODO
 
     for (let piece of this.board.piecesColored[this.turn]) {
       piece.updateValidMoves();
@@ -21,7 +21,7 @@ class Game {
 
     this.fatHistory.push(this.board.getFatPosition());
 
-    this.initDisplay();
+    this.board.initDisplay();
   }
 
   checkForEnd() {
@@ -112,59 +112,8 @@ class Game {
     return this.board.king[this.turn].inCheck() ? "checkmate" : "stalemate";
   }
 
-  initDisplay() {
-    
-    if (false) {
-      const boardDiv = document.getElementById("board-single");
-      const squares = document.getElementById("squares");
-      const highlighters = document.getElementById("highlighters");
-      const extracells = document.getElementById("extracells");
-      const cells = document.getElementById("cells");
-
-      for (let row = 0; row < 10; row++) {
-        for (let col = 0; col < 8; col++) {
-          const square = document.createElement("div");
-          square.classList.add("square");
-          square.dataset.row = row;
-          square.dataset.col = col;
-          square.style.display = "none";
-          square.style.transform = `translate(${col}00%,${row}00%)`;
-          boardDiv.appendChild(square);
-          
-          const highlighter = document.createElement("div");
-          highlighter.classList.add("highlighter");
-          highlighter.dataset.row = row;
-          highlighter.dataset.col = col;
-          highlighters.appendChild(highlighter);
-          highlighter.square = square;
-          square.highlighter = highlighter;
-
-          const cell = document.createElement("div");
-          cell.classList.add("cell");
-          cell.dataset.row = row;
-          cell.dataset.col = col;
-          cell.style.backgroundColor = "rgb(0, 0, 0, 0)";
-          cell.highlighter = highlighter;
-          highlighter.cell = cell;
-          cells.appendChild(cell);
-          square.cell = cell;
-          
-          const extracell = document.createElement("div");
-          extracell.classList.add("extracell");
-          extracell.dataset.row = row;
-          extracell.dataset.col = col;
-          extracells.appendChild(extracell);
-          cell.extracell = extracell;
-        } 
-      }
-    }
-    
-    this.board.initDisplay();
-  }
-
   move(start, end) {
-    let piece = this.board.get(start[0], start[1]);
-    let currentMove = this.board.move(start, end, true);
+    const currentMove = this.board.move(start, end, true);
     this.movesHistory.push(currentMove);
     this.turn = currentMove.nextTurn;
     this.board.updateAllValidMoves();
@@ -173,7 +122,7 @@ class Game {
 
     this.checkForEnd();
 
-    if (this.alwaysFlip) {
+    if (this.alwaysFlip) {  // TODO
       if (currentMove.turn !== currentMove.nextTurn) {
         this.board.flipDisplay(animate=false);
       }
@@ -184,7 +133,7 @@ class Game {
 
     if (this.backMovesHistory.length === 0) {return}
 
-    let lastUndoneMove = this.backMovesHistory.pop(-1);
+    const lastUndoneMove = this.backMovesHistory.pop(-1);
 
     this.board.redo(lastUndoneMove);
     this.movesHistory.push(lastUndoneMove);
@@ -192,7 +141,7 @@ class Game {
     this.board.updateAllValidMoves();
     this.fatHistory.push(this.board.getFatPosition());
 
-    if (this.alwaysFlip) {
+    if (this.alwaysFlip) {  // TODO
       if (lastUndoneMove.turn !== lastUndoneMove.nextTurn) {
         this.board.flipDisplay(animate=false);
       }
@@ -208,7 +157,7 @@ class Game {
   undo() {  // undo the last move
     if (this.movesHistory.length === 0) {return}
 
-    let lastMove = this.movesHistory.pop(-1);
+    const lastMove = this.movesHistory.pop(-1);
     this.backMovesHistory.push(lastMove);
     this.fatHistory.pop(-1);
 
@@ -217,7 +166,7 @@ class Game {
     this.turn = lastMove.turn;
     this.board.updateAllValidMoves();
     
-    if (this.alwaysFlip) {
+    if (this.alwaysFlip) {  // TODO
       if (lastMove.turn !== lastMove.nextTurn) {
         this.board.flipDisplay(animate=false);
       }

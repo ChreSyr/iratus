@@ -55,28 +55,9 @@ class Board {
 
     this.widget = document.getElementById("board-single");
     
-    // for (let col = 0; col < this.NBFILES; col++) {
-    //   for (let row = 0; row < this.NBRANKS; row++) {
-    //     const square = document.createElement("div");
-    //     square.classList.add("square");
-    //     square.dataset.row = row;
-    //     square.dataset.col = col;
-    //     // square.style.display = "none";
-    //     square.style.transform = `translate(${col}00%,${row}00%)`;
-    //     makeSquareClickable(square);
-    //     this.squares.push(square);
-    //     boardDiv.appendChild(square);
-    //   }
-    // }
-
-    // this.squareSelected = document.createElement("div");
-    // this.squareSelected.classList.add("highlight");
-    // this.squareSelected.style.display = "none";
-    // this.squareSelected.pos = null;
-    // boardDiv.appendChild(this.squareSelected);
-
     for (let piece of this.pieces) {
-      piece.initDisplay();
+      piece.isWidgeted = true;
+      piece.createWidget();
     }
   }
   

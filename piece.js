@@ -58,6 +58,7 @@ class Piece {
     // for transformation memory
     this.actualClass = this.constructor;
 
+    this.isWidgeted = false;
     this.widget = null;
     this.cssClass = undefined;
 
@@ -85,22 +86,10 @@ class Piece {
     this.validMoves.length = 0;
     this.antikingSquares.length = 0;
 
-    if (this.widget !== null) {
+    if (this.isWidgeted) {
       // update the display
-      this.widget.style.display = "none";
+      this.killWidget();
     }
-
-    // if (this.cell !== null) {
-    //   // update the display
-    //   this.cell.style.backgroundImage = "";
-    //   if (this.cssClass) {
-    //     this.cell.classList.remove(this.cssClass);
-    //   }
-    //   if (this.dynamited) {
-    //     this.cell.extracell.style.backgroundImage = "";
-    //   }
-    //   this.cell.piece = null;
-    // }
 
     if (this.dynamited && ! capturer.isCaptured) {
       commands.push(new Capture(capturer, this));
@@ -216,15 +205,6 @@ class Piece {
         this.widget.classList.remove("dynamited");
       }
     }
-
-    // update the display
-    // if (this.cell !== null) {
-    //   if (this.dynamited) {
-    //     this.cell.extracell.style.backgroundImage = "url('images/" + this.color + "dy.png')";
-    //   } else {
-    //     this.cell.extracell.style.backgroundImage = "";
-    //   }
-    // }
   }
 
   transform(pieceClass) {
@@ -249,54 +229,17 @@ class Piece {
       // for calculations
       this.board.calculator.getSimulatedPiece(this).transform(pieceClass);
     }
-
-    // if (this.cell !== null) {
-    //   this.cell.style.backgroundImage = "url('images/" + this.color + this.ID + ".png')";
-
-    //   // for calculations
-    //   this.board.calculator.getSimulatedPiece(this).transform(pieceClass);
-    // }
   }
 
   static uncapture() {
     this.board.piecesByPos[this.getPos()] = this;
     this.isCaptured = false;
 
-    if (this.widget !== null) {
+    if (this.isWidgeted) {
       // update the display
-      this.widget.style.display = "block";
+      this.createWidget();
     }
-
-    // if (this.cell !== null) {
-    //   // update the display
-    //   this.cell = this.getSquare().cell;
-    //   this.cell.style.backgroundImage = "url('images/" + this.color + this.ID + ".png')";
-    //   if (this.cssClass) {
-    //     this.cell.classList.add(this.cssClass);
-    //   }
-    //   if (this.dynamited) {
-    //     this.cell.extracell.style.backgroundImage = "url('images/" + this.color + "dy.png')";
-    //   }
-    //   this.cell.piece = this;
-    // }
   }
-
-  /*
-    def uncapture(self):
-        # The board call this function when this piece was captured but "undo" is done
-
-        # Memorizing the new position for the game
-        assert self.board[self.square] == 0
-        self.board[self.square] = self
-
-        self.is_captured = False
-
-        if self.widget is not None:
-            self.widget.wake()
-
-        if self.bonus is not None:
-            self.bonus.handle_allyuncapture()
-*/
 
   static undo(move) {
     this.goTo(move.start[0], move.start[1]);
@@ -327,11 +270,28 @@ class Piece {
 
   // VIEW METHODS
 
+  createWidget() {
+
+    if (this.isWidgeted === false) {throw Error("Can't widgetize a piece made for calculation")}
+    if (this.widget !== null) {throw Error("This piece already has a widget")}
+
+    this.widget = document.createElement("div");
+    this.widget.classList.add("piece");
+    this.widget.classList.add(this.color + this.ID);
+    this.widget.classList.add("square-" + this.getPos());
+    if (this.cssClass === "phantom") {
+      this.widget.classList.add("phantom");
+    }
+    this.widget.piece = this;
+    makePieceDraggable(this.widget);
+    this.board.widget.appendChild(this.widget);
+
+  }
+
   handlePointerDown() {
 
     if (this.board.selectedPiece !== null) {
       this.board.selectedPiece.unselect();
-      // this.board.squareSelected.classList.add("square-" + this.getPos());
     }
     
     const squareSelected = document.createElement("div");
@@ -360,37 +320,14 @@ class Piece {
       this.board.widget.appendChild(squareAccessible);
       this.board.squaresAccessible.push(squareAccessible);
     }
-
-    // if (this.board.game.turn !== this.color) {
-    //   for (let square of squares) {
-    //     square.classList.remove("accessible");
-    //   }
-    // } else {
-    //   for (let square of squares) {
-    //     let row = parseInt(square.dataset.row);
-    //     let col = parseInt(square.dataset.col);
-  
-    //     if (this.validMoves.find(move => move[0] === row && move[1] === col)) {
-    //       square.classList.add("accessible");
-    //     } else {
-    //       square.classList.remove("accessible");
-    //     }
-    //   }
-    // }
   }
 
-  initDisplay() {
+  killWidget() {
+    
+    if (this.widget === null) {return}
 
-    this.widget = document.createElement("div");
-    this.widget.classList.add("piece");
-    this.widget.classList.add(this.color + this.ID);
-    this.widget.classList.add("square-" + this.getPos());
-    if (this.cssClass === "phantom") {
-      this.widget.classList.add("phantom");
-    }
-    this.widget.piece = this;
-    makePieceDraggable(this.widget);
-    this.board.widget.appendChild(this.widget);
+    this.widget.remove();
+    this.widget = null;
 
   }
 
