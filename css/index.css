@@ -38,7 +38,7 @@
 }
 
 .settings {
-  display: flex;
+  display: none;
   width: calc(var(--square-size) * 6);
   height: calc(var(--square-size) * 8);
   background-color: var(--dark);
@@ -53,17 +53,13 @@
 
 .settings-close {
   position: absolute;
-  display: inline-block;
-  width: 20px;
-  height: 20px;
   cursor: pointer;
-  /* overflow: hidden; */
-  /* color: transparent; */
-  top: 5px;
-  right: 5px;
-  height: calc(var(--square-size) * .6);
-  width: calc(var(--square-size) * .6);
+  top: calc(var(--square-size) * .1);
+  right: calc(var(--square-size) * .1);
+  height: calc(var(--square-size) * .8);
+  width: calc(var(--square-size) * .8);
   border-radius: 0.6rem;
+  padding: 0;
 }
 
 .settings-close::before,
