@@ -1,3 +1,6 @@
+
+alert("rollingpiece");
+
 class RollingPiece extends Piece {
 
   static RANGE = 10;

@@ -1,4 +1,5 @@
 
+alert("soldierdog");
 
 class PieceMovingTwice extends Piece {
 

@@ -1,4 +1,6 @@
 
+alert("script");
+
 try {
 
   const game = new Game(IratusBoard);

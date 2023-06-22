@@ -1,4 +1,6 @@
 
+alert("functions");
+
 // Change the property squareSize depending on screen size
 function ajustSquareSize() {
   var squareSize = Math.floor(Math.min(document.body.clientWidth / 8, (document.body.clientHeight) / 13, 80));

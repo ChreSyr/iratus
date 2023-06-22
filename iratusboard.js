@@ -1,4 +1,6 @@
 
+alert("iratusboard");
+
 let pieceClasses = {
   "k": King,
   "q": Queen,
