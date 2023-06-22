@@ -131,6 +131,7 @@ function makePieceDraggable(element) {
 
 for (let promotionPiece of document.getElementsByClassName("promotion-piece")) {
   promotionPiece.addEventListener("pointerdown", event => {
+    const color = game.board.pawnToPromote.color;
     lastMove = game.movesHistory.slice(-1)[0];
     lastMove.executeCommand(new Transform(game.board.pawnToPromote, Pawn, pieceClasses[promotionPiece.classList[1]]));
     lastMove.notation += "=" + promotionPiece.classList[1].toUpperCase();
@@ -141,17 +142,28 @@ for (let promotionPiece of document.getElementsByClassName("promotion-piece")) {
     let promotionWindow = document.getElementsByClassName("promotion-window")[0];
     promotionWindow.style.visibility = "hidden";
     promotionWindow.style.pointerEvents = "none";
+    
+    let promotionPieces = document.getElementsByClassName("promotion-piece");
+    for (let promotionPiece of promotionPieces) {
+      promotionPiece.classList.remove(color + promotionPiece.classList[1]);
+    }
   });
 }
 
 const cancelPromotion = (event) => {
   if (game.board.pawnToPromote) {
+    const color = game.board.pawnToPromote.color;
     game.undo();
     game.board.pawnToPromote = null;
   
     let promotionWindow = document.getElementsByClassName("promotion-window")[0];
     promotionWindow.style.visibility = "hidden";
     promotionWindow.style.pointerEvents = "none";
+    
+    let promotionPieces = document.getElementsByClassName("promotion-piece");
+    for (let promotionPiece of promotionPieces) {
+      promotionPiece.classList.remove(color + promotionPiece.classList[1]);
+    }
   }
 }
 document.getElementsByClassName("promotion-cancel")[0].addEventListener("pointerdown", cancelPromotion);

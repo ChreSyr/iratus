@@ -585,10 +585,10 @@ class Pawn extends Piece {
 
   openPromotionWindow() {
     this.board.pawnToPromote = this;
-    let promotionWindow = document.getElementsByClassName("promotion-window")[0];
+    const promotionWindow = document.getElementsByClassName("promotion-window")[0];
     let promotionPieces = document.getElementsByClassName("promotion-piece");
     for (let promotionPiece of promotionPieces) {
-      promotionPiece.style.backgroundImage = "url('images/" + this.color + promotionPiece.classList[1] + ".png')"; 
+      promotionPiece.classList.add(this.color + promotionPiece.classList[1]);
     }
     if (this.color === "w") { // TODO : what if the board is flipped ?
       promotionWindow.classList.add("top");

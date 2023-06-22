@@ -54,19 +54,6 @@ function setPiecesStyle(style=null) {
     }
   }
 
-//   for (let row = 0; row < 10; row++) {
-//     for (let col = 0; col < 8; col++) {
-//       css += `\
-// .square-${col ? col : ""}${row} {
-//     transform: translate(${col}00%,${row}00%)
-// }
-// .flipped .square-${col ? col : ""}${row} {
-//   transform: translate(${9 - col}00%,${7 - row}00%)
-// }
-// `
-//     } 
-//   }
-
   var piecesStyle = document.getElementById("board-styles-single");
 
   if (piecesStyle.styleSheet){
