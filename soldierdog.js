@@ -83,9 +83,9 @@ class PieceMovingTwice extends Piece {
           let row2 = row + move2[0];
           let col2 = col + move2[1];
 
-          if (row2 < 0 || row2 > 9 || col2 < 0 || col2 > 7) {continue}
-          if (row === row2 && col === col2) {continue}
-          if (this.antikingSquares.find(move => move[0] === row2 && move[1] === col2)) {continue}
+          if (row2 < 0 || row2 > 9 || col2 < 0 || col2 > 7) {continue}  // out of board
+          if (this.row === row2 && this.col === col2) {continue}  // can't protect itself
+          if (this.antikingSquares.find(move => move[0] === row2 && move[1] === col2)) {continue}  // already in antikingSquares
 
           this.antikingSquares.push([row2, col2]);
         }
