@@ -1,0 +1,91 @@
+.rules {
+  margin: 20px;
+  border: 2px solid var(--light-green);
+  padding: 20px;
+  color: var(--light-green);
+  background-color: black;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (min-width: 1024px) {
+  .rules {
+    margin: 20px 200px;
+  }
+}
+
+.rules a {
+  margin: 0 auto;
+  border: 1px solid var(--light-green);
+  font-size: large;
+}
+
+.rules a:hover {
+  color: black;
+  background-color: var(--light-green);
+}
+
+.rules-sep {
+  /*   border-top: 6px solid green; */
+  height: 4px;
+  width: 100%;
+  background-color: var(--light-green);
+}
+
+.rules-title {
+  font-size: xx-large;
+}
+
+.rules p {
+  margin: 0 auto;
+  font-size: large;
+  text-align: center;
+}
+
+.rules-title-div {
+  margin: 0 auto;
+  display: flex;
+  margin-top: -5px;
+  align-items: center;
+}
+
+.showcase {
+  width: 60px;
+  height: 60px;
+  background-size: cover;
+  margin: 10px;
+}
+
+/* IMAGES */
+.dog {
+  background-image: url(../images/wd.png);
+}
+
+.dynamite {
+  background-image: url(../images/wdy.png);
+}
+
+.enrageddog {
+  background-image: url(../images/wed.png);
+}
+
+.elitesoldier {
+  background-image: url(../images/wes.png);
+}
+
+.grapple {
+  background-image: url(../images/wg.png);
+}
+
+.pawn {
+  background-image: url(../images/wi.png);
+}
+
+.phantom {
+  background-image: url(../images/wp.png);
+}
+
+.soldier {
+  background-image: url(../images/ws.png);
+}

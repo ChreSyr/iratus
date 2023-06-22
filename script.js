@@ -1,12 +1,9 @@
 
 const game = new Game(IratusBoard);
 
-ajustSquareSize();
 setPiecesStyle();
 
 // ATTACHING EVENT LISTENERS
-
-window.addEventListener('resize', ajustSquareSize);
 
 document.addEventListener("pointerdown", event => {
 

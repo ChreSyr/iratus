@@ -13,7 +13,7 @@ const cancelPromotion = (event) => {
     game.board.pawnToPromote = null;
   
     let promotionWindow = document.getElementsByClassName("promotion-window")[0];
-    promotionWindow.style.display = "block";
+    promotionWindow.style.display = "none";
     
     let promotionPieces = document.getElementsByClassName("promotion-piece");
     for (let promotionPiece of promotionPieces) {
