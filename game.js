@@ -54,8 +54,7 @@ class Game {
       pieceImage.src = gameState === "checkmate" ? "images/" + lastMove.turn + lastMove.piece.ID + ".png" : "";
       let desriptionLabel = infoDiv.getElementsByTagName("p")[0];
       desriptionLabel.innerHTML = description;
-      infoDiv.style.visibility = "visible";
-      infoDiv.style.pointerEvents = "all";
+      infoDiv.style.display = "flex";
     }
   }
 

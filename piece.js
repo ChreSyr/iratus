@@ -596,8 +596,7 @@ class Pawn extends Piece {
       promotionWindow.classList.remove("top");
     }
     promotionWindow.style.transform = `translateX(${this.col * 100}%)`;
-    promotionWindow.style.visibility = "visible";
-    promotionWindow.style.pointerEvents = "all";
+    promotionWindow.style.display = "block";
   }
 
   static preciseTransform(piece) {

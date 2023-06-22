@@ -1,9 +1,3 @@
-/* UTILITIES */
-
-.reversed {
-  transform: rotateY(180deg);
-}
-
 /* FONT */
 
 @font-face {
@@ -21,7 +15,6 @@
   --light-green: rgb(131, 174, 131);
   --light-grey: rgb(200 200 200);
   --selected: rgba(255, 255, 0, .5);
-  /* rgb(63, 131, 17); */
   --very-dark-green: rgb(10, 20, 10);
 }
 
@@ -39,13 +32,10 @@ body {
 
 header h1 {
   color: var(--light-green);
-  /* font-weight: normal; */
 }
 
 header button {
-  /* width: 100%; */
   height: var(--square-size);
-  /* position: absolute; */
   border: 2px solid black;
 }
 
@@ -78,20 +68,6 @@ button:hover {
   justify-content: center;
   display: flex;
   flex-flow: column;
-}
-
-.bar {
-  background-color: black;
-  flex: 0 1 auto;
-  height: 36px;
-}
-
-.bar-dogleft {
-  height: 0px;
-}
-
-.bar-dogright {
-  height: 0px;
 }
 
 /* CONTROLS */
@@ -157,10 +133,7 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  /* settings to change at end of game */
-  visibility: hidden;
-  pointer-events: none;
+  display: none;
   z-index: 3;
 }
 
@@ -249,7 +222,7 @@ button:hover {
   transform: translateX(-50%) translateY(-50%) rotate(-45deg);
 }
 
-/* HOME STYLE */
+/* HOME */
 
 .title {
   width: 800px;
@@ -264,7 +237,7 @@ button:hover {
   margin: 30px 60px;
 }
 
-/* Rules style */
+/* RULES */
 
 .rules {
   margin: 20px;
@@ -325,40 +298,7 @@ button:hover {
   margin: 10px;
 }
 
-/* 
-.soldier {
-  background-image: url("images/ws.png");
-}
-
-.elitesoldier {
-  background-image: url("images/wes.png");
-}
-
-.dog {
-  background-image: url("images/wd.png");
-}
-
-.enrageddog {
-  background-image: url("images/wed.png");
-}
-
-.dynamite {
-  background-image: url("images/wdy.png");
-}
-
-.phantom {
-  background-image: url("images/wp.png");
-}
-
-.grapple {
-  background-image: url("images/wg.png");
-}
-
-.pawn {
-  background-image: url("images/wi.png");
-} */
-
-/* Contact style */
+/* CONTACT */
 
 .contact-container {
   height: 100%;

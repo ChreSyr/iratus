@@ -5,7 +5,7 @@
   border-radius: 3px;
   bottom: 0;
   box-shadow: 3px 3px 10px rgb(0 0 0 / 45%);
-  display: flex;
+  display: none;
   flex-direction: column-reverse;
   height: 65%;
   left: 0;
@@ -14,8 +14,6 @@
   width: 12.5%;
   z-index: 3;
   cursor: pointer;
-  visibility: hidden;
-  pointer-events: none;
 }
 
 .promotion-cancel {

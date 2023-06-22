@@ -1,13 +1,28 @@
 
-
-const game = new Game(IratusBoard);
-
-function hideInfo() {
-  let infoDiv = document.getElementById("info");
-  infoDiv.style.visibility = "hidden";
-  infoDiv.style.pointerEvents = "none";
+// Change the property squareSize depending on screen size
+function ajustSquareSize() {
+  var squareSize = Math.floor(Math.min(document.body.clientWidth / 8, (document.body.clientHeight) / 13, 80));
+  document.documentElement.style.setProperty('--square-size', squareSize + 'px');
 }
 
+// Hide the promotion window and 
+const cancelPromotion = (event) => {
+  if (game.board.pawnToPromote) {
+    const color = game.board.pawnToPromote.color;
+    game.undo();
+    game.board.pawnToPromote = null;
+  
+    let promotionWindow = document.getElementsByClassName("promotion-window")[0];
+    promotionWindow.style.display = "block";
+    
+    let promotionPieces = document.getElementsByClassName("promotion-piece");
+    for (let promotionPiece of promotionPieces) {
+      promotionPiece.classList.remove(color + promotionPiece.classList[1]);
+    }
+  }
+}
+
+// Returns whether or not an event collides with a screen element
 function collide(event, element) {
   let rect = element.getBoundingClientRect();
   let x = event.clientX - rect.x;
@@ -15,21 +30,12 @@ function collide(event, element) {
   return x >= 0 && x <= rect.width && y >= 0 && y <= rect.height;
 }
 
-// TODO : rethink ?
-// cancel promotion when clicked outside the game
-// unselect a piece when clicked outside the game
-document.addEventListener("pointerdown", event => {
+// Hide the info window shown after a game
+function hideInfo() {
+  document.getElementById("info").style.display = "none";
+}
 
-  const boardDiv = document.getElementById("board-single");
-  if (boardDiv.contains(event.target) && boardDiv !== event.target) {return}
-
-  cancelPromotion();
-  let selectedPiece = game.board.selectedPiece;
-  if (selectedPiece) {
-    selectedPiece.unselect()
-  }
-});
-
+// Add pointerdown listener on squares (like accessible, selected...)
 function makeSquareClickable(square) {
       
   const pointerdownHandle = (event) => {
@@ -50,6 +56,7 @@ function makeSquareClickable(square) {
   square.addEventListener('pointerdown', pointerdownHandle);
 }
 
+// Add event listeners on pieces for movements
 function makePieceDraggable(element) {
   let pos = {x: 0, y: 0};
   let dragging = false;
@@ -79,11 +86,6 @@ function makePieceDraggable(element) {
     wasSelected = element.piece === game.board.selectedPiece;
     element.piece.handlePointerDown();
 
-    // dynamite
-    // if (element.piece && element.piece.dynamited) {
-    //   // element.extracell.style.backgroundImage = "";
-    //   element.style.backgroundImage += ", url('images/" + element.piece.color + "dy.png')";
-    // }
   }
   
   const pointerupHandle = (event) => {
@@ -91,12 +93,7 @@ function makePieceDraggable(element) {
     element.classList.remove('dragging');
     element.style.transform = "";
 
-    // dynamite
-    // if (element.piece && element.piece.dynamited) {
-    //   element.style.backgroundImage = "url('images/" + element.piece.color + element.piece.ID + ".png')";
-    //   element.extracell.style.backgroundImage = "url('images/" + element.piece.color + "dy.png')";
-    // }
-
+    // if clicked for move destination
     let squares = document.querySelectorAll(".square");
     for (let square of squares) {
       if (collide(event, square)) {
@@ -129,41 +126,47 @@ function makePieceDraggable(element) {
   element.addEventListener('touchstart', stopScrollEvents);
 }
 
-for (let promotionPiece of document.getElementsByClassName("promotion-piece")) {
-  promotionPiece.addEventListener("pointerdown", event => {
-    const color = game.board.pawnToPromote.color;
-    lastMove = game.movesHistory.slice(-1)[0];
-    lastMove.executeCommand(new Transform(game.board.pawnToPromote, Pawn, pieceClasses[promotionPiece.classList[1]]));
-    lastMove.notation += "=" + promotionPiece.classList[1].toUpperCase();
-    game.board.pawnToPromote = null;
-    game.board.updateAllValidMoves();
-    game.checkForEnd();
-
-    let promotionWindow = document.getElementsByClassName("promotion-window")[0];
-    promotionWindow.style.visibility = "hidden";
-    promotionWindow.style.pointerEvents = "none";
-    
-    let promotionPieces = document.getElementsByClassName("promotion-piece");
-    for (let promotionPiece of promotionPieces) {
-      promotionPiece.classList.remove(color + promotionPiece.classList[1]);
-    }
-  });
-}
-
-const cancelPromotion = (event) => {
-  if (game.board.pawnToPromote) {
-    const color = game.board.pawnToPromote.color;
-    game.undo();
-    game.board.pawnToPromote = null;
+// Writes css code in <script id="board-styles-single">
+// This code defines the images of the pieces
+function setPiecesStyle(style=null) {
+  if (style !== null) {throw Error}  // not implemented
   
-    let promotionWindow = document.getElementsByClassName("promotion-window")[0];
-    promotionWindow.style.visibility = "hidden";
-    promotionWindow.style.pointerEvents = "none";
-    
-    let promotionPieces = document.getElementsByClassName("promotion-piece");
-    for (let promotionPiece of promotionPieces) {
-      promotionPiece.classList.remove(color + promotionPiece.classList[1]);
+  var colors = ["b", "w"];
+  var pieceIDs = ["b", "d", "dy", "ed", "es", "g", "i", "k", "n", "p", "q", "r", "s"];
+
+  let css = '';
+
+  for (let color of colors) {
+    for (let pieceID of pieceIDs) {
+      css += `\
+      #board-single .piece.${color}${pieceID}, #board-single .promotion-piece.${color}${pieceID} {
+        background-image: url(images/${color}${pieceID}.png);
+      }
+      #board-single .dynamited.${color}${pieceID} {
+        background-image: url(images/${color}${pieceID}.png), url(images/${color}dy.png);
+      }
+`
     }
   }
+
+  var piecesStyle = document.getElementById("board-styles-single");
+
+  if (piecesStyle.styleSheet){
+    // This is required for IE8 and below.
+    piecesStyle.styleSheet.cssText = css;
+  } else {
+    piecesStyle.appendChild(document.createTextNode(css));
+  }
 }
-document.getElementsByClassName("promotion-cancel")[0].addEventListener("pointerdown", cancelPromotion);
+
+// change the reference of the custom stylesheet 
+function setStyle(num) {
+  var maintheme = document.getElementById('maincss');
+  var customtheme = document.getElementById('customcss');
+  if (num === 'no') {
+      maintheme.setAttribute('href', null)
+  } else {
+      maintheme.setAttribute('href', 'sharedstyle.css')
+  }
+  customtheme.setAttribute('href', 'stylesheet' + num + '.css')
+}
