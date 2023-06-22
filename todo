@@ -1,0 +1,45 @@
+
+// TODO : rule survey : can the grapple blow a dynamited piece ? me : yes
+// TODO : rule survey : can soldat capture a pawn's phantom ? me : yes
+// TODO : rule survey : does the dog enrage when its soldier is promoted ?
+
+// TODO : captured pieces on the sides
+
+// TODO : alwaysFlip
+// TODO : flipDesktop / flipMobile
+
+// TODO : solve : the grapple can't send the enemy king on an antiking square, even if he will have time to escape
+
+
+
+// TESTS :
+
+// Capture a piece
+// Check for phantomization
+// Go back
+// Check for unphantomization
+// Go forward
+// Check for phantomisation
+
+// Equip a dynamite
+// Go back
+// Go forward
+// Move the dynamited piece
+// Capture with the dynamited piece
+// Capture the dyamited piece
+
+// Castling rights
+
+// Soldier can capture pawns
+// Soldier cannot capture other pieces
+// Soldier promotes to Elite Soldier
+// King can capture a Soldier only if the dog can't reach him
+
+// King can capture an Elite Soldier only if the dog can't reach him
+
+// PieceMovingTwice always move twice
+// PieceMovingTwice can capture twice
+// PieceMovingTwice can be captured by the king
+
+// A promoted pawn keep its dynamite
+// Promotion can be cancelled by < or click out of promotion window
