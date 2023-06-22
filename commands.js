@@ -1,6 +1,4 @@
 
-alert("commands");
-
 class Command {
   constructor(name, ...args) {
     this.name = name;

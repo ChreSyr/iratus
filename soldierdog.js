@@ -1,6 +1,4 @@
 
-alert("soldierdog");
-
 class PieceMovingTwice extends Piece {
 
   // TODO : solve : an enraged dog doesn't know he can capture a checking piece that requires him two moves to reach
@@ -255,7 +253,7 @@ class Dog extends Piece {
     if (! this.soldier.isCaptured) {
       for (let command of commands) {
         if (command.name === "transform") {
-          command.args[2] = EnragedDog  // a captured Dog creates an EnragedDog's phantom
+          command.args[2] = EnragedDog  // a captured dog creates an enrageddog's phantom
         }
       }
       commands.push(new Capture(this.soldier, capturer));

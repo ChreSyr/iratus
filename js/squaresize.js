@@ -1,6 +1,4 @@
 
-alert("squaresize");
-
 ajustSquareSize();
 
 // ATTACHING EVENT LISTENERS

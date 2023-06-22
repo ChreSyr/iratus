@@ -1,6 +1,4 @@
 
-alert("functions");
-
 // Change the property squareSize depending on screen size
 function ajustSquareSize() {
   var squareSize = Math.floor(Math.min(document.body.clientWidth / 8, (document.body.clientHeight) / 13, 80));
@@ -126,6 +124,11 @@ function makePieceDraggable(element) {
   element.addEventListener('pointercancel', pointerupHandle);
   element.addEventListener('pointermove', pointermoveHandle);
   element.addEventListener('touchstart', stopScrollEvents);
+}
+
+// Open settings
+function openSettings() {
+  console.log("Open settings");
 }
 
 // Writes css code in <script id="board-styles-single">
