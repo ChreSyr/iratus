@@ -1,4 +1,10 @@
 
+var scripts = document.getElementsByTagName('script');
+var str = Array.from(document.getElementsByTagName('script'), function(script) {
+  return script.src.substring(script.src.lastIndexOf('/')+1);
+}).toString();
+alert("loading: " + str);
+
 try {
 
   const game = new Game(IratusBoard);
