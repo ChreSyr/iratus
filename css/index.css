@@ -23,29 +23,10 @@
 }
 
 .settings-btn {
-  /* display: block; */
   position: absolute;
-  width: calc(var(--square-size) * .75);
-  height: calc(var(--square-size) * .75);
-  /* padding: 0 20px 0 20px; */
-  /* line-height: 40px; */
-  background-color: black;
-  /* color: var(--light-green); */
-  border-radius: 3px;
-  border: var(--light-green) 2px solid;
-  /* font-size: large; */
-  right: calc(var(--square-size) / 8);
-  top: calc(var(--square-size) / 8);
-  /* background-image: url("../images/settings.svg"); */
-  /* background-blend-mode: soft-light; */
+  right: .6rem;
   fill: var(--light-green);
-  padding: 1%;
   cursor: pointer;
-}
-
-.settings-btn:hover {
-  background-color: var(--light-green);
-  fill: black;
 }
 
 .settings {

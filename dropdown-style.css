@@ -190,7 +190,7 @@ Main Components
 
 -------------------------------- */
 header {
-  height: var(--square-size);
+  height: 5rem;
   background: var(--dark);
   display: flex;
   justify-content: center;
@@ -204,103 +204,6 @@ header {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.cd-dropdown-trigger {
-  display: block;
-  position: relative;
-  width: calc(var(--square-size) * .75);
-  height: calc(var(--square-size) * .75);
-  /* padding: 0 20px 0 20px; */
-  line-height: 40px;
-  background-color: black;
-  color: var(--light-green);
-  border-radius: 3px;
-  border: var(--light-green) 2px solid;
-  font-size: large;
-}
-
-.cd-dropdown-trigger:hover {
-  background-color: var(--light-green);
-  -webkit-tap-highlight-color: transparent;
-}
-
-.cd-dropdown-trigger:hover::before,
-.cd-dropdown-trigger:hover::after {
-  background-color: black;
-}
-
-.cd-dropdown-trigger::before,
-.cd-dropdown-trigger::after {
-  /* this is the arrow inside the dropdown trigger*/
-  content: '';
-  position: absolute;
-  top: 50%;
-  margin-top: -1px;
-  height: 2px;
-  width: 9px;
-  background-color: var(--light-green);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-transition: width 0.3s, -webkit-transform 0.3s;
-  -moz-transition: width 0.3s, -moz-transform 0.3s;
-  transition: width 0.3s, transform 0.3s;
-}
-
-.cd-dropdown-trigger::before {
-  right: calc(var(--square-size) * .4 - 5px);
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-
-.cd-dropdown-trigger::after {
-  left: calc(var(--square-size) * .4 - 5px);
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-}
-
-@media only screen and (min-width: 1024px) {
-  .cd-dropdown-trigger {
-    font-size: 1.5rem;
-    transition: color 0.2s, background-color 0.2s;
-  }
-
-  .cd-dropdown-trigger.dropdown-is-active {
-    background-color: var(--light-green);
-  }
-
-  .cd-dropdown-trigger.dropdown-is-active::before,
-  .cd-dropdown-trigger.dropdown-is-active::after {
-    background-color: black;
-    /* transform the arrow into a 'X' */
-    width: 14px;
-
-  }
-
-  .cd-dropdown-trigger.dropdown-is-active::before {
-    /* transform the arrow into a 'X' */
-    -webkit-transform: translateX(5px) rotate(-45deg);
-    -moz-transform: translateX(5px) rotate(-45deg);
-    -ms-transform: translateX(5px) rotate(-45deg);
-    -o-transform: translateX(5px) rotate(-45deg);
-    transform: translateX(5px) rotate(-45deg);
-  }
-
-  .cd-dropdown-trigger.dropdown-is-active::after {
-    /* transform the arrow into a 'X' */
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    transform: rotate(45deg);
-    left: calc(var(--square-size) * .4 - 10.7px);
-  }
 }
 
 .cd-dropdown h2,
