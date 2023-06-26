@@ -155,6 +155,8 @@ function makePieceDraggable(element) {
     
     try {
 
+      console.log("click")
+
       cancelPromotion();
 
       const squareAccessible = document.querySelector(`.square[data-row="${element.piece.row}"][data-col="${element.piece.col}"]`);
