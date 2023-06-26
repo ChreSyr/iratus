@@ -1,5 +1,5 @@
 
-class Bishop extends RollingPiece {
+/* class BishopClass extends RollingPieceClass {
 
   static ID = "b";
   static MOVES = [
@@ -8,4 +8,25 @@ class Bishop extends RollingPiece {
     [-1, 1],
     [-1, -1],
   ];
+} */
+
+// CONSTRUCTOR
+
+function Bishop(board, row, col) {
+  RollingPiece.call(this, Bishop, board, row, col);
 }
+
+// INHERITANCE
+
+Bishop.prototype = Object.create(RollingPiece.prototype);
+Bishop.prototype.constructor = Bishop;
+
+// STATIC VALUES
+
+Bishop.prototype.ID = "b";
+Bishop.prototype.MOVES = [
+  [1, 1],
+  [1, -1],
+  [-1, 1],
+  [-1, -1],
+];
