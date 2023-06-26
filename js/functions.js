@@ -63,7 +63,6 @@ function makeSquareClickable(square) {
       let selectedPiece = game.board.selectedPiece;
       selectedPiece.unselect();
       try{
-        console.log("MOVE");
         game.move(start=[selectedPiece.row, selectedPiece.col], end=[parseInt(square.dataset.row), parseInt(square.dataset.col)]);
       } catch (error) {
         console.log(error)
@@ -98,9 +97,6 @@ function makePieceDraggableRECENT(element) {
   }
       
   const pointerdownHandle = (event) => {
-
-    console.log("POINTER DOWN");
-    alert("POINTER DOWN");
 
     cancelPromotion();
 
@@ -177,7 +173,15 @@ function makePieceDraggable(element) {
       cancelPromotion();
 
       const squareAccessible = document.querySelector(`.square[data-row="${element.piece.row}"][data-col="${element.piece.col}"]`);
-      if (squareAccessible) {return} 
+      if (squareAccessible) {
+        if (isMobileDevice()) {
+          // instant move
+          let selectedPiece = game.board.selectedPiece;
+          selectedPiece.unselect();
+          game.move(start=[selectedPiece.row, selectedPiece.col], end=[parseInt(element.piece.row), parseInt(element.piece.col)])
+        }
+        return;
+      } 
 
       let rect = element.getBoundingClientRect();
       dragging = {dx: - rect.x - rect.width / 2, dy: - rect.y - rect.height / 2};
