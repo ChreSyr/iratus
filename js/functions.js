@@ -70,7 +70,16 @@ function makeSquareClickable(square) {
     }
   }
   
-  square.addEventListener('pointerdown', pointerdownHandle);
+  if (isMobileDevice()) {
+    // User is on a mobile device
+    square.addEventListener('touchstart', pointerdownHandle);
+    // element.addEventListener('touchstart', event => {console.log("touchstart")});
+  } else {
+    // User is on a desktop device
+    square.addEventListener('mousedown', pointerdownHandle);
+    // element.addEventListener('mousedown', event => {console.log("mousedown")});
+  }
+  // square.addEventListener('pointerdown', pointerdownHandle);
 }
 
 // Add event listeners on pieces for movements
