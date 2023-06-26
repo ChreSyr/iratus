@@ -66,8 +66,20 @@ setPiecesStyle();
 
 // ATTACHING EVENT LISTENERS
 
-document.addEventListener("pointerdown", event => {
+// document.addEventListener("pointerdown", event => {
 
+//   const boardDiv = document.getElementById("board-single");
+//   if (boardDiv.contains(event.target) && boardDiv !== event.target) {return}
+
+//   cancelPromotion();
+//   let selectedPiece = game.board.selectedPiece;
+//   if (selectedPiece) {
+//     selectedPiece.unselect()
+//   }
+// });
+
+function handlePointerDown(event) {
+  
   const boardDiv = document.getElementById("board-single");
   if (boardDiv.contains(event.target) && boardDiv !== event.target) {return}
 
@@ -76,7 +88,19 @@ document.addEventListener("pointerdown", event => {
   if (selectedPiece) {
     selectedPiece.unselect()
   }
-});
+
+}
+
+if (isMobileDevice()) {
+  // User is on a mobile device
+  document.addEventListener('touchstart', handlePointerDown);
+  // document.addEventListener('touchstart', event => {console.log("touchstart")});
+} else {
+  // User is on a desktop device
+  document.addEventListener('mousedown', handlePointerDown);
+  // document.addEventListener('mousedown', event => {console.log("mousedown")});
+}
+// document.addEventListener("pointerdown", handlePointerDown);
 
 for (let promotionPiece of document.getElementsByClassName("promotion-piece")) {
   promotionPiece.addEventListener("pointerdown", event => {

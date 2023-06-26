@@ -47,6 +47,11 @@ function hideInfo() {
   document.getElementById("info").style.display = "none";
 }
 
+// Return true if the user is using a mobile
+function isMobileDevice() {
+  return /Mobi|Android/i.test(navigator.userAgent);
+}
+
 // Add pointerdown listener on squares (like accessible, selected...)
 function makeSquareClickable(square) {
       
@@ -153,9 +158,7 @@ function makePieceDraggable(element) {
       
   const pointerdownHandle = (event) => {
     
-    try {
-
-      console.log("click")
+    // try {
 
       cancelPromotion();
 
@@ -175,9 +178,9 @@ function makePieceDraggable(element) {
       wasSelected = element.piece === game.board.selectedPiece;
       element.piece.handlePointerDown();
     
-    } catch (error) {
-      console.log(error);
-    }
+    // } catch (error) {
+    //   console.log(error);
+    // }
 
   }
   
@@ -209,12 +212,22 @@ function makePieceDraggable(element) {
     pos.y = event.clientY + dragging.dy;
     var squareSize = parseInt(document.documentElement.style.getPropertyValue("--square-size"), 10);
     element.style.transform = `translate(${(element.piece.col + pos.x / squareSize) * 100}%, ${(element.piece.row + pos.y / squareSize) * 100}%)`;
-    // element.style.transform = `translate(${pos.x}px, ${pos.y}px)`;
   }
   
   // element.addEventListener('pointerdown', pointerdownHandle);
   // pointerdown is the newer version of mousedown & touchstart
-  element.addEventListener('mousedown', pointerdownHandle);
+  // element.addEventListener('mousedown', pointerdownHandle);
+  // element.addEventListener('mousedown', event => {console.log("mousedown")});
+  
+  if (isMobileDevice()) {
+    // User is on a mobile device
+    element.addEventListener('touchstart', pointerdownHandle);
+    // element.addEventListener('touchstart', event => {console.log("touchstart")});
+  } else {
+    // User is on a desktop device
+    element.addEventListener('mousedown', pointerdownHandle);
+    // element.addEventListener('mousedown', event => {console.log("mousedown")});
+  }
   element.addEventListener('touchstart', pointerdownHandle);
   element.addEventListener('pointerup', pointerupHandle);
   element.addEventListener('pointercancel', pointerupHandle);
