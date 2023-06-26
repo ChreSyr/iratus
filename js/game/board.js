@@ -1,52 +1,67 @@
 
-class Board {
+const pieceClassesByID = {
+  "k": King,
+  "q": Queen,
+  "r": Rook,
+  "b": Bishop,
+  "n": Knight,
+  "i": Pawn,
+  "dy": Dynamite,
+  "s": Soldier,
+  "es": EliteSoldier,
+  "d": Dog,
+  "ed": EnragedDog,
+  "p": Phantom,
+  "g": Grapple,
+  " ": null,
+}
 
-  static pieceClassesByID = {
-    "k": King,
-    "q": Queen,
-    "r": Rook,
-    "b": Bishop,
-    "n": Knight,
-    "i": Pawn,
-    "dy": Dynamite,
-    "s": Soldier,
-    "es": EliteSoldier,
-    "d": Dog,
-    "ed": EnragedDog,
-    "p": Phantom,
-    "g": Grapple,
-    " ": null,
-  }
-  static NBRANKS = 8;
-  static NBFILES = 8;
+// Constructor
+function Board(game, nbranks = 8, nbfiles = 8) {
+  this.game = game;
+  this.nbfiles = nbfiles;
+  this.nbranks = nbranks;
+  this.piecesByPos = new Array(nbfiles * nbranks).fill(null);
+  this.pieces = [];
+  this.piecesColored = { "w": [], "b": [] };
+  this.king = {};
+  this.pawnToPromote = null;
+  this.calculator = null;
+  this.calculatorClass = null;
+  this.fatPositionClass = null;
+  this.widget = null;
+  this.selectedPiece = null;
+  this.squareSelected = null;
+  this.squaresAccessible = [];
+  this.currentMove = null;
+  this.mainCurrentMove = null;
 
-  constructor(game) {
+  // Initialization
+  this.createPieces();
+}
 
-    this.game = game;
-    this.NBFILES = this.constructor.NBFILES;
-    this.NBRANKS = this.constructor.NBRANKS;
+// Root prototype
+Board.prototype = {
+  
+  game: undefined,
+  nbfiles: undefined,
+  nbranks: undefined,
+  piecesByPos: [],
+  pieces: [],
+  piecesColored: {},
+  king: {},
+  pawnToPromote: null,
+  calculator: null,
+  calculatorClass: null,
+  fatPositionClass: null,
+  widget: null,
+  selectedPiece: null,
+  squareSelected: null,
+  squaresAccessible: [],
+  currentMove: null,
+  mainCurrentMove: null,
 
-    this.piecesByPos = new Array(this.NBFILES * this.NBRANKS).fill(null);
-    this.pieces = [];
-    this.piecesColored = {"w": [], "b": []};
-    this.king = {};
-    this.pawnToPromote = null;
-
-    this.calculator = null;
-    this.calculatorClass = null;
-    this.fatPositionClass = null;
-    this.createPieces();
-
-    this.widget = null;
-    this.selectedPiece = null;
-    this.squareSelected = null;
-    this.squaresAccessible = [];
-
-    this.currentMove = null;
-    this.mainCurrentMove = null;
-  }
-
-  addPiece(piece) {
+  addPiece: function (piece) {
     this.pieces.push(piece);
     this.piecesByPos[piece.getPos()] = piece;
     this.piecesColored[piece.color].push(piece);
@@ -54,30 +69,30 @@ class Board {
     if (piece.ID === "k") {
       this.king[piece.color] = piece;
     }
-  }
+  },
 
-  createPieces() {}
+  createPieces: function() {},
 
-  get(row, col) {
+  get: function (row, col) {
     return this.piecesByPos[col * 10 + row];
-  }
+  },
 
-  getFatPosition() {  // for the fatHistory
+  getFatPosition: function () {
     return new FatPosition(this, this.game.turn);
-  }
-  
-  initDisplay() {
+  },
+
+  initDisplay: function () {
     this.calculator = new this.calculatorClass(this);
 
     this.widget = document.getElementById("board-single");
-    
+
     for (let piece of this.pieces) {
       piece.isWidgeted = true;
       piece.createWidget();
     }
-  }
-  
-  move(start, end, main=true) {
+  },
+
+  move: function (start, end, main = true) {
     if (typeof start === "number") {
       start = [start % 10, Math.floor(start / 10)];
     }
@@ -90,24 +105,24 @@ class Board {
     if (main) {
       this.mainCurrentMove = this.currentMove;
     }
-    this.currentMove.executeCommand(new MainMove());
+    this.currentMove.executeCommand(MainMove());
 
-    return currentMove;  // need to return currentMove, not this.currentMove
-  }
+    return currentMove;
+  },
 
-  redo(move, main=true) {
+  redo: function (move, main = true) {
     this.currentMove = move;
     if (main) {
       this.mainCurrentMove = this.currentMove;
     }
     move.redoCommands();
-  }
+  },
 
-  undo(move) {
+  undo: function (move) {
     for (let command of [...move.commands].reverse()) {
-      move.undoCommand(command)
+      move.undoCommand(command);
     }
-  }
-  
-  updateAllValidMoves() {}
-}
+  },
+
+  updateAllValidMoves: function () {},
+};

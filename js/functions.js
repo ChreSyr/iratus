@@ -180,11 +180,5 @@ function setPiecesStyle(style=null) {
 
 // change the reference of the custom stylesheet 
 function setStyle(num) {
-  var maintheme = document.getElementById('maincss');
-  var customtheme = document.getElementById('customcss');
-  // if (num === 'e') {
-  //     maintheme.setAttribute('href', null);
-  //     return;
-  // } else 
-  customtheme.setAttribute('href', 'css/custom/stylesheet' + num + '.css');
+  document.getElementById('customcss').setAttribute('href', 'css/custom/stylesheet' + num + '.css');
 }
