@@ -65,7 +65,6 @@ function makeSquareClickable(square) {
       try{
         game.move(start=[selectedPiece.row, selectedPiece.col], end=[parseInt(square.dataset.row), parseInt(square.dataset.col)]);
       } catch (error) {
-        console.error(error)
         console.log(error)
       }
     } else {
