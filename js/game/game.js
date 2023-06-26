@@ -110,7 +110,8 @@ Game.prototype = {
       }
     }
 
-    return this.board.king[this.turn].inCheck() ? "checkmate" : "stalemate";
+    const currentKing = this.board.king[this.turn];
+    return currentKing.posIsUnderCheck(currentKing.row, currentKing.col, checkForMate=true) ? "checkmate" : "stalemate";
   },
 
   move: function(start, end) {

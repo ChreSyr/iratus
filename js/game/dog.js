@@ -1,40 +1,49 @@
 
-class Dog extends Piece {
-  static ID = "d";
+// CONSTRUCTOR
 
-  constructor(board, row, col) {
-    super(board, row, col);
+function Dog(board, row, col) {
+  Piece.call(this, Dog, board, row, col);
 
-    this.soldier = undefined;
+  this.soldier = undefined;
 
-    if (col > 3) {
-      this.soldier = board.get(row, col - 1);
-      this.soldier.dog = this;
-    }
+  if (col > 3) {
+    this.soldier = board.get(row, col - 1);
+    this.soldier.dog = this;
   }
+}
 
-  static capture(capturer) {
-    let commands = super.capture(capturer);
+// INHERITANCE
 
-    if (! this.soldier.isCaptured) {
-      for (let command of commands) {
-        if (command.name === "transform") {
-          command.args[2] = EnragedDog  // a captured dog creates an enrageddog's phantom
-        }
+Dog.prototype = Object.create(Piece.prototype);
+Dog.prototype.constructor = Dog;
+
+// STATIC VALUES
+
+Dog.prototype.ID = "d";
+
+// INSTANCE METHODS - MECHANICS
+
+Dog.prototype.capture = function (capturer) {
+  let commands = Piece.prototype.capture.call(this, capturer);
+
+  if (! this.soldier.isCaptured) {
+    for (let command of commands) {
+      if (command.name === "transform") {
+        command.args[2] = EnragedDog  // a captured dog creates an enrageddog's phantom
       }
-      commands.push(new Capture(this.soldier, capturer));
     }
-
-    return commands;
+    commands.push(new Capture(this.soldier, capturer));
   }
 
-  static goTo(row, col) {
-    let startRow = this.row, startCol = this.col;
-    let commands = super.goTo(row, col);
+  return commands;
+}
 
-    if (dogIsTooFar(this.soldier.row, this.soldier.col, this.row, this.col)) {  // happens when pulled by the grapple
-      commands.push(new AfterMove([this.soldier.row, this.soldier.col], getNewDogRC(startRow, startCol, this.row, this.col)));
-    }
-    return commands;
+Dog.prototype.goTo = function (row, col) {
+  let startRow = this.row, startCol = this.col;
+  let commands = Piece.prototype.goTo.call(this, row, col);
+
+  if (dogIsTooFar(this.soldier.row, this.soldier.col, this.row, this.col)) {  // happens when pulled by the grapple
+    commands.push(new AfterMove([this.soldier.row, this.soldier.col], getNewDogRC(startRow, startCol, this.row, this.col)));
   }
+  return commands;
 }

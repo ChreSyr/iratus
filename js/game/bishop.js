@@ -1,15 +1,4 @@
 
-/* class BishopClass extends RollingPieceClass {
-
-  static ID = "b";
-  static MOVES = [
-    [1, 1],
-    [1, -1],
-    [-1, 1],
-    [-1, -1],
-  ];
-} */
-
 // CONSTRUCTOR
 
 function Bishop(board, row, col) {

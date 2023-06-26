@@ -2,7 +2,7 @@
 // CONSTRUCTOR
 
 function Pawn(board, row, col) {
-  PiecePrototyped.call(this, Pawn, board, row, col);
+  Piece.call(this, Pawn, board, row, col);
 
   this.attackingMoves = undefined;
   this.promotionRank = undefined;
@@ -12,13 +12,13 @@ function Pawn(board, row, col) {
 
 // INHERITANCE
 
-Pawn.prototype = Object.create(PiecePrototyped.prototype);
+Pawn.prototype = Object.create(Piece.prototype);
 Pawn.prototype.constructor = Pawn;
 
 // STATIC VALUES
 
 Pawn.prototype.ID = "i";
-Pawn.prototype.ATTR_TO_COPY = Piece.ATTR_TO_COPY.concat(["attackingMoves", "promotionRank"]);
+Pawn.prototype.ATTR_TO_COPY = Piece.prototype.ATTR_TO_COPY.concat(["attackingMoves", "promotionRank"]);
 
 // NON-HERITABLE METHODS
 
@@ -38,7 +38,7 @@ Pawn.prototype.preciseTransform = function (piece) {
 // INSTANCE METHODS - MECHANICS
 
 Pawn.prototype.goTo = function (row, col) {
-  let commands = PiecePrototyped.prototype.goTo.call(this, row, col);
+  let commands = Piece.prototype.goTo.call(this, row, col);
 
   if (this.row === this.promotionRank) {
     if (this.widget && this instanceof Pawn) {  // a phantom cannot promote
@@ -64,7 +64,7 @@ Pawn.prototype.goTo = function (row, col) {
 }
 
 Pawn.prototype.redo = function (row, col) {
-  PiecePrototyped.prototype.goTo.call(this, row, col)
+  Piece.prototype.goTo.call(this, row, col)
 }
 
 Pawn.prototype.updateValidMoves = function () {

@@ -1,23 +1,33 @@
 
-class Phantom extends Piece {
+// CONSTRUCTOR
 
-  static ID = "p";
+function Phantom(board, row, col) {
+  Piece.call(this, Phantom, board, row, col);
 
-  constructor(board, row, col) {
-    super(board, row, col);
+  this.cssClass = "phantom";
+}
 
-    this.cssClass = "phantom";
-  }
-  
-  static canGoTo(row, col) {
+Phantom.UNDYNAMITABLES = ["k", "q", "r", "dy", "p", "g"];
 
-    let piece = this.board.get(row, col);
-    if (piece === null) {
-      return true;
-    } else if (piece.ID === "dy") {
-      return false;
-    } else {
-      return piece.color !== this.color;
-    }
+// INHERITANCE
+
+Phantom.prototype = Object.create(Piece.prototype);
+Phantom.prototype.constructor = Phantom;
+
+// STATIC VALUES
+
+Phantom.prototype.ID = "p";
+
+// INSTANCE METHODS - MECHANICS
+
+Phantom.prototype.canGoTo = function (row, col) {
+
+  let piece = this.board.get(row, col);
+  if (piece === null) {
+    return true;
+  } else if (piece.ID === "dy") {
+    return false;
+  } else {
+    return piece.color !== this.color;
   }
 }

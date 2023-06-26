@@ -1,19 +1,4 @@
 
-/* class QueenClass extends RollingPieceClass {
-
-  static ID = "q";
-  static MOVES = [
-    [0, 1],
-    [0, -1],
-    [1, 0],
-    [-1, 0],
-    [1, 1],
-    [1, -1],
-    [-1, 1],
-    [-1, -1],
-  ];
-} */
-
 // CONSTRUCTOR
 
 function Queen(board, row, col) {

@@ -1,15 +1,4 @@
 
-/* class RookClass extends RollingPieceClass {
-
-  static ID = "r";
-  static MOVES = [
-    [0, 1],
-    [0, -1],
-    [1, 0],
-    [-1, 0],
-  ];
-} */
-
 // CONSTRUCTOR
 
 function Rook(board, row, col) {
