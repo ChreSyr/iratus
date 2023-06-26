@@ -96,6 +96,7 @@ select {
 .errorZone {
   margin: 2em;
   height: 20em;
+  overflow: auto;
 }
 
 .errorZone p {

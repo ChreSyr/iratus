@@ -62,7 +62,11 @@ function makeSquareClickable(square) {
     if (square.classList.contains("accessible")) {
       let selectedPiece = game.board.selectedPiece;
       selectedPiece.unselect();
-      game.move(start=[selectedPiece.row, selectedPiece.col], end=[parseInt(square.dataset.row), parseInt(square.dataset.col)]);
+      try{
+        game.move(start=[selectedPiece.row, selectedPiece.col], end=[parseInt(square.dataset.row), parseInt(square.dataset.col)]);
+      } catch (error) {
+        console.error(error)
+      }
     } else {
       if (game.board.selectedPiece) {
         game.board.selectedPiece.unselect();
