@@ -116,9 +116,11 @@ Game.prototype = {
 
   move: function(start, end) {
     const currentMove = this.board.move(start, end, true);
+    console.log("MOVE CREATED")
     this.movesHistory.push(currentMove);
     this.turn = currentMove.nextTurn;
     this.board.updateAllValidMoves();
+    console.log("VALID MOVES UPDATED")
     this.fatHistory.push(this.board.getFatPosition());
     this.backMovesHistory.length = 0;
     this.checkForEnd();

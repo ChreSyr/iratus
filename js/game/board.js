@@ -89,7 +89,10 @@ Board.prototype = {
     if (main) {
       this.mainCurrentMove = this.currentMove;
     }
+
+    console.log("BEFORE executeCommand")
     this.currentMove.executeCommand(MainMove());
+    console.log("AFTER executeCommand")
 
     return currentMove;
   },
