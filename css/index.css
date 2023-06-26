@@ -98,6 +98,6 @@ select {
   height: 20em;
 }
 
-.errorZone.p {
+.errorZone p {
   color: var(--light-green);
 }
