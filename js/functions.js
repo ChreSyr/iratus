@@ -135,6 +135,8 @@ function makePieceDraggable(element) {
   }
   
   element.addEventListener('pointerdown', pointerdownHandle);
+  element.addEventListener('mousedown', pointerdownHandle);
+  element.addEventListener('touchstart', pointerdownHandle);
   element.addEventListener('pointerup', pointerupHandle);
   element.addEventListener('pointercancel', pointerupHandle);
   element.addEventListener('pointermove', pointermoveHandle);
