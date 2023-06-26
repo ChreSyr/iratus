@@ -6,7 +6,7 @@
 // }).toString();
 // alert("loading: " + str);
 
-// try {
+try {
 
 const game = new Game(IratusBoard);
 
@@ -48,8 +48,8 @@ for (let promotionPiece of document.getElementsByClassName("promotion-piece")) {
 
 document.getElementsByClassName("promotion-cancel")[0].addEventListener("pointerdown", cancelPromotion);
 
-// } catch (error) {
-//   console.log(error);
-//   alert(error);
-//   alert(error.stack);
-// }
+} catch (error) {
+  console.log(error);
+  alert(error);
+  alert(error.stack);
+}
