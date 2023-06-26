@@ -69,7 +69,7 @@ function makeSquareClickable(square) {
 }
 
 // Add event listeners on pieces for movements
-function makePieceDraggable(element) {
+function makePieceDraggableRECENT(element) {
   let pos = {x: 0, y: 0};
   let dragging = false;
   let wasSelected = false;
@@ -134,7 +134,172 @@ function makePieceDraggable(element) {
     // element.style.transform = `translate(${pos.x}px, ${pos.y}px)`;
   }
   
-  element.addEventListener('pointerdown', pointerdownHandle);
+  // element.addEventListener('pointerdown', pointerdownHandle);
+  // pointerdown is the newer version of mousedown & touchstart
+  element.addEventListener('mousedown', pointerdownHandle);
+  element.addEventListener('touchstart', pointerdownHandle);
+  element.addEventListener('pointerup', pointerupHandle);
+  element.addEventListener('pointercancel', pointerupHandle);
+  element.addEventListener('pointermove', pointermoveHandle);
+  element.addEventListener('touchstart', stopScrollEvents);
+}
+
+function makePieceDraggableGPT(element) {
+  let pos = {x: 0, y: 0};
+  let dragging = false;
+  let wasSelected = false;
+  
+  const stopScrollEvents = (event) => {
+    event.preventDefault();
+  }
+
+  const mousedownHandle = (event) => {
+    if (event.button !== 0) { return; } // Only handle left mouse button
+    startDragging(event);
+  }
+
+  const touchstartHandle = (event) => {
+    if (event.touches.length !== 1) { return; } // Only handle single touch
+    startDragging(event.touches[0]);
+  }
+
+  const startDragging = (event) => {
+    console.log("POINTER DOWN");
+
+    cancelPromotion();
+
+    const squareAccessible = document.querySelector(`.square[data-row="${element.piece.row}"][data-col="${element.piece.col}"]`);
+    if (squareAccessible) { return; } 
+
+    let rect = element.getBoundingClientRect();
+    dragging = {dx: -rect.x - rect.width / 2, dy: -rect.y - rect.height / 2};
+    pos.x = event.clientX + dragging.dx;
+    pos.y = event.clientY + dragging.dy;
+
+    var squareSize = parseInt(document.documentElement.style.getPropertyValue("--square-size"), 10);
+    element.style.transform = `translate(${(element.piece.col + pos.x / squareSize) * 100}%, ${(element.piece.row + pos.y / squareSize) * 100}%)`;
+    element.classList.add('dragging');
+
+    document.addEventListener('mousemove', mousemoveHandle);
+    document.addEventListener('mouseup', mouseupHandle);
+    document.addEventListener('touchmove', touchmoveHandle);
+    document.addEventListener('touchend', touchendHandle);
+
+    wasSelected = element.piece === game.board.selectedPiece;
+    element.piece.handlePointerDown();
+  }
+  
+  const mouseupHandle = () => {
+    stopDragging();
+  }
+
+  const touchendHandle = () => {
+    stopDragging();
+  }
+
+  const stopDragging = () => {
+    dragging = false;
+    element.classList.remove('dragging');
+    element.style.transform = "";
+
+    document.removeEventListener('mousemove', mousemoveHandle);
+    document.removeEventListener('mouseup', mouseupHandle);
+    document.removeEventListener('touchmove', touchmoveHandle);
+    document.removeEventListener('touchend', touchendHandle);
+
+    // Rest of your code...
+  }
+
+  const mousemoveHandle = (event) => {
+    if (!dragging) { return; }
+    pos.x = event.clientX + dragging.dx;
+    pos.y = event.clientY + dragging.dy;
+    var squareSize = parseInt(document.documentElement.style.getPropertyValue("--square-size"), 10);
+    element.style.transform = `translate(${(element.piece.col + pos.x / squareSize) * 100}%, ${(element.piece.row + pos.y / squareSize) * 100}%)`;
+  }
+
+  const touchmoveHandle = (event) => {
+    if (!dragging || event.touches.length !== 1) { return; }
+    event.preventDefault();
+    pos.x = event.touches[0].clientX + dragging.dx;
+    pos.y = event.touches[0].clientY + dragging.dy;
+    var squareSize = parseInt(document.documentElement.style.getPropertyValue("--square-size"), 10);
+    element.style.transform = `translate(${(element.piece.col + pos.x / squareSize) * 100}%, ${(element.piece.row + pos.y / squareSize) * 100}%)`;
+  }
+
+  // Attach event listeners
+  element.addEventListener('mousedown', mousedownHandle);
+  element.addEventListener('touchstart', touchstartHandle);
+  element.addEventListener('touchstart', stopScrollEvents);
+}
+
+// Add event listeners on pieces for movements
+function makePieceDraggable(element) {
+  let pos = {x: 0, y: 0};
+  let dragging = false;
+  let wasSelected = false;
+  
+  const stopScrollEvents = (event) => {
+    event.preventDefault();
+  }
+      
+  const pointerdownHandle = (event) => {
+
+    console.log("POINTER DOWN");
+
+    cancelPromotion();
+
+    const squareAccessible = document.querySelector(`.square[data-row="${element.piece.row}"][data-col="${element.piece.col}"]`);
+    if (squareAccessible) {return} 
+
+    let rect = element.getBoundingClientRect();
+    dragging = {dx: - rect.x - rect.width / 2, dy: - rect.y - rect.height / 2};
+    pos.x = event.clientX + dragging.dx;
+    pos.y = event.clientY + dragging.dy;
+
+    var squareSize = parseInt(document.documentElement.style.getPropertyValue("--square-size"), 10);
+    element.style.transform = `translate(${(element.piece.col + pos.x / squareSize) * 100}%, ${(element.piece.row + pos.y / squareSize) * 100}%)`;
+    element.classList.add('dragging');
+    // element.setPointerCapture(event.pointerId);
+
+    wasSelected = element.piece === game.board.selectedPiece;
+    element.piece.handlePointerDown();
+
+  }
+  
+  const pointerupHandle = (event) => {
+    dragging = null;
+    element.classList.remove('dragging');
+    element.style.transform = "";
+
+    // if clicked for move destination
+    let squares = document.querySelectorAll(".square");
+    for (let square of squares) {
+      if (collide(event, square)) {
+        if (square.classList.contains("accessible")) {
+          let selectedPiece = game.board.selectedPiece;
+          selectedPiece.unselect();
+          game.move(start=[selectedPiece.row, selectedPiece.col], end=[parseInt(square.dataset.row), parseInt(square.dataset.col)])
+        }
+        break;
+      }
+    }
+    if (element.piece && wasSelected) {
+      element.piece.unselect();
+    }  // else, the piece has moved
+  }
+  
+  const pointermoveHandle = (event) => {
+    if (!dragging) {return};
+    pos.x = event.clientX + dragging.dx;
+    pos.y = event.clientY + dragging.dy;
+    var squareSize = parseInt(document.documentElement.style.getPropertyValue("--square-size"), 10);
+    element.style.transform = `translate(${(element.piece.col + pos.x / squareSize) * 100}%, ${(element.piece.row + pos.y / squareSize) * 100}%)`;
+    // element.style.transform = `translate(${pos.x}px, ${pos.y}px)`;
+  }
+  
+  // element.addEventListener('pointerdown', pointerdownHandle);
+  // pointerdown is the newer version of mousedown & touchstart
   element.addEventListener('mousedown', pointerdownHandle);
   element.addEventListener('touchstart', pointerdownHandle);
   element.addEventListener('pointerup', pointerupHandle);
