@@ -44,7 +44,7 @@ Soldier.prototype.capture = function (capturer) {
   if (! this.dog) {return commands}  // happens when this is the phantom
 
   if (! this.dog.isCaptured) {
-    commands.push(new Transform(this.dog, this.dog.actualClass, EnragedDog));  // enrage dog
+    commands.push(new Transform(this.dog, this.dog.actualClass, EnragedDog.prototype));  // enrage dog
   } else {
     commands.splice(commands.indexOf(commands.find(commandToRem => commandToRem.name === "transform")));  // remove leash phantomisation, stays dog
   }
@@ -59,7 +59,7 @@ Soldier.prototype.goTo = function (row, col) {
   if (! this.dog) {return commands}  // happens when this is the phantom
 
   if (this.row === this.promotionRank) {
-    commands.push(new Transform(this, this.actualClass, EliteSoldier));
+    commands.push(new Transform(this, this.actualClass, EliteSoldier.prototype));
   }
 
   if (dogIsTooFar(this.row, this.col, this.dog.row, this.dog.col)) {

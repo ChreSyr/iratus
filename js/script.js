@@ -30,7 +30,7 @@ for (let promotionPiece of document.getElementsByClassName("promotion-piece")) {
   promotionPiece.addEventListener("pointerdown", event => {
     const color = game.board.pawnToPromote.color;
     lastMove = game.movesHistory.slice(-1)[0];
-    lastMove.executeCommand(new Transform(game.board.pawnToPromote, Pawn, pieceClassesByID[promotionPiece.classList[1]]));
+    lastMove.executeCommand(new Transform(game.board.pawnToPromote, Pawn.prototype, pieceClassesByID[promotionPiece.classList[1]].prototype));
     lastMove.notation += "=" + promotionPiece.classList[1].toUpperCase();
     game.board.pawnToPromote = null;
     game.board.updateAllValidMoves();

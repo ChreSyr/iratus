@@ -170,27 +170,6 @@ Piece.prototype = {
       this.widget.classList.add("square-" + this.getPos());
     }
 
-    // if (this.cell !== null) {  // update the display
-     
-    //   this.cell.style.backgroundImage = "";
-    //   if (this.cssClass) {
-    //     this.cell.classList.remove(this.cssClass);
-    //   }
-    //   if (this.dynamited) {
-    //     this.cell.extracell.style.backgroundImage = "";
-    //   }
-    //   this.cell.piece = null;
-    //   this.cell = this.getSquare().cell;
-    //   this.cell.style.backgroundImage = "url('images/" + this.color + this.ID + ".png')";
-    //   if (this.cssClass) {
-    //     this.cell.classList.add(this.cssClass);
-    //   }
-    //   if (this.dynamited) {
-    //     this.cell.extracell.style.backgroundImage = "url('images/" + this.color + "dy.png')";
-    //   }
-    //   this.cell.piece = this;
-    // }
-
     return commands;
   },
 
@@ -223,21 +202,11 @@ Piece.prototype = {
     let oldClass = this.actualClass;
     this.actualClass = pieceClass;
 
-    try {  // TODO : remove 2nd part
-      for (let attr of pieceClass.ATTR_TO_COPY) {
-        this[attr] = pieceClass[attr];
-      }
-      for (let meth of pieceClass.METH_TO_COPY) {
-        this[meth] = pieceClass[meth];
-      }
-    } catch (error) {  // pieceClass is a function (new way to code classes)
-      
-      for (let attr of pieceClass.prototype.ATTR_TO_COPY) {
-        this[attr] = pieceClass.prototype[attr];
-      }
-      for (let meth of pieceClass.prototype.METH_TO_COPY) {
-        this[meth] = pieceClass.prototype[meth];
-      }
+    for (let attr of pieceClass.ATTR_TO_COPY) {
+      this[attr] = pieceClass[attr];
+    }
+    for (let meth of pieceClass.METH_TO_COPY) {
+      this[meth] = pieceClass[meth];
     }
 
     try {  // TODO : remove 2nd part
@@ -248,9 +217,6 @@ Piece.prototype = {
 
     if (this.widget !== null) {
       this.widget.classList.remove(this.color + oldClass.ID);  // TODO : fix
-      if (oldClass.prototype) {
-        this.widget.classList.remove(this.color + oldClass.prototype.ID);
-      }
       this.widget.classList.add(this.color + this.ID);
 
       // for calculations

@@ -51,7 +51,7 @@ EliteSoldier.prototype.capture = function (capturer) {
   if (! this.dog) {return commands}  // happens when this is the phantom or a promoted pawn
 
   if (! this.dog.isCaptured) {
-    commands.push(new Transform(this.dog, this.dog.actualClass, EnragedDog));  // enrage dog
+    commands.push(new Transform(this.dog, this.dog.actualClass, EnragedDog.prototype));  // enrage dog
   } else {
     commands.splice(commands.indexOf(commands.find(commandToRem => commandToRem.name === "transform")));  // remove leash phantomisation, stays dog
   }

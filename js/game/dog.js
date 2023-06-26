@@ -29,7 +29,7 @@ Dog.prototype.capture = function (capturer) {
   if (! this.soldier.isCaptured) {
     for (let command of commands) {
       if (command.name === "transform") {
-        command.args[2] = EnragedDog  // a captured dog creates an enrageddog's phantom
+        command.args[2] = EnragedDog.prototype;  // a captured dog creates an enrageddog's phantom
       }
     }
     commands.push(new Capture(this.soldier, capturer));
