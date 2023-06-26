@@ -58,6 +58,10 @@ function Piece(type, board, row, col) {  // TODO : remove type
 
 // NON-HERITABLE METHODS
 
+Piece.getPos = function(list) {
+  return list[1] * 10 + list[0];
+},
+
 Piece.preciseTransform = function (piece) {}
 
 // ROOT PROTOTYPE
@@ -130,10 +134,6 @@ Piece.prototype = {
 
   getCoordinates: function() {
     return fileDict[this.col] + (this.board.NBRANKS - this.row);
-  },
-
-  getPos: function(list) {
-    return list[1] * 10 + list[0];
   },
 
   getPos: function() {
