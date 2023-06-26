@@ -30,6 +30,32 @@ function appendErrorToContainer(errorDetails) {
   errorContainer.appendChild(errorMessage);
 }
 
+(function() {
+  // Save the reference to the original console.log function
+  var originalLog = console.log;
+
+  // Override console.log to capture and display the logs
+  console.log = function() {
+    // Get the log arguments and convert them to a string
+    var logMessage = Array.from(arguments).map(function(arg) {
+      return typeof arg === 'object' ? JSON.stringify(arg) : arg;
+    }).join(' ');
+
+    // Append the log message to the log container
+    appendLogToContainer(logMessage);
+
+    // Call the original console.log function
+    originalLog.apply(console, arguments);
+  };
+
+  function appendLogToContainer(logMessage) {
+    var logContainer = document.getElementById('logContainer');
+    var logEntry = document.createElement('p');
+    logEntry.textContent = logMessage;
+    logContainer.appendChild(logEntry);
+  }
+})();
+
 var game;
 
 // try {

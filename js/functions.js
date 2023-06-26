@@ -80,23 +80,31 @@ function makePieceDraggable(element) {
       
   const pointerdownHandle = (event) => {
 
+    console.log("POINTER DOWN");
+    console.log(1);
+
     cancelPromotion();
+    console.log(1);
 
     const squareAccessible = document.querySelector(`.square[data-row="${element.piece.row}"][data-col="${element.piece.col}"]`);
     if (squareAccessible) {return} 
+    console.log(1);
 
     let rect = element.getBoundingClientRect();
     dragging = {dx: - rect.x - rect.width / 2, dy: - rect.y - rect.height / 2};
     pos.x = event.clientX + dragging.dx;
     pos.y = event.clientY + dragging.dy;
+    console.log(1);
 
     var squareSize = parseInt(document.documentElement.style.getPropertyValue("--square-size"), 10);
     element.style.transform = `translate(${(element.piece.col + pos.x / squareSize) * 100}%, ${(element.piece.row + pos.y / squareSize) * 100}%)`;
     element.classList.add('dragging');
     element.setPointerCapture(event.pointerId);
+    console.log(1);
 
     wasSelected = element.piece === game.board.selectedPiece;
     element.piece.handlePointerDown();
+    console.log(1);
 
   }
   

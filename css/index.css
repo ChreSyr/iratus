@@ -90,3 +90,10 @@ select {
 .select:focus {
   background-color: #c91717;
 }
+
+/* TODO : remove */
+
+.errorZone {
+  margin: 2em;
+  height: 20em;
+}
