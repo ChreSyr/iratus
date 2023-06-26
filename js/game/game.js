@@ -1,5 +1,6 @@
 
-// Constructor
+// CONSTRUCTOR
+
 function Game(boardClass) {
   this.board = boardClass;
   this.movesHistory = [];
@@ -9,29 +10,18 @@ function Game(boardClass) {
   this.counter50rule = 0;
   this.result = undefined;
   this.alwaysFlip = false;
-  this.__init(boardClass);
+
+  this.board = new boardClass(this);
+  for (let piece of this.board.piecesColored[this.turn]) {
+    piece.updateValidMoves();
+  }
+  this.fatHistory.push(this.board.getFatPosition());
+  this.board.initDisplay();
 }
 
-// Root prototype
+// ROOT PROTOTYPE
+
 Game.prototype = {
-  board: undefined,
-  movesHistory: [],
-  backMovesHistory: [],
-  fatHistory: [],
-  turn: "w",
-  counter50rule: 0,
-  result: undefined,
-  alwaysFlip: false,
-
-  __init: function(boardClass) {
-    this.board = new boardClass(this);
-    for (let piece of this.board.piecesColored[this.turn]) {
-      piece.updateValidMoves();
-    }
-    this.fatHistory.push(this.board.getFatPosition());
-    this.board.initDisplay();
-  },
-
   
   checkForEnd: function() {
     let gameState = this.getGameState();

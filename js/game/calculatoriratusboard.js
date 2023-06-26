@@ -1,5 +1,6 @@
 
-// Constructor
+// CONSTRUCTOR
+
 function CalculatorIratusBoard(board) {
   IratusBoard.call(this, board.game);
   
@@ -10,9 +11,12 @@ function CalculatorIratusBoard(board) {
   }
 }
 
-// Inherited prototype
+// INHERITANCE
+
 CalculatorIratusBoard.prototype = Object.create(IratusBoard.prototype);
 CalculatorIratusBoard.prototype.constructor = CalculatorIratusBoard;
+
+// INSTANCE METHODS
 
 IratusBoard.prototype.clone = function() {
   this.piecesByPos.fill(null);

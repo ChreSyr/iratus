@@ -16,7 +16,8 @@ const pieceClassesByID = {
   " ": null,
 }
 
-// Constructor
+// CONSTRUCTOR
+
 function Board(game, nbranks = 8, nbfiles = 8) {
   this.game = game;
   this.nbfiles = nbfiles;
@@ -40,26 +41,9 @@ function Board(game, nbranks = 8, nbfiles = 8) {
   this.createPieces();
 }
 
-// Root prototype
+// ROOT PROTOTYPE
+
 Board.prototype = {
-  
-  game: undefined,
-  nbfiles: undefined,
-  nbranks: undefined,
-  piecesByPos: [],
-  pieces: [],
-  piecesColored: {},
-  king: {},
-  pawnToPromote: null,
-  calculator: null,
-  calculatorClass: null,
-  fatPositionClass: null,
-  widget: null,
-  selectedPiece: null,
-  squareSelected: null,
-  squaresAccessible: [],
-  currentMove: null,
-  mainCurrentMove: null,
 
   addPiece: function (piece) {
     this.pieces.push(piece);
