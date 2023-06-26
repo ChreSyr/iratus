@@ -6,9 +6,33 @@
 // }).toString();
 // alert("loading: " + str);
 
+window.onerror = function(message, source, lineno, colno, error) {
+  // Get the error details
+  var errorDetails = {
+    message: message,
+    source: source,
+    lineNumber: lineno,
+    columnNumber: colno,
+    error: error
+  };
+
+  // Append the error information to the error container
+  appendErrorToContainer(errorDetails);
+
+  // Prevent the default error handling
+  return true;
+};
+
+function appendErrorToContainer(errorDetails) {
+  var errorContainer = document.getElementById('errorContainer');
+  var errorMessage = document.createElement('p');
+  errorMessage.textContent = errorDetails.message;
+  errorContainer.appendChild(errorMessage);
+}
+
 var game;
 
-try {
+// try {
 
 game = new Game(IratusBoard);
 
@@ -50,8 +74,8 @@ for (let promotionPiece of document.getElementsByClassName("promotion-piece")) {
 
 document.getElementsByClassName("promotion-cancel")[0].addEventListener("pointerdown", cancelPromotion);
 
-} catch (error) {
-  console.log(error);
-  alert(error);
-  alert(error.stack);
-}
+// } catch (error) {
+//   console.log(error);
+//   alert(error);
+//   alert(error.stack);
+// }
