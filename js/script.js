@@ -6,9 +6,11 @@
 // }).toString();
 // alert("loading: " + str);
 
+var game;
+
 try {
 
-const game = new Game(IratusBoard);
+game = new Game(IratusBoard);
 
 setPiecesStyle();
 
