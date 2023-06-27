@@ -55,6 +55,8 @@ function Move(board, start, end) {
     turnNumber: 1,
     counter50rule: 0,
 
+    capturedPieces: { "w": [], "b": [] },  // just for display
+
     executeCommands(commands) {
       for (let command of commands) {
         this.executeCommand(command);
@@ -282,6 +284,20 @@ function Move(board, start, end) {
   }
 
   move.counter50rule_backup = move.counter50rule;
+
+  // Captured pieces display
+  if (board.calculator) {
+    for (let command of move.commands) {
+      if (command.name === "capture") {
+        let capturedPiece = command.args[0];
+        if (capturedPiece.ID === "dy") {continue}  // dynamite equipement
+        move.capturedPieces[capturedPiece.color].push(capturedPiece.__proto__.ID);
+        if (capturedPiece.dynamited) {
+          move.capturedPieces[capturedPiece.color].push("dy");
+        }
+      }
+    }
+  }
 
   return move;
 }

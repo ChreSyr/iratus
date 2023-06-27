@@ -104,7 +104,7 @@ if (isMobileDevice()) {
 // document.addEventListener("pointerdown", handlePointerDown);
 
 for (let promotionPiece of document.getElementsByClassName("promotion-piece")) {
-  promotionPiece.addEventListener("pointerdown", event => {
+  promotionPiece.addEventListener("pointerdown", event => {  // TODO : remove pointerdown
     const color = game.board.pawnToPromote.color;
     lastMove = game.movesHistory.slice(-1)[0];
     lastMove.executeCommand(new Transform(game.board.pawnToPromote, Pawn.prototype, pieceClassesByID[promotionPiece.classList[1]].prototype));
@@ -123,7 +123,7 @@ for (let promotionPiece of document.getElementsByClassName("promotion-piece")) {
   });
 }
 
-document.getElementsByClassName("promotion-cancel")[0].addEventListener("pointerdown", cancelPromotion);
+document.getElementsByClassName("promotion-cancel")[0].addEventListener("pointerdown", cancelPromotion);  // TODO : remove pointerdown
 
 // } catch (error) {
 //   console.log(error);

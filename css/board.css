@@ -251,6 +251,7 @@
   height: var(--square-size);
   display: flex;
   justify-content: center;
+  margin: 1rem;
   /* margin-top: calc(var(--square-size) / 2); */
 }
 

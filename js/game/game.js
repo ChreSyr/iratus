@@ -127,6 +127,7 @@ Game.prototype = {
         this.board.flipDisplay(animate = false);
       }
     }
+    this.updateCaptures();
   },
 
   redo: function() {
@@ -179,4 +180,48 @@ Game.prototype = {
       this.undo();
     }
   },
+
+  // INSTANCE METHODS - VIEW
+
+  updateCaptures: function() {
+
+    var sortPattern = ["i", "dy", "g", "s", "d", "n", "b", "p", "r", "q"];
+
+    // capturedPieces = { "w": [], "b": [] };
+    // for (let move of this.movesHistory) {
+    //   capturedPieces["w"] = capturedPieces["w"].concat(move.capturedPieces.w)
+    //   capturedPieces["b"] = capturedPieces["b"].concat(move.capturedPieces.b)
+    // }
+
+    // console.log(capturedPieces);
+
+    for (let color of ["w", "b"]) {
+
+      let capturedPieces = [];
+      for (let move of this.movesHistory) {
+        capturedPieces = capturedPieces.concat(move.capturedPieces[color])
+      }
+
+      var display = document.querySelector(".player-info." + color);
+      display.innerHTML = "";
+
+      capturedPieces.sort(function(a, b) {
+        return sortPattern.indexOf(a) - sortPattern.indexOf(b);
+      });
+
+      let lastDisplayedPiece = null;
+
+      for (let capturedPiece of capturedPieces) {
+        pieceDisplay = document.createElement("img");
+        pieceDisplay.classList.add("captured-piece");
+        pieceDisplay.classList.add(capturedPiece);
+        if (lastDisplayedPiece !== capturedPiece) {
+          pieceDisplay.classList.add("first");
+        }
+        lastDisplayedPiece = capturedPiece;
+        pieceDisplay.src = "images/" + color + capturedPiece + ".png";
+        display.appendChild(pieceDisplay);
+      }
+    }
+  }
 };
