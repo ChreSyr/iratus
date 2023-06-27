@@ -1,6 +1,8 @@
 
 // Change the property squareSize depending on screen size
 function ajustSquareSize() {
+  
+  return document.documentElement.style.setProperty('--square-size', 60 + 'px');
   // var screenWidth = screen.width;
   // var screenHeight = screen.height;
 
