@@ -148,6 +148,7 @@ Game.prototype = {
         this.board.flipDisplay(animate = false);
       }
     }
+    this.updateCaptures();
   },
 
   redoAll: function() {
@@ -173,6 +174,7 @@ Game.prototype = {
         this.board.flipDisplay(animate = false);
       }
     }
+    this.updateCaptures();
   },
 
   undoAll: function() {
@@ -186,14 +188,6 @@ Game.prototype = {
   updateCaptures: function() {
 
     var sortPattern = ["i", "dy", "g", "s", "d", "n", "b", "p", "r", "q"];
-
-    // capturedPieces = { "w": [], "b": [] };
-    // for (let move of this.movesHistory) {
-    //   capturedPieces["w"] = capturedPieces["w"].concat(move.capturedPieces.w)
-    //   capturedPieces["b"] = capturedPieces["b"].concat(move.capturedPieces.b)
-    // }
-
-    // console.log(capturedPieces);
 
     for (let color of ["w", "b"]) {
 
