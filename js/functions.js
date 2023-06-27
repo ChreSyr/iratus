@@ -2,18 +2,17 @@
 // Change the property squareSize depending on screen size
 function ajustSquareSize() {
   
-  return document.documentElement.style.setProperty('--square-size', 60 + 'px');
   // var screenWidth = screen.width;
   // var screenHeight = screen.height;
 
   // console.log("Screen Width: " + screenWidth);
   // console.log("Screen Height: " + screenHeight);
 
-  var windowWidth = window.innerWidth;
-  var windowHeight = window.innerHeight;
+  // var windowWidth = window.innerWidth;
+  // var windowHeight = window.innerHeight;
 
-  console.log("Window Width: " + windowWidth);
-  console.log("Window Height: " + windowHeight);
+  // console.log("Window Width: " + windowWidth);
+  // console.log("Window Height: " + windowHeight);
 
   // var clientWidth = document.body.clientWidth;
   // var clientHeight = document.body.clientHeight;
@@ -23,18 +22,18 @@ function ajustSquareSize() {
 
   var rootFontSize = window.getComputedStyle(document.documentElement).fontSize;
   var fontSizeValue = parseFloat(rootFontSize);
-  console.log("Root Font Size Value: " + fontSizeValue);
+  // console.log("Root Font Size Value: " + fontSizeValue);
 
   // availible space for the baord and the players info
   var availibleWidth = window.innerWidth - fontSizeValue * 2
   var availibleHeight = window.innerHeight - fontSizeValue * ( 1 + 4 + 1 + 1 + 4 + 1 + 5 )
 
-  console.log("Availible Width: " + availibleWidth);
-  console.log("Availible Height: " + availibleHeight);
+  // console.log("Availible Width: " + availibleWidth);
+  // console.log("Availible Height: " + availibleHeight);
 
   var squareSize = Math.floor(Math.min(availibleWidth / 8, availibleHeight / 10));
 
-  console.log("Square Size: " + squareSize);
+  // console.log("Square Size: " + squareSize);
 
   document.documentElement.style.setProperty('--square-size', squareSize + 'px');
 }
