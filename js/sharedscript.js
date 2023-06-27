@@ -1,13 +1,8 @@
 
-function handleMenuClick(button) {
+function openKoFi() {
+  window.open('https://ko-fi.com/chresyr', '_blank');
+}
 
-  switch (button) {
-    case "contact":
-    case "puzzle":
-    case "rules":
-      console.log(button);
-      window.location.href = button + ".html";
-      break;
-  }
-
+function openLearnChess() {
+  window.open('https://www.chess.com/fr/learn-how-to-play-chess', '_blank');
 }
