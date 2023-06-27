@@ -1,7 +1,11 @@
-
 :root {
-  --dark-green: rgb(22, 43, 22);
-  --light-green: rgb(68, 105, 68);
-  --selected: rgb(131, 17, 17);
   --accessible: rgba(92, 4, 4, 0.3);
+  --dark: rgb(21, 21, 21);
+  --darker: black;
+  --dark-green: rgb(22, 43, 22);
+  --light-dark: rgb(64, 64, 64);
+  --light-green: rgb(68, 105, 68);
+  --light-grey: rgb(200 200 200);
+  --selected: rgb(131, 17, 17);
+  --very-dark-green: rgb(10, 20, 10);
 }

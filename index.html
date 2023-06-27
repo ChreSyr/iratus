@@ -6,11 +6,12 @@
 
   <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="images/logo.png">
-  <link rel="stylesheet" type="text/css" href="dropdown-style.css">
+  <!-- <link rel="stylesheet" type="text/css" href="dropdown-style.css"> -->
   <link id="maincss" rel="stylesheet" href="css/sharedstyle.css">
   <link rel="stylesheet" type="text/css" href="css/index.css">
   <link rel="stylesheet" type="text/css" href="css/board.css">
-  <link id="customcss" rel="stylesheet" href="css/custom/stylesheet0.css">
+  <link rel="stylesheet" href="css/custom/default.css"> <!-- TODO : try light mode -->
+  <link id="customcss" rel="stylesheet" href="">
   <style type="text/css" id="board-styles-single"></style>
   <title>Iratus</title>
 
@@ -20,8 +21,13 @@
 
   <header>
     <h1>Iratus</h1>
+    <svg class="header-btn menu-sidebar-trigger" viewBox="0 0 100 100">
+      <rect class="menu-rect" x=5 y=13 width="90" height="14" rx="4"></rect>
+      <rect class="menu-rect" x=5 y="43" width="90" height="14" rx="4"></rect>
+      <rect class="menu-rect" x=5 y="73" width="90" height="14" rx="4"></rect>
+    </svg>
     <div class="cd-dropdown-wrapper">
-      <svg class="header-btn menu-trigger" viewBox="0 0 100 100">
+      <svg class="header-btn menu-dropdown-trigger" viewBox="0 0 100 100">
         <rect class="menu-rect" x=5 y=13 width="90" height="14" rx="4"></rect>
         <rect class="menu-rect" x=5 y="43" width="90" height="14" rx="4"></rect>
         <rect class="menu-rect" x=5 y="73" width="90" height="14" rx="4"></rect>
@@ -185,46 +191,50 @@
     </svg>
   </header>
 
-  <div class="all">
+  <div class="game-wrapper">
 
-    <div class="mainzone">
+    <!-- <div class="mainzone"> -->
 
-      <div class="board" id="board-single">
-        <!-- <div id="squares" , class="grid"></div>
+    <div class="player-info black"></div>
+
+    <div class="board" id="board-single">
+      <!-- <div id="squares" , class="grid"></div>
         <div id="highlighters" , class="grid"></div>
         <div id="extracells" , class="grid"></div>
         <div id="cells" , class="grid"></div> -->
-        <div class="promotion-window">
-          <div class="promotion-piece q"></div>
-          <div class="promotion-piece n"></div>
-          <div class="promotion-piece r"></div>
-          <div class="promotion-piece b"></div>
-          <div class="promotion-piece ed"></div>
-          <div class="promotion-piece es"></div>
-          <div class="promotion-cancel">
-            <p>X</p>
-          </div>
+      <div class="promotion-window">
+        <div class="promotion-piece q"></div>
+        <div class="promotion-piece n"></div>
+        <div class="promotion-piece r"></div>
+        <div class="promotion-piece b"></div>
+        <div class="promotion-piece ed"></div>
+        <div class="promotion-piece es"></div>
+        <div class="promotion-cancel">
+          <p>X</p>
         </div>
-
-        <div id="info">
-          <button onclick="hideInfo()" class="info-close">Close</button>
-          <h2>Checkmate !</h2>
-          <img src="images/wk.png"></img>
-          <p>_ won</p>
-          <button onclick="hideInfo();game.undoAll()">Nouvelle Partie</button>
-          <button onclick="document.location='contact.html'">Retours</button>
-        </div>
-
       </div>
 
-      <div class="controls">
-        <button onclick="game.undoAll()">&lt&lt</button>
-        <button onclick="game.undo()">&lt</button>
-        <button onclick="game.redo()">&gt</button>
-        <button tabindex=-1 onclick="game.redoAll()">&gt&gt</button>
+      <div id="info">
+        <button onclick="hideInfo()" class="info-close">Close</button>
+        <h2>Checkmate !</h2>
+        <img src="images/wk.png"></img>
+        <p>_ won</p>
+        <button onclick="hideInfo();game.undoAll()">Nouvelle Partie</button>
+        <button onclick="document.location='contact.html'">Retours</button>
       </div>
 
-      <!-- <div class="errorZone">
+    </div>
+
+    <div class="player-info white"></div>
+
+    <div class="controls">
+      <button onclick="game.undoAll()">&lt&lt</button>
+      <button onclick="game.undo()">&lt</button>
+      <button onclick="game.redo()">&gt</button>
+      <button tabindex=-1 onclick="game.redoAll()">&gt&gt</button>
+    </div>
+
+    <!-- <div class="errorZone">
         <h1>Error Log</h1>
         <div id="errorContainer"></div>
       </div>
@@ -234,21 +244,21 @@
         <div id="logContainer"></div>
       </div> -->
 
-      <div class="overlay" id="overlay">
-
-      </div>
-
-      <div class="settings">
-        <button onclick="closeSettings()" class="settings-close"></button>
-        <select id="styleSelector" onchange="handleStyleSelection()">
-          <option value="0">Default</option>
-          <option value="1">Style 1</option>
-          <option value="2">Style 2</option>
-          <option value="3">Style 3</option>
-        </select>
-      </div>
+    <div class="overlay" id="overlay">
 
     </div>
+
+    <div class="settings">
+      <button onclick="closeSettings()" class="settings-close"></button>
+      <select id="styleSelector" onchange="handleStyleSelection()">
+        <option value="0">Default</option>
+        <option value="1">Style 1</option>
+        <option value="2">Style 2</option>
+        <option value="3">Style 3</option>
+      </select>
+    </div>
+
+    <!-- </div> -->
 
   </div>
 

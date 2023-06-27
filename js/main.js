@@ -1,6 +1,6 @@
 jQuery(document).ready(function($){
 	//open/close mega-navigation
-	$('.menu-trigger').on('click', function(event){
+	$('.menu-dropdown-trigger').on('click', function(event){
 		event.preventDefault();
 		toggleNav();
 	});

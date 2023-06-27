@@ -11,6 +11,44 @@
   margin: 30px 60px;
 }
 
+.game-wrapper {
+  /* background-color: var(--dark); */
+  display: flex;
+  flex: 1 1 auto;
+  flex-flow: column;
+  justify-content: center;
+  margin: 0 auto;
+  text-align: center;
+  width: min-content;
+}
+
+.mainzone {
+  /* background-color: var(--light-green); */
+  /* flex: 1 1 auto; */
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.player-info {
+  border: 2px solid black;
+  height: 4rem;
+  /* margin: 0 0 0 auto; */
+}
+
+.board {
+  height: calc(var(--square-size) * 10);
+  margin: 1rem 0;
+  /* position: relative; */
+  width: calc(var(--square-size) * 8);
+  /* max-width: 500px; */
+}
+
+/* SETTINGS */
+
 .overlay {
   position: fixed;
   top: 0;
@@ -25,8 +63,6 @@
 .settings-btn {
   position: absolute;
   right: .6rem;
-  fill: var(--light-green);
-  cursor: pointer;
 }
 
 .settings {

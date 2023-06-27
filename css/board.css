@@ -2,37 +2,17 @@
   --square-size: 60px;
 }
 
-.all {
-  flex: 1 1 auto;
-  background-color: var(--dark);
-  text-align: center;
-  justify-content: center;
-  display: flex;
-  flex-flow: column;
-}
-
-.mainzone {
-  /* background-color: var(--light-green); */
-  /* flex: 1 1 auto; */
-  overflow-y: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
 .board {
   background-repeat: no-repeat;
   background-size: 100%;
   /* border-radius: 3px; */
   contain: layout;
-  height: calc(var(--square-size) * 10);
-  position: relative;
+  /* height: calc(var(--square-size) * 10); */
+  /* position: relative; */
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
-  width: calc(var(--square-size) * 8);
+  /* width: calc(var(--square-size) * 8); */
 }
 
 #board-single {
@@ -46,11 +26,12 @@
 }
 
 .piece {
+  aspect-ratio: 1 / 1;
   background-size: 100%;
   cursor: pointer;
   cursor: grab;
   cursor: -webkit-grab;
-  height: 10%;
+  /* height: 10%; */
   left: 0;
   overflow: hidden;
   position: absolute;
@@ -265,12 +246,12 @@
 /* CONTROLS */
 
 .controls {
-  background-color: var(--dark);
+  /* background-color: var(--dark); */
   width: calc(var(--square-size) * 8);
   height: var(--square-size);
   display: flex;
   justify-content: center;
-  margin-top: calc(var(--square-size) / 2);
+  /* margin-top: calc(var(--square-size) / 2); */
 }
 
 .controls button {
