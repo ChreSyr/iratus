@@ -85,6 +85,11 @@ PieceMovingTwice.prototype.updateValidMoves = function () {
     if (this.canGoTo(row, col)) {
       this.validMoves.push([row, col]);
 
+      const piece = this.board.get(row, col);
+      if (piece !== null && piece.dynamited) {
+        continue
+      }
+
       for (let move2 of this.MOVES) {
         let row2 = row + move2[0];
         let col2 = col + move2[1];

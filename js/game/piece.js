@@ -130,6 +130,7 @@ Piece.prototype = {
     this.col = original.col;
     this.board.piecesByPos[this.getPos()] = this;
     this.firstMove = original.firstMove;
+    this.dynamited = original.dynamited;
   },
 
   getCoordinates: function() {
