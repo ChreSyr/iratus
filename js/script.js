@@ -7,55 +7,55 @@
 // alert("loading: " + str);
 
 // ERRORS & CONSOLE IN-WEB LOG
-window.onerror = function(message, source, lineno, colno, error) {
-  // Get the error details
-  var errorDetails = {
-    message: message,
-    source: source,
-    lineNumber: lineno,
-    columnNumber: colno,
-    error: error
-  };
+// window.onerror = function(message, source, lineno, colno, error) {
+//   // Get the error details
+//   var errorDetails = {
+//     message: message,
+//     source: source,
+//     lineNumber: lineno,
+//     columnNumber: colno,
+//     error: error
+//   };
 
-  // Append the error information to the error container
-  appendErrorToContainer(errorDetails);
+//   // Append the error information to the error container
+//   appendErrorToContainer(errorDetails);
 
-  // Prevent the default error handling
-  return true;
-};
+//   // Prevent the default error handling
+//   return true;
+// };
 
-function appendErrorToContainer(errorDetails) {
-  var errorContainer = document.getElementById('errorContainer');
-  var errorMessage = document.createElement('p');
-  errorMessage.textContent = errorDetails.message;
-  errorContainer.appendChild(errorMessage);
-}
+// function appendErrorToContainer(errorDetails) {
+//   var errorContainer = document.getElementById('errorContainer');
+//   var errorMessage = document.createElement('p');
+//   errorMessage.textContent = errorDetails.message;
+//   errorContainer.appendChild(errorMessage);
+// }
 
-(function() {
-  // Save the reference to the original console.log function
-  var originalLog = console.log;
+// (function() {
+//   // Save the reference to the original console.log function
+//   var originalLog = console.log;
 
-  // Override console.log to capture and display the logs
-  console.log = function() {
-    // Get the log arguments and convert them to a string
-    var logMessage = Array.from(arguments).map(function(arg) {
-      return typeof arg === 'object' ? JSON.stringify(arg) : arg;
-    }).join(' ');
+//   // Override console.log to capture and display the logs
+//   console.log = function() {
+//     // Get the log arguments and convert them to a string
+//     var logMessage = Array.from(arguments).map(function(arg) {
+//       return typeof arg === 'object' ? JSON.stringify(arg) : arg;
+//     }).join(' ');
 
-    // Append the log message to the log container
-    appendLogToContainer(logMessage);
+//     // Append the log message to the log container
+//     appendLogToContainer(logMessage);
 
-    // Call the original console.log function
-    originalLog.apply(console, arguments);
-  };
+//     // Call the original console.log function
+//     originalLog.apply(console, arguments);
+//   };
 
-  function appendLogToContainer(logMessage) {
-    var logContainer = document.getElementById('logContainer');
-    var logEntry = document.createElement('p');
-    logEntry.textContent = logMessage;
-    logContainer.appendChild(logEntry);
-  }
-})();
+//   function appendLogToContainer(logMessage) {
+//     var logContainer = document.getElementById('logContainer');
+//     var logEntry = document.createElement('p');
+//     logEntry.textContent = logMessage;
+//     logContainer.appendChild(logEntry);
+//   }
+// })();
 
 var game;
 
@@ -130,3 +130,9 @@ document.getElementsByClassName("promotion-cancel")[0].addEventListener("pointer
 //   alert(error);
 //   alert(error.stack);
 // }
+
+ajustSquareSize();
+
+// ATTACHING EVENT LISTENERS
+
+window.addEventListener('resize', ajustSquareSize);

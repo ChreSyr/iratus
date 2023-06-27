@@ -92,11 +92,6 @@
   display: none;
 }
 
-.settings-btn {
-  position: absolute;
-  right: .6rem;
-}
-
 .settings {
   display: none;
   width: calc(var(--square-size) * 6);
@@ -142,21 +137,6 @@
 .settings-close:hover::before,
 .settings-close:hover::after {
   background-color: black;
-}
-
-select {
-  background-color: rgba(255, 255, 255, .1);
-  border-radius: 0.3rem;
-  color: var(--light-green);
-  font-family: "PierceRoman", "helvetica", sans-serif;
-  font-size: 2.5rem;
-  height: var(--square-size);
-  padding: .5rem 3rem;
-  width: 100%;
-}
-
-.select:focus {
-  background-color: #c91717;
 }
 
 /* TODO : remove */

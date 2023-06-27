@@ -26,12 +26,16 @@ function ajustSquareSize() {
 
   // availible space for the baord and the players info
   var availibleWidth = window.innerWidth - fontSizeValue * 2
-  var availibleHeight = window.innerHeight - fontSizeValue * ( 1 + 4 + 1 + 1 + 4 + 1 + 5 )
+  var availibleHeight = window.innerHeight - fontSizeValue * ( 1 + 4 + 1 + 1 + 4 + 1 )
 
   // console.log("Availible Width: " + availibleWidth);
   // console.log("Availible Height: " + availibleHeight);
 
-  var squareSize = Math.floor(Math.min(availibleWidth / 8, availibleHeight / 10));
+  if (isMobileDevice()) {
+    var squareSize = Math.floor(availibleWidth / 8);
+  } else {
+    var squareSize = Math.floor(Math.min(availibleWidth / 8, availibleHeight / 10));
+  }
 
   // console.log("Square Size: " + squareSize);
 
