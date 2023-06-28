@@ -44,9 +44,16 @@
   padding: .7rem;
 }
 
-@media (min-width: 614px) {
-  .only-mobile {
-    display: none;
+.menu-panel-wrapper {
+  display: flex;
+  height: 6rem;
+
+  & h1 {
+    /* font-family: var(--fontfamily-simple); */
+    font-size: x-large;
+    height: 5rem;
+    margin: .8rem 2rem;
+    text-align: center;
   }
 }
 
@@ -105,18 +112,13 @@ header h1 {
   fill: var(--darker);
 }
 
-.settings-btn {
+/* .settings-btn {
   position: absolute;
   right: .6rem;
-}
+} */
 
 /* TODO : move to @media */
 /* DESKTOP PANEL */
-
-.menu-panel-wrapper {
-  height: 6rem;
-  /* margin: .5rem 0; */
-}
 
 .menu-panel-wrapper:hover .menu-panel {
   display: block;

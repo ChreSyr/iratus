@@ -44,6 +44,10 @@ body {
   body {
     margin: 1rem 1rem 1rem calc(var(--header-height) + 1rem);
   }
+
+  .only-mobile {
+    display: none !important;
+  }
 }
 
 /* BUTTON */
