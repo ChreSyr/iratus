@@ -121,11 +121,16 @@ Pawn.prototype.openPromotionWindow = function () {
   for (let promotionPiece of promotionPieces) {
     promotionPiece.classList.add(this.color + promotionPiece.classList[1]);
   }
-  if (this.color === "w") { // TODO : what if the board is flipped ?
+  if (this.color === "w" ^ this.board.game.isFlipped()) {  // ^ is the xor
     promotionWindow.classList.add("top");
   } else {
     promotionWindow.classList.remove("top");
   }
-  promotionWindow.style.transform = `translateX(${this.col * 100}%)`;
+  if (this.board.game.isFlipped()) {
+    promotionWindow.style.transform = `translateX(${(this.board.nbfiles - 1 - this.col) * 100}%)`;
+  } else {
+    promotionWindow.style.transform = `translateX(${this.col * 100}%)`;
+  }
+
   promotionWindow.style.display = "flex";
 }

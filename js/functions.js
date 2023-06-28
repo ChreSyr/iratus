@@ -60,10 +60,10 @@ const cancelPromotion = (event) => {
 }
 
 // Close settings
-function closeSettings() {
-  document.getElementById("overlay").style.display = "none";
-  document.getElementsByClassName("settings")[0].style.display = "none";
-}
+// function closeSettings() {
+//   document.getElementById("overlay").style.display = "none";
+//   document.getElementsByClassName("settings")[0].style.display = "none";
+// }
 
 // Returns whether or not an event collides with a screen element
 function collide(event, element) {
@@ -243,10 +243,10 @@ function makePieceDraggable(element) {
 }
 
 // Open settings
-function openSettings() {
-  document.getElementById("overlay").style.display = "flex";
-  document.getElementsByClassName("settings")[0].style.display = "flex";
-}
+// function openSettings() {
+//   document.getElementById("overlay").style.display = "flex";
+//   document.getElementsByClassName("settings")[0].style.display = "flex";
+// }
 
 // Writes css code in <script id="board-styles-single">
 // This code defines the images of the pieces

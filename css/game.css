@@ -4,10 +4,6 @@
 
 /* ORDERS */
 
-.game-wrapper * {
-  order: 3;
-}
-
 .player-info.w {
   order: 0;
 }
@@ -78,74 +74,68 @@
 .board {
   background-repeat: no-repeat;
   background-size: 100%;
-  /* border-radius: 3px; */
   contain: layout;
-  /* height: calc(var(--square-size) * 10); */
-  /* position: relative; */
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
-  /* width: calc(var(--square-size) * 8); */
 }
 
 #board-single {
   background-image: url("../images/iratusboard-small.jpg");
-}
 
-@media only screen and (min-width: 1024px) {
-  #board-single {
+  @media only screen and (min-width: 480px) {
     background-image: url("../images/iratusboard.png");
   }
-}
 
-.piece {
-  aspect-ratio: 1 / 1;
-  background-size: 100%;
-  cursor: pointer;
-  cursor: grab;
-  cursor: -webkit-grab;
-  /* height: 10%; */
-  left: 0;
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  touch-action: none;
-  width: 12.5%;
-  will-change: transform;
-  z-index: 2;
-}
+  .piece {
+    aspect-ratio: 1 / 1;
+    background-size: 100%;
+    cursor: pointer;
+    cursor: grab;
+    cursor: -webkit-grab;
+    /* height: 10%; */
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    touch-action: none;
+    width: 12.5%;
+    will-change: transform;
+    z-index: 2;
+  }
 
-.piece.dragging {
-  cursor: grabbing;
-  cursor: -webkit-grabbing;
-  z-index: 3;
-}
+  .piece.dragging {
+    cursor: grabbing;
+    cursor: -webkit-grabbing;
+    z-index: 3;
+  }
 
-.square {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 12.5%;
-  height: 10%;
-  /* pointer-events: none; */
-}
+  .square {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 12.5%;
+    height: 10%;
+    /* pointer-events: none; */
+  }
 
-.square.selected {
-  background-color: var(--selected);
-  opacity: 0.5;
-}
+  .square.selected {
+    background-color: var(--selected);
+    opacity: 0.5;
+  }
 
-.square.accessible {
-  background: radial-gradient(var(--accessible) 25%, rgba(0, 0, 0, 0) 0%);
-  /* pointer-events: auto; */
-}
+  .square.accessible {
+    background: radial-gradient(var(--accessible) 25%, rgba(0, 0, 0, 0) 0%);
+    /* pointer-events: auto; */
+  }
 
-.square.captureable {
-  background: radial-gradient(transparent 59%, var(--accessible) 59%, var(--accessible) 69%, transparent 0%);
-}
+  .square.captureable {
+    background: radial-gradient(transparent 59%, var(--accessible) 59%, var(--accessible) 69%, transparent 0%);
+  }
 
-.phantom {
-  opacity: .7;
+  .phantom {
+    opacity: .7;
+  }
 }
 
 /* PROMOTION */
@@ -164,52 +154,56 @@
   width: 12.5%;
   z-index: 3;
   cursor: pointer;
-}
 
-.promotion-cancel {
-  height: calc(var(--square-size) / 2);
-  display: flex;
-  justify-content: center;
-}
+  .promotion-cancel {
+    height: calc(var(--square-size) / 2);
+    display: flex;
+    justify-content: center;
+  }
 
-.promotion-cancel p {
-  height: 100%;
-  font-size: 135%;
-  margin: 0;
+  .promotion-cancel p {
+    height: 100%;
+    font-size: 2.5rem;
+    margin: 0;
+  }
+
+  .promotion-piece {
+    height: var(--square-size);
+    background-size: contain;
+  }
 }
 
 .promotion-window.top {
   top: 0;
   bottom: auto;
-}
 
-.promotion-piece {
-  height: var(--square-size);
-  background-size: contain;
-}
+  .q {
+    order: 6;
+  }
 
-.promotion-window.top .q {
-  order: 6;
-}
+  .n {
+    order: 5;
+  }
 
-.promotion-window.top .n {
-  order: 5;
-}
+  .r {
+    order: 4;
+  }
 
-.promotion-window.top .r {
-  order: 4;
-}
+  .b {
+    order: 3;
+  }
 
-.promotion-window.top .b {
-  order: 3;
-}
+  .ed {
+    order: 2;
+  }
 
-.promotion-window.top .ed {
-  order: 2;
-}
+  .es {
+    order: 1;
+  }
 
-.promotion-window.top .es {
-  order: 1;
+  .promotion-cancel {
+    order: 0;
+  }
 }
 
 /* INFO */
