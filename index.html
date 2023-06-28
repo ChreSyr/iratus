@@ -11,8 +11,10 @@
   <link id="maincss" rel="stylesheet" href="css/header.css">
   <link rel="stylesheet" type="text/css" href="css/index.css">
   <link rel="stylesheet" type="text/css" href="css/game.css">
-  <link rel="stylesheet" href="css/custom/default.css"> <!-- TODO : try light mode -->
-  <link id="customcss" rel="stylesheet" href="">
+  <!-- <link rel="stylesheet" href="css/experiments/look-default.css"> TODO : try light mode -->
+  <!-- <link rel="stylesheet" href="css/experiments/look-default.css"> TODO : try light mode -->
+  <link id="custom-layout" rel="stylesheet" href="">
+  <link id="custom-look" rel="stylesheet" href="">
   <style type="text/css" id="board-styles-single"></style>
   <title>Iratus</title>
 
@@ -147,7 +149,7 @@
       </svg>
     </div>
 
-    <div class="menu-delimiter"></div>
+    <div class="header-delimiter"></div>
 
     <!-- RULES -->
     <div class="header-btn-wrapper">
@@ -158,9 +160,9 @@
       </svg>
       <div class="header-panel">
         <h2>Règles</h2>
-        <div class="menu-delimiter"></div>
+        <div class="header-delimiter"></div>
         <button onclick="openLearnChess()">Les bases</button>
-        <div class="menu-delimiter"></div>
+        <div class="header-delimiter"></div>
         <div class="iratusrules-wrapper">
           <button class="newrules-btn" onclick="window.location.href = 'rules.html'">Les nouveautés</button>
           <div class="rules-sub-grid">
@@ -186,7 +188,7 @@
       </svg>
       <div class="header-panel">
         <h2>Problèmes</h2>
-        <div class="menu-delimiter"></div>
+        <div class="header-delimiter"></div>
         <p>Aucun problème n'est disponible actuellement.</p>
       </div>
     </div>
@@ -200,7 +202,7 @@
       </svg>
       <div class="header-panel">
         <h2>Contact</h2>
-        <div class="menu-delimiter"></div>
+        <div class="header-delimiter"></div>
         <button onclick="window.location.href = 'contact.html'">Envoyer un message</button>
       </div>
     </div>
@@ -214,7 +216,7 @@
       </svg>
       <div class="header-panel">
         <h2>Donations</h2>
-        <div class="menu-delimiter"></div>
+        <div class="header-delimiter"></div>
         <p>
           Passionné d'échecs, j'ai créé Iratus afin de rendre les parties encore plus imprévisibles...
           <br><br>
@@ -234,29 +236,70 @@
       </svg>
       <div class="header-panel">
         <h2>Réglages</h2>
-        <div class="menu-delimiter"></div>
-        <select id="styleSelector" onchange="handleStyleSelection()">
-          <option selected value="0">Style : default</option>
-          <option value="1">Style : 1</option>
-          <option value="2">Style : 2</option>
-          <option value="3">Style : 3</option>
-        </select>
+
+        <div class="header-delimiter"></div>
+
+        <!-- Only in index.html 's menu -->
+        <div class="settings">
+          <h3>Affichage</h3>
+          <ul>
+            <li>
+              <label>Rotation</label>
+              <select id="select-rotation" onchange="handleRotationSelect()">
+                <option value="no">Aucune (Blancs)</option>
+                <option value="black">Aucune (Noirs)</option>
+                <option value="board">Plateau</option>
+                <option value="pieces">Pièces</option>
+              </select>
+            </li>
+          </ul>
+        </div>
+
+        <div class="header-delimiter"></div>
+
+        <div class="settings">
+          <h3>Expérimentations</h3>
+
+          <ul>
+            <li>
+              <label>Couleurs</label>
+              <select id="select-look" onchange="handleExperimentalSelect('look')">
+                <option value="0">Défault</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+            </li>
+          </ul>
+
+          <ul>
+            <li>
+              <label>Agencement</label>
+              <select id="select-layout" onchange="handleExperimentalSelect('layout')">
+                <option value="0">Défault</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+            </li>
+          </ul>
+
+        </div>
+
       </div>
     </div>
 
   </header>
 
-  <div class="game-wrapper">
+  <div class="game-wrapper" id="game-wrapper">
 
     <!-- <div class="mainzone"> -->
 
     <div class="player-info w"></div>
 
     <div class="board" id="board-single">
-      <!-- <div id="squares" , class="grid"></div>
-        <div id="highlighters" , class="grid"></div>
-        <div id="extracells" , class="grid"></div>
-        <div id="cells" , class="grid"></div> -->
       <div class="promotion-window">
         <div class="promotion-piece q"></div>
         <div class="promotion-piece n"></div>
@@ -301,16 +344,6 @@
 
     <div class="overlay" id="overlay">
 
-    </div>
-
-    <div class="settings">
-      <button onclick="closeSettings()" class="settings-close"></button>
-      <select id="styleSelector" onchange="handleStyleSelection()">
-        <option value="0">Default</option>
-        <option value="1">Style 1</option>
-        <option value="2">Style 2</option>
-        <option value="3">Style 3</option>
-      </select>
     </div>
 
     <!-- </div> -->

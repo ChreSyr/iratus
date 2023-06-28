@@ -1,0 +1,7 @@
+:root {
+  --light-green: rgb(221, 166, 166);
+}
+
+body {
+  background: linear-gradient(35deg, red, purple);
+}

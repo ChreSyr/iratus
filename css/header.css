@@ -1,4 +1,4 @@
-/* HEADER */
+/* DESKTOP & MOBILE HEADER - TODO : SORT */
 
 header {
   align-items: center;
@@ -11,6 +11,13 @@ header {
   top: 0;
   width: 100%;
   z-index: 10;
+}
+
+.header-delimiter {
+  background-color: var(--light-green);
+  height: 2px;
+  margin: 0.7rem;
+  width: 3.6rem;
 }
 
 header h1 {
@@ -37,19 +44,13 @@ header h1 {
   left: .6rem;
 }
 
-.menu-delimiter {
-  background-color: var(--light-green);
-  height: 2px;
-  margin: 0.7rem;
-  width: 3.6rem;
-}
-
 .settings-btn {
   position: absolute;
   right: .6rem;
 }
 
 /* TODO : move to @media */
+/* DESKTOP PANEL */
 
 .header-panel {
   color: var(--light-green);
@@ -65,7 +66,7 @@ header h1 {
 }
 
 .header-btn-wrapper {
-  height: 5rem;
+  height: 6rem;
   /* margin: .5rem 0; */
 }
 
@@ -82,8 +83,7 @@ header h1 {
   font-size: 2.1rem;
 }
 
-.header-panel .menu-delimiter {
-  /* font-size: 4em; */
+.header-panel .header-delimiter {
   margin: 1.2em 0 .5em 0;
   width: 100%;
 }
@@ -100,111 +100,139 @@ header h1 {
   width: 100%;
 }
 
-/* IRATUS NEW RULES */
+/* RULES */
 
 .iratusrules-wrapper {
   overflow-y: hidden;
-  height: 100vh;
+
+  .newrules-btn {
+    position: relative;
+    z-index: 2;
+  }
+
+  .rules-sub-grid {
+    display: grid;
+    gap: .3em;
+    grid-template-columns: repeat(3, 1fr);
+    padding: .3em 0 0 0;
+    position: relative;
+    top: -270px;
+    transition: top 1s;
+
+    & button {
+      aspect-ratio: 1 / 1;
+      background-color: transparent;
+      background-repeat: no-repeat;
+      background-size: contain;
+      margin: 0;
+    }
+
+    & button.s {
+      background-image: url("../images/bs.png");
+    }
+
+    & button.s:hover {
+      background-image: url("../images/ws.png");
+    }
+
+    & button.es {
+      background-image: url("../images/bes.png");
+    }
+
+    & button.es:hover {
+      background-image: url("../images/wes.png");
+    }
+
+    & button.d {
+      background-image: url("../images/bd.png");
+    }
+
+    & button.d:hover {
+      background-image: url("../images/wd.png");
+    }
+
+    & button.ed {
+      background-image: url("../images/bed.png");
+    }
+
+    & button.ed:hover {
+      background-image: url("../images/wed.png");
+    }
+
+    & button.dy {
+      background-image: url("../images/bdy.png");
+    }
+
+    & button.dy:hover {
+      background-image: url("../images/wdy.png");
+    }
+
+    & button.p {
+      background-image: url("../images/bp.png");
+    }
+
+    & button.p:hover {
+      background-image: url("../images/wp.png");
+    }
+
+    & button.g {
+      background-image: url("../images/bg.png");
+    }
+
+    & button.g:hover {
+      background-image: url("../images/wg.png");
+    }
+
+    & button.i {
+      background-image: url("../images/bi.png");
+    }
+
+    & button.i:hover {
+      background-image: url("../images/wi.png");
+    }
+  }
+
+  .newrules-btn:hover+.rules-sub-grid {
+    top: 0;
+  }
+
+  .rules-sub-grid:hover {
+    top: 0;
+  }
 }
 
-.iratusrules-wrapper .newrules-btn {
-  position: relative;
-  z-index: 2;
-}
+/* SETTINGS */
 
-.iratusrules-wrapper .rules-sub-grid {
-  display: grid;
-  gap: .3em;
-  grid-template-columns: repeat(3, 1fr);
-  padding: .3em 0 0 0;
-  position: relative;
-  top: -270px;
-  transition: top 1s;
-}
+.settings {
 
-.iratusrules-wrapper .newrules-btn:hover {
-  background-color: var(--light-green);
-  color: var(--darker);
-}
+  font-family: var(--fontfamily-simple);
 
-.iratusrules-wrapper .newrules-btn:hover+.rules-sub-grid {
-  top: 0;
-}
+  & h3 {
+    font-size: 2rem;
+    margin-top: 0;
+  }
 
-.iratusrules-wrapper .rules-sub-grid:hover {
-  top: 0;
-}
+  & ul {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    margin-bottom: 10px;
+    padding: 0;
+  }
 
-.iratusrules-wrapper .rules-sub-grid button {
-  aspect-ratio: 1 / 1;
-  background-color: transparent;
-  background-repeat: no-repeat;
-  background-size: contain;
-  margin: 0;
-}
+  & li {
+    display: flex;
+    justify-content: space-between;
+  }
 
-.iratusrules-wrapper .rules-sub-grid button.s {
-  background-image: url("../images/bs.png");
-}
+  & label {
+    font-size: 1.5rem;
+    margin: auto 0;
+  }
 
-.iratusrules-wrapper .rules-sub-grid button.s:hover {
-  background-image: url("../images/ws.png");
-}
-
-.iratusrules-wrapper .rules-sub-grid button.es {
-  background-image: url("../images/bes.png");
-}
-
-.iratusrules-wrapper .rules-sub-grid button.es:hover {
-  background-image: url("../images/wes.png");
-}
-
-.iratusrules-wrapper .rules-sub-grid button.d {
-  background-image: url("../images/bd.png");
-}
-
-.iratusrules-wrapper .rules-sub-grid button.d:hover {
-  background-image: url("../images/wd.png");
-}
-
-.iratusrules-wrapper .rules-sub-grid button.ed {
-  background-image: url("../images/bed.png");
-}
-
-.iratusrules-wrapper .rules-sub-grid button.ed:hover {
-  background-image: url("../images/wed.png");
-}
-
-.iratusrules-wrapper .rules-sub-grid button.dy {
-  background-image: url("../images/bdy.png");
-}
-
-.iratusrules-wrapper .rules-sub-grid button.dy:hover {
-  background-image: url("../images/wdy.png");
-}
-
-.iratusrules-wrapper .rules-sub-grid button.p {
-  background-image: url("../images/bp.png");
-}
-
-.iratusrules-wrapper .rules-sub-grid button.p:hover {
-  background-image: url("../images/wp.png");
-}
-
-.iratusrules-wrapper .rules-sub-grid button.g {
-  background-image: url("../images/bg.png");
-}
-
-.iratusrules-wrapper .rules-sub-grid button.g:hover {
-  background-image: url("../images/wg.png");
-}
-
-.iratusrules-wrapper .rules-sub-grid button.i {
-  background-image: url("../images/bi.png");
-}
-
-.iratusrules-wrapper .rules-sub-grid button.i:hover {
-  background-image: url("../images/wi.png");
+  & select {
+    width: 60%;
+  }
 }
 
 @media (min-width: 960px) {

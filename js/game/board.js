@@ -76,7 +76,7 @@ Board.prototype = {
     }
   },
 
-  move: function (start, end, main = true) {
+  move: function (start, end, main=true) {
     if (typeof start === "number") {
       start = [start % 10, Math.floor(start / 10)];
     }

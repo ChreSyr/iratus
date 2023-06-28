@@ -10,7 +10,19 @@
 
 :root {
   font-size: 10px;
+  --fontfamily-main: "PierceRoman", "helvetica", sans-serif;
+  --fontfamily-simple: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   --header-height: 5rem;
+  /* colors */
+  --accessible: rgba(0, 0, 0, 0.2);
+  --dark: rgb(21, 21, 21);
+  --darker: black;
+  --dark-green: rgb(22, 43, 22);
+  --light-dark: rgb(64, 64, 64);
+  --light-green: rgb(131, 174, 131);
+  --light-grey: rgb(200 200 200);
+  --selected: rgba(255, 255, 0, .5);
+  --very-dark-green: rgb(10, 20, 10);
 }
 
 /* @media (min-width: 960px) {
@@ -21,7 +33,7 @@
 
 body {
   background-color: var(--dark);
-  font-family: "PierceRoman", "helvetica", sans-serif;
+  font-family: var(--fontfamily-main);
   /* font-size: 1.4rem; */
   margin: calc(var(--header-height) + 1rem) 1rem;
   /* display: flex; */
@@ -42,7 +54,7 @@ button {
   border: 0;
   color: var(--light-green);
   cursor: pointer;
-  font-family: "PierceRoman";
+  font-family: inherit;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
@@ -58,7 +70,6 @@ button:hover {
   padding: 3px 20px;
   background-color: black;
   color: var(--light-green);
-  font-family: "PierceRoman";
   font-size: calc(var(--square-size) * .5);
   cursor: pointer;
   user-select: none;
@@ -84,7 +95,7 @@ select {
   border-radius: .3rem;
   color: var(--light-green);
   font-family: inherit;
-  font-size: 2.1rem;
+  font-size: 1.5rem;
   line-height: 1.2;
   padding: .4rem calc(var(--arrowPosition) + 2rem) .4rem .8rem;
   position: relative;

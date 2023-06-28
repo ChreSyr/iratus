@@ -74,9 +74,15 @@ function collide(event, element) {
 }
 
 // Handle when an option is selected in the style <select>
-function handleStyleSelection() {
-  var selectedOption = document.getElementById("styleSelector").value;
-  document.getElementById('customcss').setAttribute('href', 'css/custom/stylesheet' + selectedOption + '.css');
+function handleRotationSelect() {
+  var rotationSelect = document.getElementById("select-rotation");
+  var gameWrapper = document.getElementById("game-wrapper");
+  for (let option of rotationSelect.options) {
+    gameWrapper.classList.remove('rotation-' + option.value);
+  }
+  if (rotationSelect.value !== "no") {
+    gameWrapper.classList.add('rotation-' + rotationSelect.value);
+  }
 }
 
 // Hide the info window shown after a game
@@ -124,76 +130,6 @@ function makeSquareClickable(square) {
 }
 
 // Add event listeners on pieces for movements
-function makePieceDraggableRECENT(element) {
-  let pos = {x: 0, y: 0};
-  let dragging = false;
-  let wasSelected = false;
-  
-  const stopScrollEvents = (event) => {
-    event.preventDefault();
-  }
-      
-  const pointerdownHandle = (event) => {
-
-    cancelPromotion();
-
-    const squareAccessible = document.querySelector(`.square[data-row="${element.piece.row}"][data-col="${element.piece.col}"]`);
-    if (squareAccessible) {return} 
-
-    let rect = element.getBoundingClientRect();
-    dragging = {dx: - rect.x - rect.width / 2, dy: - rect.y - rect.height / 2};
-    pos.x = event.clientX + dragging.dx;
-    pos.y = event.clientY + dragging.dy;
-
-    var squareSize = parseInt(document.documentElement.style.getPropertyValue("--square-size"), 10);
-    element.style.transform = `translate(${(element.piece.col + pos.x / squareSize) * 100}%, ${(element.piece.row + pos.y / squareSize) * 100}%)`;
-    element.classList.add('dragging');
-    element.setPointerCapture(event.pointerId);
-
-    wasSelected = element.piece === game.board.selectedPiece;
-    element.piece.handlePointerDown();
-
-  }
-  
-  const pointerupHandle = (event) => {
-    dragging = null;
-    element.classList.remove('dragging');
-    element.style.transform = "";
-
-    // if clicked for move destination
-    let squares = document.querySelectorAll(".square");
-    for (let square of squares) {
-      if (collide(event, square)) {
-        if (square.classList.contains("accessible")) {
-          let selectedPiece = game.board.selectedPiece;
-          selectedPiece.unselect();
-          game.move(start=[selectedPiece.row, selectedPiece.col], end=[parseInt(square.dataset.row), parseInt(square.dataset.col)])
-        }
-        break;
-      }
-    }
-    if (element.piece && wasSelected) {
-      element.piece.unselect();
-    }  // else, the piece has moved
-  }
-  
-  const pointermoveHandle = (event) => {
-    if (!dragging) {return};
-    pos.x = event.clientX + dragging.dx;
-    pos.y = event.clientY + dragging.dy;
-    var squareSize = parseInt(document.documentElement.style.getPropertyValue("--square-size"), 10);
-    element.style.transform = `translate(${(element.piece.col + pos.x / squareSize) * 100}%, ${(element.piece.row + pos.y / squareSize) * 100}%)`;
-    // element.style.transform = `translate(${pos.x}px, ${pos.y}px)`;
-  }
-  
-  element.addEventListener('pointerdown', pointerdownHandle);
-  element.addEventListener('pointerup', pointerupHandle);
-  element.addEventListener('pointercancel', pointerupHandle);
-  element.addEventListener('pointermove', pointermoveHandle);
-  element.addEventListener('touchstart', stopScrollEvents);
-}
-
-// Add event listeners on pieces for movements
 function makePieceDraggable(element) {
   let pos = {x: 0, y: 0};
   let dragging = false;
@@ -226,7 +162,15 @@ function makePieceDraggable(element) {
       pos.y = event.clientY + dragging.dy;
 
       var squareSize = parseInt(document.documentElement.style.getPropertyValue("--square-size"), 10);
-      element.style.transform = `translate(${(element.piece.col + pos.x / squareSize) * 100}%, ${(element.piece.row + pos.y / squareSize) * 100}%)`;
+      const board = element.piece.board;
+      if (board.game.isFlipped()) {
+        element.style.transform = `translate(${(board.nbfiles - 1 - element.piece.col + pos.x / squareSize) * 100}%, ${(board.nbfiles + 1 - element.piece.row + pos.y / squareSize) * 100}%)`;
+      } else {
+        element.style.transform = `translate(${(element.piece.col + pos.x / squareSize) * 100}%, ${(element.piece.row + pos.y / squareSize) * 100}%)`;
+      }
+      if (board.game.hasFlippedPieces()) {
+        element.style.transform += ' rotateX(180deg)'
+      }
       element.classList.add('dragging');
       // element.setPointerCapture(event.pointerId);
 
@@ -266,7 +210,15 @@ function makePieceDraggable(element) {
     pos.x = event.clientX + dragging.dx;
     pos.y = event.clientY + dragging.dy;
     var squareSize = parseInt(document.documentElement.style.getPropertyValue("--square-size"), 10);
-    element.style.transform = `translate(${(element.piece.col + pos.x / squareSize) * 100}%, ${(element.piece.row + pos.y / squareSize) * 100}%)`;
+    const board = element.piece.board;
+    if (board.game.isFlipped()) {
+      element.style.transform = `translate(${(board.nbfiles - 1 - element.piece.col + pos.x / squareSize) * 100}%, ${(board.nbfiles + 1 - element.piece.row + pos.y / squareSize) * 100}%)`;
+    } else {
+      element.style.transform = `translate(${(element.piece.col + pos.x / squareSize) * 100}%, ${(element.piece.row + pos.y / squareSize) * 100}%)`;
+    }
+    if (board.game.hasFlippedPieces()) {
+      element.style.transform += ' rotateX(180deg)'
+    }
   }
   
   // element.addEventListener('pointerdown', pointerdownHandle);

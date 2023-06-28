@@ -1,0 +1,11 @@
+:root {
+  --light-green: rgb(220, 221, 166);
+}
+
+body {
+  background: linear-gradient(35deg, rgb(0, 0, 0), rgb(114, 0, 114));
+}
+
+/* body {
+  background: linear-gradient(35deg, rgb(0, 0, 0), rgb(51, 0, 0));
+} */

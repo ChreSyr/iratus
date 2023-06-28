@@ -9,7 +9,7 @@ function Game(boardClass) {
   this.turn = "w";
   this.counter50rule = 0;
   this.result = undefined;
-  this.alwaysFlip = false;
+  this.alwaysFlip = false;  // TODO : remove
 
   this.board = new boardClass(this);
   for (let piece of this.board.piecesColored[this.turn]) {
@@ -127,7 +127,7 @@ Game.prototype = {
         this.board.flipDisplay(animate = false);
       }
     }
-    this.updateCaptures();
+    this.updateDisplay();
   },
 
   redo: function() {
@@ -148,7 +148,7 @@ Game.prototype = {
         this.board.flipDisplay(animate = false);
       }
     }
-    this.updateCaptures();
+    this.updateDisplay();
   },
 
   redoAll: function() {
@@ -174,7 +174,7 @@ Game.prototype = {
         this.board.flipDisplay(animate = false);
       }
     }
-    this.updateCaptures();
+    this.updateDisplay();
   },
 
   undoAll: function() {
@@ -185,7 +185,25 @@ Game.prototype = {
 
   // INSTANCE METHODS - VIEW
 
-  updateCaptures: function() {
+  hasFlippedPieces: function () {
+    var gameWrapper = document.getElementById("game-wrapper");
+    return (gameWrapper.classList.contains("black-to-move") && gameWrapper.classList.contains("rotation-pieces"));
+  },
+
+  isFlipped: function () {
+    var gameWrapper = document.getElementById("game-wrapper");
+    return (gameWrapper.classList.contains("black-to-move") && gameWrapper.classList.contains("rotation-board")) || 
+            gameWrapper.classList.contains("rotation-black");
+  },
+
+  updateDisplay: function() {
+
+    // Update turn
+
+    var gameWrapper = document.getElementById("game-wrapper");
+    this.turn === "w" ? gameWrapper.classList.remove('black-to-move') : gameWrapper.classList.add('black-to-move');
+
+    // Update captures
 
     var sortPattern = ["i", "dy", "g", "s", "d", "n", "b", "p", "r", "q"];
 
