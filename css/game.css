@@ -209,65 +209,70 @@
 /* INFO */
 
 #info {
-  position: absolute;
-  left: 50%;
-  top: 18%;
-  width: calc(var(--square-size) * 8 * .8);
-  transform: translateX(-50%);
+  align-items: center;
   background-color: var(--light-green);
   border-radius: 0.6rem;
   box-shadow: 0 0.3rem 0.63rem 0.07rem rgb(0 0 0 / 40%);
-  height: calc(var(--square-size) * 8 * .8);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  /* flex */
   display: none;
-  z-index: 4;
-}
-
-#info h2 {
-  font-size: calc(var(--square-size) * 2 / 3);
-  flex: 1 1 auto;
-  margin: calc(var(--square-size) / 3);
-}
-
-#info p {
-  font-size: calc(var(--square-size) / 2);
-  flex: 5 1 auto;
-  margin: 0;
-  margin-bottom: 16px;
-}
-
-#info img {
-  flex: 5 1 auto;
-  aspect-ratio: auto;
-  margin-top: calc(var(--square-size) * -.3);
-  max-width: calc(var(--square-size) * 2);
-  max-height: calc(var(--square-size) * 2);
-}
-
-#info button {
-  border: 2px solid black;
-  flex: 0 1 auto;
-  margin-bottom: calc(var(--square-size) / 4);
-}
-
-#info .info-close {
-  /* 'X' close icon - mobile version only */
+  flex-direction: column;
+  font-size: calc(var(--square-size) / 4);
+  height: calc(var(--square-size) * 8 * .8);
+  left: 50%;
   position: absolute;
-  z-index: 1;
-  margin: 5px;
-  right: 0;
-  top: 0;
-  height: calc(var(--square-size) * .8);
-  width: calc(var(--square-size) * .8);
-  /* image replacement */
-  overflow: hidden;
-  /* text-indent: 1000%; */
-  color: transparent;
-  white-space: nowrap;
-  border-radius: 3px;
-  /* border: var(--light-green) 2px solid; */
+  top: 18%;
+  transform: translateX(-50%);
+  width: calc(var(--square-size) * 8 * .8);
+  z-index: 4;
+
+  & h2 {
+    font-size: 2.7em;
+    flex: 1 1 auto;
+    margin: .4em;
+  }
+
+  & p {
+    font-size: 2em;
+    flex: 5 1 auto;
+    margin: 0;
+    margin-bottom: .4em;
+  }
+
+  & img {
+    flex: 5 1 auto;
+    aspect-ratio: auto;
+    margin-top: -1.2em;
+    max-width: 8em;
+    max-height: 8em;
+  }
+
+  & button {
+    border: 2px solid black;
+    flex: 0 1 auto;
+    margin-bottom: .5em;
+  }
+
+  .info-close {
+    /* 'X' close icon - mobile version only */
+    position: absolute;
+    /* z-index: 1; */
+    margin: 5px;
+    right: 0;
+    top: 0;
+    height: 1.5em;
+    width: 1.5em;
+    /* image replacement */
+    overflow: hidden;
+    /* text-indent: 1000%; */
+    color: transparent;
+    white-space: nowrap;
+    border-radius: 3px;
+    /* border: var(--light-green) 2px solid; */
+  }
+
+  .info-close:hover {
+    color: transparent;
+  }
 }
 
 .info-close::after,

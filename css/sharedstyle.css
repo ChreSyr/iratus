@@ -76,6 +76,11 @@ button:hover {
   -webkit-tap-highlight-color: transparent;
 }
 
+#board-single button:hover {
+  background-color: var(--light-green);
+  color: var(--darker);
+}
+
 /* SELECT -- credits to chess.com */
 
 :root {
