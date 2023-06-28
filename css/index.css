@@ -1,3 +1,13 @@
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    margin-left: 10em;
+    /* flex-direction: column; */
+  }
+}
+
+/* TODO : remove title ? */
+
 .title {
   width: 800px;
   margin: 0 auto;
@@ -58,12 +68,30 @@
 
 /* TODO : remove */
 
-.errorZone {
-  margin: 2em;
-  height: 20em;
-  overflow: auto;
-}
+/* CONTROLS */
 
-.errorZone p {
-  color: var(--light-green);
+.controls {
+  width: min(40em, calc(var(--square-size) * 8));
+  height: 6em;
+  display: flex;
+  justify-content: center;
+  margin: 1rem auto 0;
+
+  & button {
+    font-size: 3.5em;
+    padding: 0;
+    transition: background-color .2s;
+    -webkit-tap-highlight-color: var(--light-green);
+    width: 100%;
+  }
+
+  @media only screen and (min-width: 614px) {
+    & button:active {
+      font-size: 3em;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    margin-top: 5em;
+  }
 }

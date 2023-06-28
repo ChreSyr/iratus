@@ -37,9 +37,7 @@ body {
   font-family: var(--fontfamily-main);
   /* font-size: 1.4rem; */
   margin: calc(var(--header-height) + 1rem) 1rem;
-  /* display: flex; */
-  /* flex-direction: column; */
-  overflow-x: clip;
+  /* overflow-x: clip; */
 }
 
 @media (min-width: 614px) {
