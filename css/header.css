@@ -1,3 +1,39 @@
+.menu-wrapper {
+  left: 0;
+  position: fixed;
+  top: 0;
+}
+
+.menu-bar-trigger {
+  /* left: .6rem; */
+  padding: .6rem;
+  position: absolute;
+  /* top: .6rem; */
+}
+
+.menu-bar-trigger:hover {
+  background-color: var(--light-green);
+  fill: var(--darker);
+}
+
+.menu-bar-wrapper {
+  background-color: var(--darker);
+  height: 2000px;
+  left: 0;
+  position: fixed;
+  top: 0;
+}
+
+.menu-bar-wrapper.closed-for-mobile {
+  display: none;
+}
+
+.header-btn {
+  position: relative;
+  left: 0;
+  padding: .7rem;
+}
+
 /* DESKTOP & MOBILE HEADER - TODO : SORT */
 
 header {
@@ -37,11 +73,6 @@ header h1 {
 .header-btn-wrapper:hover .header-btn {
   background-color: var(--light-green);
   fill: var(--darker);
-}
-
-.menu-sidebar-trigger {
-  position: absolute;
-  left: .6rem;
 }
 
 .settings-btn {
@@ -265,13 +296,7 @@ header h1 {
     display: none;
   }
 
-  .header-btn {
-    position: relative;
-    left: 0;
-    padding: .7rem;
-  }
-
-  .menu-sidebar-trigger {
+  .menu-bar-trigger {
     display: none;
   }
 }
