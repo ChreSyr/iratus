@@ -80,6 +80,8 @@ setPiecesStyle();
 // });
 
 function handlePointerDown(event) {
+
+  if (document.getElementsByClassName("menu-wrapper")[0].contains(event.target)) {return}
   
   const boardDiv = document.getElementById("board-single");
   if (boardDiv.contains(event.target) && boardDiv !== event.target) {return}
