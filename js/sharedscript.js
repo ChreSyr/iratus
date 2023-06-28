@@ -29,3 +29,19 @@ function openLearnChess() {
 function openMenu() {
   document.getElementsByClassName("menu-bar-wrapper")[0].classList.remove("closed-for-mobile")
 }
+
+function clickMenuBarBtn(type) {
+
+  if (document.firstElementChild.clientWidth < 614) {return}
+
+  switch (type) {
+    case 'rules':
+    case 'puzzles':
+    case 'contact':
+      window.location.href = type + '.html';
+      break;
+    case 'donations':
+      // Open ko-fi.com in a new web page
+      openKoFi();
+  }
+}
