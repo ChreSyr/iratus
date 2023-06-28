@@ -102,6 +102,7 @@ function makeSquareClickable(square) {
       
   const pointerdownHandle = (event) => {
 
+    closeMenu();
     cancelPromotion();
 
     if (square.classList.contains("accessible")) {
@@ -145,6 +146,7 @@ function makePieceDraggable(element) {
     
     // try {
 
+      closeMenu();
       cancelPromotion();
 
       const squareAccessible = document.querySelector(`.square[data-row="${element.piece.row}"][data-col="${element.piece.col}"]`);

@@ -84,6 +84,7 @@ function handlePointerDown(event) {
   const boardDiv = document.getElementById("board-single");
   if (boardDiv.contains(event.target) && boardDiv !== event.target) {return}
 
+  closeMenu();
   cancelPromotion();
   let selectedPiece = game.board.selectedPiece;
   if (selectedPiece) {

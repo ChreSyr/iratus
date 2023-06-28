@@ -17,21 +17,51 @@
 }
 
 .menu-bar-wrapper {
+  --menu-bar-width: 20rem;
   background-color: var(--darker);
   height: 2000px;
   left: 0;
   position: fixed;
   top: 0;
+  width: var(--menu-bar-width);
+
+  @media (min-width: 614px) {
+    --menu-bar-width: 5rem;
+  }
 }
 
 .menu-bar-wrapper.closed-for-mobile {
   display: none;
+
+  @media (min-width: 614px) {
+    display: block;
+  }
 }
 
-.header-btn {
+.menu-bar-btn {
   position: relative;
   left: 0;
   padding: .7rem;
+}
+
+@media (min-width: 614px) {
+  .only-mobile {
+    display: none;
+  }
+}
+
+.menu-panel {
+  color: var(--light-green);
+  display: none;
+  font-size: 3em;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: var(--menu-bar-width);
+  padding: 1em;
+  background-color: var(--dark);
+  width: 9em;
+  box-shadow: .6em -1em 1em var(--darker);
 }
 
 /* DESKTOP & MOBILE HEADER - TODO : SORT */
@@ -49,7 +79,7 @@ header {
   z-index: 10;
 }
 
-.header-delimiter {
+.menu-delimiter {
   background-color: var(--light-green);
   height: 2px;
   margin: 0.7rem;
@@ -62,7 +92,7 @@ header h1 {
   font-weight: normal;
 }
 
-.header-btn {
+.menu-bar-btn {
   border-radius: 3px;
   cursor: pointer;
   fill: var(--light-green);
@@ -70,7 +100,7 @@ header h1 {
   width: 3.6rem;
 }
 
-.header-btn-wrapper:hover .header-btn {
+.menu-panel-wrapper:hover .menu-bar-btn {
   background-color: var(--light-green);
   fill: var(--darker);
 }
@@ -83,49 +113,35 @@ header h1 {
 /* TODO : move to @media */
 /* DESKTOP PANEL */
 
-.header-panel {
-  color: var(--light-green);
-  display: none;
-  font-size: 3em;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 5rem;
-  padding: 1em;
-  background-color: var(--dark);
-  width: 9em;
-  box-shadow: .6em -1em 1em var(--darker);
-}
-
-.header-btn-wrapper {
+.menu-panel-wrapper {
   height: 6rem;
   /* margin: .5rem 0; */
 }
 
-.header-btn-wrapper:hover .header-panel {
+.menu-panel-wrapper:hover .menu-panel {
   display: block;
 }
 
-.header-panel h2 {
+.menu-panel h2 {
   margin: 0;
   text-align: center;
 }
 
-.header-panel p {
+.menu-panel p {
   font-size: 2.1rem;
 }
 
-.header-panel .header-delimiter {
+.menu-panel .menu-delimiter {
   margin: 1.2em 0 .5em 0;
   width: 100%;
 }
 
-.header-panel p {
+.menu-panel p {
   /* font-size: 4em; */
   margin: 0;
 }
 
-.header-panel button {
+.menu-panel button {
   font-size: 1em;
   margin: 0;
   padding: .3em .3em;
