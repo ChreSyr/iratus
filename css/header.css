@@ -45,15 +45,25 @@
 }
 
 .menu-panel-wrapper {
+  cursor: pointer;
   display: flex;
-  height: 6rem;
+  height: 5rem;
 
   & h1 {
     /* font-family: var(--fontfamily-simple); */
     font-size: x-large;
-    height: 5rem;
+    /* height: 5rem; */
     margin: .8rem 2rem;
     text-align: center;
+  }
+}
+
+.menu-panel-wrapper.home-btn:hover {
+  background-color: var(--light-green);
+  border-radius: 3px;
+
+  & h1 {
+    color: var(--darker);
   }
 }
 

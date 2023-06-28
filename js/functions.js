@@ -11,7 +11,7 @@ function ajustSquareSize() {
   // var windowWidth = window.innerWidth;
   // var windowHeight = window.innerHeight;
 
-  // console.log("Window Width: " + windowWidth, window.innerWidth < 1024, isMobileDevice());
+  // console.log("Window Width: " + windowWidth);
   // console.log("Window Height: " + windowHeight);
 
   // var clientWidth = document.body.clientWidth;
@@ -20,16 +20,22 @@ function ajustSquareSize() {
   // console.log("Document Width: " + clientWidth);
   // console.log("Document Height: " + clientHeight);
 
+  var clientWidth = document.firstElementChild.clientWidth;
+  var clientHeight = document.firstElementChild.clientHeight;
+
+  // console.log("HTML Width: " + clientWidth);
+  // console.log("HTML Height: " + clientHeight);
+
   var rootFontSize = window.getComputedStyle(document.documentElement).fontSize;
   var fontSizeValue = parseFloat(rootFontSize);
   // console.log("Root Font Size Value: " + fontSizeValue);
 
   // availible space for the baord and the players info
-  var availibleWidth = window.innerWidth - fontSizeValue * 2
-  if (window.innerWidth < 1024) {
-    var availibleHeight = window.innerHeight - fontSizeValue * ( 1 + 4 + 1 + 1 + 4 + 1 + 6 + 1 );
+  var availibleWidth = clientWidth - fontSizeValue * 2
+  if (clientWidth < 1024) {
+    var availibleHeight = clientHeight - fontSizeValue * ( 1 + 4 + 1 + 1 + 4 + 1 + 6 + 1 );
   } else {
-    var availibleHeight = window.innerHeight - fontSizeValue * ( 1 + 4 + 1 + 1 + 4 + 1 );
+    var availibleHeight = clientHeight - fontSizeValue * ( 1 + 4 + 1 + 1 + 4 + 1 );
   }
 
   // console.log("Availible Width: " + availibleWidth);
