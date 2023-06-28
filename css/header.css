@@ -59,10 +59,11 @@ header h1 {
   height: 100%;
   position: absolute;
   top: 0;
-  left: 50px;
+  left: 5rem;
   padding: 1em;
   background-color: var(--dark);
   width: 9em;
+  box-shadow: .6em -1em 1em var(--darker);
 }
 
 .header-btn-wrapper {
