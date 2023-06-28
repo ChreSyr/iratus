@@ -2,7 +2,11 @@
 // Handle when an option is selected in the style <select>
 function handleExperimentalSelect(type) {
   var selectedOption = document.getElementById("select-" + type).value;
-  document.getElementById('custom-' + type).setAttribute('href', 'css/experiments/' + type + '-' + selectedOption + '.css');
+  try {
+    document.getElementById('custom-' + type).setAttribute('href', 'css/experiments/' + type + '-' + selectedOption + '.css');
+  } catch (error) {
+    // file not found
+  }
 }
 
 // Open ko-fi.com in a new web page

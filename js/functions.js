@@ -26,7 +26,7 @@ function ajustSquareSize() {
 
   // availible space for the baord and the players info
   var availibleWidth = window.innerWidth - fontSizeValue * 2
-  var availibleHeight = window.innerHeight - fontSizeValue * ( 1 + 4 + 1 + 1 + 4 + 1 )
+  var availibleHeight = window.innerHeight - fontSizeValue * ( 1 + 4 + 1 + 1 + 4 + 1 + 6 + 1 )
 
   // console.log("Availible Width: " + availibleWidth);
   // console.log("Availible Height: " + availibleHeight);
@@ -36,6 +36,9 @@ function ajustSquareSize() {
   } else {
     var squareSize = Math.floor(Math.min(availibleWidth / 8, availibleHeight / 10));
   }
+
+  // we switch to desktop view at MAX * 8 + body.padding * 2 + header.width = 68 * 8 + 10 * 2 + 50 = 614px
+  squareSize = Math.min(squareSize, 68);  // No more than 68
 
   // console.log("Square Size: " + squareSize);
 
@@ -59,11 +62,6 @@ const cancelPromotion = (event) => {
   }
 }
 
-// Close settings
-// function closeSettings() {
-//   document.getElementById("overlay").style.display = "none";
-//   document.getElementsByClassName("settings")[0].style.display = "none";
-// }
 
 // Returns whether or not an event collides with a screen element
 function collide(event, element) {
@@ -241,12 +239,6 @@ function makePieceDraggable(element) {
   element.addEventListener('pointermove', pointermoveHandle);
   element.addEventListener('touchstart', stopScrollEvents);
 }
-
-// Open settings
-// function openSettings() {
-//   document.getElementById("overlay").style.display = "flex";
-//   document.getElementsByClassName("settings")[0].style.display = "flex";
-// }
 
 // Writes css code in <script id="board-styles-single">
 // This code defines the images of the pieces

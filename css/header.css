@@ -236,7 +236,7 @@ header h1 {
   }
 }
 
-@media (min-width: 960px) {
+@media (min-width: 614px) {
   header {
     align-items: normal;
     flex-direction: column;

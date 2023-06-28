@@ -10,6 +10,7 @@
 
 :root {
   font-size: 10px;
+  --desktop-minwidth: 500px;
   --fontfamily-main: "PierceRoman", "helvetica", sans-serif;
   --fontfamily-simple: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   --header-height: 5rem;
@@ -25,7 +26,7 @@
   --very-dark-green: rgb(10, 20, 10);
 }
 
-/* @media (min-width: 960px) {
+/* @media (min-width: 614px) {
   :root {
     --header-height: 15rem;
   }
@@ -41,7 +42,7 @@ body {
   overflow-x: clip;
 }
 
-@media (min-width: 960px) {
+@media (min-width: 614px) {
   body {
     margin: 1rem 1rem 1rem calc(var(--header-height) + 1rem);
   }
