@@ -159,7 +159,7 @@ function makePieceDraggable(element) {
   const supportsPointerEvents = window.PointerEvent !== undefined;
 
   const pointerdownHandle = (event) => {
-    // try {
+    event.preventDefault();
 
     if (event.clientX === undefined) {
       // TouchEvent has no clientX and no clientY
@@ -214,10 +214,6 @@ function makePieceDraggable(element) {
     wasSelected = element.piece === game.board.selectedPiece;
     element.piece.handlePointerDown();
 
-    // } catch (error) {
-    //   console.log(error);
-    // }
-
     if (supportsPointerEvents) {
       document.addEventListener("pointermove", pointermoveHandle);
       document.addEventListener("pointerup", pointerupHandle);
@@ -227,17 +223,6 @@ function makePieceDraggable(element) {
       document.addEventListener("mouseup", pointerupHandle);
       document.addEventListener("mouseleave", pointerupHandle);
     }
-
-    // if (isMobileDevice()) {
-    //   // User is on a mobile device
-    //   document.addEventListener("touchmove", pointermoveHandle);
-    //   document.addEventListener("touchend", pointerupHandle);
-    //   document.addEventListener("touchcancel", pointerupHandle);
-    // } else {
-    //   // User is on a desktop device
-    //   document.addEventListener("mousemove", pointermoveHandle);
-    //   document.addEventListener("mouseup", pointerupHandle);
-    // }
   };
 
   const pointerupHandle = (event) => {
