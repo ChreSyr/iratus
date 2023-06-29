@@ -98,7 +98,7 @@ function handlePointerDown(event) {
   closeMenu();
 }
 
-const supportsPointerEvents = window.PointerEvent !== undefined;
+// const supportsPointerEvents = window.PointerEvent !== undefined;
 
 document.addEventListener(
   supportsPointerEvents ? "pointerdown" : "mousedown",
@@ -115,6 +115,8 @@ document.addEventListener(
 //   // document.addEventListener('mousedown', event => {console.log("mousedown")});
 // }
 // document.addEventListener("pointerdown", handlePointerDown);
+
+/* PROMOTION */
 
 for (let promotionPiece of document.getElementsByClassName("promotion-piece")) {
   promotionPiece.addEventListener(
@@ -152,9 +154,3 @@ document
     supportsPointerEvents ? "pointerdown" : "mousedown",
     cancelPromotion
   );
-
-ajustSquareSize();
-
-// ATTACHING EVENT LISTENERS
-
-window.addEventListener("resize", ajustSquareSize);

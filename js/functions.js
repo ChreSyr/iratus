@@ -1,65 +1,3 @@
-// Change the property squareSize depending on screen size
-function ajustSquareSize() {
-  // var screenWidth = screen.width;
-  // var screenHeight = screen.height;
-
-  // console.log("Screen Width: " + screenWidth);
-  // console.log("Screen Height: " + screenHeight);
-
-  // var windowWidth = window.innerWidth;
-  // var windowHeight = window.innerHeight;
-
-  // console.log("Window Width: " + windowWidth);
-  // console.log("Window Height: " + windowHeight);
-
-  // var clientWidth = document.body.clientWidth;
-  // var clientHeight = document.body.clientHeight;
-
-  // console.log("Document Width: " + clientWidth);
-  // console.log("Document Height: " + clientHeight);
-
-  var clientWidth = document.firstElementChild.clientWidth;
-  var clientHeight = document.firstElementChild.clientHeight;
-
-  // console.log("HTML Width: " + clientWidth);
-  // console.log("HTML Height: " + clientHeight);
-
-  var rootFontSize = window.getComputedStyle(document.documentElement).fontSize;
-  var fontSizeValue = parseFloat(rootFontSize);
-  // console.log("Root Font Size Value: " + fontSizeValue);
-
-  // availible space for the baord and the players info
-  var availibleWidth = clientWidth - fontSizeValue * 2;
-  if (clientWidth < 1024) {
-    var availibleHeight =
-      clientHeight - fontSizeValue * (1 + 4 + 1 + 1 + 4 + 1 + 6 + 1);
-  } else {
-    var availibleHeight =
-      clientHeight - fontSizeValue * (1 + 4 + 1 + 1 + 4 + 1);
-  }
-
-  // console.log("Availible Width: " + availibleWidth);
-  // console.log("Availible Height: " + availibleHeight);
-
-  if (isMobileDevice()) {
-    var squareSize = Math.floor(availibleWidth / 8);
-  } else {
-    var squareSize = Math.floor(
-      Math.min(availibleWidth / 8, availibleHeight / 10)
-    );
-  }
-
-  // we switch to desktop view at MAX * 8 + body.padding * 2 + header.width = 68 * 8 + 10 * 2 + 50 = 614px
-  squareSize = Math.min(squareSize, 68); // No more than 68
-
-  // console.log("Square Size: " + squareSize);
-
-  document.documentElement.style.setProperty(
-    "--square-size",
-    squareSize + "px"
-  );
-}
-
 // Hide the promotion window and
 const cancelPromotion = (event) => {
   if (game.board.pawnToPromote) {
@@ -103,11 +41,6 @@ function hideInfo() {
   document.getElementById("info").style.display = "none";
 }
 
-// Return true if the user is using a mobile
-function isMobileDevice() {
-  return /Mobi|Android/i.test(navigator.userAgent);
-}
-
 // Add event listener on squares (like accessible, selected...)
 function makeSquareClickable(square) {
   const pointerdownHandle = (event) => {
@@ -132,7 +65,7 @@ function makeSquareClickable(square) {
     }
   };
 
-  const supportsPointerEvents = window.PointerEvent !== undefined;
+  // const supportsPointerEvents = window.PointerEvent !== undefined;
   square.addEventListener(
     supportsPointerEvents ? "pointerdown" : "mousedown",
     pointerdownHandle
@@ -156,7 +89,7 @@ function makePieceDraggable(element) {
   // const stopScrollEvents = (event) => {
   //   event.preventDefault();
   // };
-  const supportsPointerEvents = window.PointerEvent !== undefined;
+  // const supportsPointerEvents = window.PointerEvent !== undefined;
 
   const pointerdownHandle = (event) => {
     if (event.clientX === undefined) {

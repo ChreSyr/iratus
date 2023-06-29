@@ -52,7 +52,7 @@ body {
   background-color: var(--dark);
   font-family: var(--fontfamily-main);
   /* font-size: 1.4rem; */
-  margin: calc(var(--header-height) + 1rem) 1rem;
+  margin: calc(var(--header-height) + 1rem) 1rem 1rem;
   /* overflow-x: clip; */
 }
 
