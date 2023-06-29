@@ -24,16 +24,20 @@
   position: fixed;
   top: 0;
   width: var(--menu-bar-width);
+}
 
-  @media (min-width: 614px) {
+@media (min-width: 614px) {
+  .menu-bar-wrapper {
     --menu-bar-width: 5rem;
   }
 }
 
 .menu-bar-wrapper.closed-for-mobile {
   display: none;
+}
 
-  @media (min-width: 614px) {
+@media (min-width: 614px) {
+  .menu-bar-wrapper.closed-for-mobile {
     display: block;
   }
 }
@@ -48,23 +52,23 @@
   cursor: pointer;
   display: flex;
   height: 5rem;
+}
 
-  & h1 {
-    /* font-family: var(--fontfamily-simple); */
-    font-size: x-large;
-    /* height: 5rem; */
-    margin: .8rem 2rem;
-    text-align: center;
-  }
+.menu-panel-wrapper h1 {
+  /* font-family: var(--fontfamily-simple); */
+  font-size: x-large;
+  /* height: 5rem; */
+  margin: .8rem 2rem;
+  text-align: center;
 }
 
 .menu-panel-wrapper.home-btn:hover {
   background-color: var(--light-green);
   border-radius: 3px;
+}
 
-  & h1 {
-    color: var(--darker);
-  }
+.menu-panel-wrapper.home-btn:hover h1 {
+  color: var(--darker);
 }
 
 .menu-panel {
@@ -164,135 +168,134 @@ header h1 {
 
 .iratusrules-wrapper {
   overflow-y: hidden;
+}
 
-  .newrules-btn {
-    position: relative;
-    z-index: 2;
-  }
+.iratusrules-wrapper .newrules-btn {
+  position: relative;
+  z-index: 2;
+}
 
-  .rules-sub-grid {
-    display: grid;
-    gap: .3em;
-    grid-template-columns: repeat(3, 1fr);
-    padding: .3em 0 0 0;
-    position: relative;
-    top: -270px;
-    transition: top 1s;
+.iratusrules-wrapper .rules-sub-grid {
+  display: grid;
+  gap: .3em;
+  grid-template-columns: repeat(3, 1fr);
+  padding: .3em 0 0 0;
+  position: relative;
+  top: -270px;
+  transition: top 1s;
+}
 
-    & button {
-      aspect-ratio: 1 / 1;
-      background-color: transparent;
-      background-repeat: no-repeat;
-      background-size: contain;
-      margin: 0;
-    }
+.iratusrules-wrapper .rules-sub-grid button {
+  aspect-ratio: 1 / 1;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin: 0;
+}
 
-    & button.s {
-      background-image: url("../images/bs.png");
-    }
+.iratusrules-wrapper .rules-sub-grid button.s {
+  background-image: url("../images/bs.png");
+}
 
-    & button.s:hover {
-      background-image: url("../images/ws.png");
-    }
+.iratusrules-wrapper .rules-sub-grid button.s:hover {
+  background-image: url("../images/ws.png");
+}
 
-    & button.es {
-      background-image: url("../images/bes.png");
-    }
+.iratusrules-wrapper .rules-sub-grid button.es {
+  background-image: url("../images/bes.png");
+}
 
-    & button.es:hover {
-      background-image: url("../images/wes.png");
-    }
+.iratusrules-wrapper .rules-sub-grid button.es:hover {
+  background-image: url("../images/wes.png");
+}
 
-    & button.d {
-      background-image: url("../images/bd.png");
-    }
+.iratusrules-wrapper .rules-sub-grid button.d {
+  background-image: url("../images/bd.png");
+}
 
-    & button.d:hover {
-      background-image: url("../images/wd.png");
-    }
+.iratusrules-wrapper .rules-sub-grid button.d:hover {
+  background-image: url("../images/wd.png");
+}
 
-    & button.ed {
-      background-image: url("../images/bed.png");
-    }
+.iratusrules-wrapper .rules-sub-grid button.ed {
+  background-image: url("../images/bed.png");
+}
 
-    & button.ed:hover {
-      background-image: url("../images/wed.png");
-    }
+.iratusrules-wrapper .rules-sub-grid button.ed:hover {
+  background-image: url("../images/wed.png");
+}
 
-    & button.dy {
-      background-image: url("../images/bdy.png");
-    }
+.iratusrules-wrapper .rules-sub-grid button.dy {
+  background-image: url("../images/bdy.png");
+}
 
-    & button.dy:hover {
-      background-image: url("../images/wdy.png");
-    }
+.iratusrules-wrapper .rules-sub-grid button.dy:hover {
+  background-image: url("../images/wdy.png");
+}
 
-    & button.p {
-      background-image: url("../images/bp.png");
-    }
+.iratusrules-wrapper .rules-sub-grid button.p {
+  background-image: url("../images/bp.png");
+}
 
-    & button.p:hover {
-      background-image: url("../images/wp.png");
-    }
+.iratusrules-wrapper .rules-sub-grid button.p:hover {
+  background-image: url("../images/wp.png");
+}
 
-    & button.g {
-      background-image: url("../images/bg.png");
-    }
+.iratusrules-wrapper .rules-sub-grid button.g {
+  background-image: url("../images/bg.png");
+}
 
-    & button.g:hover {
-      background-image: url("../images/wg.png");
-    }
+.iratusrules-wrapper .rules-sub-grid button.g:hover {
+  background-image: url("../images/wg.png");
+}
 
-    & button.i {
-      background-image: url("../images/bi.png");
-    }
+.iratusrules-wrapper .rules-sub-grid button.i {
+  background-image: url("../images/bi.png");
+}
 
-    & button.i:hover {
-      background-image: url("../images/wi.png");
-    }
-  }
+.iratusrules-wrapper .rules-sub-grid button.i:hover {
+  background-image: url("../images/wi.png");
+}
 
-  .newrules-btn:hover+.rules-sub-grid {
-    top: 0;
-  }
+.iratusrules-wrapper .newrules-btn:hover+.rules-sub-grid {
+  top: 0;
+}
 
-  .rules-sub-grid:hover {
-    top: 0;
-  }
+.iratusrules-wrapper .rules-sub-grid:hover {
+  top: 0;
 }
 
 /* SETTINGS */
 
 .settings {
-
   font-family: var(--fontfamily-simple);
+}
 
-  & h3 {
-    font-size: 2rem;
-    margin-top: 0;
-  }
+.settings h3 {
+  font-size: 2rem;
+  margin-top: 0;
+}
 
-  & ul {
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    margin-bottom: 10px;
-    padding: 0;
-  }
+.settings ul {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  margin-bottom: 10px;
+  padding: 0;
+}
 
-  & li {
-    display: flex;
-    justify-content: space-between;
-  }
+.settings li {
+  display: flex;
+  justify-content: space-between;
+}
 
-  & label {
-    font-size: 1.5rem;
-    margin: auto 0;
-  }
+.settings label {
+  font-size: 1.5rem;
+  margin: auto 0;
+}
 
-  & select {
-    width: 60%;
-  }
+.settings select {
+  width: 60%;
 }
 
 @media (min-width: 614px) {
