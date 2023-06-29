@@ -81,6 +81,7 @@
 
 #board-single {
   background-image: url("../images/iratusboard-small.jpg");
+  position: relative;
 }
 
 @media only screen and (min-width: 614px) {
@@ -90,6 +91,7 @@
 }
 
 #board-single .piece {
+  background-repeat: no-repeat;
   background-size: 100%;
   cursor: pointer;
   cursor: grab;
