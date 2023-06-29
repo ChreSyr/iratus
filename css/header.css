@@ -186,11 +186,12 @@ header h1 {
 }
 
 .iratusrules-wrapper .rules-sub-grid button {
-  aspect-ratio: 1 / 1;
   background-color: transparent;
   background-repeat: no-repeat;
   background-size: contain;
   margin: 0;
+  padding-bottom: 100%;
+  padding-top: 0;
 }
 
 .iratusrules-wrapper .rules-sub-grid button.s {

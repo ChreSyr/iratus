@@ -45,7 +45,6 @@
 .player-info .captured-piece {
   background-size: contain;
   height: 80%;
-  aspect-ratio: 1 / 1;
   margin-left: -2rem;
 }
 
@@ -91,12 +90,11 @@
 }
 
 #board-single .piece {
-  aspect-ratio: 1 / 1;
   background-size: 100%;
   cursor: pointer;
   cursor: grab;
   cursor: -webkit-grab;
-  /* height: 10%; */
+  height: 10%;
   left: 0;
   overflow: hidden;
   position: absolute;
@@ -248,7 +246,6 @@
 
 #info img {
   flex: 5 1 auto;
-  aspect-ratio: auto;
   margin-top: -1.2em;
   max-width: 8em;
   max-height: 8em;
