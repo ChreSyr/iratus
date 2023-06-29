@@ -77,23 +77,25 @@ setPiecesStyle();
 // });
 
 function handlePointerDown(event) {
+  const boardDiv = document.getElementById("board-single");
+  if (boardDiv.contains(event.target) && boardDiv !== event.target) {
+    closeMenu();
+    return;
+  }
+
+  cancelPromotion();
+  let selectedPiece = game.board.selectedPiece;
+  if (selectedPiece) {
+    selectedPiece.unselect();
+  }
+
   if (
     document.getElementsByClassName("menu-wrapper")[0].contains(event.target)
   ) {
     return;
   }
 
-  const boardDiv = document.getElementById("board-single");
-  if (boardDiv.contains(event.target) && boardDiv !== event.target) {
-    return;
-  }
-
   closeMenu();
-  cancelPromotion();
-  let selectedPiece = game.board.selectedPiece;
-  if (selectedPiece) {
-    selectedPiece.unselect();
-  }
 }
 
 const supportsPointerEvents = window.PointerEvent !== undefined;

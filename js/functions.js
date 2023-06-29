@@ -174,15 +174,13 @@ function makePieceDraggable(element) {
       `.square[data-row="${element.piece.row}"][data-col="${element.piece.col}"]`
     );
     if (squareAccessible) {
-      if (isMobileDevice()) {
-        // instant move
-        let selectedPiece = game.board.selectedPiece;
-        selectedPiece.unselect();
-        game.move(
-          (start = [selectedPiece.row, selectedPiece.col]),
-          (end = [parseInt(element.piece.row), parseInt(element.piece.col)])
-        );
-      }
+      // instant move
+      let selectedPiece = game.board.selectedPiece;
+      selectedPiece.unselect();
+      game.move(
+        (start = [selectedPiece.row, selectedPiece.col]),
+        (end = [parseInt(element.piece.row), parseInt(element.piece.col)])
+      );
       return;
     }
 
