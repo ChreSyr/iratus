@@ -41,6 +41,9 @@ function clickMenuBarBtn(type) {
   if (document.firstElementChild.clientWidth < 614) {
     return;
   }
+  if (isMobileDevice()) {
+    return;
+  }
 
   switch (type) {
     case "rules":
