@@ -286,54 +286,14 @@
       <h1>Iratus</h1>
     </header>
 
-    <div class="contact-container">
-      <style>
-        /* Customize the colors of the Google Form */
-        .ss-form-container {
-          background-color: #f5f5f5;
-          color: #333333;
-        }
-
-        .ss-form-question-title {
-          color: #666666;
-        }
-
-        .ss-choice-label {
-          color: #333333;
-        }
-
-        .ss-choice-label:hover {
-          background-color: #f0f0f0;
-        }
-
-        .ss-form-title {
-          color: #333333;
-        }
-
-        .ss-form-description {
-          color: #666666;
-        }
-
-        .ss-footer-message {
-          color: #666666;
-        }
-
-        .ss-submit-button {
-          background-color: #333333;
-          color: #ffffff;
-        }
-
-        .ss-submit-button:hover {
-          background-color: #666666;
-        }
-      </style>
-      <iframe
-        class="contact"
-        src="https://docs.google.com/forms/d/e/1FAIpQLSfOIn1hVw1mTQcS3C5MKnhQzRJ-_Ujzawpwk9t7CfKvR79vuQ/viewform?embedded=true"
-        >Chargement…</iframe
-      >
-    </div>
+    <div class="load-wrapper"><div class="load"></div></div>
+    <iframe
+      id="form"
+      onload="formIsLoaded()"
+      src="https://docs.google.com/forms/d/e/1FAIpQLSfOIn1hVw1mTQcS3C5MKnhQzRJ-_Ujzawpwk9t7CfKvR79vuQ/viewform?embedded=true"
+    ></iframe>
 
     <script type="text/javascript" src="js/sharedscript.js" defer></script>
+    <script type="text/javascript" src="js/contact.js" defer></script>
   </body>
 </html>

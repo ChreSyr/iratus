@@ -1,4 +1,29 @@
-.contact {
+.load-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.load {
+  animation: spin 1s infinite linear;
+  border: 5px solid #f3f3f3;
+  border-top-color: #333;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}
+
+#form {
   border: 0;
   width: 100%;
   height: calc(100vh - 2.9rem - var(--header-height));
@@ -6,7 +31,7 @@
 }
 
 @media (min-width: 614px) {
-  .contact {
+  #form {
     height: calc(100vh - 2.9rem);
   }
 }
