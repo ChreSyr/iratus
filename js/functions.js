@@ -135,13 +135,10 @@ function makeSquareClickable(square) {
   if (isMobileDevice()) {
     // User is on a mobile device
     square.addEventListener("touchstart", pointerdownHandle);
-    // element.addEventListener('touchstart', event => {console.log("touchstart")});
   } else {
     // User is on a desktop device
     square.addEventListener("mousedown", pointerdownHandle);
-    // element.addEventListener('mousedown', event => {console.log("mousedown")});
   }
-  // square.addEventListener('pointerdown', pointerdownHandle);
 }
 
 // Add event listeners on pieces for movements
@@ -150,9 +147,10 @@ function makePieceDraggable(element) {
   let dragging = false;
   let wasSelected = false;
 
-  const stopScrollEvents = (event) => {
-    event.preventDefault();
-  };
+  // const stopScrollEvents = (event) => {
+  //   event.preventDefault();
+  // };
+  const supportsPointerEvents = window.PointerEvent !== undefined;
 
   const pointerdownHandle = (event) => {
     // try {
@@ -215,6 +213,27 @@ function makePieceDraggable(element) {
     // } catch (error) {
     //   console.log(error);
     // }
+
+    if (supportsPointerEvents) {
+      document.addEventListener("pointermove", pointermoveHandle);
+      document.addEventListener("pointerup", pointerupHandle);
+      document.addEventListener("pointercancel", pointerupHandle);
+    } else {
+      document.addEventListener("mousemove", pointermoveHandle);
+      document.addEventListener("mouseup", pointerupHandle);
+      document.addEventListener("mouseleave", pointerupHandle);
+    }
+
+    // if (isMobileDevice()) {
+    //   // User is on a mobile device
+    //   document.addEventListener("touchmove", pointermoveHandle);
+    //   document.addEventListener("touchend", pointerupHandle);
+    //   document.addEventListener("touchcancel", pointerupHandle);
+    // } else {
+    //   // User is on a desktop device
+    //   document.addEventListener("mousemove", pointermoveHandle);
+    //   document.addEventListener("mouseup", pointerupHandle);
+    // }
   };
 
   const pointerupHandle = (event) => {
@@ -240,6 +259,27 @@ function makePieceDraggable(element) {
     if (element.piece && wasSelected) {
       element.piece.unselect();
     } // else, the piece has moved
+
+    if (supportsPointerEvents) {
+      document.removeEventListener("pointermove", pointermoveHandle);
+      document.removeEventListener("pointerup", pointerupHandle);
+      document.removeEventListener("pointercancel", pointerupHandle);
+    } else {
+      document.removeEventListener("mousemove", pointermoveHandle);
+      document.removeEventListener("mouseup", pointerupHandle);
+      document.removeEventListener("mouseleave", pointerupHandle);
+    }
+
+    // if (isMobileDevice()) {
+    //   // User is on a mobile device
+    //   document.removeEventListener("touchmove", pointermoveHandle);
+    //   document.removeEventListener("touchend", pointerupHandle);
+    //   document.removeEventListener("touchcancel", pointerupHandle);
+    // } else {
+    //   // User is on a desktop device
+    //   document.removeEventListener("mousemove", pointermoveHandle);
+    //   document.removeEventListener("mouseup", pointerupHandle);
+    // }
   };
 
   const pointermoveHandle = (event) => {
@@ -272,22 +312,53 @@ function makePieceDraggable(element) {
   // element.addEventListener('pointerdown', pointerdownHandle);
   // pointerdown is the newer version of mousedown & touchstart
   // element.addEventListener('mousedown', pointerdownHandle);
-  // element.addEventListener('mousedown', event => {console.log("mousedown")});
 
-  if (isMobileDevice()) {
-    // User is on a mobile device
-    element.addEventListener("touchstart", pointerdownHandle);
-    // element.addEventListener('touchstart', event => {console.log("touchstart")});
-  } else {
-    // User is on a desktop device
-    element.addEventListener("mousedown", pointerdownHandle);
-    // element.addEventListener('mousedown', event => {console.log("mousedown")});
-  }
-  element.addEventListener("touchstart", pointerdownHandle);
-  element.addEventListener("pointerup", pointerupHandle);
-  element.addEventListener("pointercancel", pointerupHandle);
-  element.addEventListener("pointermove", pointermoveHandle);
-  element.addEventListener("touchstart", stopScrollEvents);
+  element.addEventListener(
+    supportsPointerEvents ? "pointerdown" : "mousedown",
+    pointerdownHandle
+  );
+  // if (isMobileDevice()) {
+  //   // User is on a mobile device
+  //   element.addEventListener("touchstart", pointerdownHandle);
+  //   // element.addEventListener("touchmove", pointermoveHandle);
+  //   // element.addEventListener("touchend", pointerupHandle);
+  //   // element.addEventListener("touchcancel", pointerupHandle);
+  // } else {
+  //   // User is on a desktop device
+  //   element.addEventListener("mousedown", pointerdownHandle);
+  //   // element.addEventListener("mousemove", pointermoveHandle);
+  //   // element.addEventListener("mouseup", pointerupHandle);
+  // }
+  // element.addEventListener("touchstart", pointerdownHandle);
+  // element.addEventListener("pointerup", pointerupHandle);
+  // element.addEventListener("pointercancel", pointerupHandle);
+  // element.addEventListener("pointermove", pointermoveHandle);
+  // element.addEventListener("touchstart", stopScrollEvents);
+}
+
+// Add event listeners on pieces for movements
+function makePieceDraggable(element) {
+  const pointerdownHandle = (event) => {
+    doDownStuff();
+
+    document.addEventListener("pointermove", pointermoveHandle);
+    document.addEventListener("pointerup", pointerupHandle);
+    document.addEventListener("pointercancel", pointerupHandle);
+  };
+
+  const pointermoveHandle = (event) => {
+    doMoveStuff();
+  };
+
+  const pointerupHandle = (event) => {
+    doUpStuff();
+
+    document.removeEventListener("pointermove", pointermoveHandle);
+    document.removeEventListener("pointerup", pointerupHandle);
+    document.removeEventListener("pointercancel", pointerupHandle);
+  };
+
+  element.addEventListener("pointerdown", pointerdownHandle);
 }
 
 // Writes css code in <script id="board-styles-single">
@@ -319,12 +390,12 @@ function setPiecesStyle(style = null) {
   for (let color of colors) {
     for (let pieceID of pieceIDs) {
       css += `\
-      #board-single .piece.${color}${pieceID}, #board-single .promotion-piece.${color}${pieceID} {
-        background-image: url(images/${color}${pieceID}.png);
-      }
-      #board-single .dynamited.${color}${pieceID} {
-        background-image: url(images/${color}${pieceID}.png), url(images/${color}dy.png);
-      }
+     #board-single .piece.${color}${pieceID}, #board-single .promotion-piece.${color}${pieceID} {
+       background-image: url(images/${color}${pieceID}.png);
+     }
+     #board-single .dynamited.${color}${pieceID} {
+       background-image: url(images/${color}${pieceID}.png), url(images/${color}dy.png);
+     }
 `;
     }
   }
