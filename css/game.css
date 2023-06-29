@@ -1046,321 +1046,321 @@
 /* ROTATION PIECES */
 
 .rotation-pieces.black-to-move .square-0 {
-  transform: translate(000%, 000%) rotateX(180deg);
+  transform: translate(000%, 000%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-10 {
-  transform: translate(100%, 000%) rotateX(180deg);
+  transform: translate(100%, 000%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-20 {
-  transform: translate(200%, 000%) rotateX(180deg);
+  transform: translate(200%, 000%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-30 {
-  transform: translate(300%, 000%) rotateX(180deg);
+  transform: translate(300%, 000%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-40 {
-  transform: translate(400%, 000%) rotateX(180deg);
+  transform: translate(400%, 000%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-50 {
-  transform: translate(500%, 000%) rotateX(180deg);
+  transform: translate(500%, 000%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-60 {
-  transform: translate(600%, 000%) rotateX(180deg);
+  transform: translate(600%, 000%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-70 {
-  transform: translate(700%, 000%) rotateX(180deg);
+  transform: translate(700%, 000%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-1 {
-  transform: translate(000%, 100%) rotateX(180deg);
+  transform: translate(000%, 100%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-11 {
-  transform: translate(100%, 100%) rotateX(180deg);
+  transform: translate(100%, 100%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-21 {
-  transform: translate(200%, 100%) rotateX(180deg);
+  transform: translate(200%, 100%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-31 {
-  transform: translate(300%, 100%) rotateX(180deg);
+  transform: translate(300%, 100%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-41 {
-  transform: translate(400%, 100%) rotateX(180deg);
+  transform: translate(400%, 100%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-51 {
-  transform: translate(500%, 100%) rotateX(180deg);
+  transform: translate(500%, 100%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-61 {
-  transform: translate(600%, 100%) rotateX(180deg);
+  transform: translate(600%, 100%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-71 {
-  transform: translate(700%, 100%) rotateX(180deg);
+  transform: translate(700%, 100%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-2 {
-  transform: translate(000%, 200%) rotateX(180deg);
+  transform: translate(000%, 200%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-12 {
-  transform: translate(100%, 200%) rotateX(180deg);
+  transform: translate(100%, 200%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-22 {
-  transform: translate(200%, 200%) rotateX(180deg);
+  transform: translate(200%, 200%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-32 {
-  transform: translate(300%, 200%) rotateX(180deg);
+  transform: translate(300%, 200%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-42 {
-  transform: translate(400%, 200%) rotateX(180deg);
+  transform: translate(400%, 200%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-52 {
-  transform: translate(500%, 200%) rotateX(180deg);
+  transform: translate(500%, 200%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-62 {
-  transform: translate(600%, 200%) rotateX(180deg);
+  transform: translate(600%, 200%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-72 {
-  transform: translate(700%, 200%) rotateX(180deg);
+  transform: translate(700%, 200%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-3 {
-  transform: translate(000%, 300%) rotateX(180deg);
+  transform: translate(000%, 300%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-13 {
-  transform: translate(100%, 300%) rotateX(180deg);
+  transform: translate(100%, 300%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-23 {
-  transform: translate(200%, 300%) rotateX(180deg);
+  transform: translate(200%, 300%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-33 {
-  transform: translate(300%, 300%) rotateX(180deg);
+  transform: translate(300%, 300%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-43 {
-  transform: translate(400%, 300%) rotateX(180deg);
+  transform: translate(400%, 300%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-53 {
-  transform: translate(500%, 300%) rotateX(180deg);
+  transform: translate(500%, 300%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-63 {
-  transform: translate(600%, 300%) rotateX(180deg);
+  transform: translate(600%, 300%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-73 {
-  transform: translate(700%, 300%) rotateX(180deg);
+  transform: translate(700%, 300%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-4 {
-  transform: translate(000%, 400%) rotateX(180deg);
+  transform: translate(000%, 400%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-14 {
-  transform: translate(100%, 400%) rotateX(180deg);
+  transform: translate(100%, 400%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-24 {
-  transform: translate(200%, 400%) rotateX(180deg);
+  transform: translate(200%, 400%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-34 {
-  transform: translate(300%, 400%) rotateX(180deg);
+  transform: translate(300%, 400%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-44 {
-  transform: translate(400%, 400%) rotateX(180deg);
+  transform: translate(400%, 400%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-54 {
-  transform: translate(500%, 400%) rotateX(180deg);
+  transform: translate(500%, 400%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-64 {
-  transform: translate(600%, 400%) rotateX(180deg);
+  transform: translate(600%, 400%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-74 {
-  transform: translate(700%, 400%) rotateX(180deg);
+  transform: translate(700%, 400%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-5 {
-  transform: translate(000%, 500%) rotateX(180deg);
+  transform: translate(000%, 500%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-15 {
-  transform: translate(100%, 500%) rotateX(180deg);
+  transform: translate(100%, 500%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-25 {
-  transform: translate(200%, 500%) rotateX(180deg);
+  transform: translate(200%, 500%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-35 {
-  transform: translate(300%, 500%) rotateX(180deg);
+  transform: translate(300%, 500%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-45 {
-  transform: translate(400%, 500%) rotateX(180deg);
+  transform: translate(400%, 500%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-55 {
-  transform: translate(500%, 500%) rotateX(180deg);
+  transform: translate(500%, 500%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-65 {
-  transform: translate(600%, 500%) rotateX(180deg);
+  transform: translate(600%, 500%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-75 {
-  transform: translate(700%, 500%) rotateX(180deg);
+  transform: translate(700%, 500%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-6 {
-  transform: translate(000%, 600%) rotateX(180deg);
+  transform: translate(000%, 600%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-16 {
-  transform: translate(100%, 600%) rotateX(180deg);
+  transform: translate(100%, 600%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-26 {
-  transform: translate(200%, 600%) rotateX(180deg);
+  transform: translate(200%, 600%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-36 {
-  transform: translate(300%, 600%) rotateX(180deg);
+  transform: translate(300%, 600%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-46 {
-  transform: translate(400%, 600%) rotateX(180deg);
+  transform: translate(400%, 600%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-56 {
-  transform: translate(500%, 600%) rotateX(180deg);
+  transform: translate(500%, 600%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-66 {
-  transform: translate(600%, 600%) rotateX(180deg);
+  transform: translate(600%, 600%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-76 {
-  transform: translate(700%, 600%) rotateX(180deg);
+  transform: translate(700%, 600%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-7 {
-  transform: translate(000%, 700%) rotateX(180deg);
+  transform: translate(000%, 700%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-17 {
-  transform: translate(100%, 700%) rotateX(180deg);
+  transform: translate(100%, 700%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-27 {
-  transform: translate(200%, 700%) rotateX(180deg);
+  transform: translate(200%, 700%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-37 {
-  transform: translate(300%, 700%) rotateX(180deg);
+  transform: translate(300%, 700%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-47 {
-  transform: translate(400%, 700%) rotateX(180deg);
+  transform: translate(400%, 700%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-57 {
-  transform: translate(500%, 700%) rotateX(180deg);
+  transform: translate(500%, 700%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-67 {
-  transform: translate(600%, 700%) rotateX(180deg);
+  transform: translate(600%, 700%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-77 {
-  transform: translate(700%, 700%) rotateX(180deg);
+  transform: translate(700%, 700%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-8 {
-  transform: translate(000%, 800%) rotateX(180deg);
+  transform: translate(000%, 800%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-18 {
-  transform: translate(100%, 800%) rotateX(180deg);
+  transform: translate(100%, 800%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-28 {
-  transform: translate(200%, 800%) rotateX(180deg);
+  transform: translate(200%, 800%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-38 {
-  transform: translate(300%, 800%) rotateX(180deg);
+  transform: translate(300%, 800%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-48 {
-  transform: translate(400%, 800%) rotateX(180deg);
+  transform: translate(400%, 800%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-58 {
-  transform: translate(500%, 800%) rotateX(180deg);
+  transform: translate(500%, 800%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-68 {
-  transform: translate(600%, 800%) rotateX(180deg);
+  transform: translate(600%, 800%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-78 {
-  transform: translate(700%, 800%) rotateX(180deg);
+  transform: translate(700%, 800%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-9 {
-  transform: translate(000%, 900%) rotateX(180deg);
+  transform: translate(000%, 900%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-19 {
-  transform: translate(100%, 900%) rotateX(180deg);
+  transform: translate(100%, 900%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-29 {
-  transform: translate(200%, 900%) rotateX(180deg);
+  transform: translate(200%, 900%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-39 {
-  transform: translate(300%, 900%) rotateX(180deg);
+  transform: translate(300%, 900%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-49 {
-  transform: translate(400%, 900%) rotateX(180deg);
+  transform: translate(400%, 900%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-59 {
-  transform: translate(500%, 900%) rotateX(180deg);
+  transform: translate(500%, 900%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-69 {
-  transform: translate(600%, 900%) rotateX(180deg);
+  transform: translate(600%, 900%) rotate(180deg);
 }
 
 .rotation-pieces.black-to-move .square-79 {
-  transform: translate(700%, 900%) rotateX(180deg);
+  transform: translate(700%, 900%) rotate(180deg);
 }

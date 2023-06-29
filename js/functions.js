@@ -202,7 +202,7 @@ function makePieceDraggable(element) {
       }%, ${(element.piece.row + pos.y / squareSize) * 100}%)`;
     }
     if (board.game.hasFlippedPieces()) {
-      element.style.transform += " rotateX(180deg)";
+      element.style.transform += " rotate(180deg)";
     }
     element.classList.add("dragging");
     // element.setPointerCapture(event.pointerId);
@@ -305,7 +305,7 @@ function makePieceDraggable(element) {
       }%, ${(element.piece.row + pos.y / squareSize) * 100}%)`;
     }
     if (board.game.hasFlippedPieces()) {
-      element.style.transform += " rotateX(180deg)";
+      element.style.transform += " rotate(180deg)";
     }
   };
 
