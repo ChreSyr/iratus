@@ -306,6 +306,10 @@ Piece.prototype = {
     if (this.cssClass === "phantom") {
       this.widget.classList.add("phantom");
     }
+    if (this.dynamited) {
+      // happens when uncapture
+      this.widget.classList.add("dynamited");
+    }
     this.widget.piece = this;
     makePieceDraggable(this.widget);
     this.board.widget.appendChild(this.widget);
