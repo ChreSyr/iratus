@@ -157,6 +157,12 @@ function makePieceDraggable(element) {
   const pointerdownHandle = (event) => {
     // try {
 
+    if (event.clientX === undefined) {
+      // TouchEvent has no clientX and no clientY
+      event.clientX = event.changedTouches[0].clientX;
+      event.clientY = event.changedTouches[0].clientY;
+    }
+
     closeMenu();
     cancelPromotion();
 
