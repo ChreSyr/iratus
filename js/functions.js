@@ -336,31 +336,6 @@ function makePieceDraggable(element) {
   // element.addEventListener("touchstart", stopScrollEvents);
 }
 
-// Add event listeners on pieces for movements
-function makePieceDraggable(element) {
-  const pointerdownHandle = (event) => {
-    doDownStuff();
-
-    document.addEventListener("pointermove", pointermoveHandle);
-    document.addEventListener("pointerup", pointerupHandle);
-    document.addEventListener("pointercancel", pointerupHandle);
-  };
-
-  const pointermoveHandle = (event) => {
-    doMoveStuff();
-  };
-
-  const pointerupHandle = (event) => {
-    doUpStuff();
-
-    document.removeEventListener("pointermove", pointermoveHandle);
-    document.removeEventListener("pointerup", pointerupHandle);
-    document.removeEventListener("pointercancel", pointerupHandle);
-  };
-
-  element.addEventListener("pointerdown", pointerdownHandle);
-}
-
 // Writes css code in <script id="board-styles-single">
 // This code defines the images of the pieces
 function setPiecesStyle(style = null) {
