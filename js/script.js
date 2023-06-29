@@ -58,8 +58,6 @@
 
 var game;
 
-// try {
-
 game = new Game(IratusBoard);
 
 setPiecesStyle();
@@ -98,54 +96,60 @@ function handlePointerDown(event) {
   }
 }
 
-if (isMobileDevice()) {
-  // User is on a mobile device
-  document.addEventListener("touchstart", handlePointerDown);
-  // document.addEventListener('touchstart', event => {console.log("touchstart")});
-} else {
-  // User is on a desktop device
-  document.addEventListener("mousedown", handlePointerDown);
-  // document.addEventListener('mousedown', event => {console.log("mousedown")});
-}
+const supportsPointerEvents = window.PointerEvent !== undefined;
+
+document.addEventListener(
+  supportsPointerEvents ? "pointerdown" : "mousedown",
+  handlePointerDown
+);
+
+// if (isMobileDevice()) {
+//   // User is on a mobile device
+//   document.addEventListener("touchstart", handlePointerDown);
+//   // document.addEventListener('touchstart', event => {console.log("touchstart")});
+// } else {
+//   // User is on a desktop device
+//   document.addEventListener("mousedown", handlePointerDown);
+//   // document.addEventListener('mousedown', event => {console.log("mousedown")});
+// }
 // document.addEventListener("pointerdown", handlePointerDown);
 
 for (let promotionPiece of document.getElementsByClassName("promotion-piece")) {
-  promotionPiece.addEventListener("pointerdown", (event) => {
-    // TODO : remove pointerdown
-    const color = game.board.pawnToPromote.color;
-    lastMove = game.movesHistory.slice(-1)[0];
-    lastMove.executeCommand(
-      new Transform(
-        game.board.pawnToPromote,
-        Pawn.prototype,
-        pieceClassesByID[promotionPiece.classList[1]].prototype
-      )
-    );
-    lastMove.notation += "=" + promotionPiece.classList[1].toUpperCase();
-    game.board.pawnToPromote = null;
-    game.board.updateAllValidMoves();
-    game.checkForEnd();
+  promotionPiece.addEventListener(
+    supportsPointerEvents ? "pointerdown" : "mousedown",
+    (event) => {
+      const color = game.board.pawnToPromote.color;
+      lastMove = game.movesHistory.slice(-1)[0];
+      lastMove.executeCommand(
+        new Transform(
+          game.board.pawnToPromote,
+          Pawn.prototype,
+          pieceClassesByID[promotionPiece.classList[1]].prototype
+        )
+      );
+      lastMove.notation += "=" + promotionPiece.classList[1].toUpperCase();
+      game.board.pawnToPromote = null;
+      game.board.updateAllValidMoves();
+      game.checkForEnd();
 
-    let promotionWindow =
-      document.getElementsByClassName("promotion-window")[0];
-    promotionWindow.style.display = "none";
+      let promotionWindow =
+        document.getElementsByClassName("promotion-window")[0];
+      promotionWindow.style.display = "none";
 
-    let promotionPieces = document.getElementsByClassName("promotion-piece");
-    for (let promotionPiece of promotionPieces) {
-      promotionPiece.classList.remove(color + promotionPiece.classList[1]);
+      let promotionPieces = document.getElementsByClassName("promotion-piece");
+      for (let promotionPiece of promotionPieces) {
+        promotionPiece.classList.remove(color + promotionPiece.classList[1]);
+      }
     }
-  });
+  );
 }
 
 document
   .getElementsByClassName("promotion-cancel")[0]
-  .addEventListener("pointerdown", cancelPromotion); // TODO : remove pointerdown
-
-// } catch (error) {
-//   console.log(error);
-//   alert(error);
-//   alert(error.stack);
-// }
+  .addEventListener(
+    supportsPointerEvents ? "pointerdown" : "mousedown",
+    cancelPromotion
+  );
 
 ajustSquareSize();
 

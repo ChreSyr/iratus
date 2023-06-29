@@ -108,7 +108,7 @@ function isMobileDevice() {
   return /Mobi|Android/i.test(navigator.userAgent);
 }
 
-// Add pointerdown listener on squares (like accessible, selected...)
+// Add event listener on squares (like accessible, selected...)
 function makeSquareClickable(square) {
   const pointerdownHandle = (event) => {
     closeMenu();
@@ -132,13 +132,19 @@ function makeSquareClickable(square) {
     }
   };
 
-  if (isMobileDevice()) {
-    // User is on a mobile device
-    square.addEventListener("touchstart", pointerdownHandle);
-  } else {
-    // User is on a desktop device
-    square.addEventListener("mousedown", pointerdownHandle);
-  }
+  const supportsPointerEvents = window.PointerEvent !== undefined;
+  square.addEventListener(
+    supportsPointerEvents ? "pointerdown" : "mousedown",
+    pointerdownHandle
+  );
+
+  // if (isMobileDevice()) {
+  //   // User is on a mobile device
+  //   square.addEventListener("touchstart", pointerdownHandle);
+  // } else {
+  //   // User is on a desktop device
+  //   square.addEventListener("mousedown", pointerdownHandle);
+  // }
 }
 
 // Add event listeners on pieces for movements
