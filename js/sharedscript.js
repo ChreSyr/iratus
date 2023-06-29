@@ -56,3 +56,9 @@ function clickMenuBarBtn(type) {
       openKoFi();
   }
 }
+
+if (isMobileDevice()) {
+  document
+    .getElementsByClassName("iratusrules-wrapper")[0]
+    .classList.add("always-open-for-mobile");
+}

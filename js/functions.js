@@ -159,8 +159,6 @@ function makePieceDraggable(element) {
   const supportsPointerEvents = window.PointerEvent !== undefined;
 
   const pointerdownHandle = (event) => {
-    event.preventDefault();
-
     if (event.clientX === undefined) {
       // TouchEvent has no clientX and no clientY
       event.clientX = event.changedTouches[0].clientX;

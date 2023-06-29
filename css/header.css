@@ -72,6 +72,7 @@
 }
 
 .menu-panel {
+  --menu-panel-width: calc(var(--square-size) * 8 - 4em);
   background-color: var(--dark);
   box-shadow: 0.6em -1em 1em var(--darker);
   color: var(--light-green);
@@ -83,13 +84,13 @@
   padding: 1em;
   position: absolute;
   top: 0;
-  width: calc(var(--square-size) * 8 - 4em);
+  width: var(--menu-panel-width);
 }
 
 @media (min-width: 530px) {
   .menu-panel-wrapper:hover .menu-panel {
     left: var(--menu-bar-width);
-    width: 9em;
+    --menu-panel-width: 9em;
   }
 }
 
@@ -134,14 +135,6 @@ header h1 {
   fill: var(--darker);
 }
 
-/* .settings-btn {
-  position: absolute;
-  right: .6rem;
-} */
-
-/* TODO : move to @media */
-/* DESKTOP PANEL */
-
 .menu-panel-wrapper:hover .menu-panel {
   display: block;
 }
@@ -175,7 +168,15 @@ header h1 {
 /* RULES */
 
 .iratusrules-wrapper {
+  height: 59px;
   overflow-y: hidden;
+  position: relative;
+  transition: height 1s;
+}
+
+.iratusrules-wrapper.always-open-for-mobile,
+.iratusrules-wrapper:hover {
+  height: calc(59px + 0.3em + var(--menu-panel-width));
 }
 
 .iratusrules-wrapper .newrules-btn {
@@ -184,13 +185,12 @@ header h1 {
 }
 
 .iratusrules-wrapper .rules-sub-grid {
+  bottom: 0;
   display: grid;
   gap: 0.3em;
   grid-template-columns: repeat(3, 1fr);
-  padding: 0.3em 0 0 0;
-  position: relative;
-  top: -270px;
-  transition: top 1s;
+  position: absolute;
+  width: 100%;
 }
 
 .iratusrules-wrapper .rules-sub-grid button {
@@ -264,14 +264,6 @@ header h1 {
 
 .iratusrules-wrapper .rules-sub-grid button.i:hover {
   background-image: url("../images/wi.png");
-}
-
-.iratusrules-wrapper .newrules-btn:hover + .rules-sub-grid {
-  top: 0;
-}
-
-.iratusrules-wrapper .rules-sub-grid:hover {
-  top: 0;
 }
 
 /* SETTINGS */
