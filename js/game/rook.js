@@ -1,4 +1,3 @@
-
 // CONSTRUCTOR
 
 function Rook(board, row, col) {

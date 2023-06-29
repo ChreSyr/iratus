@@ -1,4 +1,3 @@
-
 // var scripts = document.getElementsByTagName('script');
 // var str = Array.from(document.getElementsByTagName('script'), function(script) {
 //   var filename = script.src.substring(script.src.lastIndexOf('/')+1);
@@ -80,45 +79,57 @@ setPiecesStyle();
 // });
 
 function handlePointerDown(event) {
+  if (
+    document.getElementsByClassName("menu-wrapper")[0].contains(event.target)
+  ) {
+    return;
+  }
 
-  if (document.getElementsByClassName("menu-wrapper")[0].contains(event.target)) {return}
-  
   const boardDiv = document.getElementById("board-single");
-  if (boardDiv.contains(event.target) && boardDiv !== event.target) {return}
+  if (boardDiv.contains(event.target) && boardDiv !== event.target) {
+    return;
+  }
 
   closeMenu();
   cancelPromotion();
   let selectedPiece = game.board.selectedPiece;
   if (selectedPiece) {
-    selectedPiece.unselect()
+    selectedPiece.unselect();
   }
-
 }
 
 if (isMobileDevice()) {
   // User is on a mobile device
-  document.addEventListener('touchstart', handlePointerDown);
+  document.addEventListener("touchstart", handlePointerDown);
   // document.addEventListener('touchstart', event => {console.log("touchstart")});
 } else {
   // User is on a desktop device
-  document.addEventListener('mousedown', handlePointerDown);
+  document.addEventListener("mousedown", handlePointerDown);
   // document.addEventListener('mousedown', event => {console.log("mousedown")});
 }
 // document.addEventListener("pointerdown", handlePointerDown);
 
 for (let promotionPiece of document.getElementsByClassName("promotion-piece")) {
-  promotionPiece.addEventListener("pointerdown", event => {  // TODO : remove pointerdown
+  promotionPiece.addEventListener("pointerdown", (event) => {
+    // TODO : remove pointerdown
     const color = game.board.pawnToPromote.color;
     lastMove = game.movesHistory.slice(-1)[0];
-    lastMove.executeCommand(new Transform(game.board.pawnToPromote, Pawn.prototype, pieceClassesByID[promotionPiece.classList[1]].prototype));
+    lastMove.executeCommand(
+      new Transform(
+        game.board.pawnToPromote,
+        Pawn.prototype,
+        pieceClassesByID[promotionPiece.classList[1]].prototype
+      )
+    );
     lastMove.notation += "=" + promotionPiece.classList[1].toUpperCase();
     game.board.pawnToPromote = null;
     game.board.updateAllValidMoves();
     game.checkForEnd();
 
-    let promotionWindow = document.getElementsByClassName("promotion-window")[0];
+    let promotionWindow =
+      document.getElementsByClassName("promotion-window")[0];
     promotionWindow.style.display = "none";
-    
+
     let promotionPieces = document.getElementsByClassName("promotion-piece");
     for (let promotionPiece of promotionPieces) {
       promotionPiece.classList.remove(color + promotionPiece.classList[1]);
@@ -126,7 +137,9 @@ for (let promotionPiece of document.getElementsByClassName("promotion-piece")) {
   });
 }
 
-document.getElementsByClassName("promotion-cancel")[0].addEventListener("pointerdown", cancelPromotion);  // TODO : remove pointerdown
+document
+  .getElementsByClassName("promotion-cancel")[0]
+  .addEventListener("pointerdown", cancelPromotion); // TODO : remove pointerdown
 
 // } catch (error) {
 //   console.log(error);
@@ -138,4 +151,4 @@ ajustSquareSize();
 
 // ATTACHING EVENT LISTENERS
 
-window.addEventListener('resize', ajustSquareSize);
+window.addEventListener("resize", ajustSquareSize);

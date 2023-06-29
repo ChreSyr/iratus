@@ -12,7 +12,7 @@
   font-size: 10px;
   --desktop-minwidth: 500px;
   --fontfamily-main: "PierceRoman", "helvetica", sans-serif;
-  --fontfamily-simple: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --fontfamily-simple: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   --header-height: 5rem;
   /* colors */
   --accessible: rgba(0, 0, 0, 0.2);
@@ -22,7 +22,7 @@
   --light-dark: rgb(64, 64, 64);
   --light-green: rgb(131, 174, 131);
   --light-grey: rgb(200 200 200);
-  --selected: rgba(255, 255, 0, .5);
+  --selected: rgba(255, 255, 0, 0.5);
   --very-dark-green: rgb(10, 20, 10);
 }
 
@@ -31,6 +31,10 @@
     --header-height: 15rem;
   }
 } */
+
+image {
+  background-color: red;
+}
 
 button,
 div,
@@ -85,7 +89,7 @@ button:hover {
   padding: 3px 20px;
   background-color: black;
   color: var(--light-green);
-  font-size: calc(var(--square-size) * .5);
+  font-size: calc(var(--square-size) * 0.5);
   cursor: pointer;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -101,7 +105,7 @@ button:hover {
 :root {
   --arrowPosition: 1rem;
   --border-color: black;
-  --borderFocus: hsla(0, 0%, 100%, .3);
+  --borderFocus: hsla(0, 0%, 100%, 0.3);
 }
 
 select {
@@ -111,13 +115,13 @@ select {
   -moz-appearance: none;
   appearance: none;
   background-color: var(--light-dark);
-  border: .1rem solid var(--borderColor);
-  border-radius: .3rem;
+  border: 0.1rem solid var(--borderColor);
+  border-radius: 0.3rem;
   color: var(--light-green);
   font-family: inherit;
   font-size: 1.5rem;
   line-height: 1.2;
-  padding: .4rem calc(var(--arrowPosition) + 2rem) .4rem .8rem;
+  padding: 0.4rem calc(var(--arrowPosition) + 2rem) 0.4rem 0.8rem;
   position: relative;
   width: 100%;
 }
@@ -136,14 +140,20 @@ select[multiple] {
 }
 
 select[multiple] option {
-  padding: .4rem 1rem;
+  padding: 0.4rem 1rem;
 }
 
 select:not([multiple]) {
-  background-image: linear-gradient(45deg, transparent 49.8%, var(--light-green) 0), linear-gradient(135deg, var(--light-green) 49.8%, transparent 0);
-  background-position: calc(100% - var(--arrowPosition) - .5rem) 50%, calc(100% - var(--arrowPosition)) 50%;
+  background-image: linear-gradient(
+      45deg,
+      transparent 49.8%,
+      var(--light-green) 0
+    ),
+    linear-gradient(135deg, var(--light-green) 49.8%, transparent 0);
+  background-position: calc(100% - var(--arrowPosition) - 0.5rem) 50%,
+    calc(100% - var(--arrowPosition)) 50%;
   background-repeat: no-repeat;
-  background-size: .5rem .5rem, .5rem .5rem;
+  background-size: 0.5rem 0.5rem, 0.5rem 0.5rem;
   height: var(--selectSize);
 }
 
@@ -172,14 +182,14 @@ select.ui_v5-select-large {
   --arrowPosition: 1.5rem;
   --selectSize: 4rem;
   font-size: 1.5rem;
-  padding: .8rem calc(var(--arrowPosition) + 2rem) .8rem 1rem;
+  padding: 0.8rem calc(var(--arrowPosition) + 2rem) 0.8rem 1rem;
 }
 
 /* SCROLLBAR */
 
 /* width */
 ::-webkit-scrollbar {
-  width: .8rem;
+  width: 0.8rem;
 }
 
 /* Track */

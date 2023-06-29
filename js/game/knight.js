@@ -1,4 +1,3 @@
-
 // CONSTRUCTOR
 
 function Knight(board, row, col) {

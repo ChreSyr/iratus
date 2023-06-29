@@ -6,7 +6,7 @@
 
 .menu-bar-trigger {
   /* left: .6rem; */
-  padding: .6rem;
+  padding: 0.6rem;
   position: absolute;
   /* top: .6rem; */
 }
@@ -45,7 +45,7 @@
 .menu-bar-btn {
   position: relative;
   left: 0;
-  padding: .7rem;
+  padding: 0.7rem;
 }
 
 .menu-panel-wrapper {
@@ -58,7 +58,7 @@
   /* font-family: var(--fontfamily-simple); */
   font-size: x-large;
   /* height: 5rem; */
-  margin: .8rem 2rem;
+  margin: 0.8rem 2rem;
   text-align: center;
 }
 
@@ -82,7 +82,7 @@
   padding: 1em;
   background-color: var(--dark);
   width: 9em;
-  box-shadow: .6em -1em 1em var(--darker);
+  box-shadow: 0.6em -1em 1em var(--darker);
 }
 
 /* DESKTOP & MOBILE HEADER - TODO : SORT */
@@ -148,7 +148,7 @@ header h1 {
 }
 
 .menu-panel .menu-delimiter {
-  margin: 1.2em 0 .5em 0;
+  margin: 1.2em 0 0.5em 0;
   width: 100%;
 }
 
@@ -160,7 +160,7 @@ header h1 {
 .menu-panel button {
   font-size: 1em;
   margin: 0;
-  padding: .3em .3em;
+  padding: 0.3em 0.3em;
   width: 100%;
 }
 
@@ -177,9 +177,9 @@ header h1 {
 
 .iratusrules-wrapper .rules-sub-grid {
   display: grid;
-  gap: .3em;
+  gap: 0.3em;
   grid-template-columns: repeat(3, 1fr);
-  padding: .3em 0 0 0;
+  padding: 0.3em 0 0 0;
   position: relative;
   top: -270px;
   transition: top 1s;
@@ -257,7 +257,7 @@ header h1 {
   background-image: url("../images/wi.png");
 }
 
-.iratusrules-wrapper .newrules-btn:hover+.rules-sub-grid {
+.iratusrules-wrapper .newrules-btn:hover + .rules-sub-grid {
   top: 0;
 }
 
@@ -319,7 +319,7 @@ header h1 {
     margin: 0;
     /* opacity: 0; */
     position: absolute;
-    top: .6rem;
+    top: 0.6rem;
     /* visibility: hidden; */
   }
 

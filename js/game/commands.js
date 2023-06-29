@@ -1,8 +1,7 @@
-
 function Command(name, ...args) {
   return {
     name,
-    args
+    args,
   };
 }
 
@@ -55,7 +54,7 @@ function Move(board, start, end) {
     turnNumber: 1,
     counter50rule: 0,
 
-    capturedPieces: { "w": [], "b": [] },  // just for display
+    capturedPieces: { w: [], b: [] }, // just for display
 
     executeCommands(commands) {
       for (let command of commands) {
@@ -75,7 +74,10 @@ function Move(board, start, end) {
         case "anticapture":
           let commandToRem = undefined;
           for (let previousCommand of this.commands) {
-            if (previousCommand.name === "capture" && previousCommand.args[0] === args[0]) {
+            if (
+              previousCommand.name === "capture" &&
+              previousCommand.args[0] === args[0]
+            ) {
               commandToRem = previousCommand;
               break;
             }
@@ -155,7 +157,10 @@ function Move(board, start, end) {
           let annoyingAllies = [];
           for (let ally of sameClassAllies) {
             for (let validMove of ally.validMoves) {
-              if (this.end[0] === ally.row + validMove[0] && this.end[1] === ally.col + validMove[1]) {
+              if (
+                this.end[0] === ally.row + validMove[0] &&
+                this.end[1] === ally.col + validMove[1]
+              ) {
                 annoyingAllies.push(ally);
               }
             }
@@ -183,7 +188,8 @@ function Move(board, start, end) {
             } else if (sameRank === false) {
               notation += this.board.NBRANKS - this.start[0];
             } else {
-              notation += fileDict[this.start[1]] + (this.board.NBRANKS - this.start[0]);
+              notation +=
+                fileDict[this.start[1]] + (this.board.NBRANKS - this.start[0]);
             }
           }
         }
@@ -195,7 +201,8 @@ function Move(board, start, end) {
           notation += fileDict[this.start[1]];
         }
         if (piece.ID === "dy") {
-          notation += "+" + this.board.get(this.end[0], this.end[1]).ID.toUpperCase();
+          notation +=
+            "+" + this.board.get(this.end[0], this.end[1]).ID.toUpperCase();
         } else {
           notation += "x";
         }
@@ -259,7 +266,7 @@ function Move(board, start, end) {
           command.args[0].transform(command.args[1]);
           break;
       }
-    }
+    },
   };
 
   move.turnNumber = board.game.movesHistory.length
@@ -290,8 +297,12 @@ function Move(board, start, end) {
     for (let command of move.commands) {
       if (command.name === "capture") {
         let capturedPiece = command.args[0];
-        if (capturedPiece.ID === "dy") {continue}  // dynamite equipement
-        move.capturedPieces[capturedPiece.color].push(capturedPiece.__proto__.ID);
+        if (capturedPiece.ID === "dy") {
+          continue;
+        } // dynamite equipement
+        move.capturedPieces[capturedPiece.color].push(
+          capturedPiece.__proto__.ID
+        );
         if (capturedPiece.dynamited) {
           move.capturedPieces[capturedPiece.color].push("dy");
         }

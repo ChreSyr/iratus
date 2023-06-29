@@ -1,4 +1,3 @@
-
 // CONSTRUCTOR
 
 function Bishop(board, row, col) {

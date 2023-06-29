@@ -1,25 +1,97 @@
-
 // CONSTRUCTOR
 
 function FatPosition(board, turn) {
   this.piecesByPos = [
-    null, null, null, null, null, null, null, null, null, null,
-    null, null, null, null, null, null, null, null, null, null,
-    null, null, null, null, null, null, null, null, null, null,
-    null, null, null, null, null, null, null, null, null, null,
-    null, null, null, null, null, null, null, null, null, null,
-    null, null, null, null, null, null, null, null, null, null,
-    null, null, null, null, null, null, null, null, null, null,
-    null, null, null, null, null, null, null, null, null, null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
   ];
 
   for (let piece of board.pieces) {
-    if (! piece.isCaptured) {
+    if (!piece.isCaptured) {
       this.piecesByPos[piece.getPos()] = piece.ID;
     }
   }
 
-  this.casteRights = board.king["w"].castleRights + board.king["b"].castleRights;
+  this.casteRights =
+    board.king["w"].castleRights + board.king["b"].castleRights;
   this.turn = turn;
 
   const _EQ_ATTRIBUTES = ["castleRights", "turn"];
@@ -44,5 +116,5 @@ function FatPosition(board, turn) {
     }
 
     return arraysEqual(this.piecesByPos, other.piecesByPos);
-  }
+  };
 }

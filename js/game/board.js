@@ -1,20 +1,19 @@
-
 const pieceClassesByID = {
-  "k": King,
-  "q": Queen,
-  "r": Rook,
-  "b": Bishop,
-  "n": Knight,
-  "i": Pawn,
-  "dy": Dynamite,
-  "s": Soldier,
-  "es": EliteSoldier,
-  "d": Dog,
-  "ed": EnragedDog,
-  "p": Phantom,
-  "g": Grapple,
+  k: King,
+  q: Queen,
+  r: Rook,
+  b: Bishop,
+  n: Knight,
+  i: Pawn,
+  dy: Dynamite,
+  s: Soldier,
+  es: EliteSoldier,
+  d: Dog,
+  ed: EnragedDog,
+  p: Phantom,
+  g: Grapple,
   " ": null,
-}
+};
 
 // CONSTRUCTOR
 
@@ -24,7 +23,7 @@ function Board(game, nbranks = 8, nbfiles = 8) {
   this.nbranks = nbranks;
   this.piecesByPos = new Array(nbfiles * nbranks).fill(null);
   this.pieces = [];
-  this.piecesColored = { "w": [], "b": [] };
+  this.piecesColored = { w: [], b: [] };
   this.king = {};
   this.pawnToPromote = null;
   this.calculator = null;
@@ -44,7 +43,6 @@ function Board(game, nbranks = 8, nbfiles = 8) {
 // ROOT PROTOTYPE
 
 Board.prototype = {
-
   addPiece: function (piece) {
     this.pieces.push(piece);
     this.piecesByPos[piece.getPos()] = piece;
@@ -55,7 +53,7 @@ Board.prototype = {
     }
   },
 
-  createPieces: function() {},
+  createPieces: function () {},
 
   get: function (row, col) {
     return this.piecesByPos[col * 10 + row];
@@ -76,7 +74,7 @@ Board.prototype = {
     }
   },
 
-  move: function (start, end, main=true) {
+  move: function (start, end, main = true) {
     if (typeof start === "number") {
       start = [start % 10, Math.floor(start / 10)];
     }

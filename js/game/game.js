@@ -1,4 +1,3 @@
-
 // CONSTRUCTOR
 
 function Game(boardClass) {
@@ -9,7 +8,7 @@ function Game(boardClass) {
   this.turn = "w";
   this.counter50rule = 0;
   this.result = undefined;
-  this.alwaysFlip = false;  // TODO : remove
+  this.alwaysFlip = false; // TODO : remove
 
   this.board = new boardClass(this);
   for (let piece of this.board.piecesColored[this.turn]) {
@@ -22,8 +21,7 @@ function Game(boardClass) {
 // ROOT PROTOTYPE
 
 Game.prototype = {
-  
-  checkForEnd: function() {
+  checkForEnd: function () {
     let gameState = this.getGameState();
     let lastMove = this.movesHistory.slice(-1)[0];
     if (gameState === "checkmate") {
@@ -31,33 +29,45 @@ Game.prototype = {
     } else if (this.board.king[this.turn].inCheck()) {
       lastMove.notation += "+";
     }
-    let ENDS = ["checkmate", "stalemate", "draw by repetition", "draw by insufficient material", "draw by 50-moves rule"];
+    let ENDS = [
+      "checkmate",
+      "stalemate",
+      "draw by repetition",
+      "draw by insufficient material",
+      "draw by 50-moves rule",
+    ];
     let traductedENDS = {
-      "checkmate": "échec et mat",
-      "stalemate": "pat",
+      checkmate: "échec et mat",
+      stalemate: "pat",
       "draw by repetition": "égalité par répétitions",
       "draw by insufficient material": "égalité par manque de matériel",
-      "draw by 50-moves rule": "égalité par la règle des 50 coups"
+      "draw by 50-moves rule": "égalité par la règle des 50 coups",
     };
     if (ENDS.includes(gameState)) {
       let description = "";
       if (gameState === "checkmate") {
-        description = lastMove.turn === "b" ? "Victoire des Noirs" : "Victoire des Blancs";
+        description =
+          lastMove.turn === "b" ? "Victoire des Noirs" : "Victoire des Blancs";
       }
 
       let infoDiv = document.getElementById("info");
       let titleLabel = infoDiv.getElementsByTagName("h2")[0];
-      titleLabel.innerHTML = traductedENDS[gameState][0].toUpperCase() + traductedENDS[gameState].substring(1);
+      titleLabel.innerHTML =
+        traductedENDS[gameState][0].toUpperCase() +
+        traductedENDS[gameState].substring(1);
       let pieceImage = infoDiv.getElementsByTagName("img")[0];
-      pieceImage.src = gameState === "checkmate" ? "images/" + lastMove.turn + lastMove.piece.ID + ".png" : "";
+      pieceImage.src =
+        gameState === "checkmate"
+          ? "images/" + lastMove.turn + lastMove.piece.ID + ".png"
+          : "";
       let desriptionLabel = infoDiv.getElementsByTagName("p")[0];
       desriptionLabel.innerHTML = description;
       infoDiv.style.display = "flex";
     }
   },
 
-  getGameState: function() {
-    let remainingPieces = { "w": [], "b": [] };
+  getGameState: function () {
+    let remainingPieces = { w: [], b: [] };
     for (let piece of this.board.pieces) {
       if (!piece.isCaptured) {
         if (piece.ID === "k") {
@@ -81,7 +91,10 @@ Game.prototype = {
       return false;
     }
 
-    if (insufficient(remainingPieces["w"]) && insufficient(remainingPieces["b"])) {
+    if (
+      insufficient(remainingPieces["w"]) &&
+      insufficient(remainingPieces["b"])
+    ) {
       return "draw by insufficient material";
     }
 
@@ -103,7 +116,10 @@ Game.prototype = {
 
     for (let piece of this.board.piecesColored[this.turn]) {
       if (!piece.isCaptured && piece.validMoves.length) {
-        if (this.movesHistory && this.movesHistory.slice(-1)[0].counter50rule > 50) {
+        if (
+          this.movesHistory &&
+          this.movesHistory.slice(-1)[0].counter50rule > 50
+        ) {
           return "draw by 50-moves rule";
         }
         return "keep going";
@@ -111,10 +127,16 @@ Game.prototype = {
     }
 
     const currentKing = this.board.king[this.turn];
-    return currentKing.posIsUnderCheck(currentKing.row, currentKing.col, checkForMate=true) ? "checkmate" : "stalemate";
+    return currentKing.posIsUnderCheck(
+      currentKing.row,
+      currentKing.col,
+      (checkForMate = true)
+    )
+      ? "checkmate"
+      : "stalemate";
   },
 
-  move: function(start, end) {
+  move: function (start, end) {
     const currentMove = this.board.move(start, end, true);
     this.movesHistory.push(currentMove);
     this.turn = currentMove.nextTurn;
@@ -124,13 +146,13 @@ Game.prototype = {
     this.checkForEnd();
     if (this.alwaysFlip) {
       if (currentMove.turn !== currentMove.nextTurn) {
-        this.board.flipDisplay(animate = false);
+        this.board.flipDisplay((animate = false));
       }
     }
     this.updateDisplay();
   },
 
-  redo: function() {
+  redo: function () {
     if (this.backMovesHistory.length === 0) {
       return;
     }
@@ -145,19 +167,19 @@ Game.prototype = {
 
     if (this.alwaysFlip) {
       if (lastUndoneMove.turn !== lastUndoneMove.nextTurn) {
-        this.board.flipDisplay(animate = false);
+        this.board.flipDisplay((animate = false));
       }
     }
     this.updateDisplay();
   },
 
-  redoAll: function() {
+  redoAll: function () {
     while (this.backMovesHistory.length) {
       this.redo();
     }
   },
 
-  undo: function() {
+  undo: function () {
     if (this.movesHistory.length === 0) {
       return;
     }
@@ -171,13 +193,13 @@ Game.prototype = {
 
     if (this.alwaysFlip) {
       if (lastMove.turn !== lastMove.nextTurn) {
-        this.board.flipDisplay(animate = false);
+        this.board.flipDisplay((animate = false));
       }
     }
     this.updateDisplay();
   },
 
-  undoAll: function() {
+  undoAll: function () {
     while (this.movesHistory.length) {
       this.undo();
     }
@@ -187,37 +209,43 @@ Game.prototype = {
 
   hasFlippedPieces: function () {
     var gameWrapper = document.getElementById("game-wrapper");
-    return (gameWrapper.classList.contains("black-to-move") && gameWrapper.classList.contains("rotation-pieces"));
+    return (
+      gameWrapper.classList.contains("black-to-move") &&
+      gameWrapper.classList.contains("rotation-pieces")
+    );
   },
 
   isFlipped: function () {
     var gameWrapper = document.getElementById("game-wrapper");
-    return (gameWrapper.classList.contains("black-to-move") && gameWrapper.classList.contains("rotation-board")) || 
-            gameWrapper.classList.contains("rotation-black");
+    return (
+      (gameWrapper.classList.contains("black-to-move") &&
+        gameWrapper.classList.contains("rotation-board")) ||
+      gameWrapper.classList.contains("rotation-black")
+    );
   },
 
-  updateDisplay: function() {
-
+  updateDisplay: function () {
     // Update turn
 
     var gameWrapper = document.getElementById("game-wrapper");
-    this.turn === "w" ? gameWrapper.classList.remove('black-to-move') : gameWrapper.classList.add('black-to-move');
+    this.turn === "w"
+      ? gameWrapper.classList.remove("black-to-move")
+      : gameWrapper.classList.add("black-to-move");
 
     // Update captures
 
     var sortPattern = ["i", "dy", "g", "s", "d", "n", "b", "p", "r", "q"];
 
     for (let color of ["w", "b"]) {
-
       let capturedPieces = [];
       for (let move of this.movesHistory) {
-        capturedPieces = capturedPieces.concat(move.capturedPieces[color])
+        capturedPieces = capturedPieces.concat(move.capturedPieces[color]);
       }
 
       var display = document.querySelector(".player-info." + color);
       display.innerHTML = "";
 
-      capturedPieces.sort(function(a, b) {
+      capturedPieces.sort(function (a, b) {
         return sortPattern.indexOf(a) - sortPattern.indexOf(b);
       });
 
@@ -235,5 +263,5 @@ Game.prototype = {
         display.appendChild(pieceDisplay);
       }
     }
-  }
+  },
 };

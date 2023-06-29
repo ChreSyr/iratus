@@ -1,7 +1,5 @@
-
 // Change the property squareSize depending on screen size
 function ajustSquareSize() {
-  
   // var screenWidth = screen.width;
   // var screenHeight = screen.height;
 
@@ -31,11 +29,13 @@ function ajustSquareSize() {
   // console.log("Root Font Size Value: " + fontSizeValue);
 
   // availible space for the baord and the players info
-  var availibleWidth = clientWidth - fontSizeValue * 2
+  var availibleWidth = clientWidth - fontSizeValue * 2;
   if (clientWidth < 1024) {
-    var availibleHeight = clientHeight - fontSizeValue * ( 1 + 4 + 1 + 1 + 4 + 1 + 6 + 1 );
+    var availibleHeight =
+      clientHeight - fontSizeValue * (1 + 4 + 1 + 1 + 4 + 1 + 6 + 1);
   } else {
-    var availibleHeight = clientHeight - fontSizeValue * ( 1 + 4 + 1 + 1 + 4 + 1 );
+    var availibleHeight =
+      clientHeight - fontSizeValue * (1 + 4 + 1 + 1 + 4 + 1);
   }
 
   // console.log("Availible Width: " + availibleWidth);
@@ -44,34 +44,39 @@ function ajustSquareSize() {
   if (isMobileDevice()) {
     var squareSize = Math.floor(availibleWidth / 8);
   } else {
-    var squareSize = Math.floor(Math.min(availibleWidth / 8, availibleHeight / 10));
+    var squareSize = Math.floor(
+      Math.min(availibleWidth / 8, availibleHeight / 10)
+    );
   }
 
   // we switch to desktop view at MAX * 8 + body.padding * 2 + header.width = 68 * 8 + 10 * 2 + 50 = 614px
-  squareSize = Math.min(squareSize, 68);  // No more than 68
+  squareSize = Math.min(squareSize, 68); // No more than 68
 
   // console.log("Square Size: " + squareSize);
 
-  document.documentElement.style.setProperty('--square-size', squareSize + 'px');
+  document.documentElement.style.setProperty(
+    "--square-size",
+    squareSize + "px"
+  );
 }
 
-// Hide the promotion window and 
+// Hide the promotion window and
 const cancelPromotion = (event) => {
   if (game.board.pawnToPromote) {
     const color = game.board.pawnToPromote.color;
     game.undo();
     game.board.pawnToPromote = null;
-  
-    let promotionWindow = document.getElementsByClassName("promotion-window")[0];
+
+    let promotionWindow =
+      document.getElementsByClassName("promotion-window")[0];
     promotionWindow.style.display = "none";
-    
+
     let promotionPieces = document.getElementsByClassName("promotion-piece");
     for (let promotionPiece of promotionPieces) {
       promotionPiece.classList.remove(color + promotionPiece.classList[1]);
     }
   }
-}
-
+};
 
 // Returns whether or not an event collides with a screen element
 function collide(event, element) {
@@ -86,10 +91,10 @@ function handleRotationSelect() {
   var rotationSelect = document.getElementById("select-rotation");
   var gameWrapper = document.getElementById("game-wrapper");
   for (let option of rotationSelect.options) {
-    gameWrapper.classList.remove('rotation-' + option.value);
+    gameWrapper.classList.remove("rotation-" + option.value);
   }
   if (rotationSelect.value !== "no") {
-    gameWrapper.classList.add('rotation-' + rotationSelect.value);
+    gameWrapper.classList.add("rotation-" + rotationSelect.value);
   }
 }
 
@@ -105,34 +110,35 @@ function isMobileDevice() {
 
 // Add pointerdown listener on squares (like accessible, selected...)
 function makeSquareClickable(square) {
-      
   const pointerdownHandle = (event) => {
-
     closeMenu();
     cancelPromotion();
 
     if (square.classList.contains("accessible")) {
       let selectedPiece = game.board.selectedPiece;
       selectedPiece.unselect();
-      try{
-        game.move(start=[selectedPiece.row, selectedPiece.col], end=[parseInt(square.dataset.row), parseInt(square.dataset.col)]);
+      try {
+        game.move(
+          (start = [selectedPiece.row, selectedPiece.col]),
+          (end = [parseInt(square.dataset.row), parseInt(square.dataset.col)])
+        );
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     } else {
       if (game.board.selectedPiece) {
         game.board.selectedPiece.unselect();
       }
     }
-  }
-  
+  };
+
   if (isMobileDevice()) {
     // User is on a mobile device
-    square.addEventListener('touchstart', pointerdownHandle);
+    square.addEventListener("touchstart", pointerdownHandle);
     // element.addEventListener('touchstart', event => {console.log("touchstart")});
   } else {
     // User is on a desktop device
-    square.addEventListener('mousedown', pointerdownHandle);
+    square.addEventListener("mousedown", pointerdownHandle);
     // element.addEventListener('mousedown', event => {console.log("mousedown")});
   }
   // square.addEventListener('pointerdown', pointerdownHandle);
@@ -140,62 +146,74 @@ function makeSquareClickable(square) {
 
 // Add event listeners on pieces for movements
 function makePieceDraggable(element) {
-  let pos = {x: 0, y: 0};
+  let pos = { x: 0, y: 0 };
   let dragging = false;
   let wasSelected = false;
-  
+
   const stopScrollEvents = (event) => {
     event.preventDefault();
-  }
-      
+  };
+
   const pointerdownHandle = (event) => {
-    
     // try {
 
-      closeMenu();
-      cancelPromotion();
+    closeMenu();
+    cancelPromotion();
 
-      const squareAccessible = document.querySelector(`.square[data-row="${element.piece.row}"][data-col="${element.piece.col}"]`);
-      if (squareAccessible) {
-        if (isMobileDevice()) {
-          // instant move
-          let selectedPiece = game.board.selectedPiece;
-          selectedPiece.unselect();
-          game.move(start=[selectedPiece.row, selectedPiece.col], end=[parseInt(element.piece.row), parseInt(element.piece.col)])
-        }
-        return;
-      } 
-
-      let rect = element.getBoundingClientRect();
-      dragging = {dx: - rect.x - rect.width / 2, dy: - rect.y - rect.height / 2};
-      pos.x = event.clientX + dragging.dx;
-      pos.y = event.clientY + dragging.dy;
-
-      var squareSize = parseInt(document.documentElement.style.getPropertyValue("--square-size"), 10);
-      const board = element.piece.board;
-      if (board.game.isFlipped()) {
-        element.style.transform = `translate(${(board.nbfiles - 1 - element.piece.col + pos.x / squareSize) * 100}%, ${(board.nbfiles + 1 - element.piece.row + pos.y / squareSize) * 100}%)`;
-      } else {
-        element.style.transform = `translate(${(element.piece.col + pos.x / squareSize) * 100}%, ${(element.piece.row + pos.y / squareSize) * 100}%)`;
+    const squareAccessible = document.querySelector(
+      `.square[data-row="${element.piece.row}"][data-col="${element.piece.col}"]`
+    );
+    if (squareAccessible) {
+      if (isMobileDevice()) {
+        // instant move
+        let selectedPiece = game.board.selectedPiece;
+        selectedPiece.unselect();
+        game.move(
+          (start = [selectedPiece.row, selectedPiece.col]),
+          (end = [parseInt(element.piece.row), parseInt(element.piece.col)])
+        );
       }
-      if (board.game.hasFlippedPieces()) {
-        element.style.transform += ' rotateX(180deg)'
-      }
-      element.classList.add('dragging');
-      // element.setPointerCapture(event.pointerId);
+      return;
+    }
 
-      wasSelected = element.piece === game.board.selectedPiece;
-      element.piece.handlePointerDown();
-    
+    let rect = element.getBoundingClientRect();
+    dragging = { dx: -rect.x - rect.width / 2, dy: -rect.y - rect.height / 2 };
+    pos.x = event.clientX + dragging.dx;
+    pos.y = event.clientY + dragging.dy;
+
+    var squareSize = parseInt(
+      document.documentElement.style.getPropertyValue("--square-size"),
+      10
+    );
+    const board = element.piece.board;
+    if (board.game.isFlipped()) {
+      element.style.transform = `translate(${
+        (board.nbfiles - 1 - element.piece.col + pos.x / squareSize) * 100
+      }%, ${
+        (board.nbfiles + 1 - element.piece.row + pos.y / squareSize) * 100
+      }%)`;
+    } else {
+      element.style.transform = `translate(${
+        (element.piece.col + pos.x / squareSize) * 100
+      }%, ${(element.piece.row + pos.y / squareSize) * 100}%)`;
+    }
+    if (board.game.hasFlippedPieces()) {
+      element.style.transform += " rotateX(180deg)";
+    }
+    element.classList.add("dragging");
+    // element.setPointerCapture(event.pointerId);
+
+    wasSelected = element.piece === game.board.selectedPiece;
+    element.piece.handlePointerDown();
+
     // } catch (error) {
     //   console.log(error);
     // }
+  };
 
-  }
-  
   const pointerupHandle = (event) => {
     dragging = null;
-    element.classList.remove('dragging');
+    element.classList.remove("dragging");
     element.style.transform = "";
 
     // if clicked for move destination
@@ -205,63 +223,92 @@ function makePieceDraggable(element) {
         if (square.classList.contains("accessible")) {
           let selectedPiece = game.board.selectedPiece;
           selectedPiece.unselect();
-          game.move(start=[selectedPiece.row, selectedPiece.col], end=[parseInt(square.dataset.row), parseInt(square.dataset.col)])
+          game.move(
+            (start = [selectedPiece.row, selectedPiece.col]),
+            (end = [parseInt(square.dataset.row), parseInt(square.dataset.col)])
+          );
         }
         break;
       }
     }
     if (element.piece && wasSelected) {
       element.piece.unselect();
-    }  // else, the piece has moved
-  }
-  
+    } // else, the piece has moved
+  };
+
   const pointermoveHandle = (event) => {
-    if (!dragging) {return};
+    if (!dragging) {
+      return;
+    }
     pos.x = event.clientX + dragging.dx;
     pos.y = event.clientY + dragging.dy;
-    var squareSize = parseInt(document.documentElement.style.getPropertyValue("--square-size"), 10);
+    var squareSize = parseInt(
+      document.documentElement.style.getPropertyValue("--square-size"),
+      10
+    );
     const board = element.piece.board;
     if (board.game.isFlipped()) {
-      element.style.transform = `translate(${(board.nbfiles - 1 - element.piece.col + pos.x / squareSize) * 100}%, ${(board.nbfiles + 1 - element.piece.row + pos.y / squareSize) * 100}%)`;
+      element.style.transform = `translate(${
+        (board.nbfiles - 1 - element.piece.col + pos.x / squareSize) * 100
+      }%, ${
+        (board.nbfiles + 1 - element.piece.row + pos.y / squareSize) * 100
+      }%)`;
     } else {
-      element.style.transform = `translate(${(element.piece.col + pos.x / squareSize) * 100}%, ${(element.piece.row + pos.y / squareSize) * 100}%)`;
+      element.style.transform = `translate(${
+        (element.piece.col + pos.x / squareSize) * 100
+      }%, ${(element.piece.row + pos.y / squareSize) * 100}%)`;
     }
     if (board.game.hasFlippedPieces()) {
-      element.style.transform += ' rotateX(180deg)'
+      element.style.transform += " rotateX(180deg)";
     }
-  }
-  
+  };
+
   // element.addEventListener('pointerdown', pointerdownHandle);
   // pointerdown is the newer version of mousedown & touchstart
   // element.addEventListener('mousedown', pointerdownHandle);
   // element.addEventListener('mousedown', event => {console.log("mousedown")});
-  
+
   if (isMobileDevice()) {
     // User is on a mobile device
-    element.addEventListener('touchstart', pointerdownHandle);
+    element.addEventListener("touchstart", pointerdownHandle);
     // element.addEventListener('touchstart', event => {console.log("touchstart")});
   } else {
     // User is on a desktop device
-    element.addEventListener('mousedown', pointerdownHandle);
+    element.addEventListener("mousedown", pointerdownHandle);
     // element.addEventListener('mousedown', event => {console.log("mousedown")});
   }
-  element.addEventListener('touchstart', pointerdownHandle);
-  element.addEventListener('pointerup', pointerupHandle);
-  element.addEventListener('pointercancel', pointerupHandle);
-  element.addEventListener('pointermove', pointermoveHandle);
-  element.addEventListener('touchstart', stopScrollEvents);
+  element.addEventListener("touchstart", pointerdownHandle);
+  element.addEventListener("pointerup", pointerupHandle);
+  element.addEventListener("pointercancel", pointerupHandle);
+  element.addEventListener("pointermove", pointermoveHandle);
+  element.addEventListener("touchstart", stopScrollEvents);
 }
 
 // Writes css code in <script id="board-styles-single">
 // This code defines the images of the pieces
-function setPiecesStyle(style=null) {
-  
-  if (style !== null) {throw Error}  // not implemented
-  
-  var colors = ["b", "w"];
-  var pieceIDs = ["b", "d", "dy", "ed", "es", "g", "i", "k", "n", "p", "q", "r", "s"];
+function setPiecesStyle(style = null) {
+  if (style !== null) {
+    throw Error;
+  } // not implemented
 
-  let css = '';
+  var colors = ["b", "w"];
+  var pieceIDs = [
+    "b",
+    "d",
+    "dy",
+    "ed",
+    "es",
+    "g",
+    "i",
+    "k",
+    "n",
+    "p",
+    "q",
+    "r",
+    "s",
+  ];
+
+  let css = "";
 
   for (let color of colors) {
     for (let pieceID of pieceIDs) {
@@ -272,13 +319,13 @@ function setPiecesStyle(style=null) {
       #board-single .dynamited.${color}${pieceID} {
         background-image: url(images/${color}${pieceID}.png), url(images/${color}dy.png);
       }
-`
+`;
     }
   }
 
   var piecesStyle = document.getElementById("board-styles-single");
 
-  if (piecesStyle.styleSheet){
+  if (piecesStyle.styleSheet) {
     // This is required for IE8 and below.
     piecesStyle.styleSheet.cssText = css;
   } else {
@@ -286,7 +333,9 @@ function setPiecesStyle(style=null) {
   }
 }
 
-// change the reference of the custom stylesheet 
+// change the reference of the custom stylesheet
 function setStyle(num) {
-  document.getElementById('customcss').setAttribute('href', 'css/custom/stylesheet' + num + '.css');
+  document
+    .getElementById("customcss")
+    .setAttribute("href", "css/custom/stylesheet" + num + ".css");
 }

@@ -1,4 +1,3 @@
-
 // CONSTRUCTOR
 
 function Grapple(board, row, col) {
@@ -35,30 +34,35 @@ Grapple.prototype.canGoTo = function (row, col) {
   } else {
     return true;
   }
-}
+};
 
 Grapple.prototype.capturerCheck = function () {
   return false;
-}
+};
 
 Grapple.prototype.goTo = function (row, col) {
   let grappledPiece = this.board.get(row, col);
-  if (! grappledPiece) {return RollingPiece.prototype.goTo.call(this, row, col)}
-  const getCoord = (piece) => fileDict[piece.col] + (this.board.NBRANKS - piece.row);
+  if (!grappledPiece) {
+    return RollingPiece.prototype.goTo.call(this, row, col);
+  }
+  const getCoord = (piece) =>
+    fileDict[piece.col] + (this.board.NBRANKS - piece.row);
   let commands = [];
 
   let notation = "G:";
   if (grappledPiece.ID !== "i") {
     notation += grappledPiece.ID.toUpperCase();
   }
-  notation += getCoord(grappledPiece) + "->" + getCoord(this);  // ex : G:Nf6->d4
+  notation += getCoord(grappledPiece) + "->" + getCoord(this); // ex : G:Nf6->d4
   commands.push(new Notation(notation));
   commands.push(new Capture(this, this));
-  commands.push(new AfterMove([grappledPiece.row, grappledPiece.col], [this.row, this.col]));
+  commands.push(
+    new AfterMove([grappledPiece.row, grappledPiece.col], [this.row, this.col])
+  );
   return commands;
-}
+};
 
 Grapple.prototype.updateValidMoves = function () {
   RollingPiece.prototype.updateValidMoves.call(this);
   this.antikingSquares.length = 0;
-}
+};

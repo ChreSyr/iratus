@@ -1,4 +1,3 @@
-
 // CONSTRUCTOR
 
 function Phantom(board, row, col) {
@@ -21,7 +20,6 @@ Phantom.prototype.ID = "p";
 // INSTANCE METHODS - MECHANICS
 
 Phantom.prototype.canGoTo = function (row, col) {
-
   let piece = this.board.get(row, col);
   if (piece === null) {
     return true;
@@ -30,4 +28,4 @@ Phantom.prototype.canGoTo = function (row, col) {
   } else {
     return piece.color !== this.color;
   }
-}
+};

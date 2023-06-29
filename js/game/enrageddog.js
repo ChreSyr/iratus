@@ -1,4 +1,3 @@
-
 // CONSTRUCTOR
 
 function EnragedDog(board, row, col) {

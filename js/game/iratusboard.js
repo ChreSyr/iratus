@@ -1,8 +1,7 @@
-
 // CONSTRUCTOR
 
 function IratusBoard(game) {
-  Board.call(this, game, nbranks=10, nbfiles=8);
+  Board.call(this, game, (nbranks = 10), (nbfiles = 8));
 
   this.calculatorClass = CalculatorIratusBoard;
 }
@@ -27,16 +26,16 @@ IratusBoard.prototype.addPiece = function (piece) {
 IratusBoard.prototype.createPieces = function () {
   Board.prototype.createPieces.call(this);
   let iratusBoard = [
-  ["p", "d", "s","dy","dy", "s", "d", "g"],
-  ["r", "n", "b", "q", "k", "b", "n", "r"],
-  ["i", "i", "i", "i", "i", "i", "i", "i"],
-  [" ", " ", " ", " ", " ", " ", " ", " "],
-  [" ", " ", " ", " ", " ", " ", " ", " "],
-  [" ", " ", " ", " ", " ", " ", " ", " "],
-  [" ", " ", " ", " ", " ", " ", " ", " "],
-  ["i", "i", "i", "i", "i", "i", "i", "i"],
-  ["r", "n", "b", "q", "k", "b", "n", "r"],
-  ["p", "d", "s","dy","dy", "s", "d", "g"],
+    ["p", "d", "s", "dy", "dy", "s", "d", "g"],
+    ["r", "n", "b", "q", "k", "b", "n", "r"],
+    ["i", "i", "i", "i", "i", "i", "i", "i"],
+    [" ", " ", " ", " ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " ", " ", " ", " "],
+    ["i", "i", "i", "i", "i", "i", "i", "i"],
+    ["r", "n", "b", "q", "k", "b", "n", "r"],
+    ["p", "d", "s", "dy", "dy", "s", "d", "g"],
   ];
   for (let row = 0; row < 10; row++) {
     for (let col = 0; col < 8; col++) {
@@ -67,15 +66,21 @@ IratusBoard.prototype.updateAllValidMoves = function () {
   if (this.game.movesHistory.length === 0) {
     return;
   }
-  
+
   let piece = this.game.movesHistory.slice(-1)[0].piece;
-  
+
   if (piece.stillHasToMove) {
     let clonedPiece = this.calculator.getSimulatedPiece(piece);
     let validMoves = [];
     for (let validMove of piece.validMoves) {
-      let moveObject = this.calculator.move(clonedPiece.getPos(), Piece.getPos(validMove), true);
-      for (let enemyClonedPiece of this.calculator.piecesColored[clonedPiece.enemyColor]) {
+      let moveObject = this.calculator.move(
+        clonedPiece.getPos(),
+        Piece.getPos(validMove),
+        true
+      );
+      for (let enemyClonedPiece of this.calculator.piecesColored[
+        clonedPiece.enemyColor
+      ]) {
         enemyClonedPiece.updateValidMoves();
       }
       if (!this.calculator.king[piece.color].inCheck()) {
@@ -99,8 +104,14 @@ IratusBoard.prototype.updateAllValidMoves = function () {
       let validMoves = [];
       if (piece.stillHasToMove === false) {
         for (let validMove of piece.validMoves) {
-          let moveObject = this.calculator.move(clonedPiece.getPos(), Piece.getPos(validMove), true);
-          for (let enemyClonedPiece of this.calculator.piecesColored[clonedPiece.enemyColor]) {
+          let moveObject = this.calculator.move(
+            clonedPiece.getPos(),
+            Piece.getPos(validMove),
+            true
+          );
+          for (let enemyClonedPiece of this.calculator.piecesColored[
+            clonedPiece.enemyColor
+          ]) {
             enemyClonedPiece.updateValidMoves();
           }
           let valid;
@@ -108,11 +119,17 @@ IratusBoard.prototype.updateAllValidMoves = function () {
             valid = false;
             clonedPiece.updateValidMoves();
             for (let validMove2 of clonedPiece.validMoves) {
-              let moveObject2 = this.calculator.move(clonedPiece.getPos(), Piece.getPos(validMove2), true);
-              for (let enemyClonedPiece2 of this.calculator.piecesColored[clonedPiece.enemyColor]) {
+              let moveObject2 = this.calculator.move(
+                clonedPiece.getPos(),
+                Piece.getPos(validMove2),
+                true
+              );
+              for (let enemyClonedPiece2 of this.calculator.piecesColored[
+                clonedPiece.enemyColor
+              ]) {
                 enemyClonedPiece2.updateValidMoves();
               }
-  
+
               if (!this.calculator.king[piece.color].inCheck()) {
                 valid = true;
               }
@@ -131,8 +148,14 @@ IratusBoard.prototype.updateAllValidMoves = function () {
         }
       } else {
         for (let validMove of piece.validMoves) {
-          let moveObject = this.calculator.move(clonedPiece.getPos(), Piece.getPos(validMove), true);
-          for (let enemyClonedPiece of this.calculator.piecesColored[clonedPiece.enemyColor]) {
+          let moveObject = this.calculator.move(
+            clonedPiece.getPos(),
+            Piece.getPos(validMove),
+            true
+          );
+          for (let enemyClonedPiece of this.calculator.piecesColored[
+            clonedPiece.enemyColor
+          ]) {
             enemyClonedPiece.updateValidMoves();
           }
           if (!this.calculator.king[piece.color].inCheck()) {
@@ -143,5 +166,5 @@ IratusBoard.prototype.updateAllValidMoves = function () {
       }
       piece.validMoves = validMoves;
     }
-  }    
+  }
 };

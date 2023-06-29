@@ -1,264 +1,387 @@
 <!DOCTYPE html>
 
 <html lang="fr">
+  <head>
+    <meta
+      charset="utf-8"
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+    <link rel="icon" type="image/x-icon" href="images/logo.png" />
+    <link rel="stylesheet" type="text/css" href="dropdown-style.css" />
+    <link id="maincss" rel="stylesheet" href="css/sharedstyle.css" />
+    <link rel="stylesheet" href="css/rules.css" />
+    <link id="customcss" rel="stylesheet" href="css/custom/stylesheet0.css" />
+    <title>Iratus</title>
+  </head>
 
-<head>
+  <body>
+    <header>
+      <h1>Iratus</h1>
+      <div class="cd-dropdown-wrapper">
+        <svg class="menu-bar-btn menu-trigger" viewBox="0 0 100 100">
+          <rect
+            class="menu-rect"
+            x="5"
+            y="13"
+            width="90"
+            height="14"
+            rx="4"
+          ></rect>
+          <rect
+            class="menu-rect"
+            x="5"
+            y="43"
+            width="90"
+            height="14"
+            rx="4"
+          ></rect>
+          <rect
+            class="menu-rect"
+            x="5"
+            y="73"
+            width="90"
+            height="14"
+            rx="4"
+          ></rect>
+        </svg>
+        <nav class="cd-dropdown">
+          <h2>Iratus</h2>
+          <a href="#0" class="cd-close">Close</a>
+          <ul class="cd-dropdown-content">
+            <li><a href="index.html">Accueil</a></li>
+            <li class="has-children">
+              <a href="">Règles</a>
+              <ul class="cd-dropdown-icons is-hidden">
+                <li class="go-back"><a href="#0">Retour</a></li>
+                <li class="long-item">
+                  <a
+                    class="cd-dropdown-item btn-king"
+                    href="https://www.chess.com/fr/learn-how-to-play-chess"
+                    target="_blank"
+                  >
+                    <h3>Les Échecs Classiques - Chess.com</h3>
+                  </a>
+                </li>
+                <li class="see-all">
+                  <a href="rules.html">Toutes les nouvelles règles</a>
+                </li>
+                <li>
+                  <a
+                    class="cd-dropdown-item btn-soldier a-close"
+                    href="rules.html#soldier-anchor"
+                  >
+                    <h3>Le Soldat</h3>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="cd-dropdown-item btn-elitesoldier a-close"
+                    href="rules.html#elitesoldier-anchor"
+                  >
+                    <h3>Le Soldat d'Élite</h3>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="cd-dropdown-item btn-dog a-close"
+                    href="rules.html#dog-anchor"
+                  >
+                    <h3>Le Chien</h3>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="cd-dropdown-item btn-enrageddog a-close"
+                    href="rules.html#enrageddog-anchor"
+                  >
+                    <h3>Le Chien Enragé</h3>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="cd-dropdown-item btn-dynamite a-close"
+                    href="rules.html#dynamite-anchor"
+                  >
+                    <h3>La Dynamite</h3>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="cd-dropdown-item btn-phantom a-close"
+                    href="rules.html#phantom-anchor"
+                  >
+                    <h3>Le Fantôme</h3>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="cd-dropdown-item btn-grapple a-close"
+                    href="rules.html#grapple-anchor"
+                  >
+                    <h3>Le Grappin</h3>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="cd-dropdown-item btn-pawn a-close"
+                    href="rules.html#pawn-anchor"
+                  >
+                    <h3>Le Pion</h3>
+                  </a>
+                </li>
+              </ul>
+              <!-- .cd-secondary-dropdown -->
+            </li>
+            <!-- .has-children -->
 
-  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="images/logo.png">
-  <link rel="stylesheet" type="text/css" href="dropdown-style.css">
-  <link id="maincss" rel="stylesheet" href="css/sharedstyle.css">
-  <link rel="stylesheet" href="css/rules.css">
-  <link id="customcss" rel="stylesheet" href="css/custom/stylesheet0.css">
-  <title>Iratus</title>
+            <li class="has-children">
+              <a href="">Où est Charlie ?</a>
+              <ul class="cd-secondary-dropdown is-hidden">
+                <li class="go-back"><a href="#0">Où est Charlie ?</a></li>
+                <li class="see-all"><a>Charlie avait faim</a></li>
+                <li class="has-children">
+                  <a href="">Charlie est allé au kebab</a>
 
-</head>
+                  <ul class="is-hidden">
+                    <li class="go-back">
+                      <a href="#0">Charlie est allé au kebab</a>
+                    </li>
+                    <li class="see-all"><a>Charlie n'avait pas d'argent</a></li>
+                    <li class="has-children">
+                      <a href="#0">Charlie décida de voler un kebab</a>
 
-<body>
+                      <ul class="is-hidden">
+                        <li class="go-back">
+                          <a href="#0">Charlie décida de voler un kebab</a>
+                        </li>
+                        <li class="see-all"><a>Charlie est en prison</a></li>
+                      </ul>
+                    </li>
+                    <li class="has-children">
+                      <a href="#0">Charlie menaca le kebabier</a>
 
-  <header>
-    <h1>Iratus</h1>
-    <div class="cd-dropdown-wrapper">
-      <svg class="menu-bar-btn menu-trigger" viewBox="0 0 100 100">
-        <rect class="menu-rect" x=5 y=13 width="90" height="14" rx="4"></rect>
-        <rect class="menu-rect" x=5 y="43" width="90" height="14" rx="4"></rect>
-        <rect class="menu-rect" x=5 y="73" width="90" height="14" rx="4"></rect>
-      </svg>
-      <nav class="cd-dropdown">
-        <h2>Iratus</h2>
-        <a href="#0" class="cd-close">Close</a>
-        <ul class="cd-dropdown-content">
-          <li><a href="index.html">Accueil</a></li>
-          <li class="has-children">
-            <a href="">Règles</a>
-            <ul class="cd-dropdown-icons is-hidden">
-              <li class="go-back"><a href="#0">Retour</a></li>
-              <li class="long-item">
-                <a class="cd-dropdown-item btn-king" href="https://www.chess.com/fr/learn-how-to-play-chess"
-                  target="_blank">
-                  <h3>Les Échecs Classiques - Chess.com</h3>
-                </a>
-              </li>
-              <li class="see-all"><a href="rules.html">Toutes les nouvelles règles</a></li>
-              <li><a class="cd-dropdown-item btn-soldier a-close" href="rules.html#soldier-anchor">
-                  <h3>Le Soldat</h3>
-                </a></li>
-              <li><a class="cd-dropdown-item btn-elitesoldier a-close" href="rules.html#elitesoldier-anchor">
-                  <h3>Le Soldat d'Élite</h3>
-                </a></li>
-              <li><a class="cd-dropdown-item btn-dog a-close" href="rules.html#dog-anchor">
-                  <h3>Le Chien</h3>
-                </a></li>
-              <li><a class="cd-dropdown-item btn-enrageddog a-close" href="rules.html#enrageddog-anchor">
-                  <h3>Le Chien Enragé</h3>
-                </a></li>
-              <li><a class="cd-dropdown-item btn-dynamite a-close" href="rules.html#dynamite-anchor">
-                  <h3>La Dynamite</h3>
-                </a></li>
-              <li><a class="cd-dropdown-item btn-phantom a-close" href="rules.html#phantom-anchor">
-                  <h3>Le Fantôme</h3>
-                </a></li>
-              <li><a class="cd-dropdown-item btn-grapple a-close" href="rules.html#grapple-anchor">
-                  <h3>Le Grappin</h3>
-                </a></li>
-              <li><a class="cd-dropdown-item btn-pawn a-close" href="rules.html#pawn-anchor">
-                  <h3>Le Pion</h3>
-                </a></li>
-            </ul> <!-- .cd-secondary-dropdown -->
-          </li> <!-- .has-children -->
+                      <ul class="is-hidden">
+                        <li class="go-back">
+                          <a href="#0">Charlie menaca le kebabier</a>
+                        </li>
+                        <li class="see-all"><a>Charlie est à l'hôpital</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
 
-          <li class="has-children">
-            <a href="">Où est Charlie ?</a>
-            <ul class="cd-secondary-dropdown is-hidden">
-              <li class="go-back"><a href="#0">Où est Charlie ?</a></li>
-              <li class="see-all"><a>Charlie avait faim</a></li>
-              <li class="has-children">
-                <a href="">Charlie est allé au kebab</a>
+                <li class="has-children">
+                  <a href="">Charlie a cuisiné</a>
 
-                <ul class="is-hidden">
-                  <li class="go-back"><a href="#0">Charlie est allé au kebab</a></li>
-                  <li class="see-all"><a>Charlie n'avait pas d'argent</a></li>
-                  <li class="has-children">
-                    <a href="#0">Charlie décida de voler un kebab</a>
+                  <ul class="is-hidden">
+                    <li class="go-back"><a href="#0">Charlie a cuisiné</a></li>
+                    <li class="see-all"><a>Charlie a cuit des pâtes</a></li>
 
-                    <ul class="is-hidden">
-                      <li class="go-back"><a href="#0">Charlie décida de voler un kebab</a></li>
-                      <li class="see-all"><a>Charlie est en prison</a></li>
-                    </ul>
-                  </li>
-                  <li class="has-children">
-                    <a href="#0">Charlie menaca le kebabier</a>
+                    <li class="has-children">
+                      <a href="#0">Les pâtes venaient d'une usine Tricatel</a>
+                      <ul class="is-hidden">
+                        <li class="go-back">
+                          <a href="#0"
+                            >Les pâtes venaient d'une usine Tricatel</a
+                          >
+                        </li>
+                        <li class="see-all"><a>Charlie est mort</a></li>
+                      </ul>
+                    </li>
 
-                    <ul class="is-hidden">
-                      <li class="go-back"><a href="#0">Charlie menaca le kebabier</a></li>
-                      <li class="see-all"><a>Charlie est à l'hôpital</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
+                    <li class="has-children">
+                      <a href="#0">Les pâtes venaient d'une usine Panzani</a>
+                      <ul class="is-hidden">
+                        <li class="go-back">
+                          <a href="#0"
+                            >Les pâtes venaient d'une usine Panzani</a
+                          >
+                        </li>
+                        <li class="see-all"><a>Charlie est aux anges</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              <!-- .cd-secondary-dropdown -->
+            </li>
+            <!-- .has-children -->
+            <li><a href="contact.html">Contact</a></li>
+            <li>
+              <a href="https://ko-fi.com/chresyr" target="_blank">Soutenir</a>
+            </li>
+          </ul>
+          <!-- .cd-dropdown-content -->
+        </nav>
+        <!-- .cd-dropdown -->
+      </div>
+      <!-- .cd-dropdown-wrapper -->
+    </header>
 
-              <li class="has-children">
-                <a href="">Charlie a cuisiné</a>
+    <div class="rules">
+      <br />
+      <a href="https://www.chess.com/fr/learn-how-to-play-chess" target="_blank"
+        >Apprendre à Jouer aux Échecs - Chess.com</a
+      >
+      <br />
+      <br />
 
-                <ul class="is-hidden">
-                  <li class="go-back"><a href="#0">Charlie a cuisiné</a></li>
-                  <li class="see-all"><a>Charlie a cuit des pâtes</a></li>
+      <div class="rules-sep" id="soldier-anchor"></div>
+      <br />
+      <div class="rules-title-div">
+        <div class="showcase soldier"></div>
+        <h2 class="rules-title">Le Soldat</h2>
+      </div>
+      <br />
+      <p>
+        Le soldat se déplace d'une à deux cases, en diagonale et vers l'avant.
+      </p>
+      <p>Il ne peut capturer que les pions.</p>
+      <p>
+        S'il atteint l'autre bout de l'échiquier, il devient un super soldat.
+      </p>
+      <br />
+      <p>Chaque soldat a un chien.</p>
+      <p>
+        Ils ne peuvent se séparer ; le chien doit toujours être à une case de
+        son maître, diagonales comprises.
+      </p>
+      <p>Lorsque le soldat avance, le chien le suit automatiquement.</p>
+      <p>
+        Si le chien est capturé, le soldat quitte la partie pour aller enterrer
+        son chien.
+      </p>
+      <br />
 
-                  <li class="has-children">
-                    <a href="#0">Les pâtes venaient d'une usine Tricatel</a>
-                    <ul class="is-hidden">
-                      <li class="go-back"><a href="#0">Les pâtes venaient d'une usine Tricatel</a></li>
-                      <li class="see-all"><a>Charlie est mort</a></li>
-                    </ul>
-                  </li>
+      <div class="rules-sep" id="elitesoldier-anchor"></div>
+      <br />
+      <div class="rules-title-div">
+        <div class="showcase elitesoldier"></div>
+        <h2 class="rules-title">Le Soldat d'Élite</h2>
+      </div>
+      <br />
+      <p>
+        Le soldat d'élite se déplace d'une case, en diagonale, deux fois par
+        tour.
+      </p>
+      <p>Il peut capturer toutes les pièces.</p>
+      <p>
+        Si le soldat d'élite est un soldat promu, les règles quant au chien sont
+        identiques.
+      </p>
+      <br />
 
-                  <li class="has-children">
-                    <a href="#0">Les pâtes venaient d'une usine Panzani</a>
-                    <ul class="is-hidden">
-                      <li class="go-back"><a href="#0">Les pâtes venaient d'une usine Panzani</a></li>
-                      <li class="see-all"><a>Charlie est aux anges</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-            </ul> <!-- .cd-secondary-dropdown -->
-          </li> <!-- .has-children -->
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="https://ko-fi.com/chresyr" target="_blank">Soutenir</a></li>
-        </ul> <!-- .cd-dropdown-content -->
-      </nav> <!-- .cd-dropdown -->
-    </div> <!-- .cd-dropdown-wrapper -->
-  </header>
+      <div class="rules-sep" id="dog-anchor"></div>
+      <br />
+      <div class="rules-title-div">
+        <div class="showcase dog"></div>
+        <h2 class="rules-title">Le Chien</h2>
+      </div>
+      <br />
+      <p>Le chien ne se déplace qu'en suivant son maître (un soldat).</p>
+      <p>Il ne peut capturer aucune pièce.</p>
+      <p>Si son maître est capturé, le chien devient un chien enragé.</p>
+      <br />
 
-  <div class="rules">
-    <br>
-    <a href="https://www.chess.com/fr/learn-how-to-play-chess" target="_blank">Apprendre à Jouer aux Échecs -
-      Chess.com</a>
-    <br>
-    <br>
+      <div class="rules-sep" id="enrageddog-anchor"></div>
+      <br />
+      <div class="rules-title-div">
+        <div class="showcase enrageddog"></div>
+        <h2 class="rules-title">Le Chien Enragé</h2>
+      </div>
+      <br />
+      <p>
+        Le chien enragé se déplace d'une case, horizontalement ou verticalement,
+        deux fois par tour.
+      </p>
+      <p>Il peut capturer toutes les pièces.</p>
+      <br />
 
-    <div class="rules-sep" id="soldier-anchor"></div>
-    <br>
-    <div class="rules-title-div">
-      <div class="showcase soldier"></div>
-      <h2 class="rules-title">Le Soldat</h2>
+      <div class="rules-sep" id="dynamite-anchor"></div>
+      <br />
+      <div class="rules-title-div">
+        <div class="showcase dynamite"></div>
+        <h2 class="rules-title">La Dynamite</h2>
+      </div>
+      <br />
+      <p>La dynamite n'est pas une pièce, mais plutôt un équipement.</p>
+      <p>Elle s'attache à une pièce alliée pour toute la partie.</p>
+      <p>
+        La dynamite peut s'attacher aux pions, aux cavaliers, aux fous, aux
+        chiens et aux soldats.
+      </p>
+      <br />
+      <p>Pour attacher une pièce à la dynamite, deux options :</p>
+      <p>
+        Si la pièce ne s'est pas encore déplacée, la dynamite peut la rejoindre
+        sur sa case.
+      </p>
+      <p>Sinon, elle peut se placer sur la case de la dynamite.</p>
+      <br />
+      <p>Une pièce ennemie ne peut pas passer sur la dynamite.</p>
+      <br />
+      <p>
+        Lorsque qu'une pièce équipée de dynamite est capturée, la dynamite
+        expolse.
+      </p>
+      <p>La pièce ennemie qui a voulu capturer se fait ainsi capturer.</p>
+      <br />
+
+      <div class="rules-sep" id="phantom-anchor"></div>
+      <br />
+      <div class="rules-title-div">
+        <div class="showcase phantom"></div>
+        <h2 class="rules-title">Le Fantôme</h2>
+      </div>
+      <br />
+      <p>Le fantôme devient la dernière pièce alliée capturée.</p>
+      <br />
+
+      <div class="rules-sep" id="grapple-anchor"></div>
+      <br />
+      <div class="rules-title-div">
+        <div class="showcase grapple"></div>
+        <h2 class="rules-title">Le Grappin</h2>
+      </div>
+      <br />
+      <p>Le grappin se déplace comme la dame.</p>
+      <p>
+        Au lieu de capturer une pièce (alliée ou ennemie), il l'attire jusqu'à
+        lui, se faisant capturer par elle.
+      </p>
+      <br />
+
+      <div class="rules-sep" id="pawn-anchor"></div>
+      <br />
+      <div class="rules-title-div">
+        <div class="showcase pawn"></div>
+        <h2 class="rules-title">Le Pion</h2>
+      </div>
+      <br />
+      <p>Le pion peut toujours avancer d'une à deux cases.</p>
+      <p>La règle de "en passant" s'applique en conséquence.</p>
+      <br />
+      <p>
+        Lorsque le pion atteint l'autre bout de l'échiquier, il peut être promu
+        en Dame, Tour, Fou, Cavalier, Super Soldat ou Chien Enragé.
+      </p>
+      <br />
+
+      <br />
+      <br />
     </div>
-    <br>
-    <p>Le soldat se déplace d'une à deux cases, en diagonale et vers l'avant.</p>
-    <p>Il ne peut capturer que les pions.</p>
-    <p>S'il atteint l'autre bout de l'échiquier, il devient un super soldat.</p>
-    <br>
-    <p>Chaque soldat a un chien.</p>
-    <p>Ils ne peuvent se séparer ; le chien doit toujours être à une case de son maître, diagonales comprises.</p>
-    <p>Lorsque le soldat avance, le chien le suit automatiquement.</p>
-    <p>Si le chien est capturé, le soldat quitte la partie pour aller enterrer son chien.</p>
-    <br>
 
-    <div class="rules-sep" id="elitesoldier-anchor"></div>
-    <br>
-    <div class="rules-title-div">
-      <div class="showcase elitesoldier"></div>
-      <h2 class="rules-title">Le Soldat d'Élite</h2>
-    </div>
-    <br>
-    <p>Le soldat d'élite se déplace d'une case, en diagonale, deux fois par tour.</p>
-    <p>Il peut capturer toutes les pièces.</p>
-    <p>Si le soldat d'élite est un soldat promu, les règles quant au chien sont identiques.</p>
-    <br>
+    <script type="text/javascript" src="js/functions.js" defer></script>
+    <script type="text/javascript" src="js/sharedscript.js" defer></script>
 
-    <div class="rules-sep" id="dog-anchor"></div>
-    <br>
-    <div class="rules-title-div">
-      <div class="showcase dog"></div>
-      <h2 class="rules-title">Le Chien</h2>
-    </div>
-    <br>
-    <p>Le chien ne se déplace qu'en suivant son maître (un soldat).</p>
-    <p>Il ne peut capturer aucune pièce.</p>
-    <p>Si son maître est capturé, le chien devient un chien enragé.</p>
-    <br>
-
-    <div class="rules-sep" id="enrageddog-anchor"></div>
-    <br>
-    <div class="rules-title-div">
-      <div class="showcase enrageddog"></div>
-      <h2 class="rules-title">Le Chien Enragé</h2>
-    </div>
-    <br>
-    <p>Le chien enragé se déplace d'une case, horizontalement ou verticalement, deux fois par tour.</p>
-    <p>Il peut capturer toutes les pièces.</p>
-    <br>
-
-    <div class="rules-sep" id="dynamite-anchor"></div>
-    <br>
-    <div class="rules-title-div">
-      <div class="showcase dynamite"></div>
-      <h2 class="rules-title">La Dynamite</h2>
-    </div>
-    <br>
-    <p>La dynamite n'est pas une pièce, mais plutôt un équipement.</p>
-    <p>Elle s'attache à une pièce alliée pour toute la partie.</p>
-    <p>La dynamite peut s'attacher aux pions, aux cavaliers, aux fous, aux chiens et aux soldats.</p>
-    <br>
-    <p>Pour attacher une pièce à la dynamite, deux options :</p>
-    <p>Si la pièce ne s'est pas encore déplacée, la dynamite peut la rejoindre sur sa case.</p>
-    <p>Sinon, elle peut se placer sur la case de la dynamite.</p>
-    <br>
-    <p>Une pièce ennemie ne peut pas passer sur la dynamite.</p>
-    <br>
-    <p>Lorsque qu'une pièce équipée de dynamite est capturée, la dynamite expolse.</p>
-    <p>La pièce ennemie qui a voulu capturer se fait ainsi capturer.</p>
-    <br>
-
-    <div class="rules-sep" id="phantom-anchor"></div>
-    <br>
-    <div class="rules-title-div">
-      <div class="showcase phantom"></div>
-      <h2 class="rules-title">Le Fantôme</h2>
-    </div>
-    <br>
-    <p>Le fantôme devient la dernière pièce alliée capturée.</p>
-    <br>
-
-    <div class="rules-sep" id="grapple-anchor"></div>
-    <br>
-    <div class="rules-title-div">
-      <div class="showcase grapple"></div>
-      <h2 class="rules-title">Le Grappin</h2>
-    </div>
-    <br>
-    <p>Le grappin se déplace comme la dame.</p>
-    <p>Au lieu de capturer une pièce (alliée ou ennemie), il l'attire jusqu'à lui, se faisant capturer par elle.</p>
-    <br>
-
-    <div class="rules-sep" id="pawn-anchor"></div>
-    <br>
-    <div class="rules-title-div">
-      <div class="showcase pawn"></div>
-      <h2 class="rules-title">Le Pion</h2>
-    </div>
-    <br>
-    <p>Le pion peut toujours avancer d'une à deux cases.</p>
-    <p>La règle de "en passant" s'applique en conséquence.</p>
-    <br>
-    <p>Lorsque le pion atteint l'autre bout de l'échiquier, il peut être promu en Dame, Tour, Fou, Cavalier, Super
-      Soldat ou Chien Enragé.</p>
-    <br>
-
-    <br>
-    <br>
-
-  </div>
-
-  <script type="text/javascript" src="js/functions.js" defer></script>
-  <script type="text/javascript" src="js/sharedscript.js" defer></script>
-
-  <!-- Dropdown -->
-  <script src="js/jquery-2.1.1.js" defer></script>
-  <script src="js/jquery.menu-aim.js" defer></script> <!-- menu aim -->
-  <script src="js/main.js" defer></script> <!-- Resource jQuery -->
-  <script src="js/modernizr.js" defer></script> <!-- Modernizr -->
-
-</body>
-
+    <!-- Dropdown -->
+    <script src="js/jquery-2.1.1.js" defer></script>
+    <script src="js/jquery.menu-aim.js" defer></script>
+    <!-- menu aim -->
+    <script src="js/main.js" defer></script>
+    <!-- Resource jQuery -->
+    <script src="js/modernizr.js" defer></script>
+    <!-- Modernizr -->
+  </body>
 </html>

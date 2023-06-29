@@ -1,4 +1,3 @@
-
 // CONSTRUCTOR
 
 function Queen(board, row, col) {
