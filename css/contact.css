@@ -25,9 +25,10 @@
 
 #form {
   border: 0;
-  width: 100%;
-  height: calc(100vh - 2.9rem - var(--header-height));
   color: var(--light-green);
+  display: none;
+  height: calc(100vh - 2.9rem - var(--header-height));
+  width: 100%;
 }
 
 @media (min-width: 614px) {

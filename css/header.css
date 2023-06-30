@@ -49,7 +49,6 @@
 }
 
 .menu-panel-wrapper {
-  cursor: pointer;
   display: flex;
   height: 5rem;
 }
@@ -281,13 +280,13 @@ header h1 {
   display: flex;
   flex-direction: column;
   margin: 0;
-  margin-bottom: 10px;
   padding: 0;
 }
 
 .settings li {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 .settings label {

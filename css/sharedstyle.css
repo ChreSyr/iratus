@@ -14,23 +14,15 @@
   --fontfamily-main: "PierceRoman", "helvetica", sans-serif;
   --fontfamily-simple: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   --header-height: 5rem;
+  --select-height: 3.2rem;
   /* colors */
   --accessible: rgba(0, 0, 0, 0.2);
   --dark: rgb(21, 21, 21);
   --darker: black;
   --light-dark: rgb(64, 64, 64);
   --light-green: rgb(131, 174, 131);
+  --special-color: rgb(131, 174, 131);
   --selected: rgba(255, 255, 0, 0.5);
-}
-
-/* @media (min-width: 614px) {
-  :root {
-    --header-height: 15rem;
-  }
-} */
-
-image {
-  background-color: red;
 }
 
 button,
@@ -61,6 +53,68 @@ body {
   .only-mobile {
     display: none !important;
   }
+}
+
+/* LIGHT / DARK MODE */
+
+body.animating-dark-mode,
+body.animating-dark-mode * {
+  transition: background-color 1s, color 1s, fill 1s;
+}
+
+body.light-mode {
+  /* colors */
+  --dark: rgb(180, 180, 180);
+  --darker: rgb(131, 131, 131);
+  --light-dark: rgb(150, 150, 150);
+  --light-green: rgb(0, 0, 0);
+  --special-color: rgb(129, 73, 136);
+}
+
+/* gpt */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: var(--select-height);
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  border-radius: 1em;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--light-dark);
+  transition: 0.4s;
+}
+
+.slider:before {
+  border-radius: 1em;
+  position: absolute;
+  content: "";
+  height: 24px;
+  width: 24px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: var(--special-color);
+}
+
+input:checked + .slider:before {
+  transform: translateX(27px);
 }
 
 /* BUTTON */
@@ -107,7 +161,6 @@ button:hover {
 
 select {
   --arrowPosition: 1rem;
-  --selectSize: 3.2rem;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -115,6 +168,7 @@ select {
   border: 0.1rem solid var(--borderColor);
   border-radius: 0.3rem;
   color: var(--light-green);
+  cursor: pointer;
   font-family: inherit;
   font-size: 1.5rem;
   line-height: 1.2;
@@ -151,7 +205,7 @@ select:not([multiple]) {
     calc(100% - var(--arrowPosition)) 50%;
   background-repeat: no-repeat;
   background-size: 0.5rem 0.5rem, 0.5rem 0.5rem;
-  height: var(--selectSize);
+  height: var(--select-height);
 }
 
 select:not([multiple]) option {
@@ -173,13 +227,6 @@ select:focus:not(:disabled),
 select:hover:not(:disabled) {
   border-color: var(--borderFocus);
   color: var(--light-green);
-}
-
-select.ui_v5-select-large {
-  --arrowPosition: 1.5rem;
-  --selectSize: 4rem;
-  font-size: 1.5rem;
-  padding: 0.8rem calc(var(--arrowPosition) + 2rem) 0.8rem 1rem;
 }
 
 /* SCROLLBAR */

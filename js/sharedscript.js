@@ -1,3 +1,24 @@
+// Open new page from menu-bar's btn
+function clickMenuBarBtn(type) {
+  if (document.firstElementChild.clientWidth < 614) {
+    return;
+  }
+  if (isMobileDevice()) {
+    return;
+  }
+
+  switch (type) {
+    case "rules":
+    case "puzzles":
+    case "contact":
+      window.location.href = type + ".html";
+      break;
+    case "donations":
+      // Open ko-fi.com in a new web page
+      openKoFi();
+  }
+}
+
 // Close the menu's bar on mobile view
 function closeMenu() {
   document
@@ -40,26 +61,6 @@ function openMenu() {
   document
     .getElementsByClassName("menu-bar-wrapper")[0]
     .classList.remove("closed-for-mobile");
-}
-
-function clickMenuBarBtn(type) {
-  if (document.firstElementChild.clientWidth < 614) {
-    return;
-  }
-  if (isMobileDevice()) {
-    return;
-  }
-
-  switch (type) {
-    case "rules":
-    case "puzzles":
-    case "contact":
-      window.location.href = type + ".html";
-      break;
-    case "donations":
-      // Open ko-fi.com in a new web page
-      openKoFi();
-  }
 }
 
 /* Supports pointer events */
@@ -150,3 +151,40 @@ document.addEventListener(
   supportsPointerEvents ? "pointerdown" : "mousedown",
   handlePointerDown
 );
+
+/* Local storage */
+// Check the user's preference from localStorage and apply the mode on page load
+window.addEventListener("DOMContentLoaded", function () {
+  const preferredTheme = localStorage.getItem("theme");
+  const body = document.body;
+
+  if (preferredTheme === "light") {
+    body.classList.add("light-mode");
+    document.getElementById("toggleDarkMode").checked = false;
+  } else {
+    body.classList.remove("light-mode"); // Remove the light mode class if not set
+    document.getElementById("toggleDarkMode").checked = true;
+  }
+
+  console.log(preferredTheme);
+});
+
+/* Light / Dark mode */
+function toggleDarkMode() {
+  const body = document.body;
+  body.classList.toggle("light-mode");
+  body.classList.add("animating-dark-mode");
+
+  // Store the user's preference in localStorage
+  const isLightMode = body.classList.contains("light-mode");
+  localStorage.setItem("theme", isLightMode ? "light" : "dark");
+}
+const toggleSwitch = document.getElementById("toggleDarkMode");
+toggleSwitch.addEventListener("change", toggleDarkMode);
+
+function handleAnimationEnd() {
+  document.body.classList.remove("animating-dark-mode");
+}
+document
+  .getElementsByClassName("settings")[0]
+  .addEventListener("transitionend", handleAnimationEnd);
