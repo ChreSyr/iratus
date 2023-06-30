@@ -71,6 +71,10 @@ body.light-mode {
   --special-color: rgb(129, 73, 136);
 }
 
+body.easy-reading {
+  font-family: var(--fontfamily-simple);
+}
+
 /* gpt */
 .switch {
   position: relative;

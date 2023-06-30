@@ -153,20 +153,27 @@ document.addEventListener(
 );
 
 /* Local storage */
-// Check the user's preference from localStorage and apply the mode on page load
+// Check the user's preference from localStorage on page load
 window.addEventListener("DOMContentLoaded", function () {
-  const preferredTheme = localStorage.getItem("theme");
   const body = document.body;
 
+  const preferredTheme = localStorage.getItem("theme");
   if (preferredTheme === "light") {
     body.classList.add("light-mode");
-    document.getElementById("toggleDarkMode").checked = false;
+    document.getElementById("toggle-dark-mode").checked = false;
   } else {
     body.classList.remove("light-mode"); // Remove the light mode class if not set
-    document.getElementById("toggleDarkMode").checked = true;
+    document.getElementById("toggle-dark-mode").checked = true;
   }
 
-  console.log(preferredTheme);
+  const preferredReading = localStorage.getItem("easy-reading");
+  if (preferredReading === "yes") {
+    body.classList.add("easy-reading");
+    document.getElementById("toggle-easy-reading").checked = true;
+  } else {
+    body.classList.remove("easy-reading");
+    document.getElementById("toggle-easy-reading").checked = false;
+  }
 });
 
 /* Light / Dark mode */
@@ -179,8 +186,8 @@ function toggleDarkMode() {
   const isLightMode = body.classList.contains("light-mode");
   localStorage.setItem("theme", isLightMode ? "light" : "dark");
 }
-const toggleSwitch = document.getElementById("toggleDarkMode");
-toggleSwitch.addEventListener("change", toggleDarkMode);
+const switchDarkMode = document.getElementById("toggle-dark-mode");
+switchDarkMode.addEventListener("change", toggleDarkMode);
 
 function handleAnimationEnd() {
   document.body.classList.remove("animating-dark-mode");
@@ -188,3 +195,15 @@ function handleAnimationEnd() {
 document
   .getElementsByClassName("settings")[0]
   .addEventListener("transitionend", handleAnimationEnd);
+
+/* Easy Reading */
+function toggleEasyReading() {
+  const body = document.body;
+  body.classList.toggle("easy-reading");
+
+  // Store the user's preference in localStorage
+  const isEasyReading = body.classList.contains("easy-reading");
+  localStorage.setItem("easy-reading", isEasyReading ? "yes" : "no");
+}
+const switchReading = document.getElementById("toggle-easy-reading");
+switchReading.addEventListener("change", toggleEasyReading);
