@@ -1,14 +1,9 @@
+/* MENU WRAPPER */
+
 .menu-wrapper {
   left: 0;
   position: absolute;
   top: 0;
-}
-
-.menu-bar-trigger {
-  /* left: .6rem; */
-  padding: 0.6rem;
-  position: absolute;
-  /* top: .6rem; */
 }
 
 .menu-bar-trigger:hover {
@@ -48,6 +43,11 @@
   padding: 0.7rem;
 }
 
+.menu-panel-wrapper:hover .menu-bar-btn {
+  background-color: var(--light-green);
+  fill: var(--darker);
+}
+
 .menu-panel-wrapper {
   display: flex;
   height: 5rem;
@@ -84,6 +84,10 @@
   position: absolute;
   top: 0;
   width: var(--menu-panel-width);
+}
+
+.menu-panel-wrapper:hover .menu-panel {
+  display: block;
 }
 
 @media (min-width: 530px) {
@@ -127,15 +131,6 @@ header h1 {
   fill: var(--light-green);
   height: 3.6rem;
   width: 3.6rem;
-}
-
-.menu-panel-wrapper:hover .menu-bar-btn {
-  background-color: var(--light-green);
-  fill: var(--darker);
-}
-
-.menu-panel-wrapper:hover .menu-panel {
-  display: block;
 }
 
 .menu-panel h2 {
