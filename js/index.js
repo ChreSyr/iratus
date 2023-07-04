@@ -56,11 +56,11 @@
 //   }
 // })();
 
+setPiecesStyle();
+
 var game;
 
 game = new Game(IratusBoard);
-
-setPiecesStyle();
 
 // ATTACHING EVENT LISTENERS
 
@@ -76,34 +76,41 @@ setPiecesStyle();
 //   }
 // });
 
-function handlePointerDown(event) {
-  const boardDiv = document.getElementById("board-single");
-  if (boardDiv.contains(event.target) && boardDiv !== event.target) {
-    closeMenu();
-    return;
+/* handle focus out of board */
+const boardDiv = document.getElementById("board-single");
+boardDiv.addEventListener("focusout", (event) => {
+  if (game.board.selectedPiece) {
+    game.board.selectedPiece.unselect();
   }
-
   cancelPromotion();
-  let selectedPiece = game.board.selectedPiece;
-  if (selectedPiece) {
-    selectedPiece.unselect();
-  }
+});
 
-  if (
-    document.getElementsByClassName("menu-wrapper")[0].contains(event.target)
-  ) {
-    return;
-  }
+// function handlePointerDown(event) {
+//   const boardDiv = document.getElementById("board-single");
+//   if (boardDiv.contains(event.target) && boardDiv !== event.target) {
+//     closeMenu();
+//     return;
+//   }
 
-  closeMenu();
-}
+//   cancelPromotion();
+//   let selectedPiece = game.board.selectedPiece;
+//   if (selectedPiece) {
+//     selectedPiece.unselect();
+//   }
 
-// const supportsPointerEvents = window.PointerEvent !== undefined;
+//   if (document.getElementById("menu-wrapper").contains(event.target)) {
+//     return;
+//   }
 
-document.addEventListener(
-  supportsPointerEvents ? "pointerdown" : "mousedown",
-  handlePointerDown
-);
+//   closeMenu();
+// }
+
+// // const supportsPointerEvents = window.PointerEvent !== undefined;
+
+// document.addEventListener(
+//   supportsPointerEvents ? "pointerdown" : "mousedown",
+//   handlePointerDown
+// );
 
 // if (isMobileDevice()) {
 //   // User is on a mobile device

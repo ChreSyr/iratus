@@ -1,31 +1,3 @@
-// Open new page from menu-bar's btn
-function clickMenuBarBtn(type) {
-  if (document.firstElementChild.clientWidth < 614) {
-    return;
-  }
-  if (isMobileDevice()) {
-    return;
-  }
-
-  switch (type) {
-    case "rules":
-    case "puzzles":
-    case "contact":
-      window.location.href = type + ".html";
-      break;
-    case "donations":
-      // Open ko-fi.com in a new web page
-      openKoFi();
-  }
-}
-
-// Close the menu's bar on mobile view
-function closeMenu() {
-  document
-    .getElementsByClassName("menu-bar-wrapper")[0]
-    .classList.add("closed-for-mobile");
-}
-
 // Handle when an option is selected in the style <select>
 function handleExperimentalSelect(type) {
   var selectedOption = document.getElementById("select-" + type).value;
@@ -56,15 +28,15 @@ function openLearnChess() {
   window.open("https://www.chess.com/fr/learn-how-to-play-chess", "_blank");
 }
 
-// Open the menu's bar on mobile view
-function openMenu() {
-  document
-    .getElementsByClassName("menu-bar-wrapper")[0]
-    .classList.remove("closed-for-mobile");
-}
-
 /* Supports pointer events */
 const supportsPointerEvents = window.PointerEvent !== undefined;
+/* User is on a mobile device */
+// const isMobileDevice = /Mobi|Android/i.test(navigator.userAgent);
+// /* is-mobile-device css property */
+// document.documentElement.style.setProperty(
+//   "--is-mobile-device",
+//   isMobileDevice
+// );
 
 /* New rules buttons always visible on mobile */
 if (isMobileDevice()) {
@@ -140,70 +112,12 @@ ajustSquareSize();
 window.addEventListener("resize", ajustSquareSize);
 
 /* Close menu when clicked outside */
-function handlePointerDown(event) {
-  if (
-    !document.getElementsByClassName("menu-wrapper")[0].contains(event.target)
-  ) {
-    closeMenu();
-  }
-}
-document.addEventListener(
-  supportsPointerEvents ? "pointerdown" : "mousedown",
-  handlePointerDown
-);
-
-/* Local storage */
-// Check the user's preference from localStorage on page load
-window.addEventListener("DOMContentLoaded", function () {
-  const body = document.body;
-
-  const preferredTheme = localStorage.getItem("theme");
-  if (preferredTheme === "light") {
-    body.classList.add("light-mode");
-    document.getElementById("toggle-dark-mode").checked = false;
-  } else {
-    body.classList.remove("light-mode"); // Remove the light mode class if not set
-    document.getElementById("toggle-dark-mode").checked = true;
-  }
-
-  const preferredReading = localStorage.getItem("easy-reading");
-  if (preferredReading === "yes") {
-    body.classList.add("easy-reading");
-    document.getElementById("toggle-easy-reading").checked = true;
-  } else {
-    body.classList.remove("easy-reading");
-    document.getElementById("toggle-easy-reading").checked = false;
-  }
-});
-
-/* Light / Dark mode */
-function toggleDarkMode() {
-  const body = document.body;
-  body.classList.toggle("light-mode");
-  body.classList.add("animating-dark-mode");
-
-  // Store the user's preference in localStorage
-  const isLightMode = body.classList.contains("light-mode");
-  localStorage.setItem("theme", isLightMode ? "light" : "dark");
-}
-const switchDarkMode = document.getElementById("toggle-dark-mode");
-switchDarkMode.addEventListener("change", toggleDarkMode);
-
-function handleAnimationEnd() {
-  document.body.classList.remove("animating-dark-mode");
-}
-document
-  .getElementsByClassName("settings")[0]
-  .addEventListener("transitionend", handleAnimationEnd);
-
-/* Easy Reading */
-function toggleEasyReading() {
-  const body = document.body;
-  body.classList.toggle("easy-reading");
-
-  // Store the user's preference in localStorage
-  const isEasyReading = body.classList.contains("easy-reading");
-  localStorage.setItem("easy-reading", isEasyReading ? "yes" : "no");
-}
-const switchReading = document.getElementById("toggle-easy-reading");
-switchReading.addEventListener("change", toggleEasyReading);
+// function handlePointerDown(event) {
+//   if (!document.getElementById("menu-wrapper").contains(event.target)) {
+//     closeMenu();
+//   }
+// }
+// document.addEventListener(
+//   supportsPointerEvents ? "pointerdown" : "mousedown",
+//   handlePointerDown
+// );

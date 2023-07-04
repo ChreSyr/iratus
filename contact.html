@@ -9,7 +9,7 @@
     />
     <link rel="icon" type="image/x-icon" href="images/logo.png" />
     <link rel="stylesheet" href="css/sharedstyle.css" />
-    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/menu.css" />
     <link rel="stylesheet" href="css/contact.css" />
     <link rel="stylesheet" href="css/game.css" />
     <link rel="stylesheet" id="custom-layout" href="" />
@@ -19,12 +19,8 @@
 
   <body>
     <header>
-      <div class="menu-wrapper">
-        <svg
-          class="menu-bar-btn menu-bar-trigger"
-          viewBox="0 0 100 100"
-          onclick="openMenu()"
-        >
+      <div id="menu-wrapper">
+        <svg class="menu-bar-btn" viewBox="0 0 100 100" onclick="openMenu()">
           <rect
             class="menu-rect"
             x="5"
@@ -50,7 +46,7 @@
             rx="4"
           ></rect>
         </svg>
-        <div class="menu-bar-wrapper closed-for-mobile">
+        <div class="closed-for-mobile" id="menu-bar-wrapper">
           <!-- CLOSE MOBILE VIEW -->
           <div class="menu-panel-wrapper only-mobile">
             <svg

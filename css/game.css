@@ -2,6 +2,12 @@
   --square-size: 60px;
 }
 
+/* TESTING */
+
+#board-single:focus-within {
+  background: red;
+}
+
 /* ORDERS */
 
 .player-info.w {
