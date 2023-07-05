@@ -122,12 +122,13 @@
 /* TODO : change font-size when too small */
 
 .menu-panel {
-  --menu-panel-width: min(calc(var(--square-size) * 8 - 5em), 9em);
+  --menu-panel-width: min(calc(var(
+  --square-size) * 8 - 5em), 13em);
   background-color: var(--dark);
   box-shadow: 0.6em -1em 1em var(--darker);
   color: var(--light-green);
   display: none;
-  font-size: 3em;
+  font-size: 2.1em;
   bottom: 0;
   left: 5rem;
   overflow-y: auto;
@@ -135,6 +136,12 @@
   position: absolute;
   top: 0;
   width: var(--menu-panel-width);
+}
+
+@media (min-width: 614px) {
+  .menu-panel {
+    font-size: 3em;
+  }
 }
 
 .menu-panel-wrapper.selected-panel .menu-panel {
