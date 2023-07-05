@@ -193,7 +193,7 @@ header {
 .menu-panel {
   --menu-panel-width: min(calc(var(--square-size) * 8 - 5em), 13em);
   background-color: var(--dark);
-  box-shadow: 0.6em -1em 1em var(--darker);
+  box-shadow: 0.6em -0em 1em var(--darker);
   color: var(--light-green);
   display: none;
   font-size: 2.1em;
