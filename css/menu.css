@@ -1,7 +1,6 @@
 /* HEADER */
 
 header {
-  align-items: center;
   background-color: var(--darker);
   display: flex;
   height: var(--header-height);
@@ -24,12 +23,32 @@ header {
   }
 }
 
-/* HEADER H1 */
+/* HEADER TITLE */
 
-header h1 {
+#title {
+  align-items: center;
+  border-radius: 3px;
+  display: flex;
+  height: 100%;
+  padding: 0 1em;
+}
+
+#title:active {
+  background-color: var(--light-green);
+}
+
+#title h1 {
   color: var(--light-green);
   font-size: 4.2em;
   font-weight: normal;
+  /* height: 100%; */
+  margin: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+#title:active h1 {
+  color: var(--darker);
 }
 
 /* MENU WRAPPER */
@@ -109,6 +128,13 @@ header h1 {
   .menu-panel-wrapper {
     cursor: unset;
   }
+}
+
+.menu-panel-wrapper h1 {
+  color: var(--light-green);
+  font-size: x-large;
+  font-weight: normal;
+  margin: auto 1rem;
 }
 
 /* MENU PANEL WRAPPER - CLOSE */
@@ -206,17 +232,6 @@ header h1 {
 */
 
 /* NOT SORTED YET */
-
-.menu-panel-wrapper h1 {
-  /* font-family: var(--fontfamily-simple); */
-  /* flex-grow: 1; */
-  /* flex-shrink: 1; */
-  font-size: x-large;
-  /* height: 5rem; */
-  margin: auto 1rem;
-  /* min-width: 0; */
-  /* text-align: center; */
-}
 
 /* DESKTOP & MOBILE - TODO : SORT */
 
