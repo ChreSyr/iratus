@@ -158,7 +158,9 @@ function makePieceDraggable(element) {
 
   const pointermoveHandle = (event) => {
     event.preventDefault();
+    console.log(pointermove);
     if (!dragging) {
+      console.log("Closed cause not dragging");
       return;
     }
     pos.x = event.clientX + dragging.dx;
@@ -176,12 +178,15 @@ function makePieceDraggable(element) {
         (element.piece.row + pos.y / squareSize) * 100
       }%)`;
     }
+    console.log(1, element.style.transform);
     if (board.game.hasFlippedPieces()) {
       element.style.transform += " rotate(180deg)";
     }
+    console.log(2, element.style.transform);
   };
 
   element.addEventListener(pointerdown, pointerdownHandle);
+  console.log(pointerdown, pointermove, pointerup, pointercancel);
 }
 
 // Writes css code in <script id="board-styles-single">
