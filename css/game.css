@@ -1,7 +1,24 @@
 /* TESTING */
 
 #board-single:focus-within {
-  background: red;
+  background: rgba(250, 0, 0, 0.1);
+}
+
+/* GAME WRAPPER */
+
+#game-wrapper {
+  --player-info-height: 3.2rem;
+  background-color: var(--light-dark);
+  flex: 0;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+@media (min-width: 614px) {
+  #game-wrapper {
+    --player-info-height: 4rem;
+    margin: 0;
+  }
 }
 
 /* ORDERS */
@@ -44,12 +61,6 @@
   /* padding: .2rem; */
 }
 
-@media (min-width: 614px) {
-  #game-wrapper {
-    --player-info-height: 4rem;
-  }
-}
-
 .player-info .captured-piece {
   background-size: contain;
   height: 80%;
@@ -84,7 +95,7 @@
     (100vh - var(--header-height) - 4 * var(--body-margin) - var(--player-info-height) * 2) / 10
   );
   --square-size-bywidth: calc((100vw - 2 * var(--body-margin)) / 8);
-  --square-size: min(68px, var(--square-size-byheight), var(--square-size-bywidth));
+  --square-size: min(80px, var(--square-size-byheight), var(--square-size-bywidth));
   background-image: url("../images/iratusboard-small.jpg");
   background-repeat: no-repeat;
   background-size: 100%;
@@ -103,6 +114,7 @@
     --square-size-byheight: calc(
       (100vh - 4 * var(--body-margin) - var(--player-info-height) * 2) / 10
     );
+    --square-size-bywidth: calc((100vw - var(--menu-bar-width) - 2 * var(--body-margin)) / 8);
     background-image: url("../images/iratusboard.png");
   }
 }

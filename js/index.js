@@ -97,3 +97,20 @@ for (let promotionPiece of document.getElementsByClassName("promotion-piece")) {
 document
   .getElementsByClassName("promotion-cancel")[0]
   .addEventListener(supportsPointerEvents ? "pointerdown" : "mousedown", cancelPromotion);
+
+/* GAME TOOLS */
+
+const gameTools = document.querySelector(".game-tools");
+
+function adjustGameTools() {
+  if (document.body.clientWidth - boardDiv.offsetWidth >= 410) {
+    gameTools.style.width = `${400}px`;
+    gameTools.classList.add("at-right");
+  } else {
+    gameTools.style.width = "100%";
+    gameTools.classList.remove("at-right");
+  }
+}
+
+adjustGameTools();
+window.addEventListener("resize", adjustGameTools);

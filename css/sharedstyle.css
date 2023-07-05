@@ -11,10 +11,8 @@
 :root {
   font-size: 10px;
   --desktop-minwidth: 500px;
-  --fontfamily-main:
-  "PierceRoman", "helvetica", sans-serif;
-  --fontfamily-simple:
-  "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --fontfamily-main: "PierceRoman", "helvetica", sans-serif;
+  --fontfamily-simple: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   --header-height: 5rem;
   --select-height: 2.2em;
   /* colors */
@@ -43,8 +41,9 @@ svg {
 body {
   --body-margin: 1rem;
   background-color: var(--dark);
+  display: flex;
+  flex-wrap: wrap;
   font-family: var(--fontfamily-main);
-  /* font-size: 1.4rem; */
   margin: var(--body-margin);
   margin-top: calc(var(--body-margin) + var(--header-height));
   overflow-x: clip;
@@ -114,10 +113,10 @@ body.easy-reading {
   border-radius: 100%;
   position: absolute;
   content: "";
-  height: calc(var(--select-height) * .7);
-  width: calc(var(--select-height) * .7);
-  left: calc(var(--select-height) * .15);
-  bottom: calc(var(--select-height) * .15);
+  height: calc(var(--select-height) * 0.7);
+  width: calc(var(--select-height) * 0.7);
+  left: calc(var(--select-height) * 0.15);
+  bottom: calc(var(--select-height) * 0.15);
   background-color: white;
   transition: 0.4s;
 }
@@ -166,7 +165,7 @@ select {
   color: var(--light-green);
   cursor: pointer;
   font-family: inherit;
-  font-size: .5em;
+  font-size: 0.5em;
   line-height: 1.2;
   padding: 0.4rem calc(var(--arrowPosition) + 2rem) 0.4rem 0.8rem;
   position: relative;

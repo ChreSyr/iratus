@@ -1,36 +1,16 @@
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    margin-left: 10em;
-    /* flex-direction: column; */
-  }
+.game-tools {
+  margin-top: var(--body-margin);
 }
 
-.game-wrapper {
-  --player-info-height: 3.2rem;
-  background-color: var(--light-dark);
-  width: fit-content;
+.game-tools.at-right {
+  margin-left: var(--body-margin);
+  margin-top: 0;
+  width: 400px;
 }
-
-/* CONTROLS */
 
 .controls {
   height: 6em;
   display: flex;
-  justify-content: center;
-  margin: 1rem auto 0;
-}
-
-@media (min-width: 1024px) {
-  .controls {
-    margin-top: 5em;
-  }
-}
-
-@media only screen and (min-width: 614px) {
-  .controls button:active {
-    font-size: 3em;
-  }
 }
 
 .controls button {
@@ -39,4 +19,10 @@
   transition: background-color 0.2s;
   -webkit-tap-highlight-color: var(--light-green);
   width: 100%;
+}
+
+@media only screen and (min-width: 614px) {
+  .controls button:active {
+    font-size: 3em;
+  }
 }

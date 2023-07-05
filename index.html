@@ -246,7 +246,6 @@
     </header>
 
     <div class="game-wrapper" id="game-wrapper">
-
       <div class="player-info w"></div>
 
       <div class="board" id="board-single" tabindex="0">
@@ -275,11 +274,13 @@
       <div class="player-info b"></div>
     </div>
 
-    <div class="controls">
-      <button onclick="game.undoAll()">&lt&lt</button>
-      <button onclick="game.undo()">&lt</button>
-      <button onclick="game.redo()">&gt</button>
-      <button tabindex="-1" onclick="game.redoAll()">&gt&gt</button>
+    <div class="game-tools">
+      <div class="controls">
+        <button onclick="game.undoAll()">&lt&lt</button>
+        <button onclick="game.undo()">&lt</button>
+        <button onclick="game.redo()">&gt</button>
+        <button tabindex="-1" onclick="game.redoAll()">&gt&gt</button>
+      </div>
     </div>
 
     <!-- <div class="errorZone" style="color: var(--light-green);">
