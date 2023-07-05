@@ -225,7 +225,7 @@ Piece.prototype = {
     pieceClass.preciseTransform(this);
 
     if (this.widget !== null) {
-      this.widget.classList.remove(this.color + oldClass.ID); // TODO : fix
+      this.widget.classList.remove(this.color + oldClass.ID);
       this.widget.classList.add(this.color + this.ID);
 
       // for calculations

@@ -8,7 +8,6 @@ function Game(boardClass) {
   this.turn = "w";
   this.counter50rule = 0;
   this.result = undefined;
-  this.alwaysFlip = false; // TODO : remove
 
   this.board = new boardClass(this);
   for (let piece of this.board.piecesColored[this.turn]) {
@@ -46,20 +45,16 @@ Game.prototype = {
     if (ENDS.includes(gameState)) {
       let description = "";
       if (gameState === "checkmate") {
-        description =
-          lastMove.turn === "b" ? "Victoire des Noirs" : "Victoire des Blancs";
+        description = lastMove.turn === "b" ? "Victoire des Noirs" : "Victoire des Blancs";
       }
 
       let infoDiv = document.getElementById("info");
       let titleLabel = infoDiv.getElementsByTagName("h2")[0];
       titleLabel.innerHTML =
-        traductedENDS[gameState][0].toUpperCase() +
-        traductedENDS[gameState].substring(1);
+        traductedENDS[gameState][0].toUpperCase() + traductedENDS[gameState].substring(1);
       let pieceImage = infoDiv.getElementsByTagName("img")[0];
       pieceImage.src =
-        gameState === "checkmate"
-          ? "images/" + lastMove.turn + lastMove.piece.ID + ".png"
-          : "";
+        gameState === "checkmate" ? "images/" + lastMove.turn + lastMove.piece.ID + ".png" : "";
       let desriptionLabel = infoDiv.getElementsByTagName("p")[0];
       desriptionLabel.innerHTML = description;
       infoDiv.style.display = "flex";
@@ -91,10 +86,7 @@ Game.prototype = {
       return false;
     }
 
-    if (
-      insufficient(remainingPieces["w"]) &&
-      insufficient(remainingPieces["b"])
-    ) {
+    if (insufficient(remainingPieces["w"]) && insufficient(remainingPieces["b"])) {
       return "draw by insufficient material";
     }
 
@@ -116,10 +108,7 @@ Game.prototype = {
 
     for (let piece of this.board.piecesColored[this.turn]) {
       if (!piece.isCaptured && piece.validMoves.length) {
-        if (
-          this.movesHistory &&
-          this.movesHistory.slice(-1)[0].counter50rule > 50
-        ) {
+        if (this.movesHistory && this.movesHistory.slice(-1)[0].counter50rule > 50) {
           return "draw by 50-moves rule";
         }
         return "keep going";
@@ -127,11 +116,7 @@ Game.prototype = {
     }
 
     const currentKing = this.board.king[this.turn];
-    return currentKing.posIsUnderCheck(
-      currentKing.row,
-      currentKing.col,
-      (checkForMate = true)
-    )
+    return currentKing.posIsUnderCheck(currentKing.row, currentKing.col, (checkForMate = true))
       ? "checkmate"
       : "stalemate";
   },
@@ -144,11 +129,6 @@ Game.prototype = {
     this.fatHistory.push(this.board.getFatPosition());
     this.backMovesHistory.length = 0;
     this.checkForEnd();
-    if (this.alwaysFlip) {
-      if (currentMove.turn !== currentMove.nextTurn) {
-        this.board.flipDisplay((animate = false));
-      }
-    }
     this.updateDisplay();
   },
 
@@ -164,12 +144,6 @@ Game.prototype = {
     this.turn = lastUndoneMove.nextTurn;
     this.board.updateAllValidMoves();
     this.fatHistory.push(this.board.getFatPosition());
-
-    if (this.alwaysFlip) {
-      if (lastUndoneMove.turn !== lastUndoneMove.nextTurn) {
-        this.board.flipDisplay((animate = false));
-      }
-    }
     this.updateDisplay();
   },
 
@@ -190,12 +164,6 @@ Game.prototype = {
     this.board.undo(lastMove);
     this.turn = lastMove.turn;
     this.board.updateAllValidMoves();
-
-    if (this.alwaysFlip) {
-      if (lastMove.turn !== lastMove.nextTurn) {
-        this.board.flipDisplay((animate = false));
-      }
-    }
     this.updateDisplay();
   },
 
