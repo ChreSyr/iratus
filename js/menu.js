@@ -192,9 +192,14 @@ menuSettingsInputs.forEach((input) => {
       });
       break;
 
+    case "toggle-show-dev-settings":
+      input.addEventListener("change", (event) => {
+        document.body.classList.toggle("dev-mode");
+      });
+      break;
+
     case "toggle-developer-mode":
       input.addEventListener("change", (event) => {
-        // Change the mode
         devMode = !devMode;
       });
       break;

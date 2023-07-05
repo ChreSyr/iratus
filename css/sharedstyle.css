@@ -83,6 +83,10 @@ body.easy-reading {
   font-family: var(--fontfamily-simple);
 }
 
+body:not(.dev-mode) .dev-only {
+  display: none !important;
+}
+
 /* gpt */
 .switch {
   --switch-width: 4.5em;
@@ -297,7 +301,7 @@ select:hover:not(:disabled) {
 }
 
 .accordion-content {
-  font-size: .4em;
+  font-size: 0.4em;
   padding: 1em 0;
 }
 
