@@ -15,8 +15,6 @@ menuWrapper.addEventListener("focusout", (event) => {
   }
 });
 
-// TODO : an overlay over the website when the menu is open, to prevent any interaction with it when leaving the menu
-
 /* MENU BAR WRAPPER */
 
 const menuBarWrapper = document.getElementById("menu-bar-wrapper");
@@ -40,9 +38,6 @@ document.getElementById("menu-overlay").addEventListener("click", (event) => {
 
 /* MENU PANEL WRAPPER */
 
-// Open new page from menu-bar's btn
-function clickMenuBarBtn(type) {}
-
 const menuPanelWrappers = document.getElementsByClassName("menu-panel-wrapper");
 
 for (let menuPanelWrapper of menuPanelWrappers) {
@@ -51,7 +46,7 @@ for (let menuPanelWrapper of menuPanelWrappers) {
       break;
     case "menu-panel-wrapper-iratus":
       menuPanelWrapper.addEventListener("click", (event) => {
-        window.location.href = "index.html"; // TODO : plus propre ?
+        window.location.href = "index.html";
       });
       break;
     case "menu-panel-wrapper-rules":
@@ -96,7 +91,6 @@ for (let menuBarButton of menuBarButtons) {
       const buttonName = menuBarButton.id.split("-")[3];
       menuBarButton.addEventListener("click", (event) => {
         event.stopPropagation(); // prevents wrapper to open again
-        clickMenuBarBtn(buttonName); // TODO : import here
 
         if (document.firstElementChild.clientWidth >= 614 && !isMobileDevice()) {
           switch (buttonName) {

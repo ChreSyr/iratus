@@ -1,3 +1,37 @@
+/* HEADER */
+
+header {
+  align-items: center;
+  background-color: var(--darker);
+  display: flex;
+  height: var(--header-height);
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+@media (min-width: 614px) {
+  header {
+    align-items: normal;
+    flex-direction: column;
+    justify-content: normal;
+    height: 100%;
+    position: fixed;
+    width: var(--header-height);
+  }
+}
+
+/* HEADER H1 */
+
+header h1 {
+  color: var(--light-green);
+  font-size: 4.2em;
+  font-weight: normal;
+}
+
 /* MENU WRAPPER */
 
 #menu-wrapper {
@@ -40,7 +74,6 @@
 }
 
 /* closed-for-mobile : state switched by menu-bar-btn-hamburger */
-/* TODO : rename */
 
 #menu-bar-wrapper.closed-for-mobile {
   display: none;
@@ -130,7 +163,6 @@
 }
 
 /* MENU PANEL */
-/* TODO : change font-size when too small */
 
 .menu-panel {
   --menu-panel-width: min(calc(var(--square-size) * 8 - 5em), 13em);
@@ -186,32 +218,13 @@
   /* text-align: center; */
 }
 
-/* DESKTOP & MOBILE HEADER - TODO : SORT */
-
-header {
-  align-items: center;
-  background-color: var(--darker);
-  display: flex;
-  height: var(--header-height);
-  justify-content: center;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: 10;
-}
+/* DESKTOP & MOBILE - TODO : SORT */
 
 .menu-delimiter {
   background-color: var(--light-green);
   height: 2px;
   margin: 0.7rem;
   width: 3.6rem;
-}
-
-header h1 {
-  color: var(--light-green);
-  font-size: 4.2em;
-  font-weight: normal;
 }
 
 .menu-panel h2 {
@@ -374,34 +387,4 @@ header h1 {
 
 .settings select {
   width: 60%;
-}
-
-@media (min-width: 614px) {
-  header {
-    align-items: normal;
-    flex-direction: column;
-    justify-content: normal;
-    height: 100%;
-    /* overflow-x: clip; */
-    position: fixed;
-    /* transition: width 0.1s; */
-    width: var(--header-height);
-  }
-
-  /* header:hover {
-    width: calc(var(--header-height) * 4);
-  } */
-
-  header h1 {
-    left: 5.6rem;
-    margin: 0;
-    /* opacity: 0; */
-    position: absolute;
-    top: 0.6rem;
-    /* visibility: hidden; */
-  }
-
-  header h1 {
-    display: none;
-  }
 }
