@@ -1,10 +1,3 @@
-// var scripts = document.getElementsByTagName('script');
-// var str = Array.from(document.getElementsByTagName('script'), function(script) {
-//   var filename = script.src.substring(script.src.lastIndexOf('/')+1);
-//   return filename.substring(0, filename.length - 3);
-// }).toString();
-// alert("loading: " + str);
-
 // ERRORS & CONSOLE IN-WEB LOG
 // window.onerror = function(message, source, lineno, colno, error) {
 //   // Get the error details
@@ -64,18 +57,6 @@ game = new Game(IratusBoard);
 
 // ATTACHING EVENT LISTENERS
 
-// document.addEventListener("pointerdown", event => {
-
-//   const boardDiv = document.getElementById("board-single");
-//   if (boardDiv.contains(event.target) && boardDiv !== event.target) {return}
-
-//   cancelPromotion();
-//   let selectedPiece = game.board.selectedPiece;
-//   if (selectedPiece) {
-//     selectedPiece.unselect()
-//   }
-// });
-
 /* handle focus out of board */
 const boardDiv = document.getElementById("board-single");
 boardDiv.addEventListener("focusout", (event) => {
@@ -85,79 +66,34 @@ boardDiv.addEventListener("focusout", (event) => {
   cancelPromotion();
 });
 
-// function handlePointerDown(event) {
-//   const boardDiv = document.getElementById("board-single");
-//   if (boardDiv.contains(event.target) && boardDiv !== event.target) {
-//     closeMenu();
-//     return;
-//   }
-
-//   cancelPromotion();
-//   let selectedPiece = game.board.selectedPiece;
-//   if (selectedPiece) {
-//     selectedPiece.unselect();
-//   }
-
-//   if (document.getElementById("menu-wrapper").contains(event.target)) {
-//     return;
-//   }
-
-//   closeMenu();
-// }
-
-// // const supportsPointerEvents = window.PointerEvent !== undefined;
-
-// document.addEventListener(
-//   supportsPointerEvents ? "pointerdown" : "mousedown",
-//   handlePointerDown
-// );
-
-// if (isMobileDevice()) {
-//   // User is on a mobile device
-//   document.addEventListener("touchstart", handlePointerDown);
-//   // document.addEventListener('touchstart', event => {console.log("touchstart")});
-// } else {
-//   // User is on a desktop device
-//   document.addEventListener("mousedown", handlePointerDown);
-//   // document.addEventListener('mousedown', event => {console.log("mousedown")});
-// }
-// document.addEventListener("pointerdown", handlePointerDown);
-
 /* PROMOTION */
 
 for (let promotionPiece of document.getElementsByClassName("promotion-piece")) {
-  promotionPiece.addEventListener(
-    supportsPointerEvents ? "pointerdown" : "mousedown",
-    (event) => {
-      const color = game.board.pawnToPromote.color;
-      lastMove = game.movesHistory.slice(-1)[0];
-      lastMove.executeCommand(
-        new Transform(
-          game.board.pawnToPromote,
-          Pawn.prototype,
-          pieceClassesByID[promotionPiece.classList[1]].prototype
-        )
-      );
-      lastMove.notation += "=" + promotionPiece.classList[1].toUpperCase();
-      game.board.pawnToPromote = null;
-      game.board.updateAllValidMoves();
-      game.checkForEnd();
+  promotionPiece.addEventListener(supportsPointerEvents ? "pointerdown" : "mousedown", (event) => {
+    const color = game.board.pawnToPromote.color;
+    lastMove = game.movesHistory.slice(-1)[0];
+    lastMove.executeCommand(
+      new Transform(
+        game.board.pawnToPromote,
+        Pawn.prototype,
+        pieceClassesByID[promotionPiece.classList[1]].prototype
+      )
+    );
+    lastMove.notation += "=" + promotionPiece.classList[1].toUpperCase();
+    game.board.pawnToPromote = null;
+    game.board.updateAllValidMoves();
+    game.checkForEnd();
 
-      let promotionWindow =
-        document.getElementsByClassName("promotion-window")[0];
-      promotionWindow.style.display = "none";
+    let promotionWindow = document.getElementsByClassName("promotion-window")[0];
+    promotionWindow.style.display = "none";
 
-      let promotionPieces = document.getElementsByClassName("promotion-piece");
-      for (let promotionPiece of promotionPieces) {
-        promotionPiece.classList.remove(color + promotionPiece.classList[1]);
-      }
+    let promotionPieces = document.getElementsByClassName("promotion-piece");
+    for (let promotionPiece of promotionPieces) {
+      promotionPiece.classList.remove(color + promotionPiece.classList[1]);
     }
-  );
+  });
 }
 
 document
   .getElementsByClassName("promotion-cancel")[0]
-  .addEventListener(
-    supportsPointerEvents ? "pointerdown" : "mousedown",
-    cancelPromotion
-  );
+  .addEventListener(supportsPointerEvents ? "pointerdown" : "mousedown", cancelPromotion);

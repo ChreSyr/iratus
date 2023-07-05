@@ -77,7 +77,7 @@ header {
 */
 
 #menu-bar-wrapper {
-  --menu-bar-width: 20rem;
+  /* --menu-bar-width: 20rem; */
   background-color: var(--darker);
   height: 100%;
   left: 0;
@@ -87,8 +87,8 @@ header {
 }
 
 @media (min-width: 614px) {
-  #menu-bar-wrapper {
-    --menu-bar-width: 5rem;
+  :root {
+    --menu-bar-width: var(--header-height);
   }
 }
 
@@ -112,7 +112,7 @@ header {
   left: var(--menu-bar-width);
   position: fixed;
   top: 0;
-  width: 100vw;
+  width: 100%;
 }
 
 /* MENU PANEL WRAPPER */
@@ -191,15 +191,15 @@ header {
 /* MENU PANEL */
 
 .menu-panel {
-  --menu-panel-width: min(calc(var(--square-size) * 8 - 5em), 13em);
+  --menu-panel-width: min(calc(100vw - 14rem), 30rem);
   background-color: var(--dark);
   box-shadow: 0.6em -0em 1em var(--darker);
   color: var(--light-green);
   display: none;
-  font-size: 2.1em;
+  font-size: 2.5em;
   bottom: 0;
   left: 5rem;
-  overflow-y: auto;
+  overflow-y: scroll;
   padding: 1em;
   position: absolute;
   top: 0;
@@ -378,7 +378,8 @@ header {
 }
 
 .settings h3 {
-  font-size: 2rem;
+  /* font-size: 2rem; */
+  font-size: .7em;
   margin-top: 0;
 }
 
@@ -396,7 +397,8 @@ header {
 }
 
 .settings label {
-  font-size: 1.5rem;
+  /* font-size: 1.5rem; */
+  font-size: .5em;
   margin: auto 0;
 }
 

@@ -11,16 +11,19 @@
 :root {
   font-size: 10px;
   --desktop-minwidth: 500px;
-  --fontfamily-main: "PierceRoman", "helvetica", sans-serif;
-  --fontfamily-simple: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --fontfamily-main:
+  "PierceRoman", "helvetica", sans-serif;
+  --fontfamily-simple:
+  "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   --header-height: 5rem;
-  --select-height: 3.2rem;
+  --select-height: 2.2em;
   /* colors */
   --accessible: rgba(0, 0, 0, 0.2);
   --dark: rgb(21, 21, 21);
   --darker: black;
   --light-dark: rgb(64, 64, 64);
   --light-green: rgb(131, 174, 131);
+  --menu-bar-width: 20rem;
   --special-color: rgb(131, 174, 131);
   --selected: rgba(255, 255, 0, 0.5);
 }
@@ -38,16 +41,20 @@ svg {
 }
 
 body {
+  --body-margin: 1rem;
   background-color: var(--dark);
   font-family: var(--fontfamily-main);
   /* font-size: 1.4rem; */
-  margin: calc(var(--header-height) + 1rem) 1rem 1rem;
-  /* overflow-x: clip; */
+  margin: var(--body-margin);
+  margin-top: calc(var(--body-margin) + var(--header-height));
+  overflow-x: clip;
+  overflow-y: scroll;
 }
 
 @media (min-width: 614px) {
   body {
-    margin: 1rem 1rem 1rem calc(var(--header-height) + 1rem);
+    margin-left: calc(var(--body-margin) + var(--menu-bar-width));
+    margin-top: var(--body-margin);
   }
 
   .only-mobile {
@@ -77,10 +84,11 @@ body.easy-reading {
 
 /* gpt */
 .switch {
+  --switch-width: 4.5em;
   flex-shrink: 0;
   position: relative;
   display: inline-block;
-  width: 60px;
+  width: var(--switch-width);
   height: var(--select-height);
 }
 
@@ -91,7 +99,7 @@ body.easy-reading {
 }
 
 .slider {
-  border-radius: 1em;
+  border-radius: var(--select-height);
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -103,13 +111,13 @@ body.easy-reading {
 }
 
 .slider:before {
-  border-radius: 1em;
+  border-radius: 100%;
   position: absolute;
   content: "";
-  height: 24px;
-  width: 24px;
-  left: 4px;
-  bottom: 4px;
+  height: calc(var(--select-height) * .7);
+  width: calc(var(--select-height) * .7);
+  left: calc(var(--select-height) * .15);
+  bottom: calc(var(--select-height) * .15);
   background-color: white;
   transition: 0.4s;
 }
@@ -119,7 +127,7 @@ input:checked + .slider {
 }
 
 input:checked + .slider:before {
-  transform: translateX(27px);
+  transform: translateX(calc(var(--switch-width) - var(--select-height)));
 }
 
 /* BUTTON */
@@ -135,23 +143,6 @@ button {
 }
 
 button:hover {
-  background-color: var(--light-green);
-  color: var(--darker);
-}
-
-#board-single button {
-  margin: 0;
-  border: 0;
-  padding: 3px 20px;
-  background-color: black;
-  color: var(--light-green);
-  font-size: calc(var(--square-size) * 0.5);
-  cursor: pointer;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-#board-single button:hover {
   background-color: var(--light-green);
   color: var(--darker);
 }
@@ -175,7 +166,7 @@ select {
   color: var(--light-green);
   cursor: pointer;
   font-family: inherit;
-  font-size: 1.5rem;
+  font-size: .5em;
   line-height: 1.2;
   padding: 0.4rem calc(var(--arrowPosition) + 2rem) 0.4rem 0.8rem;
   position: relative;
@@ -200,11 +191,7 @@ select[multiple] option {
 }
 
 select:not([multiple]) {
-  background-image: linear-gradient(
-      45deg,
-      transparent 49.8%,
-      var(--light-green) 0
-    ),
+  background-image: linear-gradient(45deg, transparent 49.8%, var(--light-green) 0),
     linear-gradient(135deg, var(--light-green) 49.8%, transparent 0);
   background-position: calc(100% - var(--arrowPosition) - 0.5rem) 50%,
     calc(100% - var(--arrowPosition)) 50%;

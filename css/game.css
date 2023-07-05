@@ -1,7 +1,3 @@
-:root {
-  --square-size: 60px;
-}
-
 /* TESTING */
 
 #board-single:focus-within {
@@ -44,18 +40,25 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 4rem;
+  height: var(--player-info-height);
   /* padding: .2rem; */
+}
+
+@media (min-width: 614px) {
+  #game-wrapper {
+    --player-info-height: 4rem;
+  }
 }
 
 .player-info .captured-piece {
   background-size: contain;
   height: 80%;
-  margin-left: -2rem;
+  margin-left: -1.9rem;
 }
 
 .player-info .captured-piece.first {
-  margin-left: 0rem;
+  /* margin-left: -0.2rem; */
+  margin-left: 0;
 }
 
 .player-info .captured-piece.dy {
@@ -76,22 +79,30 @@
 
 /* BOARD */
 
-.board {
+#board-single {
+  --square-size-byheight: calc(
+    (100vh - var(--header-height) - 4 * var(--body-margin) - var(--player-info-height) * 2) / 10
+  );
+  --square-size-bywidth: calc((100vw - 2 * var(--body-margin)) / 8);
+  --square-size: min(68px, var(--square-size-byheight), var(--square-size-bywidth));
+  background-image: url("../images/iratusboard-small.jpg");
   background-repeat: no-repeat;
   background-size: 100%;
   contain: layout;
+  height: calc(var(--square-size) * 10);
+  margin: var(--body-margin) 0;
+  position: relative;
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
-}
-
-#board-single {
-  background-image: url("../images/iratusboard-small.jpg");
-  position: relative;
+  width: calc(var(--square-size) * 8);
 }
 
 @media only screen and (min-width: 614px) {
   #board-single {
+    --square-size-byheight: calc(
+      (100vh - 4 * var(--body-margin) - var(--player-info-height) * 2) / 10
+    );
     background-image: url("../images/iratusboard.png");
   }
 }
@@ -177,7 +188,7 @@
 
 .promotion-window .promotion-cancel p {
   height: 100%;
-  font-size: min(2.5rem, var(--square-size)/2.3);
+  font-size: min(2.5rem, var(--square-size) / 2.3);
   margin: 0;
 }
 
@@ -261,8 +272,11 @@
 
 #info button {
   border: 2px solid black;
-  flex: 0 1 auto;
+  border-radius: 3px;
+  font-size: calc(var(--square-size) * 0.5);
   margin-bottom: 0.5em;
+  padding: 0.1em 0.5em;
+  user-select: none;
 }
 
 #info .info-close {
@@ -280,7 +294,6 @@
   /* text-indent: 1000%; */
   color: transparent;
   white-space: nowrap;
-  border-radius: 3px;
   /* border: var(--light-green) 2px solid; */
 }
 

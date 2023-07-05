@@ -5,8 +5,7 @@ const cancelPromotion = (event) => {
     game.undo();
     game.board.pawnToPromote = null;
 
-    let promotionWindow =
-      document.getElementsByClassName("promotion-window")[0];
+    let promotionWindow = document.getElementsByClassName("promotion-window")[0];
     promotionWindow.style.display = "none";
 
     let promotionPieces = document.getElementsByClassName("promotion-piece");
@@ -66,10 +65,7 @@ function makeSquareClickable(square) {
   };
 
   // const supportsPointerEvents = window.PointerEvent !== undefined;
-  square.addEventListener(
-    supportsPointerEvents ? "pointerdown" : "mousedown",
-    pointerdownHandle
-  );
+  square.addEventListener(supportsPointerEvents ? "pointerdown" : "mousedown", pointerdownHandle);
 
   // if (isMobileDevice()) {
   //   // User is on a mobile device
@@ -120,21 +116,17 @@ function makePieceDraggable(element) {
     pos.x = event.clientX + dragging.dx;
     pos.y = event.clientY + dragging.dy;
 
-    var squareSize = parseInt(
-      document.documentElement.style.getPropertyValue("--square-size"),
-      10
-    );
+    var squareSize = document.getElementById("board-single").clientHeight / 10;
+
     const board = element.piece.board;
     if (board.game.isFlipped()) {
       element.style.transform = `translate(${
         (board.nbfiles - 1 - element.piece.col + pos.x / squareSize) * 100
-      }%, ${
-        (board.nbfiles + 1 - element.piece.row + pos.y / squareSize) * 100
-      }%)`;
+      }%, ${(board.nbfiles + 1 - element.piece.row + pos.y / squareSize) * 100}%)`;
     } else {
-      element.style.transform = `translate(${
-        (element.piece.col + pos.x / squareSize) * 100
-      }%, ${(element.piece.row + pos.y / squareSize) * 100}%)`;
+      element.style.transform = `translate(${(element.piece.col + pos.x / squareSize) * 100}%, ${
+        (element.piece.row + pos.y / squareSize) * 100
+      }%)`;
     }
     if (board.game.hasFlippedPieces()) {
       element.style.transform += " rotate(180deg)";
@@ -189,17 +181,6 @@ function makePieceDraggable(element) {
       document.removeEventListener("mouseup", pointerupHandle);
       document.removeEventListener("mouseleave", pointerupHandle);
     }
-
-    // if (isMobileDevice()) {
-    //   // User is on a mobile device
-    //   document.removeEventListener("touchmove", pointermoveHandle);
-    //   document.removeEventListener("touchend", pointerupHandle);
-    //   document.removeEventListener("touchcancel", pointerupHandle);
-    // } else {
-    //   // User is on a desktop device
-    //   document.removeEventListener("mousemove", pointermoveHandle);
-    //   document.removeEventListener("mouseup", pointerupHandle);
-    // }
   };
 
   const pointermoveHandle = (event) => {
@@ -208,21 +189,18 @@ function makePieceDraggable(element) {
     }
     pos.x = event.clientX + dragging.dx;
     pos.y = event.clientY + dragging.dy;
-    var squareSize = parseInt(
-      document.documentElement.style.getPropertyValue("--square-size"),
-      10
-    );
+
+    var squareSize = document.getElementById("board-single").clientHeight / 10;
+
     const board = element.piece.board;
     if (board.game.isFlipped()) {
       element.style.transform = `translate(${
         (board.nbfiles - 1 - element.piece.col + pos.x / squareSize) * 100
-      }%, ${
-        (board.nbfiles + 1 - element.piece.row + pos.y / squareSize) * 100
-      }%)`;
+      }%, ${(board.nbfiles + 1 - element.piece.row + pos.y / squareSize) * 100}%)`;
     } else {
-      element.style.transform = `translate(${
-        (element.piece.col + pos.x / squareSize) * 100
-      }%, ${(element.piece.row + pos.y / squareSize) * 100}%)`;
+      element.style.transform = `translate(${(element.piece.col + pos.x / squareSize) * 100}%, ${
+        (element.piece.row + pos.y / squareSize) * 100
+      }%)`;
     }
     if (board.game.hasFlippedPieces()) {
       element.style.transform += " rotate(180deg)";
@@ -233,10 +211,7 @@ function makePieceDraggable(element) {
   // pointerdown is the newer version of mousedown & touchstart
   // element.addEventListener('mousedown', pointerdownHandle);
 
-  element.addEventListener(
-    supportsPointerEvents ? "pointerdown" : "mousedown",
-    pointerdownHandle
-  );
+  element.addEventListener(supportsPointerEvents ? "pointerdown" : "mousedown", pointerdownHandle);
   // if (isMobileDevice()) {
   //   // User is on a mobile device
   //   element.addEventListener("touchstart", pointerdownHandle);
@@ -264,21 +239,7 @@ function setPiecesStyle(style = null) {
   } // not implemented
 
   var colors = ["b", "w"];
-  var pieceIDs = [
-    "b",
-    "d",
-    "dy",
-    "ed",
-    "es",
-    "g",
-    "i",
-    "k",
-    "n",
-    "p",
-    "q",
-    "r",
-    "s",
-  ];
+  var pieceIDs = ["b", "d", "dy", "ed", "es", "g", "i", "k", "n", "p", "q", "r", "s"];
 
   let css = "";
 
@@ -307,7 +268,5 @@ function setPiecesStyle(style = null) {
 
 // change the reference of the custom stylesheet
 function setStyle(num) {
-  document
-    .getElementById("customcss")
-    .setAttribute("href", "css/custom/stylesheet" + num + ".css");
+  document.getElementById("customcss").setAttribute("href", "css/custom/stylesheet" + num + ".css");
 }
