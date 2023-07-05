@@ -43,6 +43,8 @@ function hideInfo() {
 // Add event listener on squares (like accessible, selected...)
 function makeSquareClickable(square) {
   const pointerdownHandle = (event) => {
+    event.stopPropagation();
+
     closeMenu();
     cancelPromotion();
 
@@ -64,16 +66,7 @@ function makeSquareClickable(square) {
     }
   };
 
-  // const supportsPointerEvents = window.PointerEvent !== undefined;
-  square.addEventListener(supportsPointerEvents ? "pointerdown" : "mousedown", pointerdownHandle);
-
-  // if (isMobileDevice()) {
-  //   // User is on a mobile device
-  //   square.addEventListener("touchstart", pointerdownHandle);
-  // } else {
-  //   // User is on a desktop device
-  //   square.addEventListener("mousedown", pointerdownHandle);
-  // }
+  square.addEventListener(pointerdown, pointerdownHandle);
 }
 
 // Add event listeners on pieces for movements
@@ -82,12 +75,9 @@ function makePieceDraggable(element) {
   let dragging = false;
   let wasSelected = false;
 
-  // const stopScrollEvents = (event) => {
-  //   event.preventDefault();
-  // };
-  // const supportsPointerEvents = window.PointerEvent !== undefined;
-
   const pointerdownHandle = (event) => {
+    event.stopPropagation();
+
     if (event.clientX === undefined) {
       // TouchEvent has no clientX and no clientY
       event.clientX = event.changedTouches[0].clientX;
@@ -137,15 +127,9 @@ function makePieceDraggable(element) {
     wasSelected = element.piece === game.board.selectedPiece;
     element.piece.handlePointerDown();
 
-    if (supportsPointerEvents) {
-      document.addEventListener("pointermove", pointermoveHandle);
-      document.addEventListener("pointerup", pointerupHandle);
-      document.addEventListener("pointercancel", pointerupHandle);
-    } else {
-      document.addEventListener("mousemove", pointermoveHandle);
-      document.addEventListener("mouseup", pointerupHandle);
-      document.addEventListener("mouseleave", pointerupHandle);
-    }
+    document.addEventListener(pointermove, pointermoveHandle);
+    document.addEventListener(pointerup, pointerupHandle);
+    document.addEventListener(pointercancel, pointerupHandle);
   };
 
   const pointerupHandle = (event) => {
@@ -172,15 +156,9 @@ function makePieceDraggable(element) {
       element.piece.unselect();
     } // else, the piece has moved
 
-    if (supportsPointerEvents) {
-      document.removeEventListener("pointermove", pointermoveHandle);
-      document.removeEventListener("pointerup", pointerupHandle);
-      document.removeEventListener("pointercancel", pointerupHandle);
-    } else {
-      document.removeEventListener("mousemove", pointermoveHandle);
-      document.removeEventListener("mouseup", pointerupHandle);
-      document.removeEventListener("mouseleave", pointerupHandle);
-    }
+    document.removeEventListener(pointermove, pointermoveHandle);
+    document.removeEventListener(pointerup, pointerupHandle);
+    document.removeEventListener(pointercancel, pointerupHandle);
   };
 
   const pointermoveHandle = (event) => {
@@ -207,28 +185,7 @@ function makePieceDraggable(element) {
     }
   };
 
-  // element.addEventListener('pointerdown', pointerdownHandle);
-  // pointerdown is the newer version of mousedown & touchstart
-  // element.addEventListener('mousedown', pointerdownHandle);
-
-  element.addEventListener(supportsPointerEvents ? "pointerdown" : "mousedown", pointerdownHandle);
-  // if (isMobileDevice()) {
-  //   // User is on a mobile device
-  //   element.addEventListener("touchstart", pointerdownHandle);
-  //   // element.addEventListener("touchmove", pointermoveHandle);
-  //   // element.addEventListener("touchend", pointerupHandle);
-  //   // element.addEventListener("touchcancel", pointerupHandle);
-  // } else {
-  //   // User is on a desktop device
-  //   element.addEventListener("mousedown", pointerdownHandle);
-  //   // element.addEventListener("mousemove", pointermoveHandle);
-  //   // element.addEventListener("mouseup", pointerupHandle);
-  // }
-  // element.addEventListener("touchstart", pointerdownHandle);
-  // element.addEventListener("pointerup", pointerupHandle);
-  // element.addEventListener("pointercancel", pointerupHandle);
-  // element.addEventListener("pointermove", pointermoveHandle);
-  // element.addEventListener("touchstart", stopScrollEvents);
+  element.addEventListener(pointerdown, pointerdownHandle);
 }
 
 // Writes css code in <script id="board-styles-single">

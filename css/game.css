@@ -1,9 +1,5 @@
 /* TESTING */
 
-#board-single:focus-within {
-  background: rgba(250, 0, 0, 0.1);
-}
-
 /* GAME WRAPPER */
 
 #game-wrapper {

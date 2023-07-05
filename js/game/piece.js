@@ -93,9 +93,7 @@ Piece.prototype = {
     if (piece === null) {
       return true;
     } else if (piece.ID === "dy") {
-      return (
-        piece.color === this.color && !Dynamite.UNDYNAMITABLES.includes(this.ID)
-      );
+      return piece.color === this.color && !Dynamite.UNDYNAMITABLES.includes(this.ID);
     } else {
       return piece.color !== this.color;
     }
@@ -121,13 +119,7 @@ Piece.prototype = {
 
     let alliedPhantom = this.board.phantom[this.color];
     if (!alliedPhantom.isCaptured) {
-      commands.push(
-        new Transform(
-          alliedPhantom,
-          alliedPhantom.actualClass,
-          this.actualClass
-        )
-      );
+      commands.push(new Transform(alliedPhantom, alliedPhantom.actualClass, this.actualClass));
     }
 
     return commands;
@@ -364,9 +356,7 @@ Piece.prototype = {
       return;
     }
 
-    this.board.squareSelected.classList.remove(
-      "square-" + this.board.selectedPiece.getPos()
-    );
+    this.board.squareSelected.classList.remove("square-" + this.board.selectedPiece.getPos());
     this.board.squareSelected.remove();
     this.board.squareSelected = null;
 

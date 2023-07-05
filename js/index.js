@@ -59,6 +59,13 @@ game = new Game(IratusBoard);
 
 /* handle focus out of board */
 const boardDiv = document.getElementById("board-single");
+
+boardDiv.addEventListener(pointerdown, (event) => {
+  if (game.board.selectedPiece) {
+    game.board.selectedPiece.unselect();
+  }
+});
+
 boardDiv.addEventListener("focusout", (event) => {
   if (game.board.selectedPiece) {
     game.board.selectedPiece.unselect();
@@ -69,7 +76,7 @@ boardDiv.addEventListener("focusout", (event) => {
 /* PROMOTION */
 
 for (let promotionPiece of document.getElementsByClassName("promotion-piece")) {
-  promotionPiece.addEventListener(supportsPointerEvents ? "pointerdown" : "mousedown", (event) => {
+  promotionPiece.addEventListener(pointerdown, (event) => {
     const color = game.board.pawnToPromote.color;
     lastMove = game.movesHistory.slice(-1)[0];
     lastMove.executeCommand(
@@ -96,7 +103,7 @@ for (let promotionPiece of document.getElementsByClassName("promotion-piece")) {
 
 document
   .getElementsByClassName("promotion-cancel")[0]
-  .addEventListener(supportsPointerEvents ? "pointerdown" : "mousedown", cancelPromotion);
+  .addEventListener(pointerdown, cancelPromotion);
 
 /* GAME TOOLS */
 
