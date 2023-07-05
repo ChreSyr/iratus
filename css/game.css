@@ -177,7 +177,7 @@
 
 .promotion-window .promotion-cancel p {
   height: 100%;
-  font-size: 2.5rem;
+  font-size: min(2.5rem, var(--square-size)/2.3);
   margin: 0;
 }
 
