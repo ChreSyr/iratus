@@ -20,9 +20,7 @@ Dynamite.prototype.ID = "dy";
 Dynamite.prototype.capture = function (capturer) {
   let commands = Piece.prototype.capture.call(this, this, capturer);
   commands.splice(
-    commands.indexOf(
-      commands.find((commandToRem) => commandToRem.name === "transform")
-    )
+    commands.indexOf(commands.find((commandToRem) => commandToRem.name === "transform"))
   ); // remove phantomisation
   if (capturer !== this) {
     // when an ally goes to the dynamite
@@ -68,9 +66,6 @@ Dynamite.prototype.updateValidMoves = function () {
     if (Dynamite.UNDYNAMITABLES.includes(piece.ID)) {
       continue;
     }
-    if (piece.constructor.ID === "p") {
-      continue;
-    } // TODO : remove
     if (piece.__proto__.ID === "p") {
       continue;
     }
