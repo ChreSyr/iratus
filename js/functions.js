@@ -74,6 +74,7 @@ function makePieceDraggable(element) {
 
   const pointerdownHandle = (event) => {
     event.stopPropagation();
+    event.preventDefault();
 
     if (event.clientX === undefined) {
       // TouchEvent has no clientX and no clientY
@@ -156,6 +157,7 @@ function makePieceDraggable(element) {
   };
 
   const pointermoveHandle = (event) => {
+    event.preventDefault();
     if (!dragging) {
       return;
     }
