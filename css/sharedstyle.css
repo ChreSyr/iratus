@@ -19,6 +19,8 @@
   --accessible: rgba(0, 0, 0, 0.2);
   --dark: rgb(40, 38, 35);
   --darker: black;
+  --lighter: white;
+  --lighter-dark: rgb(118, 118, 118);
   --light-dark: rgb(64, 64, 64);
   --light-green: rgb(131, 174, 131);
   --menu-bar-width: 20rem;
@@ -161,7 +163,7 @@ select {
   -moz-appearance: none;
   appearance: none;
   background-color: var(--light-dark);
-  border: 0.1rem solid var(--borderColor);
+  border: 1px solid var(--lighter-dark);
   border-radius: 0.3rem;
   color: var(--light-green);
   cursor: pointer;
@@ -241,4 +243,68 @@ select:hover:not(:disabled) {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: var(--darker);
+}
+
+/* ACCORDION - credits to w3schools.com */
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.accordion-btn {
+  background-color: var(--light-dark);
+  border: 1px solid var(--lighter-dark);
+  border-radius: 3px;
+  /* color: #444; */
+  cursor: pointer;
+  font-size: 0.5em;
+  padding: 0.4rem 0.8rem;
+  position: relative;
+  /* width: 100%; */
+  /* text-align: left; */
+  /* border: none; */
+  outline: none;
+  /* transition: 0.4s; */
+}
+
+.accordion-btn:after {
+  content: "\02795"; /* Unicode character for "plus" sign (+) */
+  content: "+";
+  font-size: 1.2em;
+  font-weight: bold;
+  color: var(--light-green);
+  height: 100%;
+  right: 0.6em;
+  position: absolute;
+  top: 0;
+  /* transform: translateX(-50%); */
+}
+
+.accordion-btn.active:after {
+  content: "-"; /* Unicode character for "minus" sign (-) */
+  right: 0.7em;
+}
+
+.accordion-panel {
+  background-color: red;
+  color: blue;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 1em;
+  transition: max-height 0.2s ease-out;
+}
+
+.accordion-content {
+  font-size: .4em;
+  padding: 1em 0;
+}
+
+/* CODESPACE */
+
+.codespace {
+  background-color: var(--darker);
+  color: var(--lighter);
+  font-family: monospace;
 }

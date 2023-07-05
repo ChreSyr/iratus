@@ -1,3 +1,72 @@
+/* ERRORS & LOGS PRINTED IN-WEB */
+if (true) {
+  /* ERRORS */
+
+  window.onerror = function (message, source, lineno, colno, error) {
+    // Get the error details
+    var errorDetails = {
+      message: message,
+      source: source,
+      lineNumber: lineno,
+      columnNumber: colno,
+      error: error,
+    };
+
+    // Append the error information to the error container
+    appendErrorToContainer(errorDetails);
+
+    // Prevent the default error handling
+    return true;
+  };
+
+  function appendErrorToContainer(errorDetails) {
+    var errorContainer = document.getElementById("errors-container");
+    var errorMessage = document.createElement("div");
+    errorMessage.classList.add("accordion-content");
+    errorMessage.textContent = errorDetails.message;
+    errorContainer.appendChild(errorMessage);
+
+    // if open, increase errorContainer's height
+    if (errorContainer.previousElementSibling.classList.contains("active")) {
+      errorContainer.style.maxHeight = errorContainer.scrollHeight + "px";
+    }
+  }
+
+  /* LOGS */
+
+  // Save the reference to the original console.log function
+  var originalLog = console.log;
+
+  // Override console.log to capture and display the logs
+  console.log = function () {
+    // Get the log arguments and convert them to a string
+    var logMessage = Array.from(arguments)
+      .map(function (arg) {
+        return typeof arg === "object" ? JSON.stringify(arg) : arg;
+      })
+      .join(" ");
+
+    // Append the log message to the log container
+    appendLogToContainer(logMessage);
+
+    // Call the original console.log function
+    originalLog.apply(console, arguments);
+  };
+
+  function appendLogToContainer(logMessage) {
+    var logContainer = document.getElementById("logs-container");
+    var logEntry = document.createElement("div");
+    logEntry.classList.add("accordion-content");
+    logEntry.textContent = logMessage;
+    logContainer.appendChild(logEntry);
+
+    // if open, increase logContainer's height
+    if (logContainer.previousElementSibling.classList.contains("active")) {
+      logContainer.style.maxHeight = logContainer.scrollHeight + "px";
+    }
+  }
+}
+
 // Handle when an option is selected in the style <select>
 function handleExperimentalSelect(type) {
   var selectedOption = document.getElementById("select-" + type).value;
@@ -8,6 +77,21 @@ function handleExperimentalSelect(type) {
   } catch (error) {
     // file not found
   }
+}
+
+// Accordion
+var accordionTriggers = document.getElementsByClassName("accordion-btn");
+for (let accordionTrigger of accordionTriggers) {
+  accordionTrigger.addEventListener("click", function () {
+    this.classList.toggle("active");
+
+    var panel = this.nextElementSibling;
+    if (this.classList.contains("active")) {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } else {
+      panel.style.maxHeight = null;
+    }
+  });
 }
 
 // Return true if the user is using a mobile
