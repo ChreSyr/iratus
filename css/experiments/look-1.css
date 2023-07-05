@@ -1,3 +1,8 @@
 :root {
-  --dark: rgb(21, 21, 21);
+  --accessible: rgba(0, 0, 0, 0.2);
+  --dark: rgb(119, 119, 119);
+  --darker: rgb(148, 148, 148);
+  --light-dark: rgb(94, 94, 94);
+  --light-green: rgb(35, 17, 36);
+  --special-color: rgb(74, 2, 78);
 }

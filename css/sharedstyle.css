@@ -315,4 +315,7 @@ select:hover:not(:disabled) {
 
 /* VERSION LABEL */
 
-#version-label {text-align: center;width: 100%;}
+#version-label {
+  text-align: center;
+  width: 100%;
+}
