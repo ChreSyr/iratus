@@ -14,9 +14,6 @@ if (true) {
 
     // Append the error information to the error container
     appendErrorToContainer(errorDetails);
-
-    // Prevent the default error handling
-    return true;
   };
 
   function appendErrorToContainer(errorDetails) {
