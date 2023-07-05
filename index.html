@@ -278,15 +278,17 @@
       <div class="player-info w"></div>
 
       <div class="board" id="board-single" tabindex="0">
-        <div class="promotion-window">
-          <div class="promotion-piece q"></div>
-          <div class="promotion-piece n"></div>
-          <div class="promotion-piece r"></div>
-          <div class="promotion-piece b"></div>
-          <div class="promotion-piece ed"></div>
-          <div class="promotion-piece es"></div>
-          <div class="promotion-cancel">
-            <p>X</p>
+        <div class="promotion-wrapper">
+          <div class="promotion-window">
+            <div class="promotion-piece q"></div>
+            <div class="promotion-piece n"></div>
+            <div class="promotion-piece r"></div>
+            <div class="promotion-piece b"></div>
+            <div class="promotion-piece ed"></div>
+            <div class="promotion-piece es"></div>
+            <div class="promotion-cancel">
+              <p>X</p>
+            </div>
           </div>
         </div>
 
@@ -311,18 +313,6 @@
         <button tabindex="-1" onclick="game.redoAll()">&gt&gt</button>
       </div>
     </div>
-
-    <!-- <div class="errorZone" style="color: var(--light-green);">
-    <h1>Error Log</h1>
-    <div id=" errorContainer"></div>
-  </div>
-
-  <div class="errorZone" style="color: var(--light-green);">
-    <h1>Console Log</h1>
-    <div id="logContainer"></div>
-  </div> -->
-
-    <!-- </div> -->
 
     <!-- Common to all pages -->
     <script type="text/javascript" src="js/sharedscript.js" defer></script>

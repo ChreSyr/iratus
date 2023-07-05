@@ -5,8 +5,8 @@ const cancelPromotion = (event) => {
     game.undo();
     game.board.pawnToPromote = null;
 
-    let promotionWindow = document.getElementsByClassName("promotion-window")[0];
-    promotionWindow.style.display = "none";
+    let promotionWrapper = document.querySelector(".promotion-wrapper");
+    promotionWrapper.style.display = "none";
 
     let promotionPieces = document.getElementsByClassName("promotion-piece");
     for (let promotionPiece of promotionPieces) {
@@ -45,9 +45,6 @@ function makeSquareClickable(square) {
   const pointerdownHandle = (event) => {
     event.stopPropagation();
 
-    closeMenu();
-    cancelPromotion();
-
     if (square.classList.contains("accessible")) {
       let selectedPiece = game.board.selectedPiece;
       selectedPiece.unselect();
@@ -83,9 +80,6 @@ function makePieceDraggable(element) {
       event.clientX = event.changedTouches[0].clientX;
       event.clientY = event.changedTouches[0].clientY;
     }
-
-    closeMenu();
-    cancelPromotion();
 
     const squareAccessible = document.querySelector(
       `.square[data-row="${element.piece.row}"][data-col="${element.piece.col}"]`

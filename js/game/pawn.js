@@ -67,11 +67,7 @@ Pawn.prototype.goTo = function (row, col) {
     // Very rare case where the black phantom is a pawn at the topleft corner or
     // the white phantom is a pawn at the bottomright corner of the board
     return commands;
-  } else if (
-    pieceBehind !== null &&
-    pieceBehind.color !== this.color &&
-    pieceBehind.ID === "i"
-  ) {
+  } else if (pieceBehind !== null && pieceBehind.color !== this.color && pieceBehind.ID === "i") {
     let lastMove = this.board.game.movesHistory.slice(-1)[0];
     if (
       this.board.get(lastMove.end[0], lastMove.end[1]) === pieceBehind &&
@@ -126,11 +122,7 @@ Pawn.prototype.updateValidMoves = function () {
     if (attackedPiece === null) {
       // en passant
       let asidePiece = this.board.get(this.row, col);
-      if (
-        asidePiece !== null &&
-        asidePiece.ID === "i" &&
-        asidePiece.color !== this.color
-      ) {
+      if (asidePiece !== null && asidePiece.ID === "i" && asidePiece.color !== this.color) {
         let lastMove = this.board.game.movesHistory.slice(-1)[0];
         if (
           this.board.get(lastMove.end[0], lastMove.end[1]) === asidePiece &&
@@ -149,12 +141,11 @@ Pawn.prototype.updateValidMoves = function () {
 
 Pawn.prototype.openPromotionWindow = function () {
   this.board.pawnToPromote = this;
-  const promotionWindow =
-    document.getElementsByClassName("promotion-window")[0];
-  let promotionPieces = document.getElementsByClassName("promotion-piece");
-  for (let promotionPiece of promotionPieces) {
-    promotionPiece.classList.add(this.color + promotionPiece.classList[1]);
-  }
+
+  const promotionWrapper = document.querySelector(".promotion-wrapper");
+  promotionWrapper.style.display = "block";
+
+  const promotionWindow = document.querySelector(".promotion-window");
   if ((this.color === "w") ^ this.board.game.isFlipped()) {
     // ^ is the xor
     promotionWindow.classList.add("top");
@@ -162,12 +153,13 @@ Pawn.prototype.openPromotionWindow = function () {
     promotionWindow.classList.remove("top");
   }
   if (this.board.game.isFlipped()) {
-    promotionWindow.style.transform = `translateX(${
-      (this.board.nbfiles - 1 - this.col) * 100
-    }%)`;
+    promotionWindow.style.transform = `translateX(${(this.board.nbfiles - 1 - this.col) * 100}%)`;
   } else {
     promotionWindow.style.transform = `translateX(${this.col * 100}%)`;
   }
 
-  promotionWindow.style.display = "flex";
+  let promotionPieces = document.getElementsByClassName("promotion-piece");
+  for (let promotionPiece of promotionPieces) {
+    promotionPiece.classList.add(this.color + promotionPiece.classList[1]);
+  }
 };

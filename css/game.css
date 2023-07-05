@@ -4,7 +4,7 @@
 
 #game-wrapper {
   --player-info-height: 3.2rem;
-  background-color: var(--light-dark);
+  /* background-color: var(--light-dark); */
   flex: 0;
   margin: 0 auto;
   width: fit-content;
@@ -172,12 +172,21 @@
 
 /* PROMOTION */
 
+.promotion-wrapper {
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  height: 100%;
+  position: relative;
+  width: 100%;
+  z-index: 3;
+}
+
 .promotion-window {
   background-color: var(--light-green);
   border-radius: 3px;
   bottom: 0;
   box-shadow: 3px 3px 10px rgb(0 0 0 / 45%);
-  display: none;
+  display: flex;
   flex-direction: column-reverse;
   height: 65%;
   left: 0;
@@ -195,6 +204,7 @@
 }
 
 .promotion-window .promotion-cancel p {
+  color: var(--darker);
   height: 100%;
   font-size: min(2.5rem, var(--square-size) / 2.3);
   margin: 0;

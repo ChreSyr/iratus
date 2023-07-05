@@ -13,7 +13,6 @@ boardDiv.addEventListener(pointerdown, (event) => {
   if (game.board.selectedPiece) {
     game.board.selectedPiece.unselect();
   }
-  cancelPromotion();
 });
 
 boardDiv.addEventListener("focusout", (event) => {
@@ -23,6 +22,12 @@ boardDiv.addEventListener("focusout", (event) => {
 });
 
 /* PROMOTION */
+
+const promotionWrapper = document.querySelector(".promotion-wrapper");
+promotionWrapper.addEventListener(pointerdown, (event) => {
+  event.stopPropagation();
+  cancelPromotion();
+});
 
 for (let promotionPiece of document.getElementsByClassName("promotion-piece")) {
   promotionPiece.addEventListener(pointerdown, (event) => {
@@ -40,8 +45,7 @@ for (let promotionPiece of document.getElementsByClassName("promotion-piece")) {
     game.board.updateAllValidMoves();
     game.checkForEnd();
 
-    let promotionWindow = document.getElementsByClassName("promotion-window")[0];
-    promotionWindow.style.display = "none";
+    promotionWrapper.style.display = "none";
 
     let promotionPieces = document.getElementsByClassName("promotion-piece");
     for (let promotionPiece of promotionPieces) {
@@ -49,10 +53,6 @@ for (let promotionPiece of document.getElementsByClassName("promotion-piece")) {
     }
   });
 }
-
-document
-  .getElementsByClassName("promotion-cancel")[0]
-  .addEventListener(pointerdown, cancelPromotion);
 
 /* GAME TOOLS */
 
