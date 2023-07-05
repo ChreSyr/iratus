@@ -38,13 +38,6 @@ const supportsPointerEvents = window.PointerEvent !== undefined;
 //   isMobileDevice
 // );
 
-/* New rules buttons always visible on mobile */
-if (isMobileDevice()) {
-  document
-    .getElementsByClassName("iratusrules-wrapper")[0]
-    .classList.add("always-open-for-mobile");
-}
-
 /* Square size - defined here because used by menu-panel*/
 function ajustSquareSize() {
   // Change the property squareSize depending on screen size

@@ -40,26 +40,7 @@ function closeMenu() {
 /* MENU PANEL WRAPPER */
 
 // Open new page from menu-bar's btn
-function clickMenuBarBtn(type) {
-  if (document.firstElementChild.clientWidth < 614) {
-    console.log("SKIPPED ACCESS TO", type);
-    return;
-  }
-  if (isMobileDevice()) {
-    return;
-  }
-
-  switch (type) {
-    case "rules":
-    case "puzzles":
-    case "contact":
-      window.location.href = type + ".html";
-      break;
-    case "donations":
-      // Open ko-fi.com in a new web page
-      openKoFi();
-  }
-}
+function clickMenuBarBtn(type) {}
 
 const menuPanelWrappers = document.getElementsByClassName("menu-panel-wrapper");
 
@@ -115,6 +96,23 @@ for (let menuBarButton of menuBarButtons) {
       menuBarButton.addEventListener("click", (event) => {
         event.stopPropagation(); // prevents wrapper to open again
         clickMenuBarBtn(buttonName); // TODO : import here
+
+        if (
+          document.firstElementChild.clientWidth >= 614 &&
+          !isMobileDevice()
+        ) {
+          switch (buttonName) {
+            case "rules":
+            case "puzzles":
+            case "contact":
+              window.location.href = buttonName + ".html";
+              break;
+            case "donations":
+              // Open ko-fi.com in a new web page
+              openKoFi();
+          }
+          return;
+        }
 
         for (let panelWrapper of document.getElementsByClassName(
           "menu-panel-wrapper"

@@ -122,8 +122,7 @@
 /* TODO : change font-size when too small */
 
 .menu-panel {
-  --menu-panel-width: min(calc(var(
-  --square-size) * 8 - 5em), 13em);
+  --menu-panel-width: min(calc(var(--square-size) * 8 - 5em), 13em);
   background-color: var(--dark);
   box-shadow: 0.6em -1em 1em var(--darker);
   color: var(--light-green);
@@ -233,15 +232,17 @@ header h1 {
 /* RULES */
 
 .iratusrules-wrapper {
-  height: 59px;
+  /* height: 59px; */
+  height: calc(59px + 0.3em + var(--menu-panel-width));
   overflow-y: hidden;
   position: relative;
   transition: height 1s;
 }
 
-.iratusrules-wrapper.always-open-for-mobile,
-.iratusrules-wrapper:hover {
-  height: calc(59px + 0.3em + var(--menu-panel-width));
+@media (min-width: 614px) {
+  .iratusrules-wrapper:not(:hover) {
+    height: 59px;
+  }
 }
 
 .iratusrules-wrapper .newrules-btn {
