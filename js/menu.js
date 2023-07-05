@@ -55,7 +55,9 @@ for (let menuPanelWrapper of menuPanelWrappers) {
     case "menu-panel-wrapper-donations":
     case "menu-panel-wrapper-settings":
       menuPanelWrapper.addEventListener("click", (event) => {
-        menuPanelWrapper.classList.add("selected-panel");
+        if (document.firstElementChild.clientWidth < 614) {
+          menuPanelWrapper.classList.add("selected-panel");
+        }
       });
       menuPanelWrapper.addEventListener("focusout", (event) => {
         if (devMode) {
