@@ -14,9 +14,7 @@ PieceMovingTwice.prototype.constructor = PieceMovingTwice;
 // STATIC VALUES
 
 PieceMovingTwice.prototype.RANGE = 10;
-PieceMovingTwice.prototype.ATTR_TO_COPY = Piece.prototype.ATTR_TO_COPY.concat([
-  "stillHasToMove",
-]);
+PieceMovingTwice.prototype.ATTR_TO_COPY = Piece.prototype.ATTR_TO_COPY.concat(["stillHasToMove"]);
 
 // INSTANCE METHODS - MECHANICS
 
@@ -66,7 +64,13 @@ PieceMovingTwice.prototype.undo = function (move) {
 
   if (this.board.game.movesHistory.length) {
     let lastMove = this.board.game.movesHistory.slice(-1)[0];
-    this.stillHasToMove = lastMove.piece === this;
+    if (this.isWidgeted) {
+      this.stillHasToMove = lastMove.piece === this;
+    } else {
+      this.stillHasToMove = lastMove.piece === this.original;
+    }
+  } else {
+    this.stillHasToMove = false;
   }
 };
 
@@ -105,11 +109,7 @@ PieceMovingTwice.prototype.updateValidMoves = function () {
         if (this.row === row2 && this.col === col2) {
           continue;
         } // can't protect itself
-        if (
-          this.antikingSquares.find(
-            (move) => move[0] === row2 && move[1] === col2
-          )
-        ) {
+        if (this.antikingSquares.find((move) => move[0] === row2 && move[1] === col2)) {
           continue;
         } // already in antikingSquares
 
