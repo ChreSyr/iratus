@@ -17,6 +17,12 @@ const cancelPromotion = (event) => {
 
 // Returns whether or not an event collides with a screen element
 function collide(event, element) {
+  if (event.clientX === undefined) {
+    // TouchEvent has no clientX and no clientY
+    event.clientX = event.changedTouches[0].clientX;
+    event.clientY = event.changedTouches[0].clientY;
+  }
+
   let rect = element.getBoundingClientRect();
   let x = event.clientX - rect.x;
   let y = event.clientY - rect.y;
@@ -157,12 +163,17 @@ function makePieceDraggable(element) {
   };
 
   const pointermoveHandle = (event) => {
-    event.preventDefault();
-    console.log(pointermove);
     if (!dragging) {
-      console.log("Closed cause not dragging");
       return;
     }
+    event.preventDefault();
+
+    if (event.clientX === undefined) {
+      // TouchEvent has no clientX and no clientY
+      event.clientX = event.changedTouches[0].clientX;
+      event.clientY = event.changedTouches[0].clientY;
+    }
+
     pos.x = event.clientX + dragging.dx;
     pos.y = event.clientY + dragging.dy;
 
@@ -178,15 +189,12 @@ function makePieceDraggable(element) {
         (element.piece.row + pos.y / squareSize) * 100
       }%)`;
     }
-    console.log(1, element.style.transform);
     if (board.game.hasFlippedPieces()) {
       element.style.transform += " rotate(180deg)";
     }
-    console.log(2, element.style.transform);
   };
 
   element.addEventListener(pointerdown, pointerdownHandle);
-  console.log(pointerdown, pointermove, pointerup, pointercancel);
 }
 
 // Writes css code in <script id="board-styles-single">

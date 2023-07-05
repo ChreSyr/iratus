@@ -65,7 +65,7 @@ if (true) {
 }
 
 // Version
-const version = "0.10.01";
+const version = "0.11";
 const versionLabel = document.getElementById("version-label");
 versionLabel.textContent = "Version : " + version;
 
@@ -113,13 +113,9 @@ function openLearnChess() {
 
 /* Supports pointer events */
 // Old browsers don't support pointer events
+
 const supportsPointerEvents = window.PointerEvent !== undefined;
 const pointerdown = supportsPointerEvents ? "pointerdown" : "touchstart";
 const pointermove = supportsPointerEvents ? "pointermove" : "touchmove";
 const pointerup = supportsPointerEvents ? "pointerup" : "touchend";
 const pointercancel = supportsPointerEvents ? "pointercancel" : "touchcancel";
-
-// const pointerdown = supportsPointerEvents ? "pointerdown" : "mousedown";
-// const pointermove = supportsPointerEvents ? "pointermove" : "mousemove";
-// const pointerup = supportsPointerEvents ? "pointerup" : "mouseup";
-// const pointercancel = supportsPointerEvents ? "pointercancel" : "mouseleave";
