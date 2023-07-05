@@ -73,14 +73,8 @@ IratusBoard.prototype.updateAllValidMoves = function () {
     let clonedPiece = this.calculator.getSimulatedPiece(piece);
     let validMoves = [];
     for (let validMove of piece.validMoves) {
-      let moveObject = this.calculator.move(
-        clonedPiece.getPos(),
-        Piece.getPos(validMove),
-        true
-      );
-      for (let enemyClonedPiece of this.calculator.piecesColored[
-        clonedPiece.enemyColor
-      ]) {
+      let moveObject = this.calculator.move(clonedPiece.getPos(), Piece.getPos(validMove), true);
+      for (let enemyClonedPiece of this.calculator.piecesColored[clonedPiece.enemyColor]) {
         enemyClonedPiece.updateValidMoves();
       }
       if (!this.calculator.king[piece.color].inCheck()) {
@@ -109,9 +103,7 @@ IratusBoard.prototype.updateAllValidMoves = function () {
             Piece.getPos(validMove),
             true
           );
-          for (let enemyClonedPiece of this.calculator.piecesColored[
-            clonedPiece.enemyColor
-          ]) {
+          for (let enemyClonedPiece of this.calculator.piecesColored[clonedPiece.enemyColor]) {
             enemyClonedPiece.updateValidMoves();
           }
           let valid;
@@ -124,9 +116,7 @@ IratusBoard.prototype.updateAllValidMoves = function () {
                 Piece.getPos(validMove2),
                 true
               );
-              for (let enemyClonedPiece2 of this.calculator.piecesColored[
-                clonedPiece.enemyColor
-              ]) {
+              for (let enemyClonedPiece2 of this.calculator.piecesColored[clonedPiece.enemyColor]) {
                 enemyClonedPiece2.updateValidMoves();
               }
 
@@ -153,9 +143,7 @@ IratusBoard.prototype.updateAllValidMoves = function () {
             Piece.getPos(validMove),
             true
           );
-          for (let enemyClonedPiece of this.calculator.piecesColored[
-            clonedPiece.enemyColor
-          ]) {
+          for (let enemyClonedPiece of this.calculator.piecesColored[clonedPiece.enemyColor]) {
             enemyClonedPiece.updateValidMoves();
           }
           if (!this.calculator.king[piece.color].inCheck()) {

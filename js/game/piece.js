@@ -51,6 +51,9 @@ function Piece(board, row, col) {
   this.widget = null;
   this.cssClass = undefined;
 
+  // only used by calculation pieces
+  this.original = undefined;
+
   this.board.addPiece(this);
 }
 
@@ -138,6 +141,7 @@ Piece.prototype = {
     this.board.piecesByPos[this.getPos()] = this;
     this.firstMove = original.firstMove;
     this.dynamited = original.dynamited;
+    this.original = original;
   },
 
   getCoordinates: function () {
