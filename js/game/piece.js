@@ -222,13 +222,7 @@ Piece.prototype = {
       this[meth] = pieceClass[meth];
     }
 
-    try {
-      // TODO : remove 2nd part
-      pieceClass.preciseTransform(this);
-    } catch (error) {
-      // pieceClass is a function (new way to code classes)
-      pieceClass.prototype.preciseTransform(this);
-    }
+    pieceClass.preciseTransform(this);
 
     if (this.widget !== null) {
       this.widget.classList.remove(this.color + oldClass.ID); // TODO : fix
