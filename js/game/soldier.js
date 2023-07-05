@@ -44,7 +44,7 @@ Soldier.prototype.capture = function (capturer) {
   } // happens when this is the phantom
 
   if (!this.dog.isCaptured) {
-    commands.push(new Transform(this.dog, this.dog.actualClass, EnragedDog.prototype)); // enrage dog
+    commands.push(new Transform(this.dog, this.dog.actualType, EnragedDog.prototype)); // enrage dog
   } else {
     commands.splice(
       commands.indexOf(commands.find((commandToRem) => commandToRem.name === "transform"))
@@ -64,7 +64,7 @@ Soldier.prototype.goTo = function (row, col) {
   } // happens when this is the phantom
 
   if (this.row === this.promotionRank) {
-    commands.push(new Transform(this, this.actualClass, EliteSoldier.prototype));
+    commands.push(new Transform(this, this.actualType, EliteSoldier.prototype));
   }
 
   if (dogIsTooFar(this.row, this.col, this.dog.row, this.dog.col)) {

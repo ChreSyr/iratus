@@ -45,7 +45,7 @@ function Piece(board, row, col) {
   this.isCaptured = false;
   this.dynamited = false;
   // for transformation memory
-  this.actualClass = this.__proto__; // TODO : actualType
+  this.actualType = this.__proto__;
 
   this.isWidgeted = false;
   this.widget = null;
@@ -117,7 +117,7 @@ Piece.prototype = {
 
     let alliedPhantom = this.board.phantom[this.color];
     if (!alliedPhantom.isCaptured) {
-      commands.push(new Transform(alliedPhantom, alliedPhantom.actualClass, this.actualClass));
+      commands.push(new Transform(alliedPhantom, alliedPhantom.actualType, this.actualType));
     }
 
     return commands;
@@ -208,12 +208,12 @@ Piece.prototype = {
   },
 
   transform: function (pieceClass) {
-    if (this.actualClass === pieceClass) {
+    if (this.actualType === pieceClass) {
       return;
     }
 
-    let oldClass = this.actualClass;
-    this.actualClass = pieceClass;
+    let oldClass = this.actualType;
+    this.actualType = pieceClass;
 
     for (let attr of pieceClass.ATTR_TO_COPY) {
       this[attr] = pieceClass[attr];
