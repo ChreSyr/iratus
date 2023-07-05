@@ -64,6 +64,11 @@ if (true) {
   }
 }
 
+// Version
+const version = "0.10.0";
+const versionLabel = document.getElementById("version-label");
+versionLabel.textContent = "Version : " + version;
+
 // Handle when an option is selected in the style <select>
 function handleExperimentalSelect(type) {
   var selectedOption = document.getElementById("select-" + type).value;

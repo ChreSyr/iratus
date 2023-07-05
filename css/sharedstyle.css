@@ -312,3 +312,7 @@ select:hover:not(:disabled) {
   color: var(--lighter);
   font-family: monospace;
 }
+
+/* VERSION LABEL */
+
+#version-label {text-align: center;width: 100%;}
