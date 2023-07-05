@@ -52,6 +52,17 @@
   }
 }
 
+/* MENU OVERLAY */
+
+#menu-overlay {
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 100vh;
+  left: var(--menu-bar-width);
+  position: fixed;
+  top: 0;
+  width: 100vw;
+}
+
 /* MENU PANEL WRAPPER */
 
 .menu-panel-wrapper {

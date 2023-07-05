@@ -32,6 +32,12 @@ function closeMenu() {
   }
 }
 
+/* MENU OVERLAY */
+
+document.getElementById("menu-overlay").addEventListener("click", (event) => {
+  closeMenu();
+});
+
 /* MENU PANEL WRAPPER */
 
 // Open new page from menu-bar's btn
