@@ -2,11 +2,6 @@
 
 const menuWrapper = document.getElementById("menu-wrapper");
 
-menuWrapper.addEventListener("click", (event) => {
-  // event.preventDefault();
-  console.log("menu wrapper click");
-});
-
 menuWrapper.addEventListener("focusout", (event) => {
   if (devMode) {
     return;
@@ -97,10 +92,7 @@ for (let menuBarButton of menuBarButtons) {
         event.stopPropagation(); // prevents wrapper to open again
         clickMenuBarBtn(buttonName); // TODO : import here
 
-        if (
-          document.firstElementChild.clientWidth >= 614 &&
-          !isMobileDevice()
-        ) {
+        if (document.firstElementChild.clientWidth >= 614 && !isMobileDevice()) {
           switch (buttonName) {
             case "rules":
             case "puzzles":
@@ -114,9 +106,7 @@ for (let menuBarButton of menuBarButtons) {
           return;
         }
 
-        for (let panelWrapper of document.getElementsByClassName(
-          "menu-panel-wrapper"
-        )) {
+        for (let panelWrapper of document.getElementsByClassName("menu-panel-wrapper")) {
           if (panelWrapper.id.split("-")[3] === buttonName) {
             panelWrapper.classList.toggle("selected-panel");
           } else {
@@ -128,34 +118,20 @@ for (let menuBarButton of menuBarButtons) {
   }
 }
 
-/* SETTINGS SWITCH - TODO : finish */
-
-/* Local storage */
-// Check the user's preference from localStorage on page load
-window.addEventListener("DOMContentLoaded", function () {
-  const body = document.body;
-
-  const preferredTheme = localStorage.getItem("theme");
-  if (preferredTheme === "light") {
-    body.classList.add("light-mode");
-    document.getElementById("toggle-dark-mode").checked = false;
-  } else {
-    body.classList.remove("light-mode"); // Remove the light mode class if not set
-    document.getElementById("toggle-dark-mode").checked = true;
-  }
-
-  const preferredReading = localStorage.getItem("easy-reading");
-  if (preferredReading === "yes") {
-    body.classList.add("easy-reading");
-    document.getElementById("toggle-easy-reading").checked = true;
-  } else {
-    body.classList.remove("easy-reading");
-    document.getElementById("toggle-easy-reading").checked = false;
-  }
-});
+/* SETTINGS SWITCH */
 
 const menuSettings = document.getElementById("menu-panel-wrapper-settings");
 const menuSettingsInputs = menuSettings.querySelectorAll("input");
+
+let devMode = false;
+
+storage = [];
+function storeItem(itemName, onDOMContentLoaded) {
+  storage.push({
+    itemName: itemName,
+    onDOMContentLoaded: onDOMContentLoaded,
+  });
+}
 
 menuSettingsInputs.forEach((input) => {
   switch (input.id) {
@@ -170,46 +146,64 @@ menuSettingsInputs.forEach((input) => {
         const isLightMode = body.classList.contains("light-mode");
         localStorage.setItem("theme", isLightMode ? "light" : "dark");
       });
+
+      menuSettings.addEventListener("transitionend", (event) => {
+        document.body.classList.remove("animating-dark-mode");
+      });
+
+      storeItem("theme", (item) => {
+        if (item === null) {
+          return;
+        } // no item found in storage
+        // item can be "light" or "dark"
+        input.checked = item === "dark";
+        if (input.checked) {
+          document.body.classList.remove("light-mode");
+        } else {
+          document.body.classList.add("light-mode");
+        }
+      });
+      break;
+
+    case "toggle-easy-reading":
+      input.addEventListener("change", (event) => {
+        // Change the font
+        const body = document.body;
+        body.classList.toggle("easy-reading");
+
+        // Store the user's preference in localStorage
+        const isEasyReading = body.classList.contains("easy-reading");
+        localStorage.setItem("easy-reading", isEasyReading ? "yes" : "no");
+      });
+
+      storeItem("easy-reading", (item) => {
+        if (item === null) {
+          return;
+        } // no item found in storage
+        // item can be "no" or "yes"
+        input.checked = item === "yes";
+        if (input.checked) {
+          document.body.classList.add("easy-reading");
+        } else {
+          document.body.classList.remove("easy-reading");
+        }
+      });
+      break;
+
+    case "toggle-developer-mode":
+      input.addEventListener("change", (event) => {
+        // Change the mode
+        devMode = !devMode;
+      });
       break;
   }
 });
 
-/* Light / Dark mode */
-function toggleDarkMode() {
-  const body = document.body;
-  body.classList.toggle("light-mode");
-  // body.classList.add("animating-dark-mode");
-
-  // Store the user's preference in localStorage
-  const isLightMode = body.classList.contains("light-mode");
-  localStorage.setItem("theme", isLightMode ? "light" : "dark");
-}
-// const switchDarkMode = document.getElementById("toggle-dark-mode");
-// switchDarkMode.addEventListener("change", toggleDarkMode);
-
-// function handleAnimationEnd() {
-//   document.body.classList.remove("animating-dark-mode");
-// }
-// document
-//   .getElementsByClassName("settings")[0]
-//   .addEventListener("transitionend", handleAnimationEnd);
-
-/* Easy Reading */
-function toggleEasyReading() {
-  const body = document.body;
-  body.classList.toggle("easy-reading");
-
-  // Store the user's preference in localStorage
-  const isEasyReading = body.classList.contains("easy-reading");
-  localStorage.setItem("easy-reading", isEasyReading ? "yes" : "no");
-}
-const switchReading = document.getElementById("toggle-easy-reading");
-switchReading.addEventListener("change", toggleEasyReading);
-
-/* Developer Mode */
-let devMode = false;
-function toggleDeveloperMode() {
-  devMode = !devMode;
-}
-const switchDeveloper = document.getElementById("toggle-developer-mode");
-switchDeveloper.addEventListener("change", toggleDeveloperMode);
+/* Local storage */
+// Check the user's preference from localStorage on page load
+window.addEventListener("DOMContentLoaded", function () {
+  for (const stored of storage) {
+    const item = this.localStorage.getItem(stored.itemName);
+    stored.onDOMContentLoaded(item);
+  }
+});
