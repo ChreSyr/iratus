@@ -10,6 +10,7 @@ game = new Game(IratusBoard);
 const boardDiv = document.getElementById("board-single");
 
 boardDiv.addEventListener(pointerdown, (event) => {
+  console.log("board");
   if (game.board.selectedPiece) {
     game.board.selectedPiece.unselect();
   }

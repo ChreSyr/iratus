@@ -44,6 +44,7 @@ function hideInfo() {
 function makeSquareClickable(square) {
   const pointerdownHandle = (event) => {
     event.stopPropagation();
+    console.log("square");
 
     closeMenu();
     cancelPromotion();
@@ -77,6 +78,7 @@ function makePieceDraggable(element) {
 
   const pointerdownHandle = (event) => {
     event.stopPropagation();
+    console.log("piece");
 
     if (event.clientX === undefined) {
       // TouchEvent has no clientX and no clientY
