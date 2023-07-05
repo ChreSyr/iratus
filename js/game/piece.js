@@ -26,9 +26,7 @@
 
 // CONSTRUCTOR
 
-function Piece(type, board, row, col) {
-  // TODO : remove type
-
+function Piece(board, row, col) {
   this.ID = this.__proto__.ID;
   this.MOVES = this.__proto__.MOVES;
   this.RANGE = this.__proto__.RANGE;

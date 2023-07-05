@@ -1,7 +1,7 @@
 // CONSTRUCTOR
 
-function PieceMovingTwice(type, board, row, col) {
-  Piece.call(this, type, board, row, col);
+function PieceMovingTwice(board, row, col) {
+  Piece.call(this, board, row, col);
 
   this.stillHasToMove = false;
 }

@@ -141,6 +141,7 @@ button {
   -webkit-tap-highlight-color: transparent;
 }
 
+button:active,
 button:hover {
   background-color: var(--light-green);
   color: var(--darker);

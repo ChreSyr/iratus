@@ -1,7 +1,7 @@
 // CONSTRUCTOR
 
 function Grapple(board, row, col) {
-  RollingPiece.call(this, Grapple, board, row, col);
+  RollingPiece.call(this, board, row, col);
 }
 
 // INHERITANCE
@@ -45,8 +45,7 @@ Grapple.prototype.goTo = function (row, col) {
   if (!grappledPiece) {
     return RollingPiece.prototype.goTo.call(this, row, col);
   }
-  const getCoord = (piece) =>
-    fileDict[piece.col] + (this.board.NBRANKS - piece.row);
+  const getCoord = (piece) => fileDict[piece.col] + (this.board.NBRANKS - piece.row);
   let commands = [];
 
   let notation = "G:";
@@ -56,9 +55,7 @@ Grapple.prototype.goTo = function (row, col) {
   notation += getCoord(grappledPiece) + "->" + getCoord(this); // ex : G:Nf6->d4
   commands.push(new Notation(notation));
   commands.push(new Capture(this, this));
-  commands.push(
-    new AfterMove([grappledPiece.row, grappledPiece.col], [this.row, this.col])
-  );
+  commands.push(new AfterMove([grappledPiece.row, grappledPiece.col], [this.row, this.col]));
   return commands;
 };
 

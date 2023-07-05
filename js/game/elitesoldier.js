@@ -1,7 +1,7 @@
 // CONSTRUCTOR
 
 function EliteSoldier(board, row, col) {
-  PieceMovingTwice.call(this, EliteSoldier, board, row, col);
+  PieceMovingTwice.call(this, board, row, col);
 
   this.dog = null;
 }

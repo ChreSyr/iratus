@@ -1,7 +1,7 @@
 // CONSTRUCTOR
 
 function Dynamite(board, row, col) {
-  Piece.call(this, Dynamite, board, row, col);
+  Piece.call(this, board, row, col);
 }
 
 Dynamite.UNDYNAMITABLES = ["k", "q", "r", "dy", "p", "g"];

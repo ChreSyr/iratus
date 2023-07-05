@@ -1,7 +1,7 @@
 // CONSTRUCTOR
 
 function Rook(board, row, col) {
-  RollingPiece.call(this, Rook, board, row, col);
+  RollingPiece.call(this, board, row, col);
 }
 
 // INHERITANCE

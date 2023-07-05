@@ -1,7 +1,7 @@
 // CONSTRUCTOR
 
 function King(board, row, col) {
-  Piece.call(this, King, board, row, col);
+  Piece.call(this, board, row, col);
 
   this.castleRights = "00"; // long castle right + short castle right
 }

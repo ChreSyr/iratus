@@ -1,7 +1,7 @@
 // CONSTRUCTOR
 
 function Dog(board, row, col) {
-  Piece.call(this, Dog, board, row, col);
+  Piece.call(this, board, row, col);
 
   this.soldier = undefined;
 

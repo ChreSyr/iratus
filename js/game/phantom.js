@@ -1,7 +1,7 @@
 // CONSTRUCTOR
 
 function Phantom(board, row, col) {
-  Piece.call(this, Phantom, board, row, col);
+  Piece.call(this, board, row, col);
 
   this.cssClass = "phantom";
 }

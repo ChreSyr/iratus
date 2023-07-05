@@ -1,7 +1,7 @@
 // CONSTRUCTOR
 
 function EnragedDog(board, row, col) {
-  PieceMovingTwice.call(this, EnragedDog, board, row, col);
+  PieceMovingTwice.call(this, board, row, col);
 }
 
 // INHERITANCE

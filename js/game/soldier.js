@@ -1,7 +1,7 @@
 // CONSTRUCTOR
 
 function Soldier(board, row, col) {
-  RollingPiece.call(this, Soldier, board, row, col);
+  RollingPiece.call(this, board, row, col);
 
   this.dog = undefined;
 
@@ -30,9 +30,7 @@ Soldier.prototype.canGoTo = function (row, col) {
   if (piece === null) {
     return true;
   } else if (piece.ID === "dy") {
-    return (
-      piece.color === this.color && !Dynamite.UNDYNAMITABLES.includes(this.ID)
-    );
+    return piece.color === this.color && !Dynamite.UNDYNAMITABLES.includes(this.ID);
   } else {
     return piece.color !== this.color && piece.ID === "i"; // only captures pawns
   }
@@ -46,14 +44,10 @@ Soldier.prototype.capture = function (capturer) {
   } // happens when this is the phantom
 
   if (!this.dog.isCaptured) {
-    commands.push(
-      new Transform(this.dog, this.dog.actualClass, EnragedDog.prototype)
-    ); // enrage dog
+    commands.push(new Transform(this.dog, this.dog.actualClass, EnragedDog.prototype)); // enrage dog
   } else {
     commands.splice(
-      commands.indexOf(
-        commands.find((commandToRem) => commandToRem.name === "transform")
-      )
+      commands.indexOf(commands.find((commandToRem) => commandToRem.name === "transform"))
     ); // remove leash phantomisation, stays dog
   }
 
@@ -70,9 +64,7 @@ Soldier.prototype.goTo = function (row, col) {
   } // happens when this is the phantom
 
   if (this.row === this.promotionRank) {
-    commands.push(
-      new Transform(this, this.actualClass, EliteSoldier.prototype)
-    );
+    commands.push(new Transform(this, this.actualClass, EliteSoldier.prototype));
   }
 
   if (dogIsTooFar(this.row, this.col, this.dog.row, this.dog.col)) {

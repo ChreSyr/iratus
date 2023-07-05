@@ -1,7 +1,7 @@
 // CONSTRUCTOR
 
 function Pawn(board, row, col) {
-  Piece.call(this, Pawn, board, row, col);
+  Piece.call(this, board, row, col);
 
   this.attackingMoves = undefined;
   this.promotionRank = undefined;
