@@ -5,11 +5,11 @@
 }
 
 .game-tools {
-  margin-top: var(--body-margin);
+  margin-top: calc(var(--body-margin) * 3);
 }
 
 .game-tools.at-right {
-  margin-left: var(--body-margin);
+  margin-left: calc(var(--body-margin) * 3);
   margin-top: 0;
   width: 400px;
 }

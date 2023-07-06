@@ -59,7 +59,7 @@ for (let promotionPiece of document.getElementsByClassName("promotion-piece")) {
 const gameTools = document.querySelector(".game-tools");
 
 function adjustGameTools() {
-  if (document.body.clientWidth - boardDiv.offsetWidth >= 410) {
+  if (document.body.clientWidth - boardDiv.offsetWidth >= 430) {
     gameTools.style.width = `${400}px`;
     gameTools.classList.add("at-right");
   } else {
