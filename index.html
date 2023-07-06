@@ -120,7 +120,7 @@
             <div class="menu-panel">
               <h2>Problèmes</h2>
               <div class="menu-delimiter"></div>
-              <p>Aucun problème n'est disponible actuellement.</p>
+              <div class="text">Aucun problème n'est disponible actuellement.</div>
             </div>
           </div>
 
@@ -150,12 +150,12 @@
             <div class="menu-panel">
               <h2>Donations</h2>
               <div class="menu-delimiter"></div>
-              <p>
+              <div class="text">
                 Passionné d'échecs, j'ai créé Iratus afin de rendre les parties encore plus
                 imprévisibles...
                 <br /><br />
                 Syméon Rougevin-Bâville.
-              </p>
+              </div>
               <br />
               <button onclick="openKoFi()">Faire un don</button>
             </div>
@@ -175,7 +175,7 @@
               <div class="menu-delimiter"></div>
 
               <!-- Only in index.html 's menu -->
-              <div class="settings">
+              <div class="settings easy-read">
                 <h3>Affichage</h3>
                 <ul>
                   <li>
@@ -206,7 +206,7 @@
 
               <div class="menu-delimiter"></div>
 
-              <div class="settings">
+              <div class="settings easy-read">
                 <h3>Expérimentations</h3>
 
                 <ul>
@@ -250,8 +250,10 @@
                   <li class="dev-only">
                     <div class="accordion">
                       <div class="accordion-btn">Console</div>
-                      <div class="accordion-panel codespace" id="logs-container">
-                        <div class="accordion-content">Console :</div>
+                      <div class="accordion-panel codespace">
+                        <div class="accordion-content" id="logs-container">
+                          <p>Console :</p>
+                        </div>
                       </div>
                     </div>
                   </li>
@@ -310,12 +312,36 @@
         <div class="player-info b"></div>
       </div>
 
-      <div class="game-tools">
-        <div class="controls">
+      <div class="tools-wrapper">
+        <div class="tools-controls tools-line-filler">
           <button onclick="game.undoAll()">&lt&lt</button>
           <button onclick="game.undo()">&lt</button>
           <button onclick="game.redo()">&gt</button>
           <button tabindex="-1" onclick="game.redoAll()">&gt&gt</button>
+        </div>
+
+        <div class="easy-read">
+          <h3>Import / Export</h3>
+          <div class="accordion tools-line-filler">
+            <div class="accordion-btn">Position</div>
+            <div class="accordion-panel">
+              <div class="accordion-content">
+                <input id="fen-input" spellcheck="false" />
+                <button class="tools-import">Valider</button>
+                <button class="tools-export">Exporter</button>
+              </div>
+            </div>
+          </div>
+          <div class="accordion tools-line-filler">
+            <div class="accordion-btn">Partie</div>
+            <div class="accordion-panel">
+              <div class="accordion-content">
+                <textarea id="pgn-input" spellcheck="false"></textarea>
+                <button class="tools-import" type="button" disabled>Valider</button>
+                <button class="tools-export">Exporter</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

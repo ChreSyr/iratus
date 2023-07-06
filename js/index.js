@@ -56,17 +56,66 @@ for (let promotionPiece of document.getElementsByClassName("promotion-piece")) {
 
 /* GAME TOOLS */
 
-const gameTools = document.querySelector(".game-tools");
-
-function adjustGameTools() {
+// Dynamic layout of tools-wrapper
+const toolsWrapper = document.querySelector(".tools-wrapper");
+function adjustToolsWrapper() {
   if (document.body.clientWidth - boardDiv.offsetWidth >= 430) {
-    gameTools.style.width = `${400}px`;
-    gameTools.classList.add("at-right");
+    toolsWrapper.style.width = `${400}px`;
+    toolsWrapper.classList.add("at-right");
   } else {
-    gameTools.style.width = "100%";
-    gameTools.classList.remove("at-right");
+    toolsWrapper.style.width = "100%";
+    toolsWrapper.classList.remove("at-right");
   }
 }
+adjustToolsWrapper();
+window.addEventListener("resize", adjustToolsWrapper);
 
-adjustGameTools();
-window.addEventListener("resize", adjustGameTools);
+// FEN Input
+const fenInput = document.getElementById("fen-input");
+fenInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" || event.keyCode === 13) {
+    fenInput.blur(); // Release the focus from the input
+  }
+});
+
+// PGN Input
+const pgnInput = document.getElementById("pgn-input");
+pgnInput.value = game.pgn;
+
+// Automatically ajust heights
+fenInput.style.height = fenInput.scrollHeight + "px";
+pgnInput.style.height = pgnInput.scrollHeight + 2 + "px";
+
+// Enabling import button
+fenInput.addEventListener("input", (event) => {
+  // fenInput.nextElementSibling = import button
+  fenInput.nextElementSibling.disabled = fenInput.value === game.board.fen;
+});
+pgnInput.addEventListener("input", (event) => {
+  pgnInput.style.height = "0px";
+  pgnInput.style.height = pgnInput.scrollHeight + 2 + "px";
+
+  // pgnInput.nextElementSibling = import button
+  pgnInput.nextElementSibling.disabled = pgnInput.value === game.pgn;
+});
+
+// Import / Export buttons
+for (let input of [fenInput, pgnInput]) {
+  const importBtn = input.nextElementSibling;
+  const exportBtn = importBtn.nextElementSibling;
+  exportBtn.addEventListener("click", (event) => {
+    navigator.clipboard
+      .writeText(input.value)
+      .then(() => {
+        // console.log("Text copied to clipboard:", input.value);
+        const originalTextContent = exportBtn.textContent;
+        exportBtn.textContent = "Copié";
+        setTimeout(() => {
+          exportBtn.textContent = originalTextContent;
+        }, 2000);
+      })
+      .catch((error) => {
+        console.error("Failed to copy text:", input.value);
+      });
+  });
+}

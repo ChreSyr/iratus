@@ -38,6 +38,9 @@ function Board(game, nbranks = 8, nbfiles = 8) {
 
   // Initialization
   this.createPieces();
+
+  // FEN notation
+  this.fen = "lol"; // TODO
 }
 
 // ROOT PROTOTYPE

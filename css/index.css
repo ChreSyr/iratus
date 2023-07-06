@@ -4,30 +4,79 @@
   justify-content: center;
 }
 
-.game-tools {
+.tools-wrapper {
+  color: var(--light-green);
+  font-size: 1.5em;
   margin-top: calc(var(--body-margin) * 3);
+  margin-bottom: 20em;
 }
 
-.game-tools.at-right {
+@media (min-width: 614px) {
+  .tools-wrapper {
+    /* font-size: 2.5em; */
+  }
+}
+
+.tools-wrapper.at-right {
   margin-left: calc(var(--body-margin) * 3);
   margin-top: 0;
+  margin-bottom: 0;
   width: 400px;
 }
 
-.controls {
-  height: 6em;
-  display: flex;
+.tools-line-filler {
+  width: 100%;
+  margin-bottom: 3rem;
 }
 
-.controls button {
-  font-size: 3.5em;
+.tools-controls {
+  display: flex;
+  height: 6rem;
+}
+
+.tools-controls button {
+  font-size: 3.5rem;
   padding: 0;
   transition: background-color 0.2s;
   width: 100%;
 }
 
 @media only screen and (min-width: 614px) {
-  .controls button:active {
-    font-size: 3em;
+  .tools-controls button:active {
+    font-size: 3rem;
   }
+}
+
+.tools-wrapper .accordion-panel {
+  padding: 0;
+}
+
+.tools-wrapper .accordion-content {
+  box-sizing: border-box;
+  /* display: flex; */
+  padding: 0 2px;
+  position: relative;
+  width: 100%;
+}
+
+.tools-wrapper .accordion-content input,
+.tools-wrapper .accordion-content textarea {
+  box-sizing: border-box;
+  padding: 0.6em 1em;
+  position: relative;
+  resize: none;
+  width: 100%;
+  z-index: 2;
+}
+
+.tools-wrapper .accordion-content button {
+  border-radius: 3px;
+  font-size: 1.7em;
+  padding: 0.5em 2em;
+}
+
+.tools-wrapper .accordion-content button.tools-export {
+  bottom: 0;
+  right: 0;
+  position: absolute;
 }

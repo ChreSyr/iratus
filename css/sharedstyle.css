@@ -19,6 +19,7 @@
   --accessible: rgba(0, 0, 0, 0.2);
   --dark: rgb(40, 38, 35);
   --darker: black;
+  --disabled: rgb(143, 143, 143);
   --lighter: white;
   --lighter-dark: rgb(118, 118, 118);
   --light-dark: rgb(64, 64, 64);
@@ -72,6 +73,7 @@ body.light-mode {
   /* colors */
   --dark: rgb(180, 180, 180);
   --darker: rgb(131, 131, 131);
+  --disabled: rgb(168, 168, 168);
   --light-dark: rgb(150, 150, 150);
   --light-green: rgb(0, 0, 0);
   --special-color: rgb(129, 73, 136);
@@ -151,6 +153,11 @@ button:hover {
   color: var(--darker);
 }
 
+button:disabled {
+  background-color: var(--disabled);
+  color: var(--light-dark);
+}
+
 /* SELECT -- credits to chess.com */
 
 :root {
@@ -169,8 +176,7 @@ select {
   border-radius: 0.3rem;
   color: var(--light-green);
   cursor: pointer;
-  font-family: inherit;
-  font-size: 0.5em;
+  font-size: 1em;
   line-height: 1.2;
   padding: 0.4rem calc(var(--arrowPosition) + 2rem) 0.4rem 0.8rem;
   position: relative;
@@ -259,9 +265,9 @@ select:hover:not(:disabled) {
   background-color: var(--light-dark);
   border: 1px solid var(--lighter-dark);
   border-radius: 3px;
-  /* color: #444; */
+  color: var(--light-green);
   cursor: pointer;
-  font-size: 0.5em;
+  /* font-size: 0.5em; */
   padding: 0.4rem 0.8rem;
   position: relative;
   /* width: 100%; */
@@ -271,12 +277,18 @@ select:hover:not(:disabled) {
   /* transition: 0.4s; */
 }
 
+.accordion-btn.active {
+  background-color: var(--light-green);
+  color: var(--darker);
+}
+
 .accordion-btn:after {
   content: "\02795"; /* Unicode character for "plus" sign (+) */
   content: "+";
   font-size: 1.2em;
   font-weight: bold;
   color: var(--light-green);
+  color: inherit;
   height: 100%;
   right: 0.6em;
   position: absolute;
@@ -290,7 +302,7 @@ select:hover:not(:disabled) {
 }
 
 .accordion-panel {
-  background-color: red;
+  background-color: transparent;
   color: blue;
   max-height: 0;
   overflow: hidden;
@@ -299,11 +311,26 @@ select:hover:not(:disabled) {
 }
 
 .accordion-content {
-  font-size: 0.4em;
+  font-size: 0.7em;
   padding: 1em 0;
+  width: 100%;
+}
+
+/* INPUT */
+
+textarea,
+input {
+  background-color: var(--light-dark);
+  border: 1px solid var(--lighter-dark);
+  color: white;
+  /* color: var(--lighter-dark); */
 }
 
 /* CODESPACE */
+
+.easy-read {
+  font-family: var(--fontfamily-simple);
+}
 
 .codespace {
   background-color: var(--darker);

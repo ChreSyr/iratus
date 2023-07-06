@@ -52,15 +52,14 @@ if (true) {
 
   function appendLogToContainer(logMessage) {
     var logContainer = document.getElementById("logs-container");
-    var logEntry = document.createElement("div");
-    logEntry.classList.add("accordion-content");
+    var logEntry = document.createElement("p");
     logEntry.textContent = logMessage;
     logContainer.appendChild(logEntry);
 
     // if open, increase logContainer's height
-    if (logContainer.previousElementSibling.classList.contains("active")) {
-      logContainer.style.maxHeight = logContainer.scrollHeight + "px";
-    }
+    // if (logContainer.previousElementSibling.classList.contains("active")) {
+    //   logContainer.style.maxHeight = logContainer.scrollHeight + "px";
+    // }
   }
 }
 
@@ -82,6 +81,7 @@ function handleExperimentalSelect(type) {
 }
 
 // Accordion
+// Show / hide accordion-content when click on -accordion-btn
 var accordionTriggers = document.getElementsByClassName("accordion-btn");
 for (let accordionTrigger of accordionTriggers) {
   accordionTrigger.addEventListener("click", function () {
@@ -94,6 +94,17 @@ for (let accordionTrigger of accordionTriggers) {
       panel.style.maxHeight = null;
     }
   });
+}
+// Update accordion-panel's height when accordion-content's height changes
+var accordionContents = document.getElementsByClassName("accordion-content");
+for (let accordionContent of accordionContents) {
+  const resizeObserver = new ResizeObserver((entries) => {
+    if (accordionContent.parentElement.previousElementSibling.classList.contains("active")) {
+      const accordionPanel = accordionContent.parentElement;
+      accordionPanel.style.maxHeight = accordionPanel.scrollHeight + "px";
+    }
+  });
+  resizeObserver.observe(accordionContent);
 }
 
 // Return true if the user is using a mobile

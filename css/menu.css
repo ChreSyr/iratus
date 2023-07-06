@@ -132,7 +132,7 @@ header {
 
 .menu-panel-wrapper h1 {
   color: var(--light-green);
-  font-size: x-large;
+  font-size: 2.4em;
   font-weight: normal;
   margin: auto 1rem;
 }
@@ -196,7 +196,7 @@ header {
   box-shadow: 0.6em -0em 1em var(--darker);
   color: var(--light-green);
   display: none;
-  font-size: 2.5em;
+  font-size: 1.5em;
   bottom: 0;
   left: 5rem;
   overflow-y: scroll;
@@ -208,7 +208,7 @@ header {
 
 @media (min-width: 614px) {
   .menu-panel {
-    font-size: 3em;
+    /* font-size: 2em; */
   }
 }
 
@@ -243,16 +243,17 @@ header {
 }
 
 .menu-panel h2 {
+  font-size: 2em;
   margin: 0;
   text-align: center;
 }
 
-.menu-panel p {
+.menu-panel .text {
   font-size: 2.1rem;
 }
 
 .menu-panel .menu-delimiter {
-  margin: 1.2em 0 0.5em 0;
+  margin: 2em 0 01em 0;
   width: 100%;
 }
 
@@ -262,7 +263,7 @@ header {
 }
 
 .menu-panel button {
-  font-size: 1em;
+  font-size: 2em;
   margin: 0;
   padding: 0.3em 0.3em;
   width: 100%;
@@ -373,13 +374,7 @@ header {
 
 /* SETTINGS */
 
-.settings {
-  font-family: var(--fontfamily-simple);
-}
-
 .settings h3 {
-  /* font-size: 2rem; */
-  font-size: .7em;
   margin-top: 0;
 }
 
@@ -397,11 +392,13 @@ header {
 }
 
 .settings label {
-  /* font-size: 1.5rem; */
-  font-size: .5em;
   margin: auto 0;
 }
 
 .settings select {
   width: 60%;
+}
+
+.settings p:not(:last-child) {
+  margin-bottom: 1em;
 }

@@ -15,6 +15,9 @@ function Game(boardClass) {
   }
   this.fatHistory.push(this.board.getFatPosition());
   this.board.initDisplay();
+
+  // PGN notation
+  this.pgn = '[Variation "Iratus"]\n\n';  // TODO
 }
 
 // ROOT PROTOTYPE
