@@ -278,43 +278,45 @@
       </div>
     </header>
 
-    <div class="game-wrapper" id="game-wrapper">
-      <div class="player-info w"></div>
+    <div id="index-content">
+      <div class="game-wrapper" id="game-wrapper">
+        <div class="player-info w"></div>
 
-      <div class="board" id="board-single" tabindex="0">
-        <div class="promotion-wrapper">
-          <div class="promotion-window">
-            <div class="promotion-piece q"></div>
-            <div class="promotion-piece n"></div>
-            <div class="promotion-piece r"></div>
-            <div class="promotion-piece b"></div>
-            <div class="promotion-piece ed"></div>
-            <div class="promotion-piece es"></div>
-            <div class="promotion-cancel">
-              <p>X</p>
+        <div class="board" id="board-single" tabindex="0">
+          <div class="promotion-wrapper">
+            <div class="promotion-window">
+              <div class="promotion-piece q"></div>
+              <div class="promotion-piece n"></div>
+              <div class="promotion-piece r"></div>
+              <div class="promotion-piece b"></div>
+              <div class="promotion-piece ed"></div>
+              <div class="promotion-piece es"></div>
+              <div class="promotion-cancel">
+                <p>X</p>
+              </div>
             </div>
+          </div>
+
+          <div id="info">
+            <button onclick="hideInfo()" class="info-close">Close</button>
+            <h2>Checkmate !</h2>
+            <img src="images/wk.png" />
+            <p>_ won</p>
+            <button onclick="hideInfo();game.undoAll()">Nouvelle Partie</button>
+            <button onclick="document.location='contact.html'">Retours</button>
           </div>
         </div>
 
-        <div id="info">
-          <button onclick="hideInfo()" class="info-close">Close</button>
-          <h2>Checkmate !</h2>
-          <img src="images/wk.png" />
-          <p>_ won</p>
-          <button onclick="hideInfo();game.undoAll()">Nouvelle Partie</button>
-          <button onclick="document.location='contact.html'">Retours</button>
-        </div>
+        <div class="player-info b"></div>
       </div>
 
-      <div class="player-info b"></div>
-    </div>
-
-    <div class="game-tools">
-      <div class="controls">
-        <button onclick="game.undoAll()">&lt&lt</button>
-        <button onclick="game.undo()">&lt</button>
-        <button onclick="game.redo()">&gt</button>
-        <button tabindex="-1" onclick="game.redoAll()">&gt&gt</button>
+      <div class="game-tools">
+        <div class="controls">
+          <button onclick="game.undoAll()">&lt&lt</button>
+          <button onclick="game.undo()">&lt</button>
+          <button onclick="game.redo()">&gt</button>
+          <button tabindex="-1" onclick="game.redoAll()">&gt&gt</button>
+        </div>
       </div>
     </div>
 

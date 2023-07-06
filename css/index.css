@@ -1,3 +1,9 @@
+#index-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .game-tools {
   margin-top: var(--body-margin);
 }

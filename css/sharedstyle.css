@@ -43,8 +43,6 @@ svg {
 body {
   --body-margin: 1rem;
   background-color: var(--dark);
-  display: flex;
-  flex-wrap: wrap;
   font-family: var(--fontfamily-main);
   margin: var(--body-margin);
   margin-top: calc(var(--body-margin) + var(--header-height));
