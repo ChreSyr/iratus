@@ -95,9 +95,10 @@ King.prototype.posIsUnderCheck = function (row, col, checkForMate = false) {
 King.prototype.updateValidMoves = function () {
   Piece.prototype.updateValidMoves.call(this);
 
+  let canLongCastle = false;
+  let canShortCastle = false;
   if (!this.hasMoved() && !this.inCheck()) {
     // long castle
-    let canLongCastle = false;
     let pieceAtLeftCorner = this.board.get(this.row, this.col - 4);
     if (
       pieceAtLeftCorner !== null &&
@@ -123,7 +124,6 @@ King.prototype.updateValidMoves = function () {
       }
     }
     // short castle
-    let canShortCastle = false;
     let pieceAtRightCorner = this.board.get(this.row, this.col + 3);
     if (
       pieceAtRightCorner !== null &&
@@ -144,9 +144,7 @@ King.prototype.updateValidMoves = function () {
         this.validMoves.push([this.row, this.col + 2]);
       }
     }
-
-    this.castleRights =
-      (canLongCastle === true ? "1" : "0") +
-      (canShortCastle === true ? "1" : "0");
   }
+
+  this.castleRights = (canLongCastle === true ? "1" : "0") + (canShortCastle === true ? "1" : "0");
 };

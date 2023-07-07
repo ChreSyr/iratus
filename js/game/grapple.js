@@ -45,7 +45,7 @@ Grapple.prototype.goTo = function (row, col) {
   if (!grappledPiece) {
     return RollingPiece.prototype.goTo.call(this, row, col);
   }
-  const getCoord = (piece) => fileDict[piece.col] + (this.board.NBRANKS - piece.row);
+  const getCoord = (piece) => fileDict[piece.col] + (this.board.nbranks - piece.row);
   let commands = [];
 
   let notation = "G:";

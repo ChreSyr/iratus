@@ -74,10 +74,7 @@ function Move(board, start, end) {
         case "anticapture":
           let commandToRem = undefined;
           for (let previousCommand of this.commands) {
-            if (
-              previousCommand.name === "capture" &&
-              previousCommand.args[0] === args[0]
-            ) {
+            if (previousCommand.name === "capture" && previousCommand.args[0] === args[0]) {
               commandToRem = previousCommand;
               break;
             }
@@ -168,7 +165,7 @@ function Move(board, start, end) {
           let annoyingAlliesLength = annoyingAllies.length;
           if (annoyingAlliesLength === 1) {
             if (this.start[1] === annoyingAllies[0].col) {
-              notation += this.board.NBRANKS - this.start[0];
+              notation += this.board.nbranks - this.start[0];
             } else {
               notation += fileDict[this.start[1]];
             }
@@ -186,10 +183,9 @@ function Move(board, start, end) {
             if (sameFile === false) {
               notation += fileDict[this.start[1]];
             } else if (sameRank === false) {
-              notation += this.board.NBRANKS - this.start[0];
+              notation += this.board.nbranks - this.start[0];
             } else {
-              notation +=
-                fileDict[this.start[1]] + (this.board.NBRANKS - this.start[0]);
+              notation += fileDict[this.start[1]] + (this.board.nbranks - this.start[0]);
             }
           }
         }
@@ -201,15 +197,14 @@ function Move(board, start, end) {
           notation += fileDict[this.start[1]];
         }
         if (piece.ID === "dy") {
-          notation +=
-            "+" + this.board.get(this.end[0], this.end[1]).ID.toUpperCase();
+          notation += "+" + this.board.get(this.end[0], this.end[1]).ID.toUpperCase();
         } else {
           notation += "x";
         }
       }
 
       // coordinates
-      notation += fileDict[this.end[1]] + (this.board.NBRANKS - this.end[0]);
+      notation += fileDict[this.end[1]] + (this.board.nbranks - this.end[0]);
 
       // hints
       for (let hint of this.notationHints) {
@@ -277,8 +272,13 @@ function Move(board, start, end) {
     move.turnNumber = lastMove.turnNumber;
     if (lastMove.turn !== move.turn) {
       move.turnNumber += 0.5;
-      move.counter50rule = lastMove.counter50rule + 0.5;
+      move.counter50rule = lastMove.counter50rule + 1;
+    } else if (lastMove.piece === piece) {
+      // Piece moving twice
+      move.counter50rule = lastMove.counter50rule;
     }
+  } else {
+    move.counter50rule = 1;
   }
 
   let captured = board.get(move.end[0], move.end[1]);
@@ -300,9 +300,7 @@ function Move(board, start, end) {
         if (capturedPiece.ID === "dy") {
           continue;
         } // dynamite equipement
-        move.capturedPieces[capturedPiece.color].push(
-          capturedPiece.__proto__.ID
-        );
+        move.capturedPieces[capturedPiece.color].push(capturedPiece.__proto__.ID);
         if (capturedPiece.dynamited) {
           move.capturedPieces[capturedPiece.color].push("dy");
         }

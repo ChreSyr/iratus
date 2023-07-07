@@ -145,7 +145,7 @@ Piece.prototype = {
   },
 
   getCoordinates: function () {
-    return fileDict[this.col] + (this.board.NBRANKS - this.row);
+    return fileDict[this.col] + (this.board.nbranks - this.row);
   },
 
   getPos: function () {

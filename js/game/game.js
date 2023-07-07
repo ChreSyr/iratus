@@ -6,7 +6,6 @@ function Game(boardClass) {
   this.backMovesHistory = [];
   this.fatHistory = [];
   this.turn = "w";
-  this.counter50rule = 0;
   this.result = undefined;
 
   this.board = new boardClass(this);
@@ -15,9 +14,10 @@ function Game(boardClass) {
   }
   this.fatHistory.push(this.board.getFatPosition());
   this.board.initDisplay();
+  this.updateDisplay();
 
   // PGN notation
-  this.pgn = '[Variation "Iratus"]\n\n';  // TODO
+  this.pgn = '[Variation "Iratus"]\n\n'; // TODO
 }
 
 // ROOT PROTOTYPE
@@ -111,7 +111,7 @@ Game.prototype = {
 
     for (let piece of this.board.piecesColored[this.turn]) {
       if (!piece.isCaptured && piece.validMoves.length) {
-        if (this.movesHistory && this.movesHistory.slice(-1)[0].counter50rule > 50) {
+        if (this.movesHistory && this.movesHistory.slice(-1)[0].counter50rule > 100) {
           return "draw by 50-moves rule";
         }
         return "keep going";
@@ -234,5 +234,9 @@ Game.prototype = {
         display.appendChild(pieceDisplay);
       }
     }
+
+    // Update FEN
+    const fenInput = document.getElementById("fen-input");
+    fenInput.value = this.fatHistory.slice(-1)[0].fen;
   },
 };
