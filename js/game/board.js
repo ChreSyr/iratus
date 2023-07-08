@@ -28,7 +28,6 @@ function Board(game, nbranks = 8, nbfiles = 8) {
   this.pawnToPromote = null;
   this.calculator = null;
   this.calculatorClass = null;
-  this.fatPositionClass = null;
   this.widget = null;
   this.selectedPiece = null;
   this.squareSelected = null;
@@ -62,8 +61,8 @@ Board.prototype = {
     return this.piecesByPos[col * 10 + row];
   },
 
-  getFatPosition: function () {
-    return new FatPosition(this, this.game.turn);
+  getFEN: function () {
+    return new FEN(this, this.game.turn);
   },
 
   initDisplay: function () {

@@ -41,9 +41,14 @@ for (let promotionPiece of document.getElementsByClassName("promotion-piece")) {
       )
     );
     lastMove.notation += "=" + promotionPiece.classList[1].toUpperCase();
+
     game.board.pawnToPromote = null;
+    game.fenHistory.push(game.board.getFEN());
+    game.backMovesHistory.length = 0;
+    game.turn = lastMove.nextTurn;
     game.board.updateAllValidMoves();
     game.checkForEnd();
+    game.updateDisplay();
 
     promotionWrapper.style.display = "none";
 

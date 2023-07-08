@@ -4,7 +4,7 @@ function Game(boardClass) {
   this.board = boardClass;
   this.movesHistory = [];
   this.backMovesHistory = [];
-  this.fatHistory = [];
+  this.fenHistory = [];
   this.turn = "w";
   this.result = undefined;
 
@@ -12,7 +12,7 @@ function Game(boardClass) {
   for (let piece of this.board.piecesColored[this.turn]) {
     piece.updateValidMoves();
   }
-  this.fatHistory.push(this.board.getFatPosition());
+  this.fenHistory.push(this.board.getFEN());
   this.board.initDisplay();
   this.updateDisplay();
 
@@ -93,14 +93,14 @@ Game.prototype = {
       return "draw by insufficient material";
     }
 
-    if (this.fatHistory.length > 5) {
-      let currentFatPosition = this.fatHistory.slice(-1)[0];
+    if (this.fenHistory.length > 5) {
+      let currentFEN = this.fenHistory.slice(-1)[0];
       let count = 1;
-      for (let fatPosition of this.fatHistory) {
-        if (currentFatPosition === fatPosition) {
+      for (let fenPosition of this.fenHistory) {
+        if (currentFEN === fenPosition) {
           continue;
         }
-        if (currentFatPosition.equals(fatPosition)) {
+        if (currentFEN.equals(fenPosition)) {
           count += 1;
         }
       }
@@ -127,12 +127,14 @@ Game.prototype = {
   move: function (start, end) {
     const currentMove = this.board.move(start, end, true);
     this.movesHistory.push(currentMove);
-    this.turn = currentMove.nextTurn;
-    this.board.updateAllValidMoves();
-    this.fatHistory.push(this.board.getFatPosition());
-    this.backMovesHistory.length = 0;
-    this.checkForEnd();
-    this.updateDisplay();
+    if (this.board.pawnToPromote === null) {
+      this.fenHistory.push(this.board.getFEN());
+      this.backMovesHistory.length = 0;
+      this.turn = currentMove.nextTurn;
+      this.board.updateAllValidMoves();
+      this.checkForEnd();
+      this.updateDisplay();
+    }
   },
 
   redo: function () {
@@ -146,7 +148,7 @@ Game.prototype = {
     this.movesHistory.push(lastUndoneMove);
     this.turn = lastUndoneMove.nextTurn;
     this.board.updateAllValidMoves();
-    this.fatHistory.push(this.board.getFatPosition());
+    this.fenHistory.push(this.board.getFEN());
     this.updateDisplay();
   },
 
@@ -163,7 +165,7 @@ Game.prototype = {
 
     const lastMove = this.movesHistory.pop(-1);
     this.backMovesHistory.push(lastMove);
-    this.fatHistory.pop(-1);
+    this.fenHistory.pop(-1);
     this.board.undo(lastMove);
     this.turn = lastMove.turn;
     this.board.updateAllValidMoves();
@@ -237,6 +239,6 @@ Game.prototype = {
 
     // Update FEN
     const fenInput = document.getElementById("fen-input");
-    fenInput.value = this.fatHistory.slice(-1)[0].fen;
+    fenInput.value = this.fenHistory.slice(-1)[0].fen;
   },
 };
