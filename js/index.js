@@ -94,7 +94,7 @@ pgnInput.style.height = pgnInput.scrollHeight + 2 + "px";
 // Enabling import button
 fenInput.addEventListener("input", (event) => {
   // fenInput.nextElementSibling = import button
-  fenInput.nextElementSibling.disabled = fenInput.value === game.board.fen;
+  fenInput.nextElementSibling.disabled = fenInput.value === game.fenHistory.slice(-1)[0].fen;
 });
 pgnInput.addEventListener("input", (event) => {
   pgnInput.style.height = "0px";

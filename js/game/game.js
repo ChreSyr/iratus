@@ -240,5 +240,7 @@ Game.prototype = {
     // Update FEN
     const fenInput = document.getElementById("fen-input");
     fenInput.value = this.fenHistory.slice(-1)[0].fen;
+    // Disable import button
+    fenInput.nextElementSibling.disabled = true;
   },
 };
