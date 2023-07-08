@@ -17,10 +17,29 @@ const fenIDbyPieceID = {
   g: "g",
 };
 
+let ids = Object.values(fenIDbyPieceID).join(""); // Concatenate the piece IDs
+ids = ids + ids.toUpperCase() + "~_0-9"; // max 10 linked pieces
+const fenRegexPattern = `^([${ids}1-8]+\\/){9}[${ids}1-12]+\\s[wb]\\s(-|[KQkq]+)\\s(-|[a-h][2-9])\\s\\d+\\s\\d+$`;
+const fenRegex = new RegExp(fenRegexPattern);
+function isValidFEN(fen) {
+  return fenRegex.test(fen);
+}
+
+console.log(ids);
+console.log(isValidFEN("hdsyysdg/rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/HDSYYSDG w - - 0 1"));
+console.log(
+  isValidFEN("hdsyysdg/rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR/HDSYYSDG b - e4 0 1")
+);
+console.log(
+  isValidFEN("hd0s0y1s1d1g/rnbqk2r/ppppppb_p/5np1/8/8/P1N5/S_2PPPPPPP/RD_2BQKBNR/H4S3D3G b k - 2 5")
+);
+
 // CONSTRUCTOR
 function FEN(board, turn) {
-  // Pieces position
   let fen = "";
+
+  // Pieces position
+  let linkedPieces = { i: 0 };
   for (let row = 0; row < 10; row++) {
     let space = 0;
     for (let col = 0; col < 8; col++) {
@@ -36,6 +55,23 @@ function FEN(board, turn) {
           fen += fenIDbyPieceID[piece.ID];
         } else {
           fen += fenIDbyPieceID[piece.ID].toUpperCase();
+        }
+        if (piece.dynamited) {
+          fen += "_";
+        }
+        if (piece.cssClass === "phantom" && piece.ID !== "p") {
+          fen += "~";
+        }
+        if (piece.linkedPiece) {
+          const pieceCoord = piece.getCoordinates();
+          const linkedPieceCoord = piece.linkedPiece.getCoordinates();
+          if (Object.keys(linkedPieces).includes(linkedPieceCoord)) {
+            linkedPieces[pieceCoord] = linkedPieces[linkedPieceCoord];
+          } else {
+            linkedPieces[pieceCoord] = linkedPieces.i;
+            linkedPieces.i++;
+          }
+          fen += linkedPieces[pieceCoord];
         }
       }
     }

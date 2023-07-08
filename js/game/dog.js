@@ -6,6 +6,9 @@ function Dog(board, row, col) {
   this.soldier = undefined;
 
   if (col > 3) {
+    this.linkedPiece = this.board.get(row, col - 1);
+    this.linkedPiece.linkedPiece = this;
+
     this.soldier = board.get(row, col - 1);
     this.soldier.dog = this;
   }

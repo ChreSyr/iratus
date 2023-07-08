@@ -44,8 +44,9 @@ function Piece(board, row, col) {
   this.antikingSquares = [];
   this.isCaptured = false;
   this.dynamited = false;
-  // for transformation memory
-  this.actualType = this.__proto__;
+  this.linkedPiece = null; // for dog & soldier
+
+  this.actualType = this.__proto__; // for transformation memory
 
   this.isWidgeted = false;
   this.widget = null;

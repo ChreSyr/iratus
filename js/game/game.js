@@ -125,7 +125,10 @@ Game.prototype = {
   },
 
   loadFEN: function (fen) {
-    throw Error("Invalid FEN");
+    // Check validity
+    if (!isValidFEN(fen)) {
+      throw Error("Invalid FEN");
+    }
   },
 
   loadPGN: function (pgn) {
@@ -136,9 +139,9 @@ Game.prototype = {
     const currentMove = this.board.move(start, end, true);
     this.movesHistory.push(currentMove);
     if (this.board.pawnToPromote === null) {
+      this.turn = currentMove.nextTurn;
       this.fenHistory.push(this.board.getFEN());
       this.backMovesHistory.length = 0;
-      this.turn = currentMove.nextTurn;
       this.board.updateAllValidMoves();
       this.checkForEnd();
       this.updateDisplay();

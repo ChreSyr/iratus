@@ -54,7 +54,7 @@ Pawn.prototype.goTo = function (row, col) {
   let commands = Piece.prototype.goTo.call(this, row, col);
 
   if (this.row === this.promotionRank) {
-    if (this.widget && this instanceof Pawn) {
+    if (this.widget && this instanceof Pawn) {  // TODO : remove instanceof
       // a phantom cannot promote
       this.openPromotionWindow();
     }

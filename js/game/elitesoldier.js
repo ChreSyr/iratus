@@ -1,9 +1,8 @@
 // CONSTRUCTOR
 
 function EliteSoldier(board, row, col) {
+  // TODO : elite soldier is not linkedPiece, cause the dog enrages when the soldier promotes
   PieceMovingTwice.call(this, board, row, col);
-
-  this.dog = null;
 }
 
 // INHERITANCE
@@ -21,37 +20,12 @@ EliteSoldier.prototype.MOVES = [
   [-1, -1],
 ];
 
-// NON-HERITABLE METHODS
-
-EliteSoldier.prototype.preciseTransform = function (piece) {
-  if (piece.color === "b") {
-    piece.MOVES = [
-      [1, 0],
-      [2, 0],
-    ];
-    piece.attackingMoves = [
-      [1, 1],
-      [1, -1],
-    ];
-    piece.promotionRank = 9;
-  } else {
-    piece.MOVES = [
-      [-1, 0],
-      [-2, 0],
-    ];
-    piece.attackingMoves = [
-      [-1, 1],
-      [-1, -1],
-    ];
-    piece.promotionRank = 0;
-  }
-};
-
 // INSTANCE METHODS - MECHANICS
 
 EliteSoldier.prototype.preciseTransform = function (piece) {
   if (!piece instanceof EliteSoldier) {
     piece.dog = null;
+    piece.linkedPiece = null;
   }
 };
 
