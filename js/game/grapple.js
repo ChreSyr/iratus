@@ -56,6 +56,9 @@ Grapple.prototype.goTo = function (row, col) {
   commands.push(new Notation(notation));
   commands.push(new Capture(this, this));
   commands.push(new AfterMove([grappledPiece.row, grappledPiece.col], [this.row, this.col]));
+  if (grappledPiece.dynamited) {
+    commands.push(new Capture(grappledPiece, this));
+  }
   return commands;
 };
 
