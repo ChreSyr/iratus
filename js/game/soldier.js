@@ -70,6 +70,9 @@ Soldier.prototype.goTo = function (row, col) {
 
   if (this.row === this.promotionRank) {
     commands.push(new Transform(this, this.actualType, EliteSoldier.prototype));
+    commands.push(
+      new Transform(this.linkedPiece, this.linkedPiece.actualType, EnragedDog.prototype)
+    );
   }
 
   if (dogIsTooFar(this.row, this.col, this.linkedPiece.row, this.linkedPiece.col)) {
