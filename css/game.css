@@ -215,6 +215,10 @@
   background-size: contain;
 }
 
+.rotation-pieces.black-to-move .promotion-piece {
+  transform: rotate(180deg);
+}
+
 .promotion-window.top {
   top: 0;
   bottom: auto;
