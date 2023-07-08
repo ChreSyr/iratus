@@ -106,6 +106,7 @@ function Move(board, start, end) {
           this.commands.push(command);
           this.executeCommands(this.piece.goTo(this.end[0], this.end[1]));
           this.initNotation();
+          this.initCapturedPieces();
           break;
         case "notation":
           this.notation = args[0];
@@ -214,6 +215,25 @@ function Move(board, start, end) {
       this.notation = notation;
     },
 
+    initCapturedPieces() {
+      // Captured pieces display
+      if (board.calculator) {
+        for (let command of this.commands) {
+          if (command.name === "capture") {
+            let capturedPiece = command.args[0];
+            if (capturedPiece.ID === "dy") {
+              continue;
+            } // dynamite equipement
+            this.capturedPieces[capturedPiece.color].push(capturedPiece.__proto__.ID);
+            if (capturedPiece.dynamited) {
+              this.capturedPieces[capturedPiece.color].push("dy");
+            }
+          }
+        }
+        console.log(this.capturedPieces);
+      }
+    },
+
     redoCommands() {
       for (let command of this.commands) {
         switch (command.name) {
@@ -291,22 +311,6 @@ function Move(board, start, end) {
   }
 
   move.counter50rule_backup = move.counter50rule;
-
-  // Captured pieces display
-  if (board.calculator) {
-    for (let command of move.commands) {
-      if (command.name === "capture") {
-        let capturedPiece = command.args[0];
-        if (capturedPiece.ID === "dy") {
-          continue;
-        } // dynamite equipement
-        move.capturedPieces[capturedPiece.color].push(capturedPiece.__proto__.ID);
-        if (capturedPiece.dynamited) {
-          move.capturedPieces[capturedPiece.color].push("dy");
-        }
-      }
-    }
-  }
 
   return move;
 }
