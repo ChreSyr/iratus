@@ -3,14 +3,9 @@
 function Soldier(board, row, col) {
   RollingPiece.call(this, board, row, col);
 
-  this.dog = undefined;
-
   if (col < 4) {
     this.linkedPiece = this.board.get(row, col - 1);
     this.linkedPiece.linkedPiece = this;
-
-    this.dog = board.get(row, col - 1);
-    this.dog.soldier = this;
   }
 
   Soldier.prototype.preciseTransform(this);
@@ -42,16 +37,22 @@ Soldier.prototype.canGoTo = function (row, col) {
 Soldier.prototype.capture = function (capturer) {
   let commands = RollingPiece.prototype.capture.call(this, capturer);
 
-  if (!this.dog) {
+  if (!this.linkedPiece) {
+    // If this is the phantom of the soldier
     return commands;
-  } // happens when this is the phantom
+  }
 
-  if (!this.dog.isCaptured) {
-    commands.push(new Transform(this.dog, this.dog.actualType, EnragedDog.prototype)); // enrage dog
+  if (!this.linkedPiece.isCaptured) {
+    // If the dog is still alive when the soldier is captured
+    commands.push(
+      new Transform(this.linkedPiece, this.linkedPiece.actualType, EnragedDog.prototype)
+    );
   } else {
+    // Else, the soldier dies right after its dog.
+    // In this case, the dog is phantomized, not the soldier
     commands.splice(
       commands.indexOf(commands.find((commandToRem) => commandToRem.name === "transform"))
-    ); // remove leash phantomisation, stays dog
+    );
   }
 
   return commands;
@@ -62,18 +63,19 @@ Soldier.prototype.goTo = function (row, col) {
     startCol = this.col;
   let commands = RollingPiece.prototype.goTo.call(this, row, col);
 
-  if (!this.dog) {
+  if (!this.linkedPiece) {
+    // If this is the phantom of the soldier
     return commands;
-  } // happens when this is the phantom
+  }
 
   if (this.row === this.promotionRank) {
     commands.push(new Transform(this, this.actualType, EliteSoldier.prototype));
   }
 
-  if (dogIsTooFar(this.row, this.col, this.dog.row, this.dog.col)) {
+  if (dogIsTooFar(this.row, this.col, this.linkedPiece.row, this.linkedPiece.col)) {
     commands.push(
       new AfterMove(
-        [this.dog.row, this.dog.col],
+        [this.linkedPiece.row, this.linkedPiece.col],
         getNewDogRC(startRow, startCol, this.row, this.col)
       )
     );
@@ -83,10 +85,6 @@ Soldier.prototype.goTo = function (row, col) {
 };
 
 Soldier.prototype.preciseTransform = function (piece) {
-  if (!piece instanceof Soldier) {
-    piece.dog = null;
-  }
-
   if (piece.color === "b") {
     piece.MOVES = [
       [1, 1],

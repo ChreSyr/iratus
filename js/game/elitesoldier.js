@@ -22,22 +22,21 @@ EliteSoldier.prototype.MOVES = [
 
 // INSTANCE METHODS - MECHANICS
 
-EliteSoldier.prototype.preciseTransform = function (piece) {
-  if (!piece instanceof EliteSoldier) {
-    piece.dog = null;
-    piece.linkedPiece = null;
-  }
-};
+// EliteSoldier.prototype.preciseTransform = function (piece) {
+//   if (!piece instanceof EliteSoldier) {
+//     piece.linkedPiece = null;
+//   }
+// };
 
 EliteSoldier.prototype.capture = function (capturer) {
   let commands = PieceMovingTwice.prototype.capture.call(this, capturer);
 
-  if (!this.dog) {
+  if (!this.linkedPiece) {
     return commands;
-  } // happens when this is the phantom or a promoted pawn
+  }
 
-  if (!this.dog.isCaptured) {
-    commands.push(new Transform(this.dog, this.dog.actualType, EnragedDog.prototype)); // enrage dog
+  if (!this.linkedPiece.isCaptured) {
+    commands.push(new Transform(this.linkedPiece, this.linkedPiece.actualType, EnragedDog.prototype)); // enrage dog
   } else {
     commands.splice(
       commands.indexOf(commands.find((commandToRem) => commandToRem.name === "transform"))
@@ -52,14 +51,14 @@ EliteSoldier.prototype.goTo = function (row, col) {
     startCol = this.col;
   let commands = PieceMovingTwice.prototype.goTo.call(this, row, col);
 
-  if (!this.dog) {
+  if (!this.linkedPiece) {
     return commands;
   } // happens when this is the phantom or a promoted pawn
 
-  if (dogIsTooFar(this.row, this.col, this.dog.row, this.dog.col)) {
+  if (dogIsTooFar(this.row, this.col, this.linkedPiece.row, this.linkedPiece.col)) {
     commands.push(
       new AfterMove(
-        [this.dog.row, this.dog.col],
+        [this.linkedPiece.row, this.linkedPiece.col],
         getNewDogRC(startRow, startCol, this.row, this.col)
       )
     );
@@ -71,8 +70,8 @@ EliteSoldier.prototype.goTo = function (row, col) {
 EliteSoldier.prototype.updateValidMoves = function () {
   PieceMovingTwice.prototype.updateValidMoves.call(this);
 
-  if (this.dog) {
-    let squareToRemove = [this.dog.row, this.dog.col];
+  if (this.linkedPiece) {
+    let squareToRemove = [this.linkedPiece.row, this.linkedPiece.col];
     this.antikingSquares = this.antikingSquares.filter(
       (arr) => JSON.stringify(arr) !== JSON.stringify(squareToRemove)
     );
