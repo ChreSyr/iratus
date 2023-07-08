@@ -14,6 +14,7 @@ PieceMovingTwice.prototype.constructor = PieceMovingTwice;
 // STATIC VALUES
 
 PieceMovingTwice.prototype.RANGE = 10;
+PieceMovingTwice.prototype.stillHasToMove = false;
 PieceMovingTwice.prototype.ATTR_TO_COPY = Piece.prototype.ATTR_TO_COPY.concat(["stillHasToMove"]);
 
 // INSTANCE METHODS - MECHANICS
