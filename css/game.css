@@ -132,9 +132,14 @@
   z-index: 2;
 }
 
+#board-single.animated .piece {
+  transition: transform 0.1s ease;
+}
+
 #board-single .piece.dragging {
   cursor: grabbing;
   cursor: -webkit-grabbing;
+  transition: none;
   z-index: 3;
 }
 

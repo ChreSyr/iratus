@@ -174,10 +174,10 @@
 
               <div class="menu-delimiter"></div>
 
-              <!-- Only in index.html 's menu -->
               <div class="settings easy-read">
                 <h3>Affichage</h3>
                 <ul>
+                  <!-- Only in index.html 's menu -->
                   <li>
                     <label>Rotation</label>
                     <select id="select-rotation" onchange="handleRotationSelect()">
@@ -186,6 +186,14 @@
                       <option value="board">Plateau</option>
                       <option value="pieces">Pièces</option>
                     </select>
+                  </li>
+                  <!-- Only in index.html 's menu -->
+                  <li>
+                    <label>Animations</label>
+                    <label class="switch">
+                      <input type="checkbox" id="toggle-animations" />
+                      <span class="slider"></span>
+                    </label>
                   </li>
                   <li>
                     <label>Mode Sombre</label>

@@ -137,6 +137,12 @@ function storeItem(itemName, onDOMContentLoaded) {
 
 menuSettingsInputs.forEach((input) => {
   switch (input.id) {
+    case "toggle-animations":
+      input.addEventListener("change", (event) => {
+        boardDiv.classList.toggle("animated");
+      });
+      break;
+
     case "toggle-dark-mode":
       input.addEventListener("change", (event) => {
         // Change the theme
