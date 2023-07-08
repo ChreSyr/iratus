@@ -314,7 +314,6 @@
 #info .info-close {
   /* 'X' close icon - mobile version only */
   position: absolute;
-  /* z-index: 1; */
   margin: 5px;
   padding: 0;
   right: 0;
@@ -323,14 +322,8 @@
   width: 1.5em;
   /* image replacement */
   overflow: hidden;
-  /* text-indent: 1000%; */
   color: transparent;
   white-space: nowrap;
-  /* border: var(--light-green) 2px solid; */
-}
-
-#info .info-close:hover {
-  color: transparent;
 }
 
 #info .info-close::after,
@@ -370,7 +363,7 @@
 
 #info .info-close:hover::after,
 #info .info-close:hover::before {
-  background-color: black;
+  background-color: var(--darker);
 }
 
 /* SQUARE-XX */
