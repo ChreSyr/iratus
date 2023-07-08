@@ -124,6 +124,14 @@ Game.prototype = {
       : "stalemate";
   },
 
+  loadFEN: function (fen) {
+    throw Error("Invalid FEN");
+  },
+
+  loadPGN: function (pgn) {
+    throw Error("Invalid PGN");
+  },
+
   move: function (start, end) {
     const currentMove = this.board.move(start, end, true);
     this.movesHistory.push(currentMove);
@@ -240,6 +248,7 @@ Game.prototype = {
     // Update FEN
     const fenInput = document.getElementById("fen-input");
     fenInput.value = this.fenHistory.slice(-1)[0].fen;
+    fenInput.classList.remove("invalid");
     // Disable import button
     fenInput.nextElementSibling.disabled = true;
   },

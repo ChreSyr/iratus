@@ -93,6 +93,7 @@ pgnInput.style.height = pgnInput.scrollHeight + 2 + "px";
 
 // Enabling import button
 fenInput.addEventListener("input", (event) => {
+  fenInput.classList.remove("invalid");
   // fenInput.nextElementSibling = import button
   fenInput.nextElementSibling.disabled = fenInput.value === game.fenHistory.slice(-1)[0].fen;
 });
@@ -100,6 +101,7 @@ pgnInput.addEventListener("input", (event) => {
   pgnInput.style.height = "0px";
   pgnInput.style.height = pgnInput.scrollHeight + 2 + "px";
 
+  pgnInput.classList.remove("invalid");
   // pgnInput.nextElementSibling = import button
   pgnInput.nextElementSibling.disabled = pgnInput.value === game.pgn;
 });
@@ -107,6 +109,18 @@ pgnInput.addEventListener("input", (event) => {
 // Import / Export buttons
 for (let input of [fenInput, pgnInput]) {
   const importBtn = input.nextElementSibling;
+  importBtn.addEventListener("click", (event) => {
+    try {
+      if (input === fenInput) {
+        game.loadFEN(input.value);
+      } else {
+        game.loadPGN(input.value);
+      }
+    } catch (error) {
+      console.log(error.message);
+      input.classList.add("invalid");
+    }
+  });
   const exportBtn = importBtn.nextElementSibling;
   exportBtn.addEventListener("click", (event) => {
     navigator.clipboard

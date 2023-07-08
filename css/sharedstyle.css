@@ -156,6 +156,7 @@ button:hover {
 button:disabled {
   background-color: var(--disabled);
   color: var(--light-dark);
+  cursor: auto;
 }
 
 /* SELECT -- credits to chess.com */
@@ -324,6 +325,11 @@ input {
   border: 1px solid var(--lighter-dark);
   color: white;
   /* color: var(--lighter-dark); */
+}
+
+textarea.invalid,
+input.invalid {
+  border-color: red;
 }
 
 /* CODESPACE */
