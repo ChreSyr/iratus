@@ -130,3 +130,16 @@ const pointerdown = supportsPointerEvents ? "pointerdown" : "touchstart";
 const pointermove = supportsPointerEvents ? "pointermove" : "touchmove";
 const pointerup = supportsPointerEvents ? "pointerup" : "touchend";
 const pointercancel = supportsPointerEvents ? "pointercancel" : "touchcancel";
+
+// local storage
+storage = { _content: [] };
+storage.addPageLoadListener = (itemName, onDOMContentLoaded) => {
+  storage._content.push({ itemName, onDOMContentLoaded });
+};
+// on page load
+window.addEventListener("DOMContentLoaded", function () {
+  for (const stored of storage._content) {
+    const item = this.localStorage.getItem(stored.itemName);
+    stored.onDOMContentLoaded(item);
+  }
+});

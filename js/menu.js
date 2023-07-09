@@ -127,14 +127,6 @@ const menuSettingsInputs = menuSettings.querySelectorAll("input");
 
 let devMode = false;
 
-storage = [];
-function storeItem(itemName, onDOMContentLoaded) {
-  storage.push({
-    itemName: itemName,
-    onDOMContentLoaded: onDOMContentLoaded,
-  });
-}
-
 menuSettingsInputs.forEach((input) => {
   switch (input.id) {
     case "toggle-animations":
@@ -159,7 +151,7 @@ menuSettingsInputs.forEach((input) => {
         document.body.classList.remove("animating-dark-mode");
       });
 
-      storeItem("theme", (item) => {
+      storage.addPageLoadListener("theme", (item) => {
         if (item === null) {
           return;
         } // no item found in storage
@@ -184,7 +176,7 @@ menuSettingsInputs.forEach((input) => {
         localStorage.setItem("easy-reading", isEasyReading ? "yes" : "no");
       });
 
-      storeItem("easy-reading", (item) => {
+      storage.addPageLoadListener("easy-reading", (item) => {
         if (item === null) {
           return;
         } // no item found in storage
@@ -209,14 +201,5 @@ menuSettingsInputs.forEach((input) => {
         devMode = !devMode;
       });
       break;
-  }
-});
-
-/* Local storage */
-// Check the user's preference from localStorage on page load
-window.addEventListener("DOMContentLoaded", function () {
-  for (const stored of storage) {
-    const item = this.localStorage.getItem(stored.itemName);
-    stored.onDOMContentLoaded(item);
   }
 });
