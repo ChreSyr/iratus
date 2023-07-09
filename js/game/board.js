@@ -7,7 +7,7 @@ const pieceClassesByID = {
   p: Pawn,
   y: Dynamite,
   s: Soldier,
-  es: EliteSoldier,
+  e: EliteSoldier,
   d: Dog,
   ed: EnragedDog,
   f: Phantom,

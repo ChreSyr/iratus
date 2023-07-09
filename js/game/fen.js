@@ -10,7 +10,7 @@ const fenIDbyPieceID = {
   p: "p",
   y: "y",
   s: "s",
-  es: "e", // TODO : EliteSoldier = e
+  e: "e",
   d: "d",
   ed: "o", // TODO : EnragedDog = c
   f: "f",
@@ -25,7 +25,7 @@ const pieceIDbyFenID = {
   p: "p",
   y: "y",
   s: "s",
-  e: "es",
+  e: "e",
   d: "d",
   o: "ed",
   f: "f",

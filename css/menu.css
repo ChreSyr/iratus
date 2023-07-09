@@ -316,12 +316,12 @@ header {
   background-image: url("../images/ws.png");
 }
 
-.iratusrules-wrapper .rules-sub-grid button.es {
-  background-image: url("../images/bes.png");
+.iratusrules-wrapper .rules-sub-grid button.e {
+  background-image: url("../images/be.png");
 }
 
-.iratusrules-wrapper .rules-sub-grid button.es:hover {
-  background-image: url("../images/wes.png");
+.iratusrules-wrapper .rules-sub-grid button.e:hover {
+  background-image: url("../images/we.png");
 }
 
 .iratusrules-wrapper .rules-sub-grid button.d {
@@ -341,11 +341,11 @@ header {
 }
 
 .iratusrules-wrapper .rules-sub-grid button.y {
-  background-image: url("../images/bdy.png");
+  background-image: url("../images/by.png");
 }
 
 .iratusrules-wrapper .rules-sub-grid button.y:hover {
-  background-image: url("../images/wdy.png");
+  background-image: url("../images/wy.png");
 }
 
 .iratusrules-wrapper .rules-sub-grid button.f {
