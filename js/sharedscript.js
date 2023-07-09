@@ -64,7 +64,7 @@ if (true) {
 }
 
 // Version
-const version = "0.13";
+const version = "0.13.1";
 const versionLabel = document.getElementById("version-label");
 versionLabel.textContent = "Version : " + version;
 
@@ -95,16 +95,18 @@ for (let accordionTrigger of accordionTriggers) {
     }
   });
 }
-// Update accordion-panel's height when accordion-content's height changes
-var accordionContents = document.getElementsByClassName("accordion-content");
-for (let accordionContent of accordionContents) {
-  const resizeObserver = new ResizeObserver((entries) => {
-    if (accordionContent.parentElement.previousElementSibling.classList.contains("active")) {
-      const accordionPanel = accordionContent.parentElement;
-      accordionPanel.style.maxHeight = accordionPanel.scrollHeight + "px";
-    }
-  });
-  resizeObserver.observe(accordionContent);
+if ("ResizeObserver" in window) {
+  // Update accordion-panel's height when accordion-content's height changes
+  var accordionContents = document.getElementsByClassName("accordion-content");
+  for (let accordionContent of accordionContents) {
+    const resizeObserver = new ResizeObserver((entries) => {
+      if (accordionContent.parentElement.previousElementSibling.classList.contains("active")) {
+        const accordionPanel = accordionContent.parentElement;
+        accordionPanel.style.maxHeight = accordionPanel.scrollHeight + "px";
+      }
+    });
+    resizeObserver.observe(accordionContent);
+  }
 }
 
 // Return true if the user is using a mobile

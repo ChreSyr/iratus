@@ -126,7 +126,6 @@ const menuSettings = document.getElementById("menu-panel-wrapper-settings");
 const menuSettingsInputs = menuSettings.querySelectorAll("input");
 
 let devMode = false;
-document.body.classList.toggle("dev-mode");
 
 menuSettingsInputs.forEach((input) => {
   switch (input.id) {
@@ -177,7 +176,6 @@ menuSettingsInputs.forEach((input) => {
         }
       });
 
-      input.nextElementSibling.style.backgroundColor = "red";
       break;
 
     case "toggle-easy-reading":
