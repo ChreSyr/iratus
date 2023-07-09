@@ -135,6 +135,18 @@ menuSettingsInputs.forEach((input) => {
       });
       break;
 
+    case "toggle-show-dev-settings":
+      input.addEventListener("change", (event) => {
+        document.body.classList.toggle("dev-mode");
+      });
+      break;
+
+    case "toggle-developer-mode":
+      input.addEventListener("change", (event) => {
+        devMode = !devMode;
+      });
+      break;
+
     case "toggle-dark-mode":
       input.addEventListener("change", (event) => {
         // Change the theme
@@ -187,18 +199,6 @@ menuSettingsInputs.forEach((input) => {
         } else {
           document.body.classList.remove("easy-reading");
         }
-      });
-      break;
-
-    case "toggle-show-dev-settings":
-      input.addEventListener("change", (event) => {
-        document.body.classList.toggle("dev-mode");
-      });
-      break;
-
-    case "toggle-developer-mode":
-      input.addEventListener("change", (event) => {
-        devMode = !devMode;
       });
       break;
   }
