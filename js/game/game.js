@@ -127,6 +127,10 @@ Game.prototype = {
     if (!isValidFEN(fen)) {
       throw Error("Invalid FEN");
     }
+
+    storage.setItem("fen", fen);
+    location.href = "index.html#board-single";
+    location.reload();
   },
 
   loadPGN: function (pgn) {
@@ -252,5 +256,9 @@ Game.prototype = {
     fenInput.classList.remove("invalid");
     // Disable import button
     fenInput.nextElementSibling.disabled = true;
+    // Save FEN
+    // if (document.readyState === "complete") {
+    //   storage.setItem("fen", fenInput.value);
+    // }
   },
 };

@@ -1,5 +1,5 @@
 /* ERRORS & LOGS PRINTED IN-WEB */
-if (true) {
+if (false) {
   /* ERRORS */
 
   window.onerror = function (message, source, lineno, colno, error) {
@@ -135,6 +135,9 @@ const pointercancel = supportsPointerEvents ? "pointercancel" : "touchcancel";
 storage = { _content: [] };
 storage.addPageLoadListener = (itemName, onDOMContentLoaded) => {
   storage._content.push({ itemName, onDOMContentLoaded });
+};
+storage.getItem = (key) => {
+  return localStorage.getItem(key);
 };
 storage.setItem = (key, value) => {
   localStorage.setItem(key, value);

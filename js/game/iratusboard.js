@@ -1,9 +1,6 @@
 // CONSTRUCTOR
 
 function IratusBoard(game) {
-  this.emptyFEN =
-    "fd(0)s(0)yys(1)d(1)g/rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/FD(2)S(2)YYS(3)D(3)G w QKqk - - 0000000000000000-0000000000000000 0 1";
-
   Board.call(this, game, (nbranks = 10), (nbfiles = 8));
 
   this.calculatorClass = CalculatorIratusBoard;
@@ -11,6 +8,8 @@ function IratusBoard(game) {
 
 // INHERITANCE
 
+IratusBoard.emptyFEN =
+  "fd(0)s(0)yys(1)d(1)g/rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/FD(2)S(2)YYS(3)D(3)G w QKqk - - 0000000000000000-0000000000000000 0 1";
 IratusBoard.prototype = Object.create(Board.prototype);
 IratusBoard.prototype.constructor = IratusBoard;
 
@@ -39,7 +38,10 @@ IratusBoard.prototype.createPieces = function (fen = undefined) {
   // Counter50rule is used
   // TurnNumber is used
 
-  fen = fen ? fen : this.emptyFEN;
+  if (!fen) {
+    fen = storage.getItem("fen");
+  }
+  fen = fen ? fen : IratusBoard.emptyFEN;
   const [
     pieces,
     turn,
@@ -130,7 +132,6 @@ IratusBoard.prototype.createPieces = function (fen = undefined) {
       if (inParenthesis) {
         if (char === ")") {
           inParenthesis = false;
-          // console.log("Link ID :", linkID);
           lastPiece.linkID = linkID;
           continue;
         }
