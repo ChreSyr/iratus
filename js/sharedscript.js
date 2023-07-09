@@ -136,6 +136,9 @@ storage = { _content: [] };
 storage.addPageLoadListener = (itemName, onDOMContentLoaded) => {
   storage._content.push({ itemName, onDOMContentLoaded });
 };
+storage.setItem = (key, value) => {
+  localStorage.setItem(key, value);
+};
 // on page load
 window.addEventListener("DOMContentLoaded", function () {
   for (const stored of storage._content) {

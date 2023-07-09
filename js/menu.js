@@ -144,7 +144,7 @@ menuSettingsInputs.forEach((input) => {
 
         // Store the theme
         const isLightMode = body.classList.contains("light-mode");
-        localStorage.setItem("theme", isLightMode ? "light" : "dark");
+        storage.setItem("theme", isLightMode ? "light" : "dark");
       });
 
       menuSettings.addEventListener("transitionend", (event) => {
@@ -171,9 +171,9 @@ menuSettingsInputs.forEach((input) => {
         const body = document.body;
         body.classList.toggle("easy-reading");
 
-        // Store the user's preference in localStorage
+        // Store the user's preference in storage
         const isEasyReading = body.classList.contains("easy-reading");
-        localStorage.setItem("easy-reading", isEasyReading ? "yes" : "no");
+        storage.setItem("easy-reading", isEasyReading ? "yes" : "no");
       });
 
       storage.addPageLoadListener("easy-reading", (item) => {
