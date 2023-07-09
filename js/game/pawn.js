@@ -16,7 +16,7 @@ Pawn.prototype.constructor = Pawn;
 
 // STATIC VALUES
 
-Pawn.prototype.ID = "i";
+Pawn.prototype.ID = "p";
 Pawn.prototype.ATTR_TO_COPY = Piece.prototype.ATTR_TO_COPY.concat([
   "attackingMoves",
   "promotionRank",
@@ -78,7 +78,7 @@ Pawn.prototype.goTo = function (row, col) {
     } else {
       const [epRow, epCol] = getRowColFromCoord(this.board.startFEN.enPassant);
       const captured = this.board.get(epRow + (this.color === "w" ? 1 : -1), epCol);
-      if (!captured || captured.ID !== "i") {
+      if (!captured || captured.ID !== "p") {
         throw Error("Invalid FEN : en-passant doesn't match a pawn");
       }
       commands.push(new Capture(captured, this));

@@ -4,7 +4,7 @@ const pieceClassesByID = {
   r: Rook,
   b: Bishop,
   n: Knight,
-  i: Pawn,
+  p: Pawn,
   dy: Dynamite,
   s: Soldier,
   es: EliteSoldier,

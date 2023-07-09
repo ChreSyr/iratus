@@ -25,7 +25,7 @@ Soldier.prototype.canGoTo = function (row, col) {
   } else if (piece.ID === "dy") {
     return piece.color === this.color && !Dynamite.UNDYNAMITABLES.includes(this.ID);
   } else {
-    return piece.color !== this.color && piece.ID === "i"; // only captures pawns
+    return piece.color !== this.color && piece.ID === "p"; // only captures pawns
   }
 };
 

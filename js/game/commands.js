@@ -147,7 +147,7 @@ function Move(board, start, end) {
       let piece = this.piece;
 
       // piece name
-      if (piece.ID !== "i") {
+      if (piece.ID !== "p") {
         notation += piece.ID.toUpperCase();
       }
 
@@ -202,7 +202,7 @@ function Move(board, start, end) {
 
       // captures
       if (this.captures > 0) {
-        if (piece.ID === "i") {
+        if (piece.ID === "p") {
           notation += fileDict[this.start[1]];
         }
         if (piece.ID === "dy") {
@@ -329,7 +329,7 @@ function Move(board, start, end) {
     move.executeCommand(Capture(captured, move.piece));
   }
 
-  if (move.piece.ID == "i") {
+  if (move.piece.ID == "p") {
     move.counter50rule = 0;
   }
 

@@ -364,12 +364,12 @@ header {
   background-image: url("../images/wg.png");
 }
 
-.iratusrules-wrapper .rules-sub-grid button.i {
-  background-image: url("../images/bi.png");
+.iratusrules-wrapper .rules-sub-grid button.p {
+  background-image: url("../images/bp.png");
 }
 
-.iratusrules-wrapper .rules-sub-grid button.i:hover {
-  background-image: url("../images/wi.png");
+.iratusrules-wrapper .rules-sub-grid button.p:hover {
+  background-image: url("../images/wp.png");
 }
 
 /* SETTINGS */

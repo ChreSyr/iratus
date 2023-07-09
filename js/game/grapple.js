@@ -49,7 +49,7 @@ Grapple.prototype.goTo = function (row, col) {
   let commands = [];
 
   let notation = "G:";
-  if (grappledPiece.ID !== "i") {
+  if (grappledPiece.ID !== "p") {
     notation += grappledPiece.ID.toUpperCase();
   }
   notation += getCoord(grappledPiece) + "->" + getCoord(this); // ex : G:Nf6->d4
