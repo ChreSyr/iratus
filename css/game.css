@@ -105,6 +105,10 @@
   width: calc(var(--square-size) * 8);
 }
 
+#board-single:focus-within {
+  outline: none;
+}
+
 @media only screen and (min-width: 614px) {
   #board-single {
     --square-size-byheight: calc(
