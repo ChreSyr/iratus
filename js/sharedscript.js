@@ -1,5 +1,5 @@
 /* ERRORS & LOGS PRINTED IN-WEB */
-if (false) {
+if (true) {
   /* ERRORS */
 
   window.onerror = function (message, source, lineno, colno, error) {
@@ -64,7 +64,7 @@ if (false) {
 }
 
 // Version
-const version = "0.12.2";
+const version = "0.13";
 const versionLabel = document.getElementById("version-label");
 versionLabel.textContent = "Version : " + version;
 
@@ -132,9 +132,9 @@ const pointerup = supportsPointerEvents ? "pointerup" : "touchend";
 const pointercancel = supportsPointerEvents ? "pointercancel" : "touchcancel";
 
 // local storage
-storage = { _content: [] };
+storage = { content: [] };
 storage.addPageLoadListener = (itemName, onDOMContentLoaded) => {
-  storage._content.push({ itemName, onDOMContentLoaded });
+  storage.content.push({ itemName, onDOMContentLoaded });
 };
 storage.getItem = (key) => {
   return localStorage.getItem(key);
@@ -144,7 +144,7 @@ storage.setItem = (key, value) => {
 };
 // on page load
 window.addEventListener("DOMContentLoaded", function () {
-  for (const stored of storage._content) {
+  for (const stored of storage.content) {
     const item = this.localStorage.getItem(stored.itemName);
     stored.onDOMContentLoaded(item);
   }
