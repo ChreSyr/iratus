@@ -3,40 +3,8 @@ https://fr.wikipedia.org/wiki/Notation_Forsyth-Edwards
 */
 
 pieceIDs = "bcdefgknpqrsy";
-const fenIDbyPieceID = {
-  k: "k",
-  q: "q",
-  r: "r",
-  b: "b",
-  n: "n",
-  p: "p",
-  y: "y",
-  s: "s",
-  e: "e",
-  d: "d",
-  c: "c",
-  f: "f",
-  g: "g",
-};
-const pieceIDbyFenID = {
-  k: "k",
-  q: "q",
-  r: "r",
-  b: "b",
-  n: "n",
-  p: "p",
-  y: "y",
-  s: "s",
-  e: "e",
-  d: "d",
-  c: "c",
-  f: "f",
-  g: "g",
-};
-
 ids = pieceIDs + pieceIDs.toUpperCase() + "~_()0-9";
 const fenRegexPattern = `^([${ids}]+\\/){9}[${ids}]+\\s[wb]\\s(-|[KQkq]+)\\s(-|[a-h][1-8])\\s(-|[a-h]([0-9]|10))\\s(([01]+)?-([01]+)?)\\s\\d+\\s\\d+$`;
-// const fenRegexPattern = `^([${ids}]+\\/){9}[${ids}]+\\s[wb]$`;
 const fenRegex = new RegExp(fenRegexPattern);
 function isValidFEN(fen) {
   // Warning : this function checks the syntax pattern of the FEN notation,
@@ -44,16 +12,6 @@ function isValidFEN(fen) {
   // Exemple : 9 pieces in one row will not be detected here
   return fenRegex.test(fen);
 }
-
-// TESTS
-// h/h/h/8/8/8/8/h/h/h w QKqk - 0 1
-// console.log(isValidFEN("hd(0)s(0)yys(1)d(1)G/rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/HD(2)S(2)YYS(3)D(3)G w - - 0 1"));
-// console.log(
-//   isValidFEN("o~d_(0)s(0)4g/r3kn_1r/b1pq1pp1/p2p1n1p/pp2p3/1PbP4/ROPB1N2/5PPP/3Q1R1K/S~2B_YS(1)D(1)G w qk b7 0110110000000-0001000000000101 0 22")
-// );
-// console.log(
-//   isValidFEN("hd0s0y1s1d1g/rnbqk2r/ppppppb_p/5np1/8/8/P1N5/S_2PPPPPPP/RD_2BQKBNR/H4S3D3G b k - 2 5")
-// );
 
 // CONSTRUCTOR
 function FEN(board, turn) {
