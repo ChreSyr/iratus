@@ -21,6 +21,7 @@ Pawn.prototype.ATTR_TO_COPY = Piece.prototype.ATTR_TO_COPY.concat([
   "attackingMoves",
   "promotionRank",
 ]);
+Pawn.prototype.METH_TO_COPY = Piece.prototype.METH_TO_COPY.concat(["openPromotionWindow"]);
 
 // NON-HERITABLE METHODS
 
@@ -63,9 +64,7 @@ Pawn.prototype.goTo = function (row, col) {
 
   // Promotion
   if (this.row === this.promotionRank) {
-    if (this.widget && this instanceof Pawn) {
-      // TODO : remove instanceof
-      // a phantom cannot promote
+    if (this.widget) {
       this.openPromotionWindow();
     }
   }
