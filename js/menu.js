@@ -175,6 +175,8 @@ menuSettingsInputs.forEach((input) => {
           document.body.classList.add("light-mode");
         }
       });
+
+      input.nextElementSibling.style.backgroundColor = "red";
       break;
 
     case "toggle-easy-reading":
