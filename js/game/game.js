@@ -9,11 +9,9 @@ function Game(boardClass) {
   this.result = undefined;
 
   this.board = new boardClass(this);
-  for (let piece of this.board.piecesColored[this.turn]) {
-    piece.updateValidMoves();
-  }
   this.fenHistory.push(this.board.getFEN());
   this.board.initDisplay();
+  this.board.updateAllValidMoves();
   this.updateDisplay();
 
   // PGN notation

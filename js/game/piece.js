@@ -26,7 +26,7 @@
 
 // CONSTRUCTOR
 
-function Piece(board, row, col) {
+function Piece(board, color, row, col) {
   this.ID = this.__proto__.ID;
   this.MOVES = this.__proto__.MOVES;
   this.RANGE = this.__proto__.RANGE;
@@ -37,7 +37,7 @@ function Piece(board, row, col) {
   this.board = board;
   this.row = parseInt(row);
   this.col = parseInt(col);
-  this.color = row > 4 ? "w" : "b";
+  this.color = color;
   this.enemyColor = this.color === "b" ? "w" : "b";
   this.firstMove = null;
   this.validMoves = [];
@@ -95,7 +95,9 @@ Piece.prototype = {
     if (piece === null) {
       return true;
     } else if (piece.ID === "dy") {
-      return piece.color === this.color && !Dynamite.UNDYNAMITABLES.includes(this.ID);
+      return (
+        piece.color === this.color && !Dynamite.UNDYNAMITABLES.includes(this.ID) && !this.dynamited
+      );
     } else {
       return piece.color !== this.color;
     }
@@ -119,9 +121,10 @@ Piece.prototype = {
       commands.push(new NotationHint("*"));
     }
 
-    let alliedPhantom = this.board.phantom[this.color];
-    if (!alliedPhantom.isCaptured) {
-      commands.push(new Transform(alliedPhantom, alliedPhantom.actualType, this.actualType));
+    for (let alliedPhantom of this.board.phantom[this.color]) {
+      if (!alliedPhantom.isCaptured) {
+        commands.push(new Transform(alliedPhantom, alliedPhantom.actualType, this.actualType));
+      }
     }
 
     return commands;
@@ -146,7 +149,7 @@ Piece.prototype = {
   },
 
   getCoordinates: function () {
-    return fileDict[this.col] + (this.board.nbranks - this.row);
+    return fileDict[this.col] + (this.board.nbranks - this.row - 1);
   },
 
   getPos: function () {

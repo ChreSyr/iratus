@@ -1,7 +1,7 @@
 // CONSTRUCTOR
 
-function King(board, row, col) {
-  Piece.call(this, board, row, col);
+function King(board, color, row, col) {
+  Piece.call(this, board, color, row, col);
 
   this.castleRights = "00"; // long castle right + short castle right
 }
@@ -66,6 +66,25 @@ King.prototype.goTo = function (row, col) {
   return commands;
 };
 
+King.prototype.getRookAt = function (side) {
+  if (this.hasMoved()) {
+    return;
+  }
+
+  let piece;
+  if (side === "left") {
+    piece = this.board.get(this.row, this.col - 4);
+  } else {
+    piece = this.board.get(this.row, this.col + 3);
+  }
+
+  if (!piece || piece.ID !== "r") {
+    return;
+  }
+
+  return piece;
+};
+
 King.prototype.inCheck = function () {
   return this.posIsUnderCheck(this.row, this.col);
 };
@@ -99,12 +118,8 @@ King.prototype.updateValidMoves = function () {
   let canShortCastle = false;
   if (!this.hasMoved() && !this.inCheck()) {
     // long castle
-    let pieceAtLeftCorner = this.board.get(this.row, this.col - 4);
-    if (
-      pieceAtLeftCorner !== null &&
-      pieceAtLeftCorner.ID === "r" &&
-      !pieceAtLeftCorner.hasMoved()
-    ) {
+    let leftRook = this.getRookAt("left");
+    if (leftRook && !leftRook.hasMoved()) {
       canLongCastle = true;
       for (let dx of [-1, -2]) {
         if (this.board.get(this.row, this.col + dx) !== null) {
@@ -124,12 +139,8 @@ King.prototype.updateValidMoves = function () {
       }
     }
     // short castle
-    let pieceAtRightCorner = this.board.get(this.row, this.col + 3);
-    if (
-      pieceAtRightCorner !== null &&
-      pieceAtRightCorner.ID === "r" &&
-      !pieceAtRightCorner.hasMoved()
-    ) {
+    let rigthRook = this.getRookAt("right");
+    if (rigthRook && !rigthRook.hasMoved()) {
       canShortCastle = true;
       for (let dx of [1, 2]) {
         if (

@@ -1,7 +1,7 @@
 // CONSTRUCTOR
 
-function PieceMovingTwice(board, row, col) {
-  Piece.call(this, board, row, col);
+function PieceMovingTwice(board, color, row, col) {
+  Piece.call(this, board, color, row, col);
 
   this.stillHasToMove = false;
 }
@@ -28,15 +28,6 @@ PieceMovingTwice.prototype.copyFrom = function (original) {
 
 PieceMovingTwice.prototype.goTo = function (row, col) {
   let commands = Piece.prototype.goTo.call(this, row, col);
-
-  // // required because of the grapple  // TODO : why ???
-  // if (this.widget) {
-  //   let lastMove = this.board.game.movesHistory.slice(-1)[0];
-  //   if (lastMove === undefined || (lastMove.piece === this && (lastMove.end[0] !== row || lastMove.end[1] !== col))) {
-  //     this.stillHasToMove = false;
-  //     return commands;
-  //   }
-  // }
 
   // if captured, ignore second move
   for (let command of commands) {

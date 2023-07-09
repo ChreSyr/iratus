@@ -21,6 +21,7 @@ function Board(game, nbranks = 8, nbfiles = 8) {
   this.game = game;
   this.nbfiles = nbfiles;
   this.nbranks = nbranks;
+  this.startFEN = {};
   this.piecesByPos = new Array(nbfiles * nbranks).fill(null);
   this.pieces = [];
   this.piecesColored = { w: [], b: [] };
@@ -37,9 +38,6 @@ function Board(game, nbranks = 8, nbfiles = 8) {
 
   // Initialization
   this.createPieces();
-
-  // FEN notation
-  this.fen = "lol"; // TODO
 }
 
 // ROOT PROTOTYPE

@@ -1,7 +1,7 @@
 // CONSTRUCTOR
 
-function Grapple(board, row, col) {
-  RollingPiece.call(this, board, row, col);
+function Grapple(board, color, row, col) {
+  RollingPiece.call(this, board, color, row, col);
 }
 
 // INHERITANCE
@@ -45,7 +45,7 @@ Grapple.prototype.goTo = function (row, col) {
   if (!grappledPiece) {
     return RollingPiece.prototype.goTo.call(this, row, col);
   }
-  const getCoord = (piece) => fileDict[piece.col] + (this.board.nbranks - piece.row);
+  const getCoord = (piece) => fileDict[piece.col] + (this.board.nbranks - piece.row - 1);
   let commands = [];
 
   let notation = "G:";

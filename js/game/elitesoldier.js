@@ -1,7 +1,7 @@
 // CONSTRUCTOR
 
-function EliteSoldier(board, row, col) {
-  PieceMovingTwice.call(this, board, row, col);
+function EliteSoldier(board, color, row, col) {
+  PieceMovingTwice.call(this, board, color, row, col);
 }
 
 // INHERITANCE

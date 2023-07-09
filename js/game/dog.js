@@ -1,12 +1,7 @@
 // CONSTRUCTOR
 
-function Dog(board, row, col) {
-  Piece.call(this, board, row, col);
-
-  if (col > 3) {
-    this.linkedPiece = this.board.get(row, col - 1);
-    this.linkedPiece.linkedPiece = this;
-  }
+function Dog(board, color, row, col) {
+  Piece.call(this, board, color, row, col);
 }
 
 // INHERITANCE

@@ -1,7 +1,11 @@
 // CONSTRUCTOR
 
-function Rook(board, row, col) {
-  RollingPiece.call(this, board, row, col);
+function Rook(board, color, row, col) {
+  RollingPiece.call(this, board, color, row, col);
+
+  // By default, a rook has moved.
+  // If there is a cstle right with that rook from fen, the rook has not moved
+  this.firstMove = "done";
 }
 
 // INHERITANCE

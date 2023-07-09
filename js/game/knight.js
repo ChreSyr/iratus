@@ -1,7 +1,7 @@
 // CONSTRUCTOR
 
-function Knight(board, row, col) {
-  Piece.call(this, board, row, col);
+function Knight(board, color, row, col) {
+  Piece.call(this, board, color, row, col);
 }
 
 // INHERITANCE

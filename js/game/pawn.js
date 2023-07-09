@@ -1,7 +1,7 @@
 // CONSTRUCTOR
 
-function Pawn(board, row, col) {
-  Piece.call(this, board, row, col);
+function Pawn(board, color, row, col) {
+  Piece.call(this, board, color, row, col);
 
   this.attackingMoves = undefined;
   this.promotionRank = undefined;
@@ -51,30 +51,38 @@ Pawn.prototype.preciseTransform = function (piece) {
 // INSTANCE METHODS - MECHANICS
 
 Pawn.prototype.goTo = function (row, col) {
+  oldRow = this.row;
   let commands = Piece.prototype.goTo.call(this, row, col);
 
+  // If moved two squares, can be en-passant-ed
+  if (Math.abs(oldRow - this.row) === 2) {
+    commands.push(
+      new SetEnPassant(getCoordFromRowCol(this.row + (this.color === "w" ? 1 : -1), this.col))
+    );
+  }
+
+  // Promotion
   if (this.row === this.promotionRank) {
-    if (this.widget && this instanceof Pawn) {  // TODO : remove instanceof
+    if (this.widget && this instanceof Pawn) {
+      // TODO : remove instanceof
       // a phantom cannot promote
       this.openPromotionWindow();
     }
   }
 
-  // en passant
-  let stepback = this.color === "w" ? 1 : -1;
-  let pieceBehind = this.board.get(this.row + stepback, this.col);
-  if (pieceBehind === undefined) {
-    // Very rare case where the black phantom is a pawn at the topleft corner or
-    // the white phantom is a pawn at the bottomright corner of the board
-    return commands;
-  } else if (pieceBehind !== null && pieceBehind.color !== this.color && pieceBehind.ID === "i") {
-    let lastMove = this.board.game.movesHistory.slice(-1)[0];
-    if (
-      this.board.get(lastMove.end[0], lastMove.end[1]) === pieceBehind &&
-      lastMove.start[0] !== this.row &&
-      lastMove.start[1] === this.col
-    ) {
-      commands.push(new Capture(pieceBehind, this));
+  // Capturing en passant
+  const lastMove = this.board.game.movesHistory.slice(-1)[0];
+  const enPassant = lastMove ? lastMove.enPassant : this.board.startFEN.enPassant;
+  if (enPassant !== "-" && enPassant === this.getCoordinates()) {
+    if (lastMove) {
+      commands.push(new Capture(lastMove.piece, this));
+    } else {
+      const [epRow, epCol] = getRowColFromCoord(this.board.startFEN.enPassant);
+      const captured = this.board.get(epRow + (this.color === "w" ? 1 : -1), epCol);
+      if (!captured || captured.ID !== "i") {
+        throw Error("Invalid FEN : en-passant doesn't match a pawn");
+      }
+      commands.push(new Capture(captured, this));
     }
   }
 
@@ -121,15 +129,10 @@ Pawn.prototype.updateValidMoves = function () {
     let attackedPiece = this.board.get(row, col);
     if (attackedPiece === null) {
       // en passant
-      let asidePiece = this.board.get(this.row, col);
-      if (asidePiece !== null && asidePiece.ID === "i" && asidePiece.color !== this.color) {
-        let lastMove = this.board.game.movesHistory.slice(-1)[0];
-        if (
-          this.board.get(lastMove.end[0], lastMove.end[1]) === asidePiece &&
-          lastMove.start[0] !== row
-        ) {
-          this.validMoves.push([row, col]);
-        }
+      const lastMove = this.board.game.movesHistory.slice(-1)[0];
+      const enPassant = lastMove ? lastMove.enPassant : this.board.startFEN.enPassant;
+      if (enPassant !== "-" && enPassant === getCoordFromRowCol(row, col)) {
+        this.validMoves.push([row, col]);
       }
     } else if (this.canGoTo(row, col)) {
       this.validMoves.push([row, col]);

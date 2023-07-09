@@ -1,12 +1,7 @@
 // CONSTRUCTOR
 
-function Soldier(board, row, col) {
-  RollingPiece.call(this, board, row, col);
-
-  if (col < 4) {
-    this.linkedPiece = this.board.get(row, col - 1);
-    this.linkedPiece.linkedPiece = this;
-  }
+function Soldier(board, color, row, col) {
+  RollingPiece.call(this, board, color, row, col);
 
   Soldier.prototype.preciseTransform(this);
 }
