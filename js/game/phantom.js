@@ -6,7 +6,7 @@ function Phantom(board, color, row, col) {
   this.cssClass = "phantom";
 }
 
-Phantom.UNDYNAMITABLES = ["k", "q", "r", "dy", "p", "g"];
+Phantom.UNDYNAMITABLES = ["k", "q", "r", "dy", "p", "g"]; // TODO : DYNAMITABLES
 
 // INHERITANCE
 
@@ -15,7 +15,7 @@ Phantom.prototype.constructor = Phantom;
 
 // STATIC VALUES
 
-Phantom.prototype.ID = "p";
+Phantom.prototype.ID = "f";
 
 // INSTANCE METHODS - MECHANICS
 

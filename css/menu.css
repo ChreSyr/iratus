@@ -348,12 +348,12 @@ header {
   background-image: url("../images/wdy.png");
 }
 
-.iratusrules-wrapper .rules-sub-grid button.p {
-  background-image: url("../images/bp.png");
+.iratusrules-wrapper .rules-sub-grid button.f {
+  background-image: url("../images/bf.png");
 }
 
-.iratusrules-wrapper .rules-sub-grid button.p:hover {
-  background-image: url("../images/wp.png");
+.iratusrules-wrapper .rules-sub-grid button.f:hover {
+  background-image: url("../images/wf.png");
 }
 
 .iratusrules-wrapper .rules-sub-grid button.g {

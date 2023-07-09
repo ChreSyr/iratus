@@ -2,7 +2,7 @@
 
 function IratusBoard(game) {
   this.emptyFEN =
-    "hd(0)s(0)yys(1)d(1)g/rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/HD(2)S(2)YYS(3)D(3)G w QKqk - - 0000000000000000-0000000000000000 0 1";
+    "fd(0)s(0)yys(1)d(1)g/rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/FD(2)S(2)YYS(3)D(3)G w QKqk - - 0000000000000000-0000000000000000 0 1";
 
   Board.call(this, game, (nbranks = 10), (nbfiles = 8));
 
@@ -40,17 +40,6 @@ IratusBoard.prototype.createPieces = function (fen = undefined) {
   // TurnNumber is used
 
   fen = fen ? fen : this.emptyFEN;
-  // let fen =
-  //   "s~bkyos(0)d(0)g/6n_r/pp4bp/2p2Rp1/5r2/4P3/5BP1/PPPBN3/2KRN3/P~D(1)S(1)Y1S(2)D(2)1 b - - - 11100011100000-011000001011 100 67";
-  // let fen =
-  //   "b~d(0)s(0)yn_s(1)d(1)g/r3k2r/1ppqpp1p/3pPb2/3P3R/pP6/2N3P1/P1Q1pPB1/R3K3/P~2O_YS(2)D(2)G w Qq a5 - 001000000000-000000000000010 0 2";
-  // let fen =
-  //   "1d(0)s(0)1yE1g/1o~3b2/p1k5/Pp1n4/5p2/7p/5R1P/2P3P1/3R3K/B~6G b - a5 - 111000-001101111 0 45";
-  // let fen = "3Q2b~1/8/p3kE2/1p6/5p2/7p/2P4P/6P1/7K/8 w - - - 1110-10111 0 57";
-
-  // fen =
-  //   "p~d(0)s(0)2s(1)d(1)g/2kr3r/1bn_p1n_b1/2p2q2/1p6/p3PB1p/P1N2N1P/BPPQ1PP1/O~2R1RK1/1D(2)S(2)YY2G w - - a1 11111110000100-00000110111111 6 21";
-
   const [
     pieces,
     turn,

@@ -7,13 +7,13 @@ const fenIDbyPieceID = {
   r: "r",
   b: "b",
   n: "n",
-  i: "p",
-  dy: "y",
+  i: "p", // TODO : Pawn = p
+  dy: "y", // TODO : Dynamite = y
   s: "s",
-  es: "e",
+  es: "e", // TODO : EliteSoldier = e
   d: "d",
-  ed: "o",
-  p: "h",
+  ed: "o", // TODO : EnragedDog = c
+  f: "f", // TODO : Phantom = f
   g: "g",
 };
 const pieceIDbyFenID = {
@@ -28,7 +28,7 @@ const pieceIDbyFenID = {
   e: "es",
   d: "d",
   o: "ed",
-  h: "p",
+  f: "f",
   g: "g",
 };
 

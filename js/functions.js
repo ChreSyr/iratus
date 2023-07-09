@@ -207,7 +207,7 @@ function setPiecesStyle(style = null) {
   } // not implemented
 
   var colors = ["b", "w"];
-  var pieceIDs = ["b", "d", "dy", "ed", "es", "g", "i", "k", "n", "p", "q", "r", "s"];
+  var pieceIDs = ["b", "d", "dy", "ed", "es", "g", "i", "k", "n", "f", "q", "r", "s"];
 
   let css = "";
 
