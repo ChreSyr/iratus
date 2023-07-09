@@ -1,6 +1,8 @@
 /* FEN - Forsyth-Edwards Notation
 https://fr.wikipedia.org/wiki/Notation_Forsyth-Edwards
 */
+
+pieceIDs = "bcdefgknpqrsy";
 const fenIDbyPieceID = {
   k: "k",
   q: "q",
@@ -12,7 +14,7 @@ const fenIDbyPieceID = {
   s: "s",
   e: "e",
   d: "d",
-  c: "o", // TODO : EnragedDog = c
+  c: "c",
   f: "f",
   g: "g",
 };
@@ -27,13 +29,12 @@ const pieceIDbyFenID = {
   s: "s",
   e: "e",
   d: "d",
-  o: "c",
+  c: "c",
   f: "f",
   g: "g",
 };
 
-let ids = Object.values(fenIDbyPieceID).join(""); // Concatenate the piece IDs
-ids = ids + ids.toUpperCase() + "~_()0-9";
+ids = pieceIDs + pieceIDs.toUpperCase() + "~_()0-9";
 const fenRegexPattern = `^([${ids}]+\\/){9}[${ids}]+\\s[wb]\\s(-|[KQkq]+)\\s(-|[a-h][1-8])\\s(-|[a-h]([0-9]|10))\\s(([01]+)?-([01]+)?)\\s\\d+\\s\\d+$`;
 // const fenRegexPattern = `^([${ids}]+\\/){9}[${ids}]+\\s[wb]$`;
 const fenRegex = new RegExp(fenRegexPattern);
@@ -108,9 +109,9 @@ function FEN(board, turn) {
         space = 0;
       }
       if (piece.color === "b") {
-        fen += fenIDbyPieceID[piece.ID];
+        fen += piece.ID;
       } else {
-        fen += fenIDbyPieceID[piece.ID].toUpperCase();
+        fen += piece.ID.toUpperCase();
       }
       if (piece.dynamited) {
         fen += "_";

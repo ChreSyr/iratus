@@ -70,7 +70,7 @@ IratusBoard.prototype.createPieces = function (fen = undefined) {
 
   // PIECES
   let lastPiece = {};
-  if (!Object.values(fenIDbyPieceID).includes(fen[0].toLowerCase())) {
+  if (!pieceIDs.includes(fen[0].toLowerCase())) {
     if (!"12345678".includes(fen[0].toLowerCase())) {
       throw Error("Invalid FEN : Must start with a piece or an empty space");
     }
@@ -178,7 +178,7 @@ IratusBoard.prototype.createPieces = function (fen = undefined) {
       // Piece pre-creation
       lastPiece = {};
       const charLowerCase = char.toLowerCase();
-      lastPiece.id = pieceIDbyFenID[charLowerCase];
+      lastPiece.id = charLowerCase;
       lastPiece.color = char === charLowerCase ? "b" : "w";
       lastPiece.row = irow;
       lastPiece.col = icol;
