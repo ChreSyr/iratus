@@ -125,7 +125,8 @@ for (let menuBarButton of menuBarButtons) {
 const menuSettings = document.getElementById("menu-panel-wrapper-settings");
 const menuSettingsInputs = menuSettings.querySelectorAll("input");
 
-let devMode = true;
+let devMode = false;
+document.body.classList.toggle("dev-mode");
 
 menuSettingsInputs.forEach((input) => {
   switch (input.id) {
