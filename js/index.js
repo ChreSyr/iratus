@@ -121,7 +121,15 @@ for (let input of [fenInput, pgnInput]) {
       input.classList.add("invalid");
     }
   });
-  const exportBtn = importBtn.nextElementSibling;
+  const resetBtn = importBtn.nextElementSibling;
+  resetBtn.addEventListener("click", (event) => {
+    if (input === fenInput) {
+      game.loadFEN(IratusBoard.emptyFEN);
+    } else {
+      game.loadPGN(Game.emptyPGN); // TODO
+    }
+  });
+  const exportBtn = resetBtn.nextElementSibling;
   exportBtn.addEventListener("click", (event) => {
     navigator.clipboard
       .writeText(input.value)
