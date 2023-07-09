@@ -69,14 +69,16 @@
   z-index: 2;
 }
 
-.tools-wrapper .accordion-content button {
-  border-radius: 3px;
-  font-size: 1.7em;
-  padding: 0.5em 2em;
+.tools-wrapper .tools-ie-buttons {
+  display: flex;
 }
 
-.tools-wrapper .accordion-content button.tools-export {
-  bottom: 0;
-  right: 0;
-  position: absolute;
+.tools-wrapper .tools-ie-buttons button {
+  border-radius: 3px;
+  font-size: 1.7em;
+  padding: 0.5em 0;
+  width: 33.3%;
+}
+.tools-wrapper .tools-ie-buttons button:not(:first-child) {
+  margin-left: 0.5em;
 }

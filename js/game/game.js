@@ -255,7 +255,7 @@ Game.prototype = {
     fenInput.value = this.fenHistory.slice(-1)[0].fen;
     fenInput.classList.remove("invalid");
     // Disable import button
-    fenInput.nextElementSibling.disabled = true;
+    fenInput.nextElementSibling.firstElementChild.disabled = true;
     // Save FEN
     // if (document.readyState === "complete") {
     //   storage.setItem("fen", fenInput.value);

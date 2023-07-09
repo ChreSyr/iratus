@@ -94,21 +94,24 @@ pgnInput.style.height = pgnInput.scrollHeight + 2 + "px";
 // Enabling import button
 fenInput.addEventListener("input", (event) => {
   fenInput.classList.remove("invalid");
-  // fenInput.nextElementSibling = import button
-  fenInput.nextElementSibling.disabled = fenInput.value === game.fenHistory.slice(-1)[0].fen;
+  // fenInput.nextElementSibling.firstElementChild = import button
+  console.log(fenInput.value === game.fenHistory.slice(-1)[0].fen);
+  console.log(fenInput.value, game.fenHistory.slice(-1)[0].fen);
+  fenInput.nextElementSibling.firstElementChild.disabled =
+    fenInput.value === game.fenHistory.slice(-1)[0].fen;
 });
 pgnInput.addEventListener("input", (event) => {
   pgnInput.style.height = "0px";
   pgnInput.style.height = pgnInput.scrollHeight + 2 + "px";
 
   pgnInput.classList.remove("invalid");
-  // pgnInput.nextElementSibling = import button
-  pgnInput.nextElementSibling.disabled = pgnInput.value === game.pgn;
+  // pgnInput.nextElementSibling.firstElementChild = import button
+  pgnInput.nextElementSibling.firstElementChild.disabled = pgnInput.value === game.pgn;
 });
 
 // Import / Export buttons
 for (let input of [fenInput, pgnInput]) {
-  const importBtn = input.nextElementSibling;
+  const importBtn = input.nextElementSibling.firstElementChild;
   importBtn.addEventListener("click", (event) => {
     try {
       if (input === fenInput) {
@@ -134,7 +137,6 @@ for (let input of [fenInput, pgnInput]) {
     navigator.clipboard
       .writeText(input.value)
       .then(() => {
-        // console.log("Text copied to clipboard:", input.value);
         const originalTextContent = exportBtn.textContent;
         exportBtn.textContent = "Copié";
         setTimeout(() => {
