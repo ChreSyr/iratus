@@ -11,7 +11,7 @@ EnragedDog.prototype.constructor = EnragedDog;
 
 // STATIC ATTRIBUTES
 
-EnragedDog.prototype.ID = "ed";
+EnragedDog.prototype.ID = "c";
 EnragedDog.prototype.MOVES = [
   [0, 1],
   [0, -1],

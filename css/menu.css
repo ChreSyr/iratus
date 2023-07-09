@@ -332,12 +332,12 @@ header {
   background-image: url("../images/wd.png");
 }
 
-.iratusrules-wrapper .rules-sub-grid button.ed {
-  background-image: url("../images/bed.png");
+.iratusrules-wrapper .rules-sub-grid button.c {
+  background-image: url("../images/bc.png");
 }
 
-.iratusrules-wrapper .rules-sub-grid button.ed:hover {
-  background-image: url("../images/wed.png");
+.iratusrules-wrapper .rules-sub-grid button.c:hover {
+  background-image: url("../images/wc.png");
 }
 
 .iratusrules-wrapper .rules-sub-grid button.y {

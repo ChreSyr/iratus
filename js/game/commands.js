@@ -152,7 +152,7 @@ function Move(board, start, end) {
       }
 
       // start square precision
-      if (["n", "b", "r", "q", "s", "d", "ed"].includes(piece.ID)) {
+      if (["n", "b", "r", "q", "s", "d", "c"].includes(piece.ID)) {
         let sameClassAllies = [];
         for (let ally of this.board.piecesColored[piece.color]) {
           if (ally.ID === piece.ID && ally !== piece) {

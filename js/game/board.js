@@ -9,7 +9,7 @@ const pieceClassesByID = {
   s: Soldier,
   e: EliteSoldier,
   d: Dog,
-  ed: EnragedDog,
+  c: EnragedDog,
   f: Phantom,
   g: Grapple,
   " ": null,
