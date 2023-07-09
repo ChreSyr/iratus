@@ -207,7 +207,7 @@ function setPiecesStyle(style = null) {
   } // not implemented
 
   var colors = ["b", "w"];
-  var pieceIDs = ["b", "d", "dy", "ed", "es", "g", "p", "k", "n", "f", "q", "r", "s"];
+  var pieceIDs = ["b", "d", "y", "ed", "es", "g", "p", "k", "n", "f", "q", "r", "s"];
 
   let css = "";
 
@@ -218,7 +218,7 @@ function setPiecesStyle(style = null) {
        background-image: url(images/${color}${pieceID}.png);
      }
      #board-single .dynamited.${color}${pieceID} {
-       background-image: url(images/${color}${pieceID}.png), url(images/${color}dy.png);
+       background-image: url(images/${color}${pieceID}.png), url(images/${color}y.png);
      }
 `;
     }

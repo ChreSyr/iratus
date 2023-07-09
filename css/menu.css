@@ -340,11 +340,11 @@ header {
   background-image: url("../images/wed.png");
 }
 
-.iratusrules-wrapper .rules-sub-grid button.dy {
+.iratusrules-wrapper .rules-sub-grid button.y {
   background-image: url("../images/bdy.png");
 }
 
-.iratusrules-wrapper .rules-sub-grid button.dy:hover {
+.iratusrules-wrapper .rules-sub-grid button.y:hover {
   background-image: url("../images/wdy.png");
 }
 

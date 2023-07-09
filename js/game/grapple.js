@@ -29,7 +29,7 @@ Grapple.prototype.canGoTo = function (row, col) {
   let piece = this.board.get(row, col);
   if (piece === null) {
     return true;
-  } else if (piece.ID === "dy") {
+  } else if (piece.ID === "y") {
     return false;
   } else {
     return true;

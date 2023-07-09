@@ -216,7 +216,7 @@ Game.prototype = {
 
     // Update captures
 
-    var sortPattern = ["p", "dy", "g", "s", "d", "n", "b", "f", "r", "q"];
+    var sortPattern = ["p", "y", "g", "s", "d", "n", "b", "f", "r", "q"];
 
     for (let color of ["w", "b"]) {
       let capturedPieces = [];

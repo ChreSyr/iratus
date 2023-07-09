@@ -94,7 +94,7 @@ Piece.prototype = {
     const piece = this.board.get(row, col);
     if (piece === null) {
       return true;
-    } else if (piece.ID === "dy") {
+    } else if (piece.ID === "y") {
       return (
         piece.color === this.color && !Dynamite.UNDYNAMITABLES.includes(this.ID) && !this.dynamited
       );

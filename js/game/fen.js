@@ -7,8 +7,8 @@ const fenIDbyPieceID = {
   r: "r",
   b: "b",
   n: "n",
-  p: "p", // TODO : Pawn = p
-  dy: "y", // TODO : Dynamite = y
+  p: "p",
+  y: "y",
   s: "s",
   es: "e", // TODO : EliteSoldier = e
   d: "d",
@@ -23,7 +23,7 @@ const pieceIDbyFenID = {
   b: "b",
   n: "n",
   p: "p",
-  y: "dy",
+  y: "y",
   s: "s",
   e: "es",
   d: "d",

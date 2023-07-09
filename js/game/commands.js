@@ -205,7 +205,7 @@ function Move(board, start, end) {
         if (piece.ID === "p") {
           notation += fileDict[this.start[1]];
         }
-        if (piece.ID === "dy") {
+        if (piece.ID === "y") {
           notation += "+" + this.board.get(this.end[0], this.end[1]).ID.toUpperCase();
         } else {
           notation += "x";
@@ -229,12 +229,12 @@ function Move(board, start, end) {
         for (let command of this.commands) {
           if (command.name === "capture") {
             let capturedPiece = command.args[0];
-            if (capturedPiece.ID === "dy") {
+            if (capturedPiece.ID === "y") {
               continue;
             } // dynamite equipement
             this.capturedPieces[capturedPiece.color].push(capturedPiece.__proto__.ID);
             if (capturedPiece.dynamited) {
-              this.capturedPieces[capturedPiece.color].push("dy");
+              this.capturedPieces[capturedPiece.color].push("y");
             }
           }
         }

@@ -4,7 +4,7 @@ function Dynamite(board, color, row, col) {
   Piece.call(this, board, color, row, col);
 }
 
-Dynamite.UNDYNAMITABLES = ["k", "q", "r", "dy", "f", "g"];
+Dynamite.UNDYNAMITABLES = ["k", "q", "r", "y", "f", "g"];
 
 // INHERITANCE
 
@@ -13,7 +13,7 @@ Dynamite.prototype.constructor = Dynamite;
 
 // STATIC VALUES
 
-Dynamite.prototype.ID = "dy";
+Dynamite.prototype.ID = "y";
 
 // INSTANCE METHODS - MECHANICS
 

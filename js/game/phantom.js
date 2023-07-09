@@ -6,7 +6,7 @@ function Phantom(board, color, row, col) {
   this.cssClass = "phantom";
 }
 
-Phantom.UNDYNAMITABLES = ["k", "q", "r", "dy", "p", "g"]; // TODO : DYNAMITABLES
+Phantom.UNDYNAMITABLES = ["k", "q", "r", "y", "p", "g"]; // TODO : DYNAMITABLES
 
 // INHERITANCE
 
@@ -23,7 +23,7 @@ Phantom.prototype.canGoTo = function (row, col) {
   let piece = this.board.get(row, col);
   if (piece === null) {
     return true;
-  } else if (piece.ID === "dy") {
+  } else if (piece.ID === "y") {
     return false;
   } else {
     return piece.color !== this.color;
