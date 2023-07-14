@@ -74,7 +74,7 @@ function FEN(board, turn) {
       if (piece.dynamited) {
         fen += "_";
       }
-      if (piece.cssClass === "phantom" && piece.ID !== "p") {
+      if (piece.cssClass === "phantom" && piece.ID !== "f") {
         fen += "~";
       }
       if (piece.linkedPiece && !piece.linkedPiece.isCaptured) {
