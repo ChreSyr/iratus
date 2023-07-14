@@ -235,12 +235,10 @@ Game.prototype = {
         )
         .join("");
     };
-    const notCapturedPieces = {
-      w: getRemainingPieces("w"),
-      b: getRemainingPieces("b"),
-    };
+    const remainingW = getRemainingPieces("w");
+    const remainingB = getRemainingPieces("b");
 
-    function removeCommonElements(list1, list2) {
+    const removeCommonElements = (list1, list2) => {
       const frequencyMap = {};
       const result = [];
 
@@ -259,11 +257,10 @@ Game.prototype = {
       }
 
       return result;
-    }
-    const { w, b } = notCapturedPieces;
-    const updatedNotCapturedPieces = {
-      b: removeCommonElements(b, w),
-      w: removeCommonElements(w, b),
+    };
+    const imbalances = {
+      b: removeCommonElements(remainingB, remainingW),
+      w: removeCommonElements(remainingW, remainingB),
     };
 
     for (let color of ["w", "b"]) {
@@ -271,7 +268,7 @@ Game.prototype = {
       display.innerHTML = "";
       let lastDisplayedPiece = null;
 
-      const capturedPieces = updatedNotCapturedPieces[color];
+      const capturedPieces = imbalances[color];
       capturedPieces.relativeValue = 0;
 
       capturedPieces.sort(function (a, b) {
@@ -293,8 +290,8 @@ Game.prototype = {
       }
     }
 
-    const wAdvantage = updatedNotCapturedPieces["b"].relativeValue;
-    const bAdvantage = updatedNotCapturedPieces["w"].relativeValue;
+    const wAdvantage = imbalances["b"].relativeValue;
+    const bAdvantage = imbalances["w"].relativeValue;
     const relativeAdvantage = Math.abs(wAdvantage - bAdvantage);
     let advantageColor;
     let advantageContainer;
