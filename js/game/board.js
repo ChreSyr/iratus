@@ -37,7 +37,11 @@ function Board(game, nbranks = 8, nbfiles = 8) {
   this.mainCurrentMove = null;
 
   // Initialization
-  this.createPieces();
+  try {
+    this.createPieces();
+  } catch (error) {
+    this.error = error;
+  }
 }
 
 // ROOT PROTOTYPE
@@ -67,6 +71,18 @@ Board.prototype = {
     this.calculator = new this.calculatorClass(this);
 
     this.widget = document.getElementById("board-single");
+
+    if (this.error) {
+      const errorContainer = document.createElement("div");
+      errorContainer.classList.add("error-container");
+      const errorMsg = document.createElement("h3");
+      errorMsg.classList.add("error-message");
+      errorMsg.innerText = this.error.message;
+      errorContainer.appendChild(errorMsg);
+      this.widget.appendChild(errorContainer);
+      document.querySelector(".board-overlay").style.display = "block";
+      return;
+    }
 
     for (let piece of this.pieces) {
       piece.isWidgeted = true;

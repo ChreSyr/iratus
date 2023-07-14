@@ -74,7 +74,7 @@ IratusBoard.prototype.createPieces = function (fen = undefined) {
   let lastPiece = {};
   if (!pieceIDs.includes(fen[0].toLowerCase())) {
     if (!"12345678".includes(fen[0].toLowerCase())) {
-      throw Error("Invalid FEN : Must start with a piece or an empty space");
+      throw Error("FEN incorrect : Commence soit par l'id d'une pièce, soit par un nombre.");
     }
   }
   let linkID = "";
@@ -120,7 +120,7 @@ IratusBoard.prototype.createPieces = function (fen = undefined) {
         dynamitablesHasMovedIndexes[pieceAttributes.color]++;
       }
     } catch (error) {
-      console.error(error);
+      throw Error("FEN incorrect :\nErreur lors de la création de " + pieceAttributes);
     }
   };
 
@@ -136,7 +136,7 @@ IratusBoard.prototype.createPieces = function (fen = undefined) {
           continue;
         }
         if (!"0123456789".includes(char)) {
-          throw Error("Invalid FEN : Parenthesis can only contain numbers");
+          throw Error("FEN incorrect :\nLes parenthèses n'accèptent que les nombres");
         }
         linkID += char;
         continue;
@@ -149,18 +149,12 @@ IratusBoard.prototype.createPieces = function (fen = undefined) {
 
       // Phantom
       if (char === "~") {
-        if (lastPiece.phantomized) {
-          throw Error("Invalid FEN : A piece can't be phantomized twice");
-        }
         lastPiece.phantomized = true;
         continue;
       }
 
       // Dynamite
       if (char === "_") {
-        if (lastPiece.dynamited) {
-          throw Error("Invalid FEN : A piece can't be dynamited twice");
-        }
         lastPiece.dynamited = true;
         continue;
       }
@@ -193,13 +187,16 @@ IratusBoard.prototype.createPieces = function (fen = undefined) {
   this.game.turn = turn;
 
   // CASTLE RIGHTS
+  if (this.king.length !== 2) {
+    throw Error("FEN incorrect :\nIl manque un roi");
+  }
   if (castleRights !== "-") {
     for (let castle of castleRights) {
       let rook = this.king[castle === castle.toUpperCase() ? "w" : "b"].getRookAt(
         castle.toUpperCase() === "K" ? "right" : "left"
       );
       if (!rook) {
-        console.error("Error : wrong castle rights");
+        throw Error("FEN incorrect :\nImpossible d'appliquer les roques");
       } else {
         rook.firstMove = null;
       }
@@ -212,6 +209,8 @@ IratusBoard.prototype.createPieces = function (fen = undefined) {
     this.startFEN.pieceMovingAgain = this.get(rowIndex, colIndex);
     this.startFEN.pieceMovingAgain.stillHasToMove = true;
   }
+
+  // VALIDITY CHECK
 };
 
 IratusBoard.prototype.updateAllValidMoves = function () {

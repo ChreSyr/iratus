@@ -25,6 +25,7 @@
   --light-dark: rgb(64, 64, 64);
   --light-green: rgb(131, 174, 131);
   --menu-bar-width: 20rem;
+  --overlay-color: rgba(0, 0, 0, 0.5);
   --special-color: rgb(131, 174, 131);
   --selected: rgba(255, 255, 0, 0.5);
 }

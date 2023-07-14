@@ -9,8 +9,11 @@ function Game(boardClass) {
   this.result = undefined;
 
   this.board = new boardClass(this);
-  this.fenHistory.push(this.board.getFEN());
   this.board.initDisplay();
+  if (this.board.error) {
+    return;
+  }
+  this.fenHistory.push(this.board.getFEN());
   this.board.updateAllValidMoves();
   this.updateDisplay();
 
