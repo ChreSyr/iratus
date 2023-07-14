@@ -11,6 +11,8 @@ Grapple.prototype.constructor = Grapple;
 
 // STATIC VALUES
 
+Grapple.RELATIVE_VALUE = 5;
+
 Grapple.prototype.ID = "g";
 Grapple.prototype.MOVES = [
   [0, 1],

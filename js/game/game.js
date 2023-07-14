@@ -218,24 +218,59 @@ Game.prototype = {
       ? gameWrapper.classList.remove("black-to-move")
       : gameWrapper.classList.add("black-to-move");
 
-    // Update captures
+    // Pieces imbalance
 
-    var sortPattern = ["p", "y", "g", "s", "d", "n", "b", "f", "r", "q"];
+    const capturablesPattern = Object.keys(pieceClassesByID).slice(1, -1);
+    capturablesPattern.sort(
+      (id1, id2) => pieceClassesByID[id1].RELATIVE_VALUE - pieceClassesByID[id2].RELATIVE_VALUE
+    );
 
-    for (let color of ["w", "b"]) {
-      let capturedPieces = [];
-      for (let move of this.movesHistory) {
-        capturedPieces = capturedPieces.concat(move.capturedPieces[color]);
+    const notCapturedPieces = {
+      w: this.board.pieces
+        .filter((piece) => !piece.isCaptured && piece.color === "w")
+        .map((piece) => (piece.cssClass === "phantom" ? Phantom.prototype.ID : piece.ID)),
+      b: this.board.pieces
+        .filter((piece) => !piece.isCaptured && piece.color === "b")
+        .map((piece) => (piece.cssClass === "phantom" ? Phantom.prototype.ID : piece.ID)),
+    };
+
+    function removeCommonElements(list1, list2) {
+      const frequencyMap = {};
+      const result = [];
+
+      // Count the frequency of elements in list1
+      for (const element of list1) {
+        frequencyMap[element] = (frequencyMap[element] || 0) + 1;
       }
 
+      // Add elements to result if not present in list2 or still have remaining occurrences in list1
+      for (const element of list2) {
+        if (!frequencyMap[element]) {
+          result.push(element);
+        } else {
+          frequencyMap[element]--;
+        }
+      }
+
+      return result;
+    }
+    const { w, b } = notCapturedPieces;
+    const updatedNotCapturedPieces = {
+      b: removeCommonElements(b, w),
+      w: removeCommonElements(w, b),
+    };
+
+    for (let color of ["w", "b"]) {
       var display = document.querySelector(".player-info." + color);
       display.innerHTML = "";
+      let lastDisplayedPiece = null;
+
+      const capturedPieces = updatedNotCapturedPieces[color];
+      capturedPieces.relativeValue = 0;
 
       capturedPieces.sort(function (a, b) {
-        return sortPattern.indexOf(a) - sortPattern.indexOf(b);
+        return capturablesPattern.indexOf(a) - capturablesPattern.indexOf(b);
       });
-
-      let lastDisplayedPiece = null;
 
       for (let capturedPiece of capturedPieces) {
         pieceDisplay = document.createElement("img");
@@ -247,7 +282,29 @@ Game.prototype = {
         lastDisplayedPiece = capturedPiece;
         pieceDisplay.src = "images/" + color + capturedPiece + ".png";
         display.appendChild(pieceDisplay);
+
+        capturedPieces.relativeValue += pieceClassesByID[capturedPiece].RELATIVE_VALUE;
       }
+    }
+
+    const wAdvantage = updatedNotCapturedPieces["b"].relativeValue;
+    const bAdvantage = updatedNotCapturedPieces["w"].relativeValue;
+    const relativeAdvantage = Math.abs(wAdvantage - bAdvantage);
+    let advantageColor;
+    let advantageContainer;
+    if (wAdvantage > bAdvantage) {
+      advantageColor = "w";
+      advantageContainer = document.querySelector(".player-info.b");
+    } else if (bAdvantage > wAdvantage) {
+      advantageColor = "b";
+      advantageContainer = document.querySelector(".player-info.w");
+    } // else there is material equality
+
+    if (advantageColor) {
+      advantageDisplay = document.createElement("p");
+      advantageDisplay.classList.add("relative-advantage");
+      advantageDisplay.innerText = "+" + relativeAdvantage;
+      advantageContainer.appendChild(advantageDisplay);
     }
 
     // Update FEN

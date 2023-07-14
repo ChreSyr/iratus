@@ -11,6 +11,8 @@ EliteSoldier.prototype.constructor = EliteSoldier;
 
 // STATIC VALUES
 
+EliteSoldier.RELATIVE_VALUE = 4;
+
 EliteSoldier.prototype.ID = "e";
 EliteSoldier.prototype.MOVES = [
   [1, 1],

@@ -13,6 +13,8 @@ Phantom.prototype.constructor = Phantom;
 
 // STATIC VALUES
 
+Phantom.RELATIVE_VALUE = 4;
+
 Phantom.prototype.ID = "f";
 
 // INSTANCE METHODS - MECHANICS

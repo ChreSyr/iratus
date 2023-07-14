@@ -8,6 +8,8 @@ Dynamite.DYNAMITABLES = ["p", "n", "b", "d", "s"];
 
 // INHERITANCE
 
+Dynamite.RELATIVE_VALUE = 2;
+
 Dynamite.prototype = Object.create(Piece.prototype);
 Dynamite.prototype.constructor = Dynamite;
 

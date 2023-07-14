@@ -16,6 +16,8 @@ Pawn.prototype.constructor = Pawn;
 
 // STATIC VALUES
 
+Pawn.RELATIVE_VALUE = 1;
+
 Pawn.prototype.ID = "p";
 Pawn.prototype.ATTR_TO_COPY = Piece.prototype.ATTR_TO_COPY.concat([
   "attackingMoves",

@@ -11,6 +11,8 @@ Queen.prototype.constructor = Queen;
 
 // STATIC VALUES
 
+Queen.RELATIVE_VALUE = 10;
+
 Queen.prototype.ID = "q";
 Queen.prototype.MOVES = [
   [0, 1],

@@ -65,6 +65,10 @@ function Piece(board, color, row, col) {
 }),
   (Piece.preciseTransform = function (piece) {});
 
+// STATIC VALUES
+
+Piece.RELATIVE_VALUE = 0;
+
 // ROOT PROTOTYPE
 
 Piece.prototype = {

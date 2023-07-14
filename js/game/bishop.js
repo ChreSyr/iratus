@@ -6,6 +6,8 @@ function Bishop(board, color, row, col) {
 
 // INHERITANCE
 
+Bishop.RELATIVE_VALUE = 4;
+
 Bishop.prototype = Object.create(RollingPiece.prototype);
 Bishop.prototype.constructor = Bishop;
 

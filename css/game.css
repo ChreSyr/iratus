@@ -84,6 +84,12 @@
   filter: drop-shadow(0 0 1px black) drop-shadow(0 0 1px black);
 }
 
+.player-info p {
+  color: var(--lighter-dark);
+  font-family: var(--fontfamily-simple);
+  font-size: 1.7em;
+}
+
 /* BOARD */
 
 #board-single {

@@ -13,6 +13,8 @@ Soldier.prototype.constructor = Soldier;
 
 // STATIC VALUES
 
+Soldier.RELATIVE_VALUE = 2;
+
 Soldier.prototype.ID = "s";
 Soldier.prototype.RANGE = 2;
 

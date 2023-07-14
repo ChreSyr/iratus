@@ -11,6 +11,8 @@ Knight.prototype.constructor = Knight;
 
 // STATIC VALUES
 
+Knight.RELATIVE_VALUE = 3;
+
 Knight.prototype.ID = "n";
 Knight.prototype.MOVES = [
   [2, 1],

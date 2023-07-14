@@ -15,6 +15,8 @@ Rook.prototype.constructor = Rook;
 
 // STATIC VALUES
 
+Rook.RELATIVE_VALUE = 6;
+
 Rook.prototype.ID = "r";
 Rook.prototype.MOVES = [
   [0, 1],

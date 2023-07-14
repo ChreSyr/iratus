@@ -6,6 +6,8 @@ function Dog(board, color, row, col) {
 
 // INHERITANCE
 
+Dog.RELATIVE_VALUE = 0;
+
 Dog.prototype = Object.create(Piece.prototype);
 Dog.prototype.constructor = Dog;
 
