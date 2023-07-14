@@ -6,8 +6,6 @@ function Phantom(board, color, row, col) {
   this.cssClass = "phantom";
 }
 
-Phantom.UNDYNAMITABLES = ["k", "q", "r", "y", "p", "g"]; // TODO : DYNAMITABLES
-
 // INHERITANCE
 
 Phantom.prototype = Object.create(Piece.prototype);

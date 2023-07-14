@@ -96,7 +96,7 @@ Piece.prototype = {
       return true;
     } else if (piece.ID === "y") {
       return (
-        piece.color === this.color && !Dynamite.UNDYNAMITABLES.includes(this.ID) && !this.dynamited
+        piece.color === this.color && Dynamite.DYNAMITABLES.includes(this.ID) && !this.dynamited
       );
     } else {
       return piece.color !== this.color;

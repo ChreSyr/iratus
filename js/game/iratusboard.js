@@ -109,7 +109,7 @@ IratusBoard.prototype.createPieces = function (fen = undefined) {
           waitingForLink[pieceAttributes.linkID] = piece;
         }
       }
-      if (!Dynamite.UNDYNAMITABLES.includes(pieceAttributes.id)) {
+      if (Dynamite.DYNAMITABLES.includes(pieceAttributes.id)) {
         if (
           this.startFEN.dynamitablesHasMoved[pieceAttributes.color][
             dynamitablesHasMovedIndexes[pieceAttributes.color]

@@ -88,7 +88,7 @@ function FEN(board, turn) {
         }
         fen += "(" + linkedPieces[pieceCoord] + ")";
       }
-      if (!Dynamite.UNDYNAMITABLES.includes(piece.ID)) {
+      if (Dynamite.DYNAMITABLES.includes(piece.ID)) {
         dynamitablesHasMoved[piece.color] += piece.hasMoved() ? "1" : "0";
       }
       if (piece.stillHasToMove) {

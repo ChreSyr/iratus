@@ -23,7 +23,7 @@ Soldier.prototype.canGoTo = function (row, col) {
   if (piece === null) {
     return true;
   } else if (piece.ID === "y") {
-    return piece.color === this.color && !Dynamite.UNDYNAMITABLES.includes(this.ID);
+    return piece.color === this.color && Dynamite.DYNAMITABLES.includes(this.ID);
   } else {
     return piece.color !== this.color && piece.ID === "p"; // only captures pawns
   }

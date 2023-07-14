@@ -4,7 +4,7 @@ function Dynamite(board, color, row, col) {
   Piece.call(this, board, color, row, col);
 }
 
-Dynamite.UNDYNAMITABLES = ["k", "q", "r", "y", "f", "g"];
+Dynamite.DYNAMITABLES = ["p", "n", "b", "d", "s"];
 
 // INHERITANCE
 
@@ -63,7 +63,7 @@ Dynamite.prototype.updateValidMoves = function () {
     if (piece.dynamited) {
       continue;
     }
-    if (Dynamite.UNDYNAMITABLES.includes(piece.ID)) {
+    if (!Dynamite.DYNAMITABLES.includes(piece.ID)) {
       continue;
     }
     if (piece.__proto__.ID === "f") {
