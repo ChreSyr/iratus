@@ -74,7 +74,7 @@ IratusBoard.prototype.createPieces = function (fen = undefined) {
   let lastPiece = {};
   if (!pieceIDs.includes(fen[0].toLowerCase())) {
     if (!"12345678".includes(fen[0].toLowerCase())) {
-      throw Error("FEN incorrect : Commence soit par l'id d'une pièce, soit par un nombre.");
+      throw Error("FEN incorrect :\nDoit commencer soit par l'id d'une pièce, soit par un nombre.");
     }
   }
   let linkID = "";
@@ -187,7 +187,7 @@ IratusBoard.prototype.createPieces = function (fen = undefined) {
   this.game.turn = turn;
 
   // CASTLE RIGHTS
-  if (this.king.length !== 2) {
+  if (Object.keys(this.king).length !== 2) {
     throw Error("FEN incorrect :\nIl manque un roi");
   }
   if (castleRights !== "-") {

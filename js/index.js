@@ -37,8 +37,6 @@ pgnInput.style.height = pgnInput.scrollHeight + 2 + "px";
 fenInput.addEventListener("input", (event) => {
   fenInput.classList.remove("invalid");
   // fenInput.nextElementSibling.firstElementChild = import button
-  console.log(fenInput.value === game.fenHistory.slice(-1)[0].fen);
-  console.log(fenInput.value, game.fenHistory.slice(-1)[0].fen);
   fenInput.nextElementSibling.firstElementChild.disabled =
     fenInput.value === game.fenHistory.slice(-1)[0].fen;
 });

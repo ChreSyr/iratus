@@ -11,6 +11,7 @@ function Game(boardClass) {
   this.board = new boardClass(this);
   this.board.initDisplay();
   if (this.board.error) {
+    this.fenHistory.push(boardClass.emptyFEN);
     return;
   }
   this.fenHistory.push(this.board.getFEN());

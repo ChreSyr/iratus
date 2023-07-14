@@ -390,6 +390,8 @@
 .error-container {
   align-items: center;
   display: flex;
+  flex-direction: column;
+  font-size: calc(var(--square-size) / 4);
   height: 100%;
   justify-content: center;
   left: 0;
@@ -399,9 +401,17 @@
 }
 
 .error-message {
-  font-size: 500%;
-  /* height: 10%; */
+  font-size: 3em;
   text-align: center;
+}
+
+.error-button {
+  border: 2px solid black;
+  border-radius: 3px;
+  font-size: 3em;
+  margin-bottom: 0.5em;
+  padding: 0.1em 0.5em;
+  user-select: none;
 }
 
 /* SQUARE-XX */

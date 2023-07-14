@@ -79,6 +79,13 @@ Board.prototype = {
       errorMsg.classList.add("error-message");
       errorMsg.innerText = this.error.message;
       errorContainer.appendChild(errorMsg);
+      const errorReloader = document.createElement("button");
+      errorReloader.classList.add("error-button");
+      errorReloader.innerText = "Réinitialiser";
+      errorReloader.addEventListener("click", (event) => {
+        this.game.loadFEN(IratusBoard.emptyFEN);
+      });
+      errorContainer.appendChild(errorReloader);
       this.widget.appendChild(errorContainer);
       document.querySelector(".board-overlay").style.display = "block";
       return;
