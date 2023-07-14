@@ -225,13 +225,19 @@ Game.prototype = {
       (id1, id2) => pieceClassesByID[id1].RELATIVE_VALUE - pieceClassesByID[id2].RELATIVE_VALUE
     );
 
+    const getRemainingPieces = (color) => {
+      return this.board.pieces
+        .filter((piece) => !piece.isCaptured && piece.color === color)
+        .map(
+          (piece) =>
+            (piece.cssClass === "phantom" ? Phantom.prototype.ID : piece.ID) +
+            (piece.dynamited ? "y" : "")
+        )
+        .join("");
+    };
     const notCapturedPieces = {
-      w: this.board.pieces
-        .filter((piece) => !piece.isCaptured && piece.color === "w")
-        .map((piece) => (piece.cssClass === "phantom" ? Phantom.prototype.ID : piece.ID)),
-      b: this.board.pieces
-        .filter((piece) => !piece.isCaptured && piece.color === "b")
-        .map((piece) => (piece.cssClass === "phantom" ? Phantom.prototype.ID : piece.ID)),
+      w: getRemainingPieces("w"),
+      b: getRemainingPieces("b"),
     };
 
     function removeCommonElements(list1, list2) {
