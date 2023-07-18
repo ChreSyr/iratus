@@ -64,7 +64,7 @@ if (true) {
 }
 
 // Version
-const version = "0.13.1";
+const version = "0.13.5";
 const versionLabel = document.getElementById("version-label");
 versionLabel.textContent = "Version : " + version;
 

@@ -126,6 +126,7 @@ const menuSettings = document.getElementById("menu-panel-wrapper-settings");
 const menuSettingsInputs = menuSettings.querySelectorAll("input");
 
 let devMode = false;
+let iaMode = false;
 
 menuSettingsInputs.forEach((input) => {
   switch (input.id) {
@@ -144,6 +145,12 @@ menuSettingsInputs.forEach((input) => {
     case "toggle-developer-mode":
       input.addEventListener("change", (event) => {
         devMode = !devMode;
+      });
+      break;
+
+    case "toggle-ia-mode":
+      input.addEventListener("change", (event) => {
+        iaMode = !iaMode;
       });
       break;
 

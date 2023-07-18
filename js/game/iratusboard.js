@@ -319,4 +319,38 @@ IratusBoard.prototype.updateAllValidMoves = function () {
       piece.validMoves = validMoves;
     }
   }
+
+  let validBlackMoves = [];
+
+  if (iaMode && lastMove.nextTurn === "b") {
+    for (let blackPiece of this.pieces) {
+      if (blackPiece.color !== "b") {
+        continue;
+      }
+      for (let validBlackMove of blackPiece.validMoves) {
+        validBlackMoves.push([blackPiece, validBlackMove]);
+      }
+    }
+
+    const getRandomFromList = (list) => {
+      return list[Math.floor(Math.random() * list.length)];
+    };
+
+    let aiMove = getRandomFromList(validBlackMoves);
+    if (aiMove === undefined) {
+      return; // checkmate or pat
+    }
+    let aiPiece = aiMove[0];
+    let aiValidMove = aiMove[1];
+
+    setTimeout(() => {
+      if (this.game.turn !== "b") {
+        return;
+      }
+      this.game.move(
+        (start = [aiPiece.row, aiPiece.col]),
+        (end = [aiValidMove[0], aiValidMove[1]])
+      );
+    }, 1000);
+  }
 };
