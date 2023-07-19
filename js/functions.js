@@ -6,7 +6,7 @@ const cancelPromotion = (event) => {
     game.board.pawnToPromote = null;
 
     let promotionWrapper = document.querySelector(".promotion-wrapper");
-    promotionWrapper.style.display = "none";
+    promotionWrapper.style.display = "none"; // TODO : class "open"
 
     let promotionPieces = document.getElementsByClassName("promotion-piece");
     for (let promotionPiece of promotionPieces) {
@@ -43,7 +43,8 @@ function handleRotationSelect() {
 
 // Hide the info window shown after a game
 function hideInfo() {
-  document.getElementById("info").style.display = "none";
+  document.getElementById("info").classList.remove("show");
+  document.querySelector(".board-overlay").classList.remove("show");
 }
 
 // Add event listener on squares (like accessible, selected...)

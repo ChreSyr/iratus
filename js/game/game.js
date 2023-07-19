@@ -62,7 +62,8 @@ Game.prototype = {
         gameState === "checkmate" ? "images/" + lastMove.turn + lastMove.piece.ID + ".png" : "";
       let desriptionLabel = infoDiv.getElementsByTagName("p")[0];
       desriptionLabel.innerHTML = description;
-      infoDiv.style.display = "flex";
+      infoDiv.classList.add("show");
+      document.querySelector(".board-overlay").classList.add("show");
     }
   },
 

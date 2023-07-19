@@ -87,7 +87,7 @@ Board.prototype = {
       });
       errorContainer.appendChild(errorReloader);
       this.widget.appendChild(errorContainer);
-      document.querySelector(".board-overlay").style.display = "block";
+      document.querySelector(".board-overlay").classList.add("show");
       return;
     }
 
