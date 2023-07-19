@@ -58,9 +58,15 @@ Game.prototype = {
       let titleLabel = gameOverDiv.getElementsByTagName("h2")[0];
       titleLabel.innerHTML =
         traductedENDS[gameState][0].toUpperCase() + traductedENDS[gameState].substring(1);
-      let pieceImage = gameOverDiv.getElementsByTagName("img")[0];
-      pieceImage.src =
-        gameState === "checkmate" ? "images/" + lastMove.turn + lastMove.piece.ID + ".png" : "";
+      let pieceImage = gameOverDiv.getElementsByTagName("div")[0];
+      let backImage = "";
+      if (gameState === "checkmate") {
+        backImage = "url('images/" + lastMove.turn + lastMove.piece.ID + ".png')";
+        if (lastMove.piece.dynamited) {
+          backImage += ", url('images/" + lastMove.turn + "y.png')";
+        }
+      }
+      pieceImage.style.backgroundImage = backImage;
       let desriptionLabel = gameOverDiv.getElementsByTagName("p")[0];
       desriptionLabel.innerHTML = description;
       gameOverDiv.classList.add("show");

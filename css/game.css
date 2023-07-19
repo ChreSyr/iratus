@@ -285,7 +285,7 @@
   order: 0;
 }
 
-/* INFO */
+/* GAME OVER */
 
 #game-over {
   align-items: center;
@@ -318,7 +318,7 @@
 }
 
 #game-over h2 {
-  font-size: 2.4em;
+  font-size: 2.7em;
   flex: 1 1 auto;
   margin: 0.4em 1.5em;
   text-align: center;
@@ -331,11 +331,13 @@
   margin-bottom: 0.4em;
 }
 
-#game-over img {
+#game-over div {
+  background-repeat: no-repeat;
+  background-size: contain;
   flex: 5 1 auto;
+  height: 8em;
   margin-top: -1.2em;
-  max-width: 8em;
-  max-height: 8em;
+  width: 8em;
 }
 
 #game-over button {
