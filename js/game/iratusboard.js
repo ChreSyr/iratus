@@ -42,6 +42,7 @@ IratusBoard.prototype.createPieces = function (fen = undefined) {
     fen = storage.getItem("fen");
   }
   fen = fen ? fen : IratusBoard.emptyFEN;
+  this.fromFEN = fen;
   const [
     pieces,
     turn,

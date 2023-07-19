@@ -21,6 +21,7 @@ function Board(game, nbranks = 8, nbfiles = 8) {
   this.game = game;
   this.nbfiles = nbfiles;
   this.nbranks = nbranks;
+  this.fromFEN = undefined; // The FEN text
   this.startFEN = {};
   this.piecesByPos = new Array(nbfiles * nbranks).fill(null);
   this.pieces = [];
