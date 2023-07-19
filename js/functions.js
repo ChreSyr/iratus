@@ -41,9 +41,9 @@ function handleRotationSelect() {
   }
 }
 
-// Hide the info window shown after a game
-function hideInfo() {
-  document.getElementById("info").classList.remove("show");
+// Hide the game-over window shown after a game
+function hideGameOver() {
+  document.getElementById("game-over").classList.remove("show");
   document.querySelector(".board-overlay").classList.remove("show");
 }
 

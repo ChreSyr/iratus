@@ -54,16 +54,16 @@ Game.prototype = {
         description = lastMove.turn === "b" ? "Victoire des Noirs" : "Victoire des Blancs";
       }
 
-      let infoDiv = document.getElementById("info");
-      let titleLabel = infoDiv.getElementsByTagName("h2")[0];
+      let gameOverDiv = document.getElementById("game-over");
+      let titleLabel = gameOverDiv.getElementsByTagName("h2")[0];
       titleLabel.innerHTML =
         traductedENDS[gameState][0].toUpperCase() + traductedENDS[gameState].substring(1);
-      let pieceImage = infoDiv.getElementsByTagName("img")[0];
+      let pieceImage = gameOverDiv.getElementsByTagName("img")[0];
       pieceImage.src =
         gameState === "checkmate" ? "images/" + lastMove.turn + lastMove.piece.ID + ".png" : "";
-      let desriptionLabel = infoDiv.getElementsByTagName("p")[0];
+      let desriptionLabel = gameOverDiv.getElementsByTagName("p")[0];
       desriptionLabel.innerHTML = description;
-      infoDiv.classList.add("show");
+      gameOverDiv.classList.add("show");
       document.querySelector(".board-overlay").classList.add("show");
     }
   },

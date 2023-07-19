@@ -287,7 +287,7 @@
 
 /* INFO */
 
-#info {
+#game-over {
   align-items: center;
   background-color: var(--light-green);
   border-radius: 0.6rem;
@@ -307,38 +307,38 @@
   z-index: 4;
 }
 
-#info.show {
+#game-over.show {
   max-height: unset;
   opacity: 1;
   transition: opacity 0.3s ease-in-out;
 }
 
-.light-mode #info {
+.light-mode #game-over {
   background-color: var(--light-dark);
 }
 
-#info h2 {
-  font-size: 2.7em;
+#game-over h2 {
+  font-size: 2.4em;
   flex: 1 1 auto;
   margin: 0.4em 1.5em;
   text-align: center;
 }
 
-#info p {
+#game-over p {
   font-size: 2em;
   flex: 5 1 auto;
   margin: 0;
   margin-bottom: 0.4em;
 }
 
-#info img {
+#game-over img {
   flex: 5 1 auto;
   margin-top: -1.2em;
   max-width: 8em;
   max-height: 8em;
 }
 
-#info button {
+#game-over button {
   border: 2px solid black;
   border-radius: 3px;
   font-size: calc(var(--square-size) * 0.5);
@@ -347,7 +347,7 @@
   user-select: none;
 }
 
-#info .info-close {
+#game-over .game-over-close {
   /* 'X' close icon - mobile version only */
   position: absolute;
   margin: 5px;
@@ -362,8 +362,8 @@
   white-space: nowrap;
 }
 
-#info .info-close::after,
-#info .info-close::before {
+#game-over .game-over-close::after,
+#game-over .game-over-close::before {
   /* this is the 'X' icon */
   content: "";
   position: absolute;
@@ -381,7 +381,7 @@
   background-color: var(--light-green);
 }
 
-#info .info-close::after {
+#game-over .game-over-close::after {
   -webkit-transform: translateX(-50%) translateY(-50%) rotate(45deg);
   -moz-transform: translateX(-50%) translateY(-50%) rotate(45deg);
   -ms-transform: translateX(-50%) translateY(-50%) rotate(45deg);
@@ -389,7 +389,7 @@
   transform: translateX(-50%) translateY(-50%) rotate(45deg);
 }
 
-#info .info-close::before {
+#game-over .game-over-close::before {
   -webkit-transform: translateX(-50%) translateY(-50%) rotate(316deg);
   -moz-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
   -ms-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
@@ -397,8 +397,8 @@
   transform: translateX(-50%) translateY(-50%) rotate(-45deg);
 }
 
-#info .info-close:hover::after,
-#info .info-close:hover::before {
+#game-over .game-over-close:hover::after,
+#game-over .game-over-close:hover::before {
   background-color: var(--darker);
 }
 
