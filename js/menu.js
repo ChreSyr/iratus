@@ -154,6 +154,37 @@ menuSettingsInputs.forEach((input) => {
       });
       break;
 
+    case "toggle-coords":
+      const coords = document.querySelector("svg.coordinates");
+
+      input.addEventListener("change", (event) => {
+        if (input.checked) {
+          coords.classList.remove("hidden");
+          boardDiv.style.setProperty("--coords-margin", "0.3");
+        } else {
+          coords.classList.add("hidden");
+          boardDiv.style.setProperty("--coords-margin", "0");
+        }
+
+        // Store the choice
+        storage.setItem("show-coords", input.checked ? "yes" : "no");
+      });
+
+      storage.addPageLoadListener("show-coords", (item) => {
+        if (item === null) {
+          return;
+        } // no item found in storage
+        // item can be "yes" or "no"
+        input.checked = item === "yes";
+        if (input.checked) {
+          boardDiv.style.setProperty("--coords-margin", "0.3");
+        } else {
+          coords.classList.add("hidden");
+          boardDiv.style.setProperty("--coords-margin", "0");
+        }
+      });
+      break;
+
     case "toggle-dark-mode":
       input.addEventListener("change", (event) => {
         // Change the theme
@@ -162,8 +193,7 @@ menuSettingsInputs.forEach((input) => {
         body.classList.add("animating-dark-mode");
 
         // Store the theme
-        const isLightMode = body.classList.contains("light-mode");
-        storage.setItem("theme", isLightMode ? "light" : "dark");
+        storage.setItem("theme", input.checked ? "dark" : "light");
       });
 
       menuSettings.addEventListener("transitionend", (event) => {

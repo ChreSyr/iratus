@@ -93,10 +93,12 @@
 /* BOARD */
 
 #board-single {
+  --coords-margin: 0.3;
   --square-size-byheight: calc(
-    (100vh - var(--header-height) - 4 * var(--body-margin) - var(--player-info-height) * 2) / 10
+    (100vh - var(--header-height) - 4 * var(--body-margin) - var(--player-info-height) * 2) /
+      (10 + var(--coords-margin))
   );
-  --square-size-bywidth: calc((100vw - 2 * var(--body-margin)) / 8);
+  --square-size-bywidth: calc((100vw - 2 * var(--body-margin)) / (8 + var(--coords-margin)));
   --square-size: min(80px, var(--square-size-byheight), var(--square-size-bywidth));
   background-image: url("../images/iratusboard-small.jpg");
   background-repeat: no-repeat;
@@ -118,9 +120,11 @@
 @media only screen and (min-width: 614px) {
   #board-single {
     --square-size-byheight: calc(
-      (100vh - 4 * var(--body-margin) - var(--player-info-height) * 2) / 10
+      (100vh - 4 * var(--body-margin) - var(--player-info-height) * 2) / (10 + var(--coords-margin))
     );
-    --square-size-bywidth: calc((100vw - var(--menu-bar-width) - 2 * var(--body-margin)) / 8);
+    --square-size-bywidth: calc(
+      (100vw - var(--menu-bar-width) - 2 * var(--body-margin)) / (8 + var(--coords-margin))
+    );
     background-image: url("../images/iratusboard.png");
   }
 }
@@ -183,6 +187,27 @@
 
 #board-single .phantom {
   opacity: 0.5;
+}
+
+/* COORDINATES */
+
+#board-single {
+  margin-left: calc(var(--square-size) * var(--coords-margin));
+  margin-bottom: calc(var(--square-size) * var(--coords-margin) + var(--body-margin));
+}
+
+.coordinates {
+  position: absolute;
+  transform: translate(-4.5%, 3.2%);
+}
+
+.coordinates.hidden {
+  display: none;
+}
+
+.coordinates text {
+  fill: var(--light);
+  font-weight: 600;
 }
 
 /* BOARD OVERLAY  TODO : more usages */
