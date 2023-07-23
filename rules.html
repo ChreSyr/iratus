@@ -118,7 +118,7 @@
             <div class="menu-panel">
               <h2>Problèmes</h2>
               <div class="menu-delimiter"></div>
-              <p>Aucun problème n'est disponible actuellement.</p>
+              <div class="text">Aucun problème n'est disponible actuellement.</div>
             </div>
           </div>
 
@@ -148,12 +148,12 @@
             <div class="menu-panel">
               <h2>Donations</h2>
               <div class="menu-delimiter"></div>
-              <p>
+              <div class="text">
                 Passionné d'échecs, j'ai créé Iratus afin de rendre les parties encore plus
                 imprévisibles...
                 <br /><br />
                 Syméon Rougevin-Bâville.
-              </p>
+              </div>
               <br />
               <button onclick="openKoFi()">Faire un don</button>
             </div>
@@ -172,19 +172,9 @@
 
               <div class="menu-delimiter"></div>
 
-              <!-- Only in index.html 's menu -->
-              <div class="settings">
+              <div class="settings easy-read">
                 <h3>Affichage</h3>
                 <ul>
-                  <li>
-                    <label>Rotation</label>
-                    <select id="select-rotation" onchange="handleRotationSelect()">
-                      <option value="no">Aucune (Blancs)</option>
-                      <option value="black">Aucune (Noirs)</option>
-                      <option value="board">Plateau</option>
-                      <option value="pieces">Pièces</option>
-                    </select>
-                  </li>
                   <li>
                     <label>Mode Sombre</label>
                     <label class="switch">
@@ -204,7 +194,7 @@
 
               <div class="menu-delimiter"></div>
 
-              <div class="settings">
+              <div class="settings easy-read">
                 <h3>Expérimentations</h3>
 
                 <ul>
@@ -243,13 +233,22 @@
                     </label>
                   </li>
                   <li class="dev-only">
+                    <label>IA</label>
+                    <label class="switch">
+                      <input type="checkbox" id="toggle-ia-mode" />
+                      <span class="slider"></span>
+                    </label>
+                  </li>
+                  <li class="dev-only">
                     <button onclick="console.log('Hello world')">Generate Logs</button>
                   </li>
                   <li class="dev-only">
                     <div class="accordion">
                       <div class="accordion-btn">Console</div>
-                      <div class="accordion-panel codespace" id="logs-container">
-                        <div class="accordion-content">Console :</div>
+                      <div class="accordion-panel codespace">
+                        <div class="accordion-content" id="logs-container">
+                          <p>Console :</p>
+                        </div>
                       </div>
                     </div>
                   </li>
