@@ -20,6 +20,7 @@
   --dark: rgb(40, 38, 35);
   --darker: black;
   --disabled: rgb(143, 143, 143);
+  --light: rgb(150, 150, 150);
   --lighter: white;
   --lighter-dark: rgb(118, 118, 118);
   --light-dark: rgb(64, 64, 64);
@@ -75,6 +76,7 @@ body.light-mode {
   --dark: rgb(180, 180, 180);
   --darker: rgb(131, 131, 131);
   --disabled: rgb(168, 168, 168);
+  --light: rgb(90, 90, 90);
   --light-dark: rgb(150, 150, 150);
   --light-green: rgb(0, 0, 0);
   --special-color: rgb(129, 73, 136);
