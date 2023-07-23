@@ -3,6 +3,105 @@ const boardDiv = document.getElementById("board-single");
 
 /* GAME TOOLS */
 
+// SETTINGS
+
+var gameWrapper = document.getElementById("game-wrapper");
+
+// Select Rotation
+const selectRotation = document.getElementById("select-rotation");
+
+const updateRotation = () => {
+  for (let option of selectRotation.options) {
+    gameWrapper.classList.remove("rotation-" + option.value);
+  }
+  if (selectRotation.value !== "no") {
+    gameWrapper.classList.add("rotation-" + selectRotation.value);
+  }
+};
+
+selectRotation.addEventListener("change", (event) => {
+  updateRotation();
+
+  // Store the choice
+  storage.setItem("rotation", selectRotation.value);
+});
+
+storage.addPageLoadListener("rotation", (item) => {
+  if (item === null) {
+    return;
+  } // no item found in storage
+
+  selectRotation.value = item;
+  updateRotation();
+});
+
+// Inputs
+const indexSettingsInputs = document.querySelectorAll(".tools-wrapper input");
+
+indexSettingsInputs.forEach((input) => {
+  switch (input.id) {
+    case "toggle-animations":
+      const updateAnimations = () => {
+        if (input.checked) {
+          boardDiv.classList.add("animated");
+        } else {
+          boardDiv.classList.remove("animated");
+        }
+      };
+
+      input.addEventListener("change", (event) => {
+        updateAnimations();
+
+        // Store the choice
+        storage.setItem("animate-pieces", input.checked ? "yes" : "no");
+      });
+
+      storage.addPageLoadListener("animate-pieces", (item) => {
+        if (item === null) {
+          return;
+        } // no item found in storage
+
+        // item can be "yes" or "no"
+        input.checked = item === "yes";
+        updateAnimations();
+      });
+      break;
+
+    case "toggle-coords":
+      const coords = document.querySelector("svg.coordinates");
+
+      const updateCoords = () => {
+        if (input.checked) {
+          coords.classList.remove("hidden");
+          boardDiv.style.setProperty("--coords-margin", "0.3");
+        } else {
+          coords.classList.add("hidden");
+          boardDiv.style.setProperty("--coords-margin", "0");
+        }
+      };
+
+      input.addEventListener("change", (event) => {
+        updateCoords();
+
+        // Store the choice
+        storage.setItem("show-coords", input.checked ? "yes" : "no");
+      });
+
+      storage.addPageLoadListener("show-coords", (item) => {
+        if (item === null) {
+          return;
+        } // no item found in storage
+
+        // item can be "yes" or "no"
+        input.checked = item === "yes";
+        updateCoords();
+      });
+      break;
+  }
+});
+
+// IMPORT EXPORT
+
 // Dynamic layout of tools-wrapper
 const toolsWrapper = document.querySelector(".tools-wrapper");
 function adjustToolsWrapper() {

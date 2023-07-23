@@ -29,18 +29,6 @@ function collide(event, element) {
   return x >= 0 && x <= rect.width && y >= 0 && y <= rect.height;
 }
 
-// Handle when an option is selected in the style <select>
-function handleRotationSelect() {
-  var rotationSelect = document.getElementById("select-rotation");
-  var gameWrapper = document.getElementById("game-wrapper");
-  for (let option of rotationSelect.options) {
-    gameWrapper.classList.remove("rotation-" + option.value);
-  }
-  if (rotationSelect.value !== "no") {
-    gameWrapper.classList.add("rotation-" + rotationSelect.value);
-  }
-}
-
 // Hide the game-over window shown after a game
 function hideGameOver() {
   document.getElementById("game-over").classList.remove("show");

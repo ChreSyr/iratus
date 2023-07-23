@@ -130,12 +130,6 @@ let iaMode = false;
 
 menuSettingsInputs.forEach((input) => {
   switch (input.id) {
-    case "toggle-animations":
-      input.addEventListener("change", (event) => {
-        boardDiv.classList.toggle("animated");
-      });
-      break;
-
     case "toggle-show-dev-settings":
       input.addEventListener("change", (event) => {
         document.body.classList.toggle("dev-mode");
@@ -151,37 +145,6 @@ menuSettingsInputs.forEach((input) => {
     case "toggle-ia-mode":
       input.addEventListener("change", (event) => {
         iaMode = !iaMode;
-      });
-      break;
-
-    case "toggle-coords":
-      const coords = document.querySelector("svg.coordinates");
-
-      input.addEventListener("change", (event) => {
-        if (input.checked) {
-          coords.classList.remove("hidden");
-          boardDiv.style.setProperty("--coords-margin", "0.3");
-        } else {
-          coords.classList.add("hidden");
-          boardDiv.style.setProperty("--coords-margin", "0");
-        }
-
-        // Store the choice
-        storage.setItem("show-coords", input.checked ? "yes" : "no");
-      });
-
-      storage.addPageLoadListener("show-coords", (item) => {
-        if (item === null) {
-          return;
-        } // no item found in storage
-        // item can be "yes" or "no"
-        input.checked = item === "yes";
-        if (input.checked) {
-          boardDiv.style.setProperty("--coords-margin", "0.3");
-        } else {
-          coords.classList.add("hidden");
-          boardDiv.style.setProperty("--coords-margin", "0");
-        }
       });
       break;
 

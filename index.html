@@ -177,31 +177,6 @@
               <div class="settings easy-read">
                 <h3>Affichage</h3>
                 <ul>
-                  <!-- Only in index.html 's menu -->
-                  <li>
-                    <label>Rotation</label>
-                    <select id="select-rotation" onchange="handleRotationSelect()">
-                      <option value="no">Aucune (Blancs)</option>
-                      <option value="black">Aucune (Noirs)</option>
-                      <option value="board">Plateau</option>
-                      <option value="pieces">Pièces</option>
-                    </select>
-                  </li>
-                  <li>
-                    <label>Animations</label>
-                    <label class="switch">
-                      <input type="checkbox" id="toggle-animations" />
-                      <span class="slider"></span>
-                    </label>
-                  </li>
-                  <li>
-                    <label>Coordonnées</label>
-                    <label class="switch">
-                      <input type="checkbox" id="toggle-coords" checked />
-                      <span class="slider"></span>
-                    </label>
-                  </li>
-                  <!-- In all menus -->
                   <li>
                     <label>Mode Sombre</label>
                     <label class="switch">
@@ -365,7 +340,34 @@
           <button tabindex="-1" onclick="game.redoAll()">&gt&gt</button>
         </div>
 
-        <div class="easy-read">
+        <div class="easy-read settings">
+          <h3>Réglages</h3>
+          <ul>
+            <li>
+              <label>Rotation</label>
+              <select id="select-rotation">
+                <option value="no">Aucune (Blancs)</option>
+                <option value="black">Aucune (Noirs)</option>
+                <option value="board">Plateau</option>
+                <option value="pieces">Pièces</option>
+              </select>
+            </li>
+            <li>
+              <label>Animations</label>
+              <label class="switch">
+                <input type="checkbox" id="toggle-animations" />
+                <span class="slider"></span>
+              </label>
+            </li>
+            <li>
+              <label>Coordonnées</label>
+              <label class="switch">
+                <input type="checkbox" id="toggle-coords" checked />
+                <span class="slider"></span>
+              </label>
+            </li>
+          </ul>
+
           <h3>Import / Export</h3>
           <div class="accordion tools-line-filler">
             <div class="accordion-btn">Position</div>
