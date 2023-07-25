@@ -98,23 +98,7 @@ function makePieceDraggable(element) {
     pos.x = event.clientX + dragging.dx;
     pos.y = event.clientY + dragging.dy;
 
-    var squareSize = document.getElementById("board-single").clientHeight / 10;
-
-    const board = element.piece.board;
-    if (board.game.isFlipped()) {
-      element.style.transform = `translate(${
-        (board.nbfiles - 1 - element.piece.col + pos.x / squareSize) * 100
-      }%, ${(board.nbfiles + 1 - element.piece.row + pos.y / squareSize) * 100}%)`;
-    } else {
-      element.style.transform = `translate(${(element.piece.col + pos.x / squareSize) * 100}%, ${
-        (element.piece.row + pos.y / squareSize) * 100
-      }%)`;
-    }
-    if (board.game.hasFlippedPieces()) {
-      element.style.transform += " rotate(180deg)";
-    }
     element.classList.add("dragging");
-    // element.setPointerCapture(event.pointerId);
 
     wasSelected = element.piece === game.board.selectedPiece;
     element.piece.handlePointerDown();
