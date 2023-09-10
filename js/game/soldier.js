@@ -62,7 +62,9 @@ Soldier.prototype.goTo = function (row, col) {
 
   if (!this.linkedPiece) {
     // If this is the phantom of the soldier
-    commands.push(new Transform(this, this.actualType, EliteSoldier.prototype));
+    if (this.row === this.promotionRank) {
+      commands.push(new Transform(this, this.actualType, EliteSoldier.prototype));
+    }
     return commands;
   }
 
