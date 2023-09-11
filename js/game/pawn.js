@@ -91,6 +91,7 @@ Pawn.prototype.goTo = function (row, col) {
 };
 
 Pawn.prototype.redo = function (row, col) {
+  // skip call to Pawn.redo, avoiding the promotion choice
   Piece.prototype.goTo.call(this, row, col);
 };
 
@@ -110,8 +111,12 @@ Pawn.prototype.updateValidMoves = function () {
       continue;
     }
 
-    if (this.board.get(row, col) === null) {
+    let blocker = this.board.get(row, col);
+    if (blocker === null) {
       this.validMoves.push([row, col]);
+    } else if (blocker.ID === "y" && !this.dynamited) {
+      this.validMoves.push([row, col]);
+      break;
     } else {
       break;
     }
@@ -127,15 +132,15 @@ Pawn.prototype.updateValidMoves = function () {
 
     this.antikingSquares.push([row, col]);
 
-    let attackedPiece = this.board.get(row, col);
-    if (attackedPiece === null) {
+    let blocker = this.board.get(row, col);
+    if (blocker === null) {
       // en passant
       const lastMove = this.board.game.movesHistory.slice(-1)[0];
       const enPassant = lastMove ? lastMove.enPassant : this.board.startFEN.enPassant;
       if (enPassant !== "-" && enPassant === getCoordFromRowCol(row, col)) {
         this.validMoves.push([row, col]);
       }
-    } else if (this.canGoTo(row, col)) {
+    } else if (blocker.color != this.color) {
       this.validMoves.push([row, col]);
     }
   }
