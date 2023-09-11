@@ -63,6 +63,7 @@ PieceMovingTwice.prototype.undo = function (move) {
     }
   } else {
     this.stillHasToMove = false;
+    this.stillHasToMove = this.board.startFEN.pieceMovingAgain == this;
   }
 };
 
