@@ -28,7 +28,7 @@ King.prototype.MOVES = [
 // INSTANCE METHODS - MECHANICS
 
 King.prototype.canGoTo = function (row, col) {
-  if (this.posIsUnderCheck(row, col)) {
+  if ((this.posIsUnderCheck(row, col), (takePhantomsIntoAccount = false))) {
     return false;
   }
   let piece = this.board.get(row, col);
@@ -89,12 +89,12 @@ King.prototype.inCheck = function () {
   return this.posIsUnderCheck(this.row, this.col);
 };
 
-King.prototype.posIsUnderCheck = function (row, col, checkForMate = false) {
+King.prototype.posIsUnderCheck = function (row, col, takePhantomsIntoAccount = true) {
   for (let piece of this.board.piecesColored[this.enemyColor]) {
     // the phantom's antiking squares can change after a capture
     // so they are taken in account only during calculation
     // and when checking for a mate
-    if (checkForMate === false) {
+    if (takePhantomsIntoAccount === false) {
       if (piece.widget && piece.cssClass === "phantom") {
         continue;
       }

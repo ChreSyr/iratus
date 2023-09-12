@@ -230,11 +230,11 @@ IratusBoard.prototype.updateAllValidMoves = function () {
   let lastMove = this.game.movesHistory.slice(-1)[0];
   let piece = lastMove ? lastMove.piece : this.startFEN.pieceMovingAgain;
 
-  if (piece === "-") {
-    return;
-  }
+  // if (piece === "-") {
+  //   return;
+  // }
 
-  if (piece.stillHasToMove) {
+  if (piece !== "-" && piece.stillHasToMove) {
     let clonedPiece = this.calculator.getSimulatedPiece(piece);
     let validMoves = [];
     for (let validMove of piece.validMoves) {

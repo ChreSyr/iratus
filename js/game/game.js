@@ -129,7 +129,7 @@ Game.prototype = {
     }
 
     const currentKing = this.board.king[this.turn];
-    return currentKing.posIsUnderCheck(currentKing.row, currentKing.col, (checkForMate = true))
+    return currentKing.posIsUnderCheck(currentKing.row, currentKing.col)
       ? "checkmate"
       : "stalemate";
   },
